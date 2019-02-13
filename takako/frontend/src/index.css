@@ -12,3 +12,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.three-boxes {
+  margin: 30px;
+  padding: 10px;
+  height: 200px;
+}
+
+.landing-section {
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 10px;
+}
+
+.float-box {
+  float: left;
+  width: 30%; /* three boxes (use 25% for four, and 50% for two, etc) */
+  padding: 10px; /* if you want space between the images */
+  text-align: center;
+}
+
+.float-gray-box {
+  float: left;
+  width: 28%; /* three boxes (use 25% for four, and 50% for two, etc) */
+  padding: 10px; /* if you want space between the images */
+  text-align: center;
+  margin: 5px;
+  height: 180px;
+}
+
+@import url("css/normalize.css");
+@import url("css/sakura.css");

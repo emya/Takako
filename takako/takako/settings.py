@@ -37,8 +37,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'webpack_loader',
+    'rest_framework',
+    'knox',
+
+    'notes',
+    #'notes.apps.NotesConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    'rest_framework.authentication.TokenAuthentication',
+    #    'rest_framework.authentication.SessionAuthentication',
+    #),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

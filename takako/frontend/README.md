@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Docker 
+
+### `docker build -t tatako .`
+### `docker run -p 3000:3000 takako`
+
 ## Available Scripts
 
 In the project directory, you can run:
