@@ -1,5 +1,7 @@
 # Takako
 
+Hello!
+
 ## Docker 
 
 ### `docker build -t tatako-django .`
