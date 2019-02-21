@@ -37,35 +37,147 @@ class Takako extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Otsukai</h2>
-        <hr />
-
-        <div style={{textAlign: "right"}}>
-          <Link to="/login">Login</Link>
-        </div>
-
-        <div style={{textAlign: "center", backgroundColor: "aliceblue", padding: "30px"}}>
-          <p>Get any items from the world without any trip</p>
-        </div>
-
-        <div style={{textAlign: "center", padding: "30px"}}>
-          <p>Make money during your trip!</p>
-        </div>
-
-        <div class="three-boxes">
-          <div class="float-gray-box" style={{backgroundColor: "#DCDCDC"}}>
-            <p>Get duty-free cosmetics</p>
+      <body>
+        <header class="header">
+          <div class="topbar">
+            <form class="search">
+              <input type="search" name="search" placeholder="Search"/>
+              <input class="search-button" type="submit" value="Search"/>
+            </form>
+            <a class="register" href="#">Get Started</a>
+            <a class="signin" href="#">Sign in</a>
           </div>
-          <div class="float-gray-box" style={{backgroundColor: "#DCDCDC"}}>
-            <p></p>
+          <div class="catchcopy clearfix">
+            <div class="content">
+              <h1 class="site-title">Find Someone who Can Bring Back Whatever You Want.
+              </h1>
+              <p class="site-description">Request world traveler to buy and bring back whatever from wherever, just like how you ask your friend.
+              </p>
+            </div>
+            <image class="lpimage" src="img/woman-3373637_960_720.jpg"/>
           </div>
-          <div class="float-gray-box" style={{backgroundColor: "#DCDCDC"}}>
-            <p></p>
-          </div>
-        </div>
+          </header>
 
-      </div>
+        <section class="how">
+          <h2 class="heading">How It Works</h2>
+          <div class="how-wrapper">
+            <div class="how-box">
+              <div class="how-title">Request Item</div>
+              <div class="how-description">Find someone near you, who are traveling for where you want an item from.
+              </div>
+            </div>
+            <div class="how-box">
+              <div class="how-title">Let Traveler Get It</div>
+              <div class="how-description">Requested traveler can get your item at agreed price.
+              </div>
+            </div>
+            <div class="how-box">
+              <div class="how-title">Receive It</div>
+              <div class="how-description">your item will be shipped domestically or handed in person to minimize cost!
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="use">
+          <h2 class="heading">Best for Someone Who Are ...</h2>
+          <div class="wrapper-shopper">
+            <div class="use-box">
+              <div class="person-title">"Shopper"</div>
+              <p class="shopper-description">Looking for Item Overseas</p>
+            </div>
+              <div class="use-box clearfix">
+                  <div class="use-example">“I want to buy duty-free cosmetics”
+                  <img class="use-image" src="img/woman2.jpg"/>
+                  </div>
+            </div>
+            <div class="use-box clearfix">
+              <div class="use-example">“I Can’t find my favorite brand from home”
+                <img class="use-image" src="img/woman2.jpg"/>
+              </div>
+            </div>
+            <div class="use-box clearfix">
+              <div class="use-example">“TBU”
+                <img class="use-image" src="img/woman2.jpg"/>
+              </div>
+            </div>
+          </div>
+          <div class="wrapper-shopper">
+            <div class="use-box">
+              <div class="person-title">"Traveller"</div>
+              <p class="shopper-description">Looking to Make Money</p>
+            </div>
+            <div class="use-box clearfix">
+              <div class="use-example">“I found rare item I could sell”
+                <img class="use-image" src="img/woman.jpg"/>
+              </div>
+            </div>
+            <div class="use-box clearfix">
+              <div class="use-example">"I wanna make money to bump up trip budget”
+                <img class="use-image" src="img/woman.jpg"/>
+              </div>
+            </div>
+            <div class="use-box clearfix">
+              <div class="use-example">“TBU”
+                <img class="use-image" src="img/woman.jpg"/>
+              </div>
+            </div>
+          </div>
+          <a class="button" href="#">GET STARTED</a>
+        </section>
+
+        <section class="service">
+          <h2 class="heading">Our Services</h2>
+          <div class="wrapper-service">
+            <div class="service-box">
+              <i class="service-icon fa fa-lightbulb-o"></i>
+              <div class="service-title">Cheaper Shopping</div>
+              <p class="service-text">Just Pay agreed price. No excessive premium or international shipping!</p>
+            </div>
+            <div class="service-box">
+              <i class="service-icon fa fa-lightbulb-o"></i>
+              <div class="service-title">Easy Selling</div>
+              <p class="service-text">Make extra money on your trip without having to find customer on your own.</p>
+            </div>
+            <div class="service-box">
+              <i class="service-icon fa fa-lightbulb-o"></i>
+              <div class="service-title">Safe Transaction</div>
+              <p class="service-text">We keep money until transaction completes, and anonymous shipping is available.</p>
+            </div>
+            <div class="service-box">
+              <i class="service-icon fa fa-lightbulb-o"></i>
+              <div class="service-title">Free</div>
+              <p class="service-text">Free to register or post!</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="latest">
+          <h2 class="heading">Latest Requests</h2>
+          <a class="request-box">
+            <img class="request-img" src="img/makeup.jpg"/>
+            <div class="request-title">Kimono<br/>Japan</div>
+            <time class="date" datetime="2019-02-14">02.14.2019</time>
+          </a>
+          <a class="request-box">
+            <img class="request-img" src="img/makeup.jpg"/>
+            <div class="request-title">Eyeshadow<br/>UK</div>
+            <time class="date" datetime="2019-02-15">02.15.2019</time>
+          </a>
+          <a class="request-box">
+            <img class="request-img" src="img/makeup.jpg"/>
+            <div class="request-title">Facial Cream<br/>India</div>
+            <time class="date" datetime="2019-02-10">02.10.2019</time>
+          </a>
+          <br/>
+          <a class="button" href="#">GET STARTED</a>
+        </section>
+
+      <footer>
+        <div class="footer"></div>
+      </footer>
+
+      </body>
     )
   }
 }
