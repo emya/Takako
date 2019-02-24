@@ -26,9 +26,6 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Profile.objects.all().filter(user=self.request.user)
-        print("queryset", queryset)
-        for q in queryset:
-            print(q)
         return queryset
 
 class SProfileViewSet(viewsets.ModelViewSet):
