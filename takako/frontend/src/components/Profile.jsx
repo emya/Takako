@@ -49,8 +49,8 @@ class Profile extends Component {
           <div>
             <label>Bio</label>
             <input type="text" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
-            <label>Location</label>
-            <input type="text" onChange={this.handleChange.bind(this, 'location', profile)} value={profile.location}/>
+            <label>Residence</label>
+            <input type="text" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
           </div>
           ))}
           <input type="submit" value="Save Profile" />

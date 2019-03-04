@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Note, Profile, PSProfile
+from .models import Note, Profile, SProfile
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -17,17 +17,17 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username')
 
-class PSProfileSerializer(serializers.ModelSerializer):
+class SProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
     class Meta:
-        model = PSProfile
+        model = SProfile
         fields = ('id', 'bio', 'user')
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('id', 'bio', 'location', 'birth_date')
+        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation')
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

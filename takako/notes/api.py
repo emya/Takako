@@ -3,11 +3,11 @@ from rest_framework.response import Response
 
 from knox.models import AuthToken
 
-from .models import Note, Profile, PSProfile
+from .models import Note, Profile, SProfile
 from .serializers import (
     NoteSerializer,
     ProfileSerializer,
-    PSProfileSerializer,
+    SProfileSerializer,
     CreateUserSerializer,
     UserSerializer,
     LoginUserSerializer
@@ -28,14 +28,14 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = Profile.objects.all().filter(user=self.request.user)
         return queryset
 
-class PSProfileViewSet(viewsets.ModelViewSet):
+class SProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
-    serializer_class = PSProfileSerializer
+    serializer_class = SProfileSerializer
 
     def get_queryset(self):
         others = self.request.GET.get('others')
         all = self.request.GET.get('all')
-        queryset = PSProfile.objects.all()
+        queryset = SProfile.objects.all()
 
         if all:
             return queryset
