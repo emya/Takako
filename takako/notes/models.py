@@ -14,7 +14,8 @@ class Note(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
-    residence = models.CharField(max_length=30, blank=True)
+    residence = models.CharField(max_length=100, blank=True)
+    occupation = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
 class SProfile(models.Model):
