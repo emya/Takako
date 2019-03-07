@@ -35,36 +35,81 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Otukai</h2>
-        <hr />
-
-        <div style={{textAlign: "right"}}>
-          {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
+      <body>
+      <header class="header">
+        <div class="topbar">
+          <form class="search">
+            <input type="search" name="search" placeholder="Search"/>
+            <input class="search-button" type="submit" value="Search"/>
+          </form>
+          <a class="register" href="#">Get Started</a>
+          <a class="signin" href="#">Sign in</a>
         </div>
 
-        <h3>Profile</h3>
-        <form onSubmit={this.submitProfile}>
-          {this.props.profile.map((profile) => (
-          <div>
-            <label>Bio</label>
-            <input type="text" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
-            <label>Residence</label>
-            <input type="text" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
-          </div>
-          ))}
-          <input type="submit" value="Save Profile" />
-        </form>
-
-        <p>
-          <Link to="/psprofile">Personal Shopper</Link>
-        </p>
-
-        <p>
-          <Link to="/personalshoppers">Personal Shoppers</Link>
-        </p>
-
+      <div class="menu">
+        <a href="#">HOME</a>
+        <a href="#">Request Item</a>
+        <a href="#">Find Request</a>
       </div>
+      </header>
+
+      <div class="wrapper clearfix">
+        <div class="sidemenu">
+          <ul>
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">Transaction Status</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Edit Profile</a></li>
+            <li><a href="#">Edit Account</a></li>
+          </ul>
+        </div>
+        <div class="profile">
+          <div class="wrapper clearfix">
+            <div class="profile-switch shopper">Shopper Profile</div>
+            <div class="profile-switch traveler">Traveler Profile</div>
+          </div>
+          <a class="message-btn" href="#">Message Traveller</a>
+          <img src="./img/woman3.jpg"/>
+          <p class="user-data">Megan Bakken</p>
+          <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+          <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
+          <p class="object">Gender</p><p class="user-data">Female</p>
+          <p class="object">Residence</p><p class="user-data">New York</p>
+          <p class="object">Occupation</p><p class="user-data">Employee</p>
+          <h3>Upcoming Trips</h3>
+          <table border="1" class="trips">
+            <tr class="table-heading">
+              <td>Date</td>
+              <td>Location</td>
+              <td>Note</td>
+            </tr>
+            <tr>
+              <td>4/5/2019 - 4/12/2019</td>
+              <td>Tokyo, Japan</td>
+              <td>Business Trip</td>
+            </tr>
+          </table>
+          <h3>Past Transactions</h3>
+          <table border="1" class="trips">
+            <tr class="table-heading">
+              <td>Date</td>
+              <td>Location</td>
+              <td>Item</td>
+            </tr>
+            <tr>
+              <td>4/5/2018</td>
+              <td>Tokyo, Japan</td>
+              <td>Tokyo Banana</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    <footer>
+      <div class="footer"></div>
+    </footer>
+</body>
     )
   }
 }
