@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  color: #fff;
+  color: #1B435D;
   text-align: center;
   font-size: 1.4rem;
   font-family: Raleway, "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif;
@@ -29,11 +29,16 @@ a:link, a:visited, a:hover, a:active {
 
 .heading {
   font-family: baskerville;
+  color: white;
   font-weight: bold;
   font-size: 5rem;
   margin-top: 20px;
   margin-bottom: 60px;
   letter-spacing: 2px;
+}
+
+.heading.s {
+  color: #1B435D;
 }
 
 /* topbar */
@@ -72,10 +77,6 @@ a:link, a:visited, a:hover, a:active {
 
 /* catchcopy */
 
-.catchcopy {
-
-}
-
 .content {
   display: block;
   position: relative;
@@ -87,6 +88,7 @@ a:link, a:visited, a:hover, a:active {
 
 .site-title {
   font-family: baskerville;
+  color: white;
   position: absolute;
   top: 5%;
   font-size: 6rem;
@@ -96,6 +98,7 @@ a:link, a:visited, a:hover, a:active {
 
 .site-description {
   position: absolute;
+  color: white;
   top: 60%;
   font-size: 2rem;
   line-height: 30px;
