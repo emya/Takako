@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {profile, auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
+import MediaQuery from 'react-responsive';
+import '../css/style.scss';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faIgloo)
 
 class Profile extends Component {
   componentDidMount() {
@@ -35,15 +42,24 @@ class Profile extends Component {
 
   render() {
     return (
-      <body>
-      <header class="header">
-        <div class="topbar">
+    <body>
+    <header class="header">
+        <div class="topbar-contents">
           <form class="search">
             <input type="search" name="search" placeholder="Search"/>
             <input class="search-button" type="submit" value="Search"/>
           </form>
-          <a class="register" href="#">Get Started</a>
-          <a class="signin" href="#">Sign in</a>
+          <a href="#"><p>APP<br/>LOGO</p></a>
+          <div class="login">
+            <a class="register" href="#">Get Started</a>
+            <a class="signin" href="#">Sign in</a>
+          </div>
+        </div>
+
+        <div class="mobile-topbar-contents">
+          <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
+          <a href="#"><p>APP<br/>LOGO</p></a>
+          <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
         </div>
 
       <div class="menu">
@@ -51,65 +67,82 @@ class Profile extends Component {
         <a href="#">Request Item</a>
         <a href="#">Find Request</a>
       </div>
-      </header>
+    </header>
 
-      <div class="wrapper clearfix">
-        <div class="sidemenu">
-          <ul>
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">Transaction Status</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Edit Profile</a></li>
-            <li><a href="#">Edit Account</a></li>
-          </ul>
-        </div>
-        <div class="profile">
-          <div class="wrapper clearfix">
-            <div class="profile-switch shopper">Shopper Profile</div>
-            <div class="profile-switch traveler">Traveler Profile</div>
-          </div>
-          <a class="message-btn" href="#">Message Traveller</a>
-          <img src="./img/woman3.jpg"/>
-          <p class="user-data">Megan Bakken</p>
-          <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-          <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
-          <p class="object">Gender</p><p class="user-data">Female</p>
-          <p class="object">Residence</p><p class="user-data">New York</p>
-          <p class="object">Occupation</p><p class="user-data">Employee</p>
-          <h3>Upcoming Trips</h3>
-          <table border="1" class="trips">
-            <tr class="table-heading">
-              <td>Date</td>
-              <td>Location</td>
-              <td>Note</td>
-            </tr>
-            <tr>
-              <td>4/5/2019 - 4/12/2019</td>
-              <td>Tokyo, Japan</td>
-              <td>Business Trip</td>
-            </tr>
-          </table>
-          <h3>Past Transactions</h3>
-          <table border="1" class="trips">
-            <tr class="table-heading">
-              <td>Date</td>
-              <td>Location</td>
-              <td>Item</td>
-            </tr>
-            <tr>
-              <td>4/5/2018</td>
-              <td>Tokyo, Japan</td>
-              <td>Tokyo Banana</td>
-            </tr>
-          </table>
-        </div>
+    <div class="wrapper clearfix">
+      <div class="sidemenu">
+        <ul>
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">Transaction Status</a></li>
+          <li><a href="#">Search</a></li>
+          <li><a href="#">Edit Profile</a></li>
+          <li><a href="#">Edit Account</a></li>
+        </ul>
       </div>
 
-    <footer>
-      <div class="footer"></div>
-    </footer>
-</body>
+      <div class="profile">
+        <div class="wrapper clearfix">
+          <div class="profile-switch shopper">Shopper Profile</div>
+          <div class="profile-switch traveler">Traveler Profile</div>
+        </div>
+
+        <a class="message-btn" href="#">Message Traveller</a>
+
+        <img src="./img/woman3.jpg"/>
+        <p class="user-data">Megan Bakken</p>
+        <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+        <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
+        <p class="object">Gender</p><p class="user-data">Female</p>
+        <p class="object">Residence</p><p class="user-data">New York</p>
+        <p class="object">Occupation</p><p class="user-data">Employee</p>
+
+        <h2>Upcoming Trips</h2>
+        <table class="table-data">
+          <tr class="table-heading">
+            <td>Date</td>
+            <td>Location</td>
+            <td>Note</td>
+          </tr>
+          <tr>
+            <td>4/5/2019 - 4/12/2019</td>
+            <td>Tokyo, Japan</td>
+            <td>Business Trip</td>
+          </tr>
+        </table>
+
+        <h2>Past Transactions</h2>
+        <table class="table-data">
+          <tr class="table-heading">
+            <td>Date</td>
+            <td>Location</td>
+            <td>Item</td>
+          </tr>
+          <tr>
+            <td>4/5/2018</td>
+            <td>Tokyo, Japan</td>
+            <td>Tokyo Banana</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="sidemenu-mobile">
+    <ul>
+    <li><a href="#">My Profile<span>></span></a></li>
+    <li><a href="#">Transaction Status<span>></span></a></li>
+    <li><a href="#">Search<span>></span></a></li>
+    <li><a href="#">Edit Profile<span>></span></a></li>
+    <li><a href="#">Edit Account<span>></span></a></li>
+    </ul>
+    </div>
+
+  <footer>
+  FOOTER CONTENTS TO BE DETERMINED
+  <FontAwesomeIcon icon="igloo" />
+  </footer>
+    </body>
+
     )
   }
 }

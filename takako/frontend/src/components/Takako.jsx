@@ -127,7 +127,7 @@ class Takako extends Component {
         </section>
 
         <section class="service">
-          <h2 class="heading">Our Services</h2>
+          <h2 class="heading s">Our Services</h2>
           <div class="wrapper-service">
             <div class="service-box">
               <i class="service-icon fa fa-lightbulb-o"></i>
