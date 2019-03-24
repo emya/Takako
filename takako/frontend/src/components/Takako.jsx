@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
+import MediaQuery from 'react-responsive';
+import '../css/style_LP.scss';
 
 class Takako extends Component {
   /*
@@ -37,16 +39,26 @@ class Takako extends Component {
 
   render() {
     return (
-      <body>
-        <header class="header">
-          <div class="topbar">
+      <div>
+      <header class="header">
+          <div class="topbar-contents">
             <form class="search">
               <input type="search" name="search" placeholder="Search"/>
               <input class="search-button" type="submit" value="Search"/>
             </form>
-            <a class="register" href="#">Get Started</a>
-            <a class="signin" href="#">Sign in</a>
+            <a href="#"><p>APP<br/>LOGO</p></a>
+            <div class="login">
+              <a class="register" href="#">Get Started</a>
+              <a class="signin" href="#">Sign in</a>
+            </div>
           </div>
+
+          <div class="mobile-topbar-contents">
+            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
+            <a href="#"><p>APP<br/>LOGO</p></a>
+            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
+          </div>
+
           <div class="catchcopy clearfix">
             <div class="content">
               <h1 class="site-title">Find Someone who Can Bring Back Whatever You Want.
@@ -54,7 +66,7 @@ class Takako extends Component {
               <p class="site-description">Request world traveler to buy and bring back whatever from wherever, just like how you ask your friend.
               </p>
             </div>
-            <image class="lpimage" src="img/woman-3373637_960_720.jpg"/>
+            <image class="lpimage" src="../img/LP.jpg"/>
           </div>
           </header>
 
@@ -62,18 +74,18 @@ class Takako extends Component {
           <h2 class="heading">How It Works</h2>
           <div class="how-wrapper">
             <div class="how-box">
-              <div class="how-title">Request Item</div>
+              <div class="how-title">Request Your Item</div>
               <div class="how-description">Find someone near you, who are traveling for where you want an item from.
               </div>
             </div>
             <div class="how-box">
-              <div class="how-title">Let Traveler Get It</div>
+              <div class="how-title">Traveler Buys It</div>
               <div class="how-description">Requested traveler can get your item at agreed price.
               </div>
             </div>
             <div class="how-box">
               <div class="how-title">Receive It</div>
-              <div class="how-description">your item will be shipped domestically or handed in person to minimize cost!
+              <div class="how-description">Your item will be shipped domestically or handed in person to minimize cost!
               </div>
             </div>
           </div>
@@ -86,41 +98,35 @@ class Takako extends Component {
               <div class="person-title">"Shopper"</div>
               <p class="shopper-description">Looking for Item Overseas</p>
             </div>
-              <div class="use-box clearfix">
-                  <div class="use-example">“I want to buy duty-free cosmetics”
+              <div class="use-box">
+                  <div class="use-example">“I want to buy duty-free cosmetics”</div>
                   <img class="use-image" src="img/woman2.jpg"/>
-                  </div>
-            </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“I Can’t find my favorite brand from home”
-                <img class="use-image" src="img/woman2.jpg"/>
               </div>
-            </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“TBU”
+            <div class="use-box">
+              <div class="use-example">“I Can’t find my favorite brand from home"</div>
                 <img class="use-image" src="img/woman2.jpg"/>
-              </div>
+            </div>
+            <div class="use-box">
+              <div class="use-example">“TBU”</div>
+                <img class="use-image" src="img/woman2.jpg"/>
             </div>
           </div>
           <div class="wrapper-shopper">
             <div class="use-box">
               <div class="person-title">"Traveller"</div>
               <p class="shopper-description">Looking to Make Money</p>
-            </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“I found rare item I could sell”
-                <img class="use-image" src="img/woman.jpg"/>
               </div>
-            </div>
-            <div class="use-box clearfix">
-              <div class="use-example">"I wanna make money to bump up trip budget”
+            <div class="use-box">
+              <div class="use-example">“I found rare item I could sell”</div>
                 <img class="use-image" src="img/woman.jpg"/>
-              </div>
             </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“TBU”
+            <div class="use-box">
+              <div class="use-example">"I wanna make money to bump up trip budget”</div>
                 <img class="use-image" src="img/woman.jpg"/>
-              </div>
+            </div>
+            <div class="use-box">
+              <div class="use-example">“TBU”</div>
+                <img class="use-image" src="img/woman.jpg"/>
             </div>
           </div>
           <a class="button" href="#">GET STARTED</a>
@@ -130,22 +136,22 @@ class Takako extends Component {
           <h2 class="heading s">Our Services</h2>
           <div class="wrapper-service">
             <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o"></i>
-              <div class="service-title">Cheaper Shopping</div>
+              <i class="service-icon fa fa-lightbulb-o">★</i>
+              <div class="service-title">Save Shipping</div>
               <p class="service-text">Just Pay agreed price. No excessive premium or international shipping!</p>
             </div>
             <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o"></i>
+              <i class="service-icon fa fa-lightbulb-o">★</i>
               <div class="service-title">Easy Selling</div>
               <p class="service-text">Make extra money on your trip without having to find customer on your own.</p>
             </div>
             <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o"></i>
+              <i class="service-icon fa fa-lightbulb-o">★</i>
               <div class="service-title">Safe Transaction</div>
               <p class="service-text">We keep money until transaction completes, and anonymous shipping is available.</p>
             </div>
             <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o"></i>
+              <i class="service-icon fa fa-lightbulb-o">★</i>
               <div class="service-title">Free</div>
               <p class="service-text">Free to register or post!</p>
             </div>
@@ -177,7 +183,7 @@ class Takako extends Component {
         <div class="footer"></div>
       </footer>
 
-      </body>
+      </div>
     )
   }
 }

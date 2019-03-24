@@ -42,7 +42,7 @@ class Profile extends Component {
 
   render() {
     return (
-    <body>
+<div>
     <header class="header">
         <div class="topbar-contents">
           <form class="search">
@@ -66,6 +66,7 @@ class Profile extends Component {
         <a href="#">HOME</a>
         <a href="#">Request Item</a>
         <a href="#">Find Request</a>
+        <a href="#">Mypage</a>
       </div>
     </header>
 
@@ -74,9 +75,11 @@ class Profile extends Component {
         <ul>
           <li><a href="#">My Profile</a></li>
           <li><a href="#">Transaction Status</a></li>
-          <li><a href="#">Search</a></li>
+          <li><a href="#">Message Box</a></li>
           <li><a href="#">Edit Profile</a></li>
           <li><a href="#">Edit Account</a></li>
+          <li><a href="#">Logout</a></li>
+          <li><a href="#">Help</a></li>
         </ul>
       </div>
 
@@ -131,9 +134,11 @@ class Profile extends Component {
     <ul>
     <li><a href="#">My Profile<span>></span></a></li>
     <li><a href="#">Transaction Status<span>></span></a></li>
-    <li><a href="#">Search<span>></span></a></li>
+    <li><a href="#">Message Box<span>></span></a></li>
     <li><a href="#">Edit Profile<span>></span></a></li>
     <li><a href="#">Edit Account<span>></span></a></li>
+    <li><a href="#">Logout<span>></span></a></li>
+    <li><a href="#">Help<span>></span></a></li>
     </ul>
     </div>
 
@@ -141,7 +146,7 @@ class Profile extends Component {
   FOOTER CONTENTS TO BE DETERMINED
   <FontAwesomeIcon icon="igloo" />
   </footer>
-    </body>
+</div>
 
     )
   }

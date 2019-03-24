@@ -80,7 +80,7 @@ h2 {
 
 .mobile-menu-icon {
   font-size: 5rem;
-  color: white;
+  color: black;
 }
 
 .mobile-topbar-contents {
@@ -281,8 +281,12 @@ h2 {
 }
 
 .table-data td {
-  padding: 5px 10px;
+  padding: 10px 13px;
   border: 1px dashed #1B435D;
+}
+
+.table-data .transaction-data td:nth-child(6) {
+  font-weight: bold;
 }
 
 
