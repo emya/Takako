@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
-import '../css/style_LP.scss';
+//import '../css/style_LP.scss';
 
 class Takako extends Component {
   /*

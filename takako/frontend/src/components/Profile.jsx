@@ -83,6 +83,7 @@ class Profile extends Component {
         </ul>
       </div>
 
+
       <div class="profile">
         <div class="wrapper clearfix">
           <div class="profile-switch shopper">Shopper Profile</div>
@@ -91,14 +92,22 @@ class Profile extends Component {
 
         <a class="message-btn" href="#">Message Traveller</a>
 
-        <img src="./img/woman3.jpg"/>
-        <p class="user-data">Megan Bakken</p>
-        <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-        <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
-        <p class="object">Gender</p><p class="user-data">Female</p>
-        <p class="object">Residence</p><p class="user-data">New York</p>
-        <p class="object">Occupation</p><p class="user-data">Employee</p>
+        <form onSubmit={this.submitProfile}>
+          {this.props.profile.map((profile) => (
+            <div>
+              <img src="./img/woman3.jpg"/>
+              <p class="user-data"> {this.props.user.username} </p>
+              <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+              <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
+              <p class="object">Residence</p>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.residence}/>
+              <p class="object">Occupation</p>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.occupation}/>
+            </div>
+          ))}
+          <input type="submit" value="Save Profile" />
+        </form>
 
         <h2>Upcoming Trips</h2>
         <table class="table-data">
