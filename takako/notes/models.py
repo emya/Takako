@@ -18,7 +18,7 @@ class Profile(models.Model):
     occupation = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-class SProfile(models.Model):
+class TravelerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
 

@@ -6,7 +6,7 @@ import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import Takako from "./components/Takako";
 import Note from "./components/Note";
 import Profile from "./components/Profile";
-import PSProfile from "./components/PSProfile";
+import TravelerProfile from "./components/TravelerProfile";
 import NotFound from "./components/NotFound";
 
 import {auth} from "./actions";
@@ -18,7 +18,6 @@ import thunk from "redux-thunk";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import PersonalShoppers from "./components/PersonalShoppers";
 
 let store = createStore(takakoApp, applyMiddleware(thunk));
 
@@ -50,10 +49,9 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/" component={Takako} />
                     <Route exact path="/note" component={Note} />
                     <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/psprofile" component={PSProfile} />
+                    <Route exact path="/traveler/profile" component={TravelerProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    <Route exact path="/personalshoppers" component={PersonalShoppers} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
