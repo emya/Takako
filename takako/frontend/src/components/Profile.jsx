@@ -99,11 +99,12 @@ class Profile extends Component {
               <p class="user-data"> {this.props.user.username} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-              <p class="active-info">Since 03/2019<br/>Last login 1 day ago</p>
               <p class="object">Residence</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.residence}/>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
               <p class="object">Occupation</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.occupation}/>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
+              <p class="object">Bio</p>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
           ))}
           <input type="submit" value="Save Profile" />
