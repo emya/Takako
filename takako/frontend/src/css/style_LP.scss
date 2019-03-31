@@ -1,0 +1,417 @@
+@charset "UTF-8";
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: #1B435D;
+  text-align: center;
+  font-size: 1.4rem;
+  font-family: Raleway, "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.heading {
+  font-family: baskerville;
+  font-weight: bold;
+  font-size: 4rem;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  letter-spacing: 2px;
+}
+
+.heading {
+  @media (max-width: 767px) {
+    font-size: 3.5rem;
+  }}
+
+
+/* topbar */
+
+.topbar {
+  background-color: #78BBE6;
+  height: 80px;
+  width: 100%;
+  padding: 20px 80px 10px 80px;
+}
+
+.search {
+  float: left;
+  display: inline-block;
+  margin: auto 0 auto 0px;
+  padding: 10px;
+}
+
+.search-button {
+  background-color: #F99F48;
+}
+
+.signin, .register {
+  font-weight: bold;
+  float: right;
+  display: inline-block;
+  margin: auto 0 auto 30px;
+  padding: 10px;
+  letter-spacing: 2px;
+}
+
+.register {
+  border: 2px solid #fff;
+  border-radius: 3%;
+}
+
+/* catchcopy */
+
+.content {
+  display: block;
+  position: relative;
+  float: left;
+  color: white;
+  background-color: #1B435D;
+  height: 500px;
+  width: 60%;
+}
+
+.content {
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 400px;
+  }}
+
+.site-title {
+  font-family: baskerville;
+  position: absolute;
+  top: 5%;
+  font-size: 6rem;
+  line-height: 80px;
+  padding: 0 30px;
+}
+
+.site-description {
+  position: absolute;
+  top: 60%;
+  font-size: 2rem;
+  line-height: 30px;
+  padding: 0 30px;
+}
+
+.site-title {
+  @media (max-width: 767px) {
+    line-height: 50px;
+    font-size: 4rem;
+  }}
+
+.site-description {
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
+  }}
+
+.lpimage {
+  float: left;
+  width: 40%;
+  height: 500px;
+  background-color: gray;
+}
+
+.lpimage {
+  @media (max-width: 767px) {
+    display: none;
+  }}
+
+
+/* How It Works */
+
+.how {
+  background-color: #FFF;
+  width: 100%;
+  height: 500px;
+  padding: 80px 30px;
+}
+
+.how {
+  @media (max-width: 767px) {
+    height: 1200px;
+  }}
+
+.how-wrapper {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin: 50px auto 50px;
+}
+
+.how-box {
+  display: table-cell;
+  padding: 0 20px;
+}
+
+.how-wrapper, .how-box {
+  @media (max-width: 767px) {
+    display: block;
+  }}
+
+.how .heading {
+  color: #78BBE6;
+}
+
+.how-title {
+  font-size: 3rem;
+  color: #1B435D;
+  font-weight: bold;
+  margin: 20px 20px;
+}
+
+.how-description {
+  font-size: 2rem;
+  margin: 10px 20px;
+  line-height: 2;
+}
+
+/* Use Case */
+
+.use {
+  background-color: #78BBE6;
+  width: 100%;
+  height: 900px;
+  padding: 80px 30px;
+}
+
+.use {
+  @media (max-width: 767px) {
+    height: 2000px;
+  }}
+
+.use .heading {
+  color:white;
+}
+
+.wrapper-shopper {
+  background-color: #FFF;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin: 30px auto 0;
+  padding: 10px;
+}
+
+.use-box {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  height: 250px;
+}
+
+.wrapper-shopper, .use-box {
+  @media (max-width: 767px) {
+    display: block;
+  }}
+
+.use-box:nth-child(1) {
+  @media (max-width: 767px) {
+    height: 120px;
+  }
+}
+
+.use-box {
+  @media (max-width: 767px) {
+    margin: 20px;
+    height: 150px;
+  }
+}
+
+.person-title {
+  font-weight: bold;
+  font-style: italic;
+  display: block;
+  font-size: 3rem;
+  color: #F99F48;
+  padding: 0px;
+}
+
+.shopper-description, .traveler-description {
+  display: block;
+  font-weight: none;
+  margin: 30px 0 0 0;
+  font-size: 2rem;
+}
+
+.use-example {
+  font-size: 1.8rem;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -ms-transform: translate(0%,-50%);
+  -webkit-transform : translate(0%,-50%);
+  transform : translate(0%,-50%);
+  width: 50%;
+  line-height: 25px;
+  padding: 20px;
+}
+
+.use-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: gray;
+}
+
+.button {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  border: 2px solid #FFF;
+  border-radius: 3%;
+  color: #FFF;
+  background-color: #F99F48;
+  width: 300px;
+  height: 50px;
+  padding: 10px 20px;
+  margin: 50px 0 30px;
+  letter-spacing: 2px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+/* Service */
+
+.service {
+  background-color: #fff;
+  width: 100%;
+  height: 800px;
+  padding: 80px 30px;
+}
+
+.service {
+  @media (max-width: 767px) {
+    height: 1800px;
+  }}
+
+.wrapper-service {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.service-box {
+  display: table-cell;
+  padding: 0 20px;
+}
+
+.wrapper-service, .service-box {
+  @media (max-width: 767px) {
+    display: block;
+  }}
+
+.service-icon {
+  width: 300px;
+  height: 300px;
+  margin-bottom: 30px;
+  // border: 4px solid;
+  // border-radius: 50%;
+  color: #F99F48;
+  font-size: 9rem;
+  line-height: 142px;
+}
+
+.service-title {
+  color: #F99F48;
+  font-weight: bold;
+  font-size: 3rem;
+  margin: 10px 0 30px 10px;
+}
+
+.service-text {
+  font-size: 2rem;
+  margin: 0 10px;
+  line-height: 2;
+}
+
+/* Latest Requests */
+
+.latest {
+  background-color: #1B435D;
+  width: 100%;
+  height: 800px;
+  padding: 80px 50px;
+}
+
+.latest {
+  @media (max-width: 767px) {
+    height: 1800px;
+  }}
+
+.latest .heading {
+  color:white;
+}
+
+.request-box {
+  display: inline-block;
+  position: relative;
+  background-color: #FFF;
+  width: 250px;
+  height: 300px;
+  padding: 200px 15px 0;
+  margin: 20px 10px;
+  box-shadow: 6px 6px 8px -4px rgba(0, 0, 0, 0.15);
+}
+
+.request-box:hover {
+  opacity: 0.8;
+}
+
+.request-title {
+  font-weight: bold;
+  font-size: 2rem;
+  display: block;
+  margin: 0 10px 20px 10px;
+  color: #1B435D;
+}
+
+.date {
+  display: block;
+  color: #F99F48;
+}
+
+.request-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* footer */
+
+.footer {
+  background-color: #78BBE6;
+  width: 100%;
+  height: 300px;
+  padding: 80px 50px;
+}
+
+/* Others */
+
+.how-title, .person-title, .service-title {
+  @media (max-width: 767px) {
+    font-size: 2.5rem;
+      }}
