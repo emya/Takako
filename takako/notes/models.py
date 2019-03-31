@@ -27,3 +27,10 @@ class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
     photo = models.ImageField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Trip(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    destination = models.CharField(max_length=100, blank=True)
+    departure_date = models.DateField(null=True, blank=True)
+    arrival_date = models.DateField(null=True, blank=True)
+    status = models.IntegerField()
