@@ -22,7 +22,6 @@ class TravelerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
 
-
 class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
     photo = models.ImageField(blank=True)
