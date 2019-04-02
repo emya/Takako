@@ -1,6 +1,6 @@
 import * as notes from "./notes";
 import * as profile from "./profile";
 import * as auth from "./auth";
-import * as personalshoppers from "./personalshoppers";
+import * as traveler_profile from "./traveler_profile";
 
-export {notes, profile, personalshoppers, auth}
+export {notes, profile, traveler_profile, auth}

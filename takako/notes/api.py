@@ -3,11 +3,11 @@ from rest_framework.response import Response
 
 from knox.models import AuthToken
 
-from .models import Note, Profile, SProfile
+from .models import Note, Profile, TravelerProfile
 from .serializers import (
     NoteSerializer,
     ProfileSerializer,
-    SProfileSerializer,
+    TravelerProfileSerializer,
     CreateUserSerializer,
     UserSerializer,
     LoginUserSerializer
@@ -26,16 +26,22 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Profile.objects.all().filter(user=self.request.user)
+        if queryset:
+            return queryset
+        # If queryset is empty
+        # Make new profile for this user
+        Profile.objects.create(user=self.request.user)
+        queryset = Profile.objects.all().filter(user=self.request.user)
         return queryset
 
-class SProfileViewSet(viewsets.ModelViewSet):
+class TravelerProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
-    serializer_class = SProfileSerializer
+    serializer_class = TravelerProfileSerializer
 
     def get_queryset(self):
         others = self.request.GET.get('others')
         all = self.request.GET.get('all')
-        queryset = SProfile.objects.all()
+        queryset = TravelerProfile.objects.all()
 
         if all:
             return queryset

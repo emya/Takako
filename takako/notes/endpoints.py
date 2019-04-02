@@ -4,7 +4,7 @@ from rest_framework import routers
 from .api import (
     NoteViewSet,
     ProfileViewSet,
-    SProfileViewSet,
+    TravelerProfileViewSet,
     RegistrationAPI,
     LoginAPI,
     UserAPI
@@ -15,7 +15,7 @@ from .api import (
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
 router.register('profiles', ProfileViewSet, 'profiles')
-router.register('sprofiles', SProfileViewSet, 'sprofiles')
+router.register('travelers/profiles', TravelerProfileViewSet, 'traveler_profiles')
 #router.register('notes', NoteViewSet, 'notes')
 
 urlpatterns = [
