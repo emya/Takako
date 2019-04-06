@@ -12,7 +12,6 @@ class Note extends Component {
     updateNoteId: null,
   }
 
-
   resetForm = () => {
     this.setState({text: "", updateNoteId: null});
   }
