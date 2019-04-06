@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Note, Profile, TravelerProfile
+from .models import Note, Profile, TravelerProfile, Transaction
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -11,6 +11,11 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ('id', 'text', )
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ('id', 'requester', 'respondent', 'status', 'price', 'created_at', 'updated_at', )
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
