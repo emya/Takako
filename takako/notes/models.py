@@ -27,6 +27,21 @@ class Showcase(models.Model):
     photo = models.ImageField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class Transaction(models.Model):
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_created')
+    respondent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_received')
+    # Status
+    # 0: sent request
+    # 1: canceled request
+    # 2: accepted request
+    # 3: rejected request
+    # 4: purchased
+    # 5: done (paid to respondent)
+    status = models.IntegerField()
+    price = models.IntegerField()
+    created_at = models.DateField(null=True, blank=True)
+    updated_at = models.DateField(null=True, blank=True)
+
 class Trip(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     destination = models.CharField(max_length=100, blank=True)

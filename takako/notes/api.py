@@ -3,9 +3,10 @@ from rest_framework.response import Response
 
 from knox.models import AuthToken
 
-from .models import Note, Profile, TravelerProfile
+from .models import Note, Profile, Transaction, TravelerProfile
 from .serializers import (
     NoteSerializer,
+    TransactionSerializer,
     ProfileSerializer,
     TravelerProfileSerializer,
     CreateUserSerializer,
@@ -20,12 +21,32 @@ class NoteViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
     serializer_class = NoteSerializer
 
+class TransactionAPI(generics.GenericAPIView):
+    serializer_class = TransactionSerializer
+
+    def get(self, request):
+        # Transaction for sent requests
+        queryset_requester = Transaction.objects.all().filter(requester=request.user)
+        # Transaction for received requests
+        queryset_respondent = Transaction.objects.all().filter(respondent=request.user)
+        return Response({ 'sent_requests': queryset_requester, 'received_requests': queryset_respondent})
+
 class ProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
-        queryset = Profile.objects.all().filter(user=self.request.user)
+        others = self.request.GET.get('others')
+        all = self.request.GET.get('all')
+        queryset = Profile.objects.all()
+
+        if all:
+            return queryset
+        if others:
+            queryset = queryset.exclude(user=self.request.user)
+            return queryset
+
+        queryset = queryset.filter(user=self.request.user)
         if queryset:
             return queryset
         # If queryset is empty

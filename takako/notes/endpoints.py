@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from .api import (
     NoteViewSet,
+    TransactionAPI,
     ProfileViewSet,
     TravelerProfileViewSet,
     RegistrationAPI,
@@ -23,4 +24,5 @@ urlpatterns = [
     url("^auth/register/$", RegistrationAPI.as_view()),
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
+    url('^transactions/$', TransactionAPI.as_view()),
 ]
