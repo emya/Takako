@@ -4,6 +4,8 @@ import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import { AddMessage } from '../containers/AddMessage'
+import { MessagesList } from '../containers/MessagesList'
 
 class MessageBox extends Component {
   render() {
@@ -72,16 +74,8 @@ class MessageBox extends Component {
               </div>
             </div>
             <div class="chat">
-              <h3>Emi<br/>"Japanese Snack"</h3>
-              <div class="chat-area">
-                <div class="chat-cmt-sender">Emi:<br/>Did you find it?</div>
-                <div class="chat-cmt-me">Me:<br/>Yes!</div>
-                <div class="chat-cmt-sender">Emi:<br/>Great, thank you.</div>
-                <div class="chat-cmt-me">Me:<br/>I'll upload the picture.</div>
-                <div class="chat-cmt-sender">Emi:<br/>Sounds good!</div>
-                <div class="chat-cmt-me">Me:<br/>:)</div>
-              </div>
-              <div class="type-msg"><input type="text" name="text" placeholder="Type Message"/></div>
+              <MessagesList />
+              <AddMessage />
             </div>
           </div>
 
@@ -108,4 +102,7 @@ class MessageBox extends Component {
     )
   }
 }
+
 export default MessageBox;
+
+
