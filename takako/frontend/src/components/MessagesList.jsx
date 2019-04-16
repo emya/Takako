@@ -4,7 +4,7 @@ import Message from "./Message";
 
 const MessagesList = ({ messages }) => (
   <section id="messages-list">
-    <ul>
+    <div class="chat-area">
     {messages.map(message => (
       <Message
       key={message.id}
@@ -12,7 +12,7 @@ const MessagesList = ({ messages }) => (
       />
     ))}
 
-    </ul>
+    </div>
   </section>
 )
 

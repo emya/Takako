@@ -74,16 +74,6 @@ class MessageBox extends Component {
               </div>
             </div>
             <div class="chat">
-              <h3>Emi<br/>"Japanese Snack"</h3>
-              <div class="chat-area">
-                <div class="chat-cmt-sender">Emi:<br/>Did you find it?</div>
-                <div class="chat-cmt-me">Me:<br/>Yes!</div>
-                <div class="chat-cmt-sender">Emi:<br/>Great, thank you.</div>
-                <div class="chat-cmt-me">Me:<br/>I'll upload the picture.</div>
-                <div class="chat-cmt-sender">Emi:<br/>Sounds good!</div>
-                <div class="chat-cmt-me">Me:<br/>:)</div>
-              </div>
-              <div class="type-msg"><input type="text" name="text" placeholder="Type Message"/></div>
               <MessagesList />
               <AddMessage />
             </div>
