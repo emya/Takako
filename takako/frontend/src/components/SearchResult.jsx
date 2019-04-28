@@ -49,7 +49,7 @@ class SearchResult extends Component {
 
       <div class="wrapper clearfix">
         <div class="filter">
-          <h2 class="heading">Filter</h2>
+          <h2>Filter</h2>
           <div class="filter-field">
             <div class="filter-item">
               <h3>Keyword</h3>
@@ -80,7 +80,7 @@ class SearchResult extends Component {
       </div>
 
       <div class="search-result">
-        <h2 class="heading">Results for "Travellers"</h2>
+        <h2>Results for "Travellers"</h2>
         <div class="sort-by">Sort by:<select><option>Trip Return</option></select></div>
         <div class="profile-card">
             <img class="profile-card-img" src="./img/woman3.jpg"/>
