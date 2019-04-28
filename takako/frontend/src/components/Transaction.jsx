@@ -111,6 +111,7 @@ class Transaction extends Component {
               <td>Tokyo, Japan</td>
               <td>Declined</td>
               <td>-</td>
+            </tr>
             <tr class="transaction-data">
               <td>1/12/2018</td>
               <td>Takumi</td>
@@ -122,7 +123,6 @@ class Transaction extends Component {
             <tr class="transaction-data total">
               <td colspan="5">Total Earnings</td>
               <td>$30</td>
-            </tr>
             </tr>
           </table>
         </div>

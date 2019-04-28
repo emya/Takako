@@ -107,7 +107,7 @@ class Profile extends Component {
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
           ))}
-          <input type="submit" value="Save Profile" />
+          <input class="submit-btn" type="submit" value="Save Profile" />
         </form>
 
         <h2>Upcoming Trips</h2>
