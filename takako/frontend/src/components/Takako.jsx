@@ -72,7 +72,7 @@ class Takako extends Component {
               <p class="site-description">Request nearest traveler to buy and bring back whatever from wherever, just like how you ask your friend.
               </p>
             </div>
-            <image class="lpimage" src="../img/LP.jpg"/>
+            <image class="lpimage" src={require('../img/LP.jpg')}/>
           </div>
           </header>
 
@@ -103,17 +103,17 @@ class Takako extends Component {
             <div class="use-box clearfix">
                 <div class="use-example">“I want to buy cosmetics at duty-free prices”
                 </div>
-                <img class="use-image" src="img/cosmetics.png"/>
+                <img class="use-image" src={require('../img/cosmetics.png')}/>
             </div>
             <div class="use-box clearfix">
               <div class="use-example">“I can’t find my favorite brand from home”
               </div>
-                <img class="use-image" src="img/woman2.jpg"/>
+                <img class="use-image" src={require("../img/cosmetics.png")}/>
             </div>
             <div class="use-box clearfix">
               <div class="use-example">“Imported items are too expensive.”
               </div>
-                <img class="use-image" src="img/woman2.jpg"/>
+                <img class="use-image" src={require("../img/cosmetics.png")}/>
             </div>
           </div>
 
@@ -149,17 +149,17 @@ class Takako extends Component {
         <section class="latest">
           <h2 class="heading">Latest Requests</h2>
           <a class="request-box">
-            <img class="request-img" src="img/makeup.jpg"/>
+            <img class="request-img" src={require("../img/clothing.png")}/>
             <div class="request-title">Kimono<br/>Japan</div>
             <time class="date" datetime="2019-02-14">02.14.2019</time>
           </a>
           <a class="request-box">
-            <img class="request-img" src="img/makeup.jpg"/>
+            <img class="request-img" src={require("../img/clothing.png")}/>
             <div class="request-title">Eyeshadow<br/>UK</div>
             <time class="date" datetime="2019-02-15">02.15.2019</time>
           </a>
           <a class="request-box">
-            <img class="request-img" src="img/makeup.jpg"/>
+            <img class="request-img" src={require("../img/clothing.png")}/>
             <div class="request-title">Facial Cream<br/>India</div>
             <time class="date" datetime="2019-02-10">02.10.2019</time>
           </a>
