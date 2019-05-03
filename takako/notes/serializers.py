@@ -30,9 +30,11 @@ class TravelerProfileSerializer(serializers.ModelSerializer):
         fields = ('id', 'bio', 'user')
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Profile
-        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation')
+        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'user')
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

@@ -6,7 +6,7 @@ import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import Takako from "./components/Takako";
 import Note from "./components/Note";
 import Transaction from "./components/Transaction";
-import SearchResult from "./components/SearchResult";
+import Search from "./components/Search";
 import Profile from "./components/Profile";
 import MessageBox from "./components/MessageBox";
 import TravelerProfile from "./components/TravelerProfile";
@@ -51,7 +51,7 @@ class RootContainerComponent extends Component {
                 <Switch>
                     <PrivateRoute exact path="/" component={Takako} />
                     <Route exact path="/note" component={Note} />
-                    <Route exact path="/search/result" component={SearchResult} />
+                    <Route exact path="/search" component={Search} />
                     <Route exact path="/transaction/status" component={Transaction} />
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/message" component={MessageBox} />
