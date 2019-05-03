@@ -4,12 +4,11 @@ import profile from "./profile";
 import auth from "./auth";
 import traveler_profile from "./traveler_profile";
 import transactions from "./transactions"
-import search_result from "./search_result"
 import messages from "./messages"
 
 
 const takakoApp = combineReducers({
-  notes, auth, profile, traveler_profile, transactions, search_result, messages
+  notes, auth, profile, traveler_profile, transactions, messages
 })
 
 export default takakoApp;

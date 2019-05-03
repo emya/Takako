@@ -32,8 +32,6 @@ class Note extends Component {
     //this.resetForm();
   }
 
-
-
   render() {
     return (
       <div>
