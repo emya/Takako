@@ -18,12 +18,13 @@ class Search extends Component {
 
   handleFormSubmit = (keyword) => {
     let headers = {"Content-Type": "application/json"};
-    let {token} = this.props.auth.token;
+    let {token} = this.props.auth;
 
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
-    fetch("/api/profiles/?all=True", {headers, })
+
+    fetch("/api/profiles/?others=True", {headers, })
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
