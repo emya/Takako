@@ -39,8 +39,6 @@ export const fetchProfiles = () => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
 
-    console.log("token at fetchProfiles", token);
-
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
