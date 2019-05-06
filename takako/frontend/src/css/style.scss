@@ -49,6 +49,12 @@ h2 {
   padding: 1% 5%;
 }
 
+.logo {
+  width: 120px;
+  height: 60px;
+}
+
+
 .search-button {
   background-color: #F99F48;
 }
@@ -470,6 +476,60 @@ h2 {
 
 .submit-btn {
    background-color: red;
+}
+
+// howItWorks
+
+.how-it-works > h3 {
+  text-align: left;
+  margin: 50px 0 40px 10%;
+}
+
+.how-it-works {
+  float: right;
+  width: 75%;
+}
+
+.step {
+  position: relative;
+  display: block;
+  text-align: left;
+  // background-color: #D5EEFF;
+  width: 80%;
+  height: 40px;
+  margin: 30px auto;
+  padding-left: 40px;
+  overflow-wrap: break-word;
+}
+
+.step-number {
+  position: absolute;
+  text-align: center;
+  top: -30%;
+  left: -3%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 2rem;
+  color: white;
+  font-weight: bold;
+  background-color: #78BBE6;
+  border-radius: 50%;
+}
+
+
+.request-form p, form {
+  display: inline-block;
+}
+
+.request-form-index {
+  display: inline-block;
+  margin: 20px 20px 20px 0;
+  font-weight: bold;
+}
+
+.send-request {
+  margin-top: 50px;
 }
 
 /* footer */
