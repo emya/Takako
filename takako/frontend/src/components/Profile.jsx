@@ -7,12 +7,15 @@ import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import Header from './Header'
+import SideMenu from './SideMenu'
 
 library.add(faIgloo)
 
 class Profile extends Component {
   componentDidMount() {
-    this.props.fetchProfiles();
+    console.log(this.props.match.params.userId);
+    this.props.fetchProfile(this.props.match.params.userId);
   }
 
   state = {
@@ -43,46 +46,10 @@ class Profile extends Component {
   render() {
     return (
 <div>
-    <header class="header">
-        <div class="topbar-contents">
-          <form class="search">
-            <input type="search" name="search" placeholder="Search"/>
-            <input class="search-button" type="submit" value="Search"/>
-          </form>
-          <a href="#"><p>APP<br/>LOGO</p></a>
-          <div class="login">
-            <a class="register" href="#">Get Started</a>
-            <a class="signin" href="#">Sign in</a>
-          </div>
-        </div>
-
-        <div class="mobile-topbar-contents">
-          <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-          <a href="#"><p>APP<br/>LOGO</p></a>
-          <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
-        </div>
-
-      <div class="menu">
-        <a href="#">HOME</a>
-        <a href="#">Request Item</a>
-        <a href="#">Find Request</a>
-        <a href="#">Mypage</a>
-      </div>
-    </header>
+   <Header />
 
     <div class="wrapper clearfix">
-      <div class="sidemenu">
-        <ul>
-          <li><a href="#">My Profile</a></li>
-          <li><a href="#">Transaction Status</a></li>
-          <li><a href="#">Message Box</a></li>
-          <li><a href="#">Edit Profile</a></li>
-          <li><a href="#">Edit Account</a></li>
-          <li><a href="#">Logout</a></li>
-          <li><a href="#">Help</a></li>
-        </ul>
-      </div>
-
+      <SideMenu />
 
       <div class="profile">
         <div class="wrapper clearfix">
@@ -96,7 +63,7 @@ class Profile extends Component {
           {this.props.profile.map((profile) => (
             <div>
               <img src="./img/woman3.jpg"/>
-              <p class="user-data"> {this.props.user.username} </p>
+              <p class="user-data"> {profile.user.username} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
               <p class="object">Residence</p>
@@ -166,7 +133,6 @@ class Profile extends Component {
 const mapStateToProps = state => {
   console.log("state.auth.user", state.auth);
   console.log("state.profile", state);
-  console.log("profile", profile);
   return {
     profile: state.profile,
     user: state.auth.user,
@@ -187,8 +153,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(notes.deleteNote(id));
     },
   */
-    fetchProfiles: () => {
-      dispatch(profile.fetchProfiles());
+    fetchProfile: (userId) => {
+      dispatch(profile.fetchProfile(userId));
     },
     updateProfile: (id, bio, location) => {
       return dispatch(profile.updateProfile(id, bio, location));

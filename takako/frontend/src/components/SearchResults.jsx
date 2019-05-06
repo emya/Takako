@@ -31,7 +31,7 @@ const SearchResults = ({profiles}) => {
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
             <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
             <div class="profile-card-contents">
-              <p class="profile-card-name">{profile.user.username}</p>
+              <p class="profile-card-name"><a href={`/profile/${profile.user.id}`} style={{color: "black"}}>{profile.user.username}</a></p>
               <div class="profile-card-data subject">Residence:</div><div class="profile-card-data">{profile.residence}</div>
               <div class="profile-card-data subject">Occupation:</div><div class="profile-card-data">{profile.occupation}</div>
               <div class="profile-card-data subject">Next Trip:</div><div class="profile-card-data">9/2019 Spain</div>

@@ -53,7 +53,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/note" component={Note} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/transaction/status" component={Transaction} />
-                    <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/profile/:userId" component={Profile} />
                     <Route exact path="/message" component={MessageBox} />
                     <Route exact path="/traveler/profile" component={TravelerProfile} />
                     <Route exact path="/register" component={Register} />
