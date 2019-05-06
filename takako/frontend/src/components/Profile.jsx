@@ -14,8 +14,6 @@ library.add(faIgloo)
 
 class Profile extends Component {
   componentDidMount() {
-    console.log(this.props.match.params.userId);
-    console.log(this.props);
     this.props.fetchProfile(this.props.match.params.userId);
   }
 
@@ -132,8 +130,6 @@ class Profile extends Component {
 
 
 const mapStateToProps = state => {
-  console.log("state.auth.user", state.auth);
-  console.log("state.profile", state);
   return {
     profile: state.profile,
     user: state.auth.user,
