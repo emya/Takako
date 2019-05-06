@@ -19,7 +19,7 @@ class Login extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to="/profile" />
+      return <Redirect to={`/profile/${this.props.user.id}`} />
     }
     return (
       <form onSubmit={this.onSubmit}>
@@ -66,7 +66,8 @@ const mapStateToProps = state => {
   }
   return {
     errors,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
   };
 }
 

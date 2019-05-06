@@ -8,20 +8,26 @@ class SearchBar extends Component {
     profiles: []
   }
 
+  state = {
+    residence: "",
+    destination: "",
+    profiles: []
+  }
+
   handleSubmit = event => {
     event.preventDefault();
-    this.props.handleFormSubmit(this.state.keyword);
+    this.props.handleFormSubmit(this.state.residence, this.state.destination);
   }
 
   render() {
     return(
 
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="username">Keyword</label>
-        <input id="keyword" value={this.state.keyword} type="text" onChange={(e) => this.setState({keyword: e.target.value})}/>
+        <label htmlFor="residence">Residence</label>
+        <input id="residence" value={this.state.residence} type="text" onChange={(e) => this.setState({residence: e.target.value})}/>
 
-        <label htmlFor="email">Trip return</label>
-        <input id="trip_return" type="text" />
+        <label htmlFor="destination">Destination</label>
+        <input id="destination" value={this.state.destination} type="text" onChange={(e) => this.setState({destination: e.target.value})}/>
 
         <button>Search</button>
       </form>

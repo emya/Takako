@@ -4,6 +4,7 @@ import {auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
 import '../css/style_LP.scss';
+import Header from './Header'
 
 class Takako extends Component {
   /*
@@ -48,8 +49,8 @@ class Takako extends Component {
             </form>
             <a href="#"><p>APP<br/>LOGO</p></a>
             <div class="login">
-              <a class="register" href="#">Get Started</a>
-              <a class="signin" href="#">Sign in</a>
+              <a class="register" href="/register">Get Started</a>
+              <a class="signin" href="/login">Sign in</a>
             </div>
           </div>
 

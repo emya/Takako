@@ -10,13 +10,17 @@ import SearchResults from './SearchResults'
 import {createStore} from 'redux';
 import {Provider, connect} from 'react-redux';
 
+import Header from './Header'
+import SideMenu from './SideMenu'
+
 class Search extends Component {
   state = {
-    keyword: "",
+    residence: "",
+    destination: "",
     profiles: []
   }
 
-  handleFormSubmit = (keyword) => {
+  handleFormSubmit = (residence, destination) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = this.props.auth;
 
@@ -24,7 +28,7 @@ class Search extends Component {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    fetch("/api/profiles/?others=True", {headers, })
+    fetch(`/api/profiles/?others=True&destination=${destination}&residence=${residence}`, {headers, })
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
@@ -51,45 +55,10 @@ class Search extends Component {
   render() {
     return (
    <div>
-      <header class="header">
-          <div class="topbar-contents">
-            <form class="search">
-              <input type="search" name="search" placeholder="Search"/>
-              <input class="search-button" type="submit" value="Search"/>
-            </form>
-            <a href="#"><p>APP<br/>LOGO</p></a>
-            <div class="login">
-              <a class="register" href="#">Get Started</a>
-              <a class="signin" href="#">Sign in</a>
-            </div>
-          </div>
-
-          <div class="mobile-topbar-contents">
-            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-            <a href="#"><p>APP<br/>LOGO</p></a>
-            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
-          </div>
-
-        <div class="menu">
-          <a href="#">HOME</a>
-          <a href="#">Request Item</a>
-          <a href="#">Find Request</a>
-          <a href="#">Mypage</a>
-        </div>
-      </header>
+      <Header />
 
       <div class="wrapper clearfix">
-        <div class="sidemenu">
-          <ul>
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">Transaction Status</a></li>
-            <li><a href="#">Message Box</a></li>
-            <li><a href="#">Edit Profile</a></li>
-            <li><a href="#">Edit Account</a></li>
-            <li><a href="#">Logout</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-        </div>
+        <SideMenu />
 
         <SearchBar handleFormSubmit={this.handleFormSubmit}/>
         <SearchResults profiles={this.state.profiles}/>

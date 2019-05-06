@@ -36,9 +36,20 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
+        userId = self.request.GET.get('userId')
         all = self.request.GET.get('all')
         others = self.request.GET.get('others')
+        residence = self.request.GET.get('residence')
+        destination = self.request.GET.get('destination')
+
         queryset = Profile.objects.all()
+
+        if userId:
+            queryset = queryset.filter(id=userId)
+            return queryset
+
+        if residence:
+            queryset = queryset.filter(residence=residence)
 
         if all:
             return queryset
