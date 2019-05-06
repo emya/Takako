@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 
 from .models import Note, Profile, Transaction, TravelerProfile
+from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
     TransactionSerializer,
@@ -45,12 +46,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = Profile.objects.all()
 
         if userId:
-            # TODO: create new profile only for my page
-            # Have to fix this by checking who's requester
-            queryset = queryset.filter(id=userId)
-            if not queryset:
-                Profile.objects.create(user=self.request.user)
-                queryset = Profile.objects.all().filter(user=self.request.user)
+            user = User.objects.get(pk=userId)
+            queryset = queryset.filter(user=user)
             return queryset
 
         if residence:
@@ -62,13 +59,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
             queryset = queryset.exclude(user=self.request.user)
             return queryset
 
+        # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
-        if queryset:
-            return queryset
-        # If queryset is empty
-        # Make new profile for this user
-        Profile.objects.create(user=self.request.user)
-        queryset = Profile.objects.all().filter(user=self.request.user)
         return queryset
 
 class TravelerProfileViewSet(viewsets.ModelViewSet):
@@ -96,6 +88,7 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        Profile.objects.create(user=user)
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)

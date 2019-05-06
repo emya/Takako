@@ -5,7 +5,7 @@ render() {
     return (
       <div class="sidemenu">
         <ul>
-          <li><a href="/profile">My Profile</a></li>
+          <li><a href={`/profile/${this.props.user}`}>My Profile</a></li>
           <li><a href="#">Transaction Status</a></li>
           <li><a href="#">Message Box</a></li>
           <li><a href="#">Edit Profile</a></li>
