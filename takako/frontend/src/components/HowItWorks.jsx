@@ -1,55 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charsset="UTF-8">
-  <title>Transaction Status</title>
-  <link rel="stylesheet" href="../css/normalize.css">
-  <link rel="stylesheet" href="../css/style.min.css">
-</head>
-<body>
+import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {profile, auth} from "../actions";
+import {Link, Redirect} from "react-router-dom";
+import MediaQuery from 'react-responsive';
+import '../css/style.scss';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import Header from './Header'
+import SideMenu from './SideMenu'
 
-  <div>
-     <header class="header">
-         <div class="topbar-contents">
-           <form class="search">
-             <input type="search" name="search" placeholder="Search"/>
-             <input class="search-button" type="submit" value="Search"/>
-           </form>
-           <a href="#"><p>APP<br/>LOGO</p></a>
-           <div class="login">
-             <a class="register" href="#">Get Started</a>
-             <a class="signin" href="#">Sign in</a>
-           </div>
-         </div>
+library.add(faIgloo)
 
-         <div class="mobile-topbar-contents">
-           <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-           <a href="#"><p>APP<br/>LOGO</p></a>
-           <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
-         </div>
+class HowItWorks extends Component {
 
-       <div class="menu">
-         <a href="#">HOME</a>
-         <a href="#">Request Item</a>
-         <a href="#">Find Request</a>
-         <a href="#">Mypage</a>
-       </div>
-     </header>
+  render() {
+    return (
+<div>
+   <Header />
 
-     <div class="wrapper clearfix">
-       <div class="sidemenu">
-         <ul>
-           <li><a href="#">My Profile</a></li>
-           <li><a href="#">Transaction Status</a></li>
-           <li><a href="#">Message Box</a></li>
-           <li><a href="#">Edit Profile</a></li>
-           <li><a href="#">Edit Account</a></li>
-           <li><a href="#">Logout</a></li>
-           <li><a href="#">Help</a></li>
-         </ul>
-       </div>
+    <div class="wrapper clearfix">
+      <SideMenu />
 
-       <div class="how-it-works">
+      <div class="how-it-works">
          <h2>How It Works</h2>
          <h3>...If You Want to Request an Item</h3>
          <div class="step">
@@ -95,27 +68,28 @@
            <p>Once the item is received by the requesting user, Souvrnir will send you the payment.</p>
          </div>
        </div>
+    </div>
 
-     </div>
-   </div>
+    <div class="sidemenu-mobile">
+    <ul>
+    <li><a href="#">My Profile<span>></span></a></li>
+    <li><a href="#">Transaction Status<span>></span></a></li>
+    <li><a href="#">Message Box<span>></span></a></li>
+    <li><a href="#">Edit Profile<span>></span></a></li>
+    <li><a href="#">Edit Account<span>></span></a></li>
+    <li><a href="#">Logout<span>></span></a></li>
+    <li><a href="#">Help<span>></span></a></li>
+    </ul>
+    </div>
 
-     <div class="sidemenu-mobile">
-     <ul>
-     <li><a href="#">My Profile<span>></span></a></li>
-     <li><a href="#">Transaction Status<span>></span></a></li>
-     <li><a href="#">Message Box<span>></span></a></li>
-     <li><a href="#">Edit Profile<span>></span></a></li>
-     <li><a href="#">Edit Account<span>></span></a></li>
-     <li><a href="#">Logout<span>></span></a></li>
-     <li><a href="#">Help<span>></span></a></li>
-     </ul>
-     </div>
+  <footer>
+  FOOTER CONTENTS TO BE DETERMINED
+  <FontAwesomeIcon icon="igloo" />
+  </footer>
+</div>
 
-   <footer>
-   FOOTER CONTENTS TO BE DETERMINED
-   <FontAwesomeIcon icon="igloo" />
-   </footer>
- </div>
+    )
+  }
+}
 
-<body>
-<html>
+export default HowItWorks;

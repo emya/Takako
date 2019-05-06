@@ -6,7 +6,7 @@ render() {
 <div>
     <header class="header">
         <div class="topbar-contents">
-          <a href="#"><p>APP<br/>LOGO</p></a>
+          <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')}/></a>
           <div class="login">
             <a class="register" href="#">Get Started</a>
             <a class="signin" href="#">Sign in</a>
@@ -21,7 +21,7 @@ render() {
 
       <div class="menu">
         <a href="/search">Search</a>
-        <a href="#">How it works</a>
+        <a href="/how-it-works">How it works</a>
       </div>
     </header>
 </div>

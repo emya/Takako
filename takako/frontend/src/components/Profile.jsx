@@ -15,6 +15,7 @@ library.add(faIgloo)
 class Profile extends Component {
   componentDidMount() {
     console.log(this.props.match.params.userId);
+    console.log(this.props);
     this.props.fetchProfile(this.props.match.params.userId);
   }
 
