@@ -45,7 +45,12 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = Profile.objects.all()
 
         if userId:
+            # TODO: create new profile only for my page
+            # Have to fix this by checking who's requester
             queryset = queryset.filter(id=userId)
+            if not queryset:
+                Profile.objects.create(user=self.request.user)
+                queryset = Profile.objects.all().filter(user=self.request.user)
             return queryset
 
         if residence:
