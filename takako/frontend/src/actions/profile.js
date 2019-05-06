@@ -43,8 +43,6 @@ export const fetchProfile = userId => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("userId", userId);
-
     return fetch(`/api/profiles/?userId=${userId}`, {headers, })
       .then(res => {
         if (res.status < 500) {
@@ -72,7 +70,6 @@ export const fetchProfiles = () => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
 
-    console.log("getState", this.props);
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }

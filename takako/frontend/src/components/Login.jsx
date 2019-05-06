@@ -65,7 +65,7 @@ const mapStateToProps = state => {
             return {field, message: state.auth.errors[field]};
         });
     }
-    console.log("state", state);
+
     return {
         errors,
         isAuthenticated: state.auth.isAuthenticated,
