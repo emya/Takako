@@ -44,8 +44,8 @@ class Profile extends Component {
 
   render() {
     return (
-<div>
-   <Header />
+  <div>
+    <Header />
 
     <div class="wrapper clearfix">
       <SideMenu />

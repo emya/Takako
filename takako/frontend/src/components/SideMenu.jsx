@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class SideMenu extends Component {
 render() {
@@ -17,4 +18,11 @@ render() {
   )}
 }
 
-export default SideMenu;
+const mapStateToProps = state => {
+  return {
+    profile: state.profile,
+    user: state.auth.user,
+  }
+}
+
+export default connect(mapStateToProps)(SideMenu);
