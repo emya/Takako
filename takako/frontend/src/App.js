@@ -12,6 +12,7 @@ import MessageBox from "./components/MessageBox";
 import TravelerProfile from "./components/TravelerProfile";
 import NotFound from "./components/NotFound";
 import HowItWorks from "./components/HowItWorks";
+import RequestForm from "./components/RequestForm";
 
 import {auth} from "./actions";
 import { Provider, connect } from "react-redux";
@@ -54,6 +55,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/note" component={Note} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/how-it-works" component={HowItWorks} />
+                    <Route exact path="/request/form" component={RequestForm} />
                     <Route exact path="/transaction/status" component={Transaction} />
                     <Route exact path="/profile/:userId" component={Profile} />
                     <Route exact path="/message" component={MessageBox} />
