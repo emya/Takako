@@ -36,6 +36,13 @@ class ProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
     serializer_class = ProfileSerializer
 
+    def update(self, request, pk):
+        instance = self.get_object()
+        serializer = self.serializer_class(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
     def get_queryset(self):
         userId = self.request.GET.get('userId')
         all = self.request.GET.get('all')
