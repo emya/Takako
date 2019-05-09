@@ -24,6 +24,10 @@ class HowItWorks extends Component {
 
       <div class="how-it-works">
          <h2>How It Works</h2>
+
+         <h3>To Get Started</h3>
+         <div class="to-get-started">Register for a monthly membership fee of $4.99 (first month FREE). <br/>Once you are registered, update your profile from "My Profile".</div>
+
          <h3>...If You Want to Request an Item</h3>
          <div class="step">
            <div class="step-number">1</div>

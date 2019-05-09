@@ -27,10 +27,10 @@ class RequestForm extends Component {
         <p class="request-form-index">My Location</p><input type="text" value=""></input><br/>
         <p class="request-form-index">Item Name</p><input type="text"></input><br/>
         <p class="request-form-index">Item ID</p><input type="text" placeholder="(Optional)"></input><br/>
+        <p class="request-form-index">Item URL</p><input type="text" placeholder="(Optional)"></input><br/>
         <p class="request-form-index">Item Category</p><select><option>Cosmetics</option></select><br/>
         <p class="request-form-index">Want Item by</p><input type="text"></input><br/>
         <p class="request-form-index">Proposed Price (incl. shipping)</p><input type="text"></input><br/>
-        <p class="request-form-index">Price Negotiable?</p><select><option>Negotiable</option><option>Non-negotiable</option></select><br/>
         <p class="request-form-index">Preferred Delivery Method</p><select><option>Ship</option><option>Pick UP/Meet Up</option></select><br/>
         <p class="request-form-index">Comments</p><input type="text" placeholder="(Optional)"></input><br/>
         <button class="send-request">SEND REQUEST</button>

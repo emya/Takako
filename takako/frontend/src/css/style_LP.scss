@@ -144,6 +144,7 @@ a:link, a:visited, a:hover, a:active {
   font-size: 6rem;
   line-height: 80px;
   padding: 0 30px;
+  margin-top: 90px;
 }
 
 .site-description {
@@ -152,6 +153,7 @@ a:link, a:visited, a:hover, a:active {
   font-size: 2rem;
   line-height: 30px;
   padding: 0 30px;
+  margin-top: 30px;
 }
 
 .site-title {
@@ -166,17 +168,17 @@ a:link, a:visited, a:hover, a:active {
   }}
 
 .lpimage {
-  float: left;
+  // float: right;
   width: 40%;
   height: 500px;
-  background-color: gray;
+  opacity: 0.8;
+  // background-color: gray;
 }
 
 .lpimage {
   @media (max-width: 767px) {
     display: none;
   }}
-
 
 /* How It Works */
 
@@ -323,6 +325,7 @@ a:link, a:visited, a:hover, a:active {
   width: 50%;
   height: 200px;
   background-color: grey;
+  opacity: 0.8;
 }
 
 .button {
