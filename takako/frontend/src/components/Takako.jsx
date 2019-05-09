@@ -7,36 +7,6 @@ import '../css/style_LP.scss';
 import Header from './Header'
 
 class Takako extends Component {
-  /*
-  componentDidMount() {
-    this.props.fetchNotes();
-  }
-
-  state = {
-    text: "",
-    updateNoteId: null,
-  }
-
-
-  resetForm = () => {
-    this.setState({text: "", updateNoteId: null});
-  }
-
-  selectForEdit = (id) => {
-    let note = this.props.notes[id];
-    this.setState({text: note.text, updateNoteId: id});
-  }
-
-  submitNote = (e) => {
-    e.preventDefault();
-    if (this.state.updateNoteId === null) {
-      this.props.addNote(this.state.text).then(this.resetForm)
-    } else {
-      this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
-    }
-    //this.resetForm();
-  }
-  */
 
   render() {
     return (
@@ -178,37 +148,4 @@ class Takako extends Component {
   }
 }
 
-
-const mapStateToProps = state => {
-  return {
-    user: state.auth.user,
-  }
-}
-
-
-const mapDispatchToProps = dispatch => {
-  return {
-    /*
-    fetchNotes: () => {
-      dispatch(notes.fetchNotes());
-    },
-    addNote: (text) => {
-      return dispatch(notes.addNote(text));
-    },
-    //addNote: (text) => {
-    //  dispatch(notes.addNote(text));
-    //},
-    updateNote: (id, text) => {
-      return dispatch(notes.updateNote(id, text));
-      //dispatch(notes.updateNote(id, text));
-    },
-    deleteNote: (id) => {
-      dispatch(notes.deleteNote(id));
-    },
-    */
-    logout: () => dispatch(auth.logout()),
-  }
-}
-
-//export default Takako;
-export default connect(mapStateToProps, mapDispatchToProps)(Takako);
+export default Takako;
