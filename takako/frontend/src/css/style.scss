@@ -50,7 +50,7 @@ h2 {
 }
 
 .logo {
-  width: 120px;
+  width: 200px;
   height: 60px;
 }
 
@@ -62,6 +62,7 @@ h2 {
 .signin, .register {
   font-weight: bold;
   letter-spacing: 2px;
+  margin-right: 20px;
 }
 
 .register {
@@ -302,6 +303,72 @@ h2 {
   border: none;
 }
 
+.request {
+  display: inline-block;
+  position: relative;
+  margin: 60px 0 30px 0;
+
+}
+
+// .request::after {
+//   content: "";
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   bottom: -10%;
+//   border-bottom: 1px solid #333;
+// }
+
+// Transaction msg-history
+
+.transaction-history {
+  float: right;
+  text-align: center;
+  width: 75%;
+}
+
+.history-box {
+  display: inline-box;
+  width: 70%;
+  height: 50px;
+  border: 1px solid grey;
+  margin: 0 auto 10px auto;
+}
+
+.history-box.initial {
+  height: 350px;
+}
+
+.history-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-box p {
+  display: inline;
+  line-height: 50px;
+  margin: auto 50px;
+}
+
+.request-data {
+  text-align: left;
+  list-style: none;
+}
+
+.request-data li {
+  margin: 10px;
+}
+
+.bread-crumb {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.bread-crumb a:link, .bread-crumb a:visited{
+  color: #78BBE6;
+}
+
+
 // search result
 
 .filter, .search-result {
@@ -490,6 +557,11 @@ h2 {
   width: 75%;
 }
 
+.to-get-started {
+  text-align: left;
+  margin-left: 140px;
+}
+
 .step {
   position: relative;
   display: block;
@@ -517,6 +589,10 @@ h2 {
   border-radius: 50%;
 }
 
+.request-form {
+  float: right;
+  width: 75%;
+}
 
 .request-form p, form {
   display: inline-block;

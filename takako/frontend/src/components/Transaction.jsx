@@ -61,12 +61,10 @@ class Transaction extends Component {
         </div>
 
         <div class="profile">
-          <div class="wrapper clearfix">
-            <div class="profile-switch shopper">Shopper Profile</div>
-            <div class="profile-switch traveler">Traveler Profile</div>
-          </div>
+        
+          <h2>Transaction Status</h2>
 
-          <h2>Sent Request</h2>
+          <h3 class="request">Sent Request</h3>
           <table class="table-data">
             <tr class="table-heading">
               <td>Date Sent</td>
@@ -94,7 +92,7 @@ class Transaction extends Component {
             </tr>
           </table>
 
-          <h2>Received Request</h2>
+          <h3 class="request">Received Request</h3>
           <table class="table-data">
             <tr class="table-heading">
               <td>Date Received</td>

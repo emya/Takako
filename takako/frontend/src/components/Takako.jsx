@@ -43,11 +43,13 @@ class Takako extends Component {
       <body>
       <header class="header">
           <div class="topbar-contents">
-            <form class="search">
+            {/*
+              <form class="search">
               <input type="search" name="search" placeholder="Search"/>
               <input class="search-button" type="submit" value="Search"/>
             </form>
-            <a href="#"><p>APP<br/>LOGO</p></a>
+            */}
+            <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')} /></a>
             <div class="login">
               <a class="register" href="/register">Get Started</a>
               <a class="signin" href="/login">Sign in</a>
@@ -57,24 +59,24 @@ class Takako extends Component {
 
           <div class="mobile-topbar-contents">
             <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-            <a href="#"><p>APP<br/>LOGO</p></a>
+            <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')} /></a>
             <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
           </div>
 
         <div class="menu">
-          <a href="#">HOME</a>
-          <a href="#">Request Item</a>
-          <a href="#">Mypage</a>
+          <a href="/search">Search</a>
+          <a href="/how-it-works">How it Works</a>
         </div>
+
 
           <div class="catchcopy clearfix">
             <div class="content">
-              <h1 class="site-title">Find Someone who Can Bring Back Whatever You Want.
+              <h1 class="site-title">Find Someone Who Can Get You an Item That You Can't.
               </h1>
               <p class="site-description">Request nearest traveler to buy and bring back whatever from wherever, just like how you ask your friend.
               </p>
             </div>
-            <image class="lpimage" src={require('../img/LP.jpg')}/>
+            <img class="lpimage" src={require('../img/LP.png')}/>
           </div>
           </header>
 
@@ -83,7 +85,7 @@ class Takako extends Component {
           <div class="how-wrapper">
             <div class="how-box">
               <div class="how-title">Request Item</div>
-              <div class="how-description">Find someone near you, who are traveling for where you want your item from.
+              <div class="how-description">Find someone near you, who are traveling to where you want your item from.
               </div>
             </div>
             <div class="how-box">
@@ -105,17 +107,17 @@ class Takako extends Component {
             <div class="use-box clearfix">
                 <div class="use-example">“I want to buy cosmetics at duty-free prices”
                 </div>
-                <img class="use-image" src={require('../img/cosmetics.png')}/>
+                <img class="use-image" src={require('../img/LP.png')}/>
             </div>
             <div class="use-box clearfix">
               <div class="use-example">“I can’t find my favorite brand from home”
               </div>
-                <img class="use-image" src={require("../img/cosmetics.png")}/>
+                <img class="use-image" src={require("../img/clothing.png")}/>
             </div>
             <div class="use-box clearfix">
               <div class="use-example">“Imported items are too expensive.”
               </div>
-                <img class="use-image" src={require("../img/cosmetics.png")}/>
+                <img class="use-image" src={require("../img/electronics.png")}/>
             </div>
           </div>
 
@@ -132,7 +134,7 @@ class Takako extends Component {
             </div>
             <div class="service-box">
               <i class="service-icon fa fa-lightbulb-o">★</i>
-              <div class="service-title">Availlable</div>
+              <div class="service-title">Reachable</div>
               <p class="service-text">You can reach ANY items that are not available domestically.</p>
             </div>
             <div class="service-box">
@@ -151,17 +153,17 @@ class Takako extends Component {
         <section class="latest">
           <h2 class="heading">Latest Requests</h2>
           <a class="request-box">
-            <img class="request-img" src={require("../img/clothing.png")}/>
+            <img class="request-img" src={require("../img/books.png")}/>
             <div class="request-title">Kimono<br/>Japan</div>
             <time class="date" datetime="2019-02-14">02.14.2019</time>
           </a>
           <a class="request-box">
-            <img class="request-img" src={require("../img/clothing.png")}/>
+            <img class="request-img" src={require("../img/books.png")}/>
             <div class="request-title">Eyeshadow<br/>UK</div>
             <time class="date" datetime="2019-02-15">02.15.2019</time>
           </a>
           <a class="request-box">
-            <img class="request-img" src={require("../img/clothing.png")}/>
+            <img class="request-img" src={require("../img/books.png")}/>
             <div class="request-title">Facial Cream<br/>India</div>
             <time class="date" datetime="2019-02-10">02.10.2019</time>
           </a>
