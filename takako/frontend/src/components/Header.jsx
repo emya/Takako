@@ -6,7 +6,7 @@ render() {
 <div>
     <header class="header">
         <div class="topbar-contents">
-          <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')}/></a>
+          <a href="/"><img class="logo" src={require('../img/Souvenir_logo.png')}/></a>
           <div class="login">
             <a class="register" href="#">Get Started</a>
             <a class="signin" href="#">Sign in</a>

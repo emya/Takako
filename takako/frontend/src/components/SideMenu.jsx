@@ -4,10 +4,11 @@ import {auth} from "../actions";
 
 class SideMenu extends Component {
 render() {
+    console.log(this.props);
     return (
       <div class="sidemenu">
         <ul>
-          <li><a href={`/profile/${this.props.user}`}>My Profile</a></li>
+          <li><a href={`/profile/${this.props.user.id}`}>My Profile</a></li>
           <li><a href="/transaction/status">Transaction Status</a></li>
           <li><a href="#">Message Box</a></li>
           <li><a href="#">Edit Profile</a></li>

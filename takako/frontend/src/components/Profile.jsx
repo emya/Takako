@@ -51,7 +51,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
-        <a class="message-btn" href="#">Message Traveller</a>
+        <a class="message-btn" href="#">Request shopping</a>
 
         <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
@@ -127,7 +127,6 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    user: state.auth.user,
   }
 }
 

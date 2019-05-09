@@ -178,7 +178,7 @@ class Takako extends Component {
   }
 }
 
-
+/*
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
@@ -188,27 +188,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    /*
-    fetchNotes: () => {
-      dispatch(notes.fetchNotes());
-    },
-    addNote: (text) => {
-      return dispatch(notes.addNote(text));
-    },
-    //addNote: (text) => {
-    //  dispatch(notes.addNote(text));
-    //},
-    updateNote: (id, text) => {
-      return dispatch(notes.updateNote(id, text));
-      //dispatch(notes.updateNote(id, text));
-    },
-    deleteNote: (id) => {
-      dispatch(notes.deleteNote(id));
-    },
-    */
     logout: () => dispatch(auth.logout()),
   }
 }
+*/
 
-//export default Takako;
-export default connect(mapStateToProps, mapDispatchToProps)(Takako);
+export default Takako;
+//export default connect(mapStateToProps, mapDispatchToProps)(Takako);
