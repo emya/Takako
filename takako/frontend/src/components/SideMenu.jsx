@@ -4,7 +4,6 @@ import {auth} from "../actions";
 
 class SideMenu extends Component {
 render() {
-    console.log(this.props);
     return (
       <div class="sidemenu">
         <ul>
