@@ -47,7 +47,7 @@ class Transaction extends Component {
               <td>4/16/2019 - 4/20/2019</td>
               <td>Makeup</td>
               <td>Tokyo, Japan</td>
-              <td>Accepted</td>
+              <td>Accepted <a href="#" style={{color: "#78BBE6"}}>details</a></td>
             </tr>
             <tr class="transaction-data">
               <td>5/3/2019</td>
@@ -55,7 +55,7 @@ class Transaction extends Component {
               <td>5/20/2019 - 5/25/2019</td>
               <td>Snack</td>
               <td>Paris, France</td>
-              <td>Purchased</td>
+              <td>Purchased <a href="#" style={{color: "#78BBE6"}}>details</a> </td>
             </tr>
           </table>
 
@@ -116,7 +116,6 @@ class Transaction extends Component {
 
 
 const mapStateToProps = state => {
-  console.log("state.auth.user", state.auth);
   return {
     sent_requests: state.sent_requests,
     received_requests: state.received_requests,
