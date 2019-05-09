@@ -1,4 +1,4 @@
-export const updateProfile = (id, bio, location) => {
+export const updateProfile = (id, bio, residence) => {
   return (dispatch, getState) => {
 
     let headers = {"Content-Type": "application/json"};
@@ -8,11 +8,12 @@ export const updateProfile = (id, bio, location) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(`id: ${id}, bio: ${bio}, location: ${location}`)
+    console.log(`id: ${id}, bio: ${bio}, residence: ${residence}`)
 
-    let body = JSON.stringify({bio, location, });
+    let body = JSON.stringify({bio, residence, });
+    console.log(body);
 
-    return fetch(`/api/profile/${id}/`, {headers, method: "PUT", body})
+    return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

@@ -38,8 +38,9 @@ class RootContainerComponent extends Component {
             console.log("this.props", this.props)
             if (this.props.auth.isLoading) {
                 return <em>Loading...</em>;
-            //} else if (!this.props.auth.isAuthenticated) {
-            //    return <Redirect to="/login" />;
+            } else if (!this.props.auth.isAuthenticated) {
+                console.log("redirect to home")
+                return <Redirect to="/" />;
             } else {
                 return <ChildComponent {...props} />
             }
@@ -51,15 +52,15 @@ class RootContainerComponent extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <PrivateRoute exact path="/" component={Takako} />
-                    <Route exact path="/note" component={Note} />
-                    <Route exact path="/search" component={Search} />
-                    <Route exact path="/how-it-works" component={HowItWorks} />
-                    <Route exact path="/request/form" component={RequestForm} />
-                    <Route exact path="/transaction/status" component={Transaction} />
-                    <Route exact path="/profile/:userId" component={Profile} />
-                    <Route exact path="/message" component={MessageBox} />
-                    <Route exact path="/traveler/profile" component={TravelerProfile} />
+                    <Route exact path="/" component={Takako} />
+                    <PrivateRoute exact path="/note" component={Note} />
+                    <PrivateRoute exact path="/search" component={Search} />
+                    <PrivateRoute exact path="/how-it-works" component={HowItWorks} />
+                    <PrivateRoute exact path="/request/form" component={RequestForm} />
+                    <PrivateRoute exact path="/transaction/status" component={Transaction} />
+                    <PrivateRoute exact path="/profile/:userId" component={Profile} />
+                    <PrivateRoute exact path="/message" component={MessageBox} />
+                    <PrivateRoute exact path="/traveler/profile" component={TravelerProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route component={NotFound} />

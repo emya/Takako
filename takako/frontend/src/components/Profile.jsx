@@ -19,27 +19,27 @@ class Profile extends Component {
 
   state = {
     bio: "",
-    location: "",
+    residence: "",
     updateProfileId: null,
   }
 
   resetForm = () => {
-    this.setState({bio: "", location: "", updateProfileId: null});
+    this.setState({bio: "", residence: "", updateProfileId: null});
   }
 
   selectForEdit = (profile) => {
     console.log("selectForEdit", profile)
-    this.setState({bio: profile.bio, location: profile.location, updateProfileId: profile.id});
+    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
   }
 
   submitProfile = (e) => {
     e.preventDefault();
-    this.props.updateProfile(this.state.updateProfileId, this.state.bio, this.state.location).then(this.resetForm);
+    this.props.updateProfile(this.state.updateProfileId, this.state.bio, this.state.residence).then(this.resetForm);
   }
 
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
-    this.setState({bio: profile.bio, location: profile.location, updateProfileId: profile.id});
+    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
   }
 
   render() {
@@ -51,12 +51,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
-        <div class="wrapper clearfix">
-          <div class="profile-switch shopper">Shopper Profile</div>
-          <div class="profile-switch traveler">Traveler Profile</div>
-        </div>
-
-        <a class="message-btn" href="#">Message Traveller</a>
+        <a class="message-btn" href="#">Request shopping</a>
 
         <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
@@ -80,7 +75,7 @@ class Profile extends Component {
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>
-            <td>Location</td>
+            <td>residence</td>
             <td>Note</td>
           </tr>
           <tr>
@@ -94,7 +89,7 @@ class Profile extends Component {
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>
-            <td>Location</td>
+            <td>residence</td>
             <td>Item</td>
           </tr>
           <tr>
@@ -132,7 +127,6 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.profile,
-    user: state.auth.user,
   }
 }
 
@@ -153,8 +147,8 @@ const mapDispatchToProps = dispatch => {
     fetchProfile: (userId) => {
       dispatch(profile.fetchProfile(userId));
     },
-    updateProfile: (id, bio, location) => {
-      return dispatch(profile.updateProfile(id, bio, location));
+    updateProfile: (id, bio, residence) => {
+      return dispatch(profile.updateProfile(id, bio, residence));
       //dispatch(notes.updateNote(id, text));
     },
     logout: () => dispatch(auth.logout()),
