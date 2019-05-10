@@ -50,7 +50,7 @@ class Login extends Component {
                     </p>
 
                     <p>
-                        Don't have an account? <Link to="/register">Register</Link>
+                        Don't have an account? <Link to="/register" style={{color: "black"}}>Register</Link>
                     </p>
                 </fieldset>
             </form>
