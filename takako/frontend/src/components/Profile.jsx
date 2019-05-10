@@ -51,7 +51,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
-        <a class="message-btn" href="#">Request shopping</a>
+        <a class="message-btn" href="/request/form">Request shopping</a>
 
         <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
