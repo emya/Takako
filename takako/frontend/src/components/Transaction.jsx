@@ -47,7 +47,7 @@ class Transaction extends Component {
               <td>4/16/2019 - 4/20/2019</td>
               <td>Makeup</td>
               <td>Tokyo, Japan</td>
-              <td>Accepted <a href="#" style={{color: "#78BBE6"}}>details</a></td>
+              <td>Accepted <a href="/transaction/history" style={{color: "#78BBE6"}}>details</a></td>
             </tr>
             <tr class="transaction-data">
               <td>5/3/2019</td>
@@ -55,7 +55,7 @@ class Transaction extends Component {
               <td>5/20/2019 - 5/25/2019</td>
               <td>Snack</td>
               <td>Paris, France</td>
-              <td>Purchased <a href="#" style={{color: "#78BBE6"}}>details</a> </td>
+              <td>Purchased <a href="/transaction/history" style={{color: "#78BBE6"}}>details</a> </td>
             </tr>
           </table>
 
