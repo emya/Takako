@@ -12,9 +12,9 @@ import SideMenu from './SideMenu'
 
 library.add(faIgloo)
 
-class Profile extends Component {
+class MyProfile extends Component {
   componentDidMount() {
-    this.props.fetchProfile(this.props.match.params.userId);
+    this.props.fetchProfile(this.props.user.id);
   }
 
   state = {
@@ -51,8 +51,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
-        <a class="message-btn" href="/request/form">Request shopping</a>
-
+        <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
             <div>
               <img src="./img/woman3.jpg"/>
@@ -60,13 +59,15 @@ class Profile extends Component {
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
               <p class="object">Residence</p>
-               {profile.residence}
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
               <p class="object">Occupation</p>
-               {profile.occupation}
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
               <p class="object">Bio</p>
-               {profile.bio}
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
           ))}
+          <input class="submit-btn" type="submit" value="Save Profile" />
+        </form>
 
         <h2>Upcoming Trips</h2>
         <table class="table-data">
@@ -124,6 +125,7 @@ class Profile extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.profile,
+    user: state.auth.user,
   }
 }
 
@@ -153,4 +155,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);

@@ -8,6 +8,7 @@ import Note from "./components/Note";
 import Transaction from "./components/Transaction";
 import TransactionHistory from "./components/TransactionHistory";
 import Search from "./components/Search";
+import MyProfile from "./components/MyProfile";
 import Profile from "./components/Profile";
 import MessageBox from "./components/MessageBox";
 import TravelerProfile from "./components/TravelerProfile";
@@ -60,6 +61,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/request/form" component={RequestForm} />
                     <PrivateRoute exact path="/transaction/status" component={Transaction} />
                     <PrivateRoute exact path="/transaction/history" component={TransactionHistory} />
+                    <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/profile/:userId" component={Profile} />
                     <PrivateRoute exact path="/message" component={MessageBox} />
                     <PrivateRoute exact path="/traveler/profile" component={TravelerProfile} />

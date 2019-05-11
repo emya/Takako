@@ -20,7 +20,7 @@ class Login extends Component {
     render() {
         if (this.props.isAuthenticated) {
             console.log("isAuthenticated", this.props)
-            return <Redirect to={`/profile/${this.props.user.id}`} />
+            return <Redirect to='/myprofile' />
         }
         return (
             <form onSubmit={this.onSubmit}>
