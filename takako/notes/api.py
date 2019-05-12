@@ -1,14 +1,17 @@
+import json
 from rest_framework import viewsets, permissions, generics
+
 from rest_framework.response import Response
 
 from knox.models import AuthToken
 
-from .models import Note, Profile, Transaction, TravelerProfile
+from .models import Note, Profile, Transaction, TravelerProfile, Trip
 from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
     TransactionSerializer,
     ProfileSerializer,
+    TripSerializer,
     TravelerProfileSerializer,
     CreateUserSerializer,
     UserSerializer,
@@ -31,6 +34,36 @@ class TransactionAPI(generics.GenericAPIView):
         # Transaction for received requests
         queryset_respondent = Transaction.objects.all().filter(respondent=request.user)
         return Response({ 'sent_requests': queryset_requester, 'received_requests': queryset_respondent})
+
+class TripViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = TripSerializer
+
+    def create(self, request):
+        trip = Trip.objects.create(user=request.user, **request.data)
+        serializer = self.serializer_class(trip)
+        return Response(serializer.data)
+
+    def update(self, request, pk):
+        instance = self.get_object()
+        serializer = self.serializer_class(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def get_queryset(self):
+        userId = self.request.GET.get('userId')
+
+        queryset = Trip.objects.all()
+
+        if userId:
+            user = User.objects.get(pk=userId)
+            queryset = queryset.filter(user=user)
+            return queryset
+
+        # TODO: handle exception
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
 class ProfileViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]

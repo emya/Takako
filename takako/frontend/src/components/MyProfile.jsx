@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
 import SideMenu from './SideMenu'
+import UpcomingTrips from './UpcomingTrips'
 
 library.add(faIgloo)
 
@@ -70,18 +71,7 @@ class MyProfile extends Component {
         </form>
 
         <h2>Upcoming Trips</h2>
-        <table class="table-data">
-          <tr class="table-heading">
-            <td>Date</td>
-            <td>residence</td>
-            <td>Note</td>
-          </tr>
-          <tr>
-            <td>4/5/2019 - 4/12/2019</td>
-            <td>Tokyo, Japan</td>
-            <td>Business Trip</td>
-          </tr>
-        </table>
+        <UpcomingTrips />
 
         <h2>Past Transactions</h2>
         <table class="table-data">

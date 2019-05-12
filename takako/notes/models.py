@@ -47,4 +47,6 @@ class Trip(models.Model):
     destination = models.CharField(max_length=100, blank=True)
     departure_date = models.DateField(null=True, blank=True)
     arrival_date = models.DateField(null=True, blank=True)
-    status = models.IntegerField()
+    status = models.IntegerField(default=0)
+    # Status
+    # 0: just create the trip
