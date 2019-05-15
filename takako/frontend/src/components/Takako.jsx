@@ -65,7 +65,7 @@ class Takako extends Component {
 
         <div class="menu">
           <a href="#">Search</a>
-          <a href="#">How it Works</a>
+          <a href="/how-it-works">How it Works</a>
         </div>
 
 
