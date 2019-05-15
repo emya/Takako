@@ -28,17 +28,17 @@ class Transaction extends Component {
        <SideMenu />
 
         <div class="profile">
-        
+
           <h2>Transaction Status</h2>
 
           <h3 class="request">Sent Request</h3>
           <table class="table-data">
             <tr class="table-heading">
               <td>Date Sent</td>
-              <td>Traveler</td>
+              <td>User</td>
               <td>Travel Date</td>
               <td>Item</td>
-              <td>Location</td>
+              <td>Destination</td>
               <td>Status</td>
             </tr>
             <tr class="transaction-data">
@@ -63,9 +63,9 @@ class Transaction extends Component {
           <table class="table-data">
             <tr class="table-heading">
               <td>Date Received</td>
-              <td>Shopper</td>
+              <td>User</td>
               <td>Item</td>
-              <td>Location</td>
+              <td>Destination</td>
               <td>Status</td>
               <td>Earning</td>
             </tr>

@@ -24,7 +24,7 @@ body {
 }
 
 a:link, a:visited, a:hover, a:active {
-  color: #fff;
+  color: #FFF;
   text-decoration: none;
   cursor: pointer;
 }
@@ -52,11 +52,6 @@ h2 {
 .logo {
   width: 200px;
   height: 60px;
-}
-
-
-.search-button {
-  background-color: #F99F48;
 }
 
 .signin, .register {
@@ -547,20 +542,38 @@ h2 {
 
 // howItWorks
 
-.how-it-works > h3 {
-  text-align: left;
-  margin: 50px 0 40px 10%;
+.how-it-works {
+  width: 100%;
+  float: right;
+  padding: 0;
+  height: 1800px;
 }
 
-.how-it-works {
+.how-it-works h3 {
+  text-align: left;
+  margin: 50px 0 40px 36px;
+}
+
+.how-it-works-left {
+  float: left;
+  width: 50%;
+}
+
+.how-it-works-right {
   float: right;
-  width: 75%;
+  width: 50%;
 }
 
 .to-get-started {
   text-align: left;
-  margin-left: 140px;
+  margin: 0 0 50px 36px;
+
 }
+
+.details:link, .details:visited, .details:hover, .details:active {
+  color: #F99F48;
+}
+
 
 .step {
   position: relative;
@@ -569,7 +582,7 @@ h2 {
   // background-color: #D5EEFF;
   width: 80%;
   height: 40px;
-  margin: 30px auto;
+  margin: 60px auto;
   padding-left: 40px;
   overflow-wrap: break-word;
 }
@@ -611,6 +624,7 @@ h2 {
 /* footer */
 
 footer {
+  display: block;
   background-color: #78BBE6;
   width: 100%;
   height: 300px;

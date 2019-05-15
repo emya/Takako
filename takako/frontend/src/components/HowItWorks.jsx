@@ -18,78 +18,95 @@ class HowItWorks extends Component {
     return (
 <div>
    <Header />
-
-    <div class="wrapper clearfix">
-      <SideMenu />
-
+   <div class="wrapper clearfix">
       <div class="how-it-works">
-         <h2>How It Works</h2>
+           <h2 class>How It Works</h2>
+           <h3>To Get Started</h3>
+           <p class="to-get-started">First, register from  <a class="details" href="/register">here</a>. Registration is absolutely FREE! <br/><br/>Once you are registered, update your profile from "My Profile".</p>
 
-         <h3>To Get Started</h3>
-         <div class="to-get-started">Register for a monthly membership fee of $4.99 (first month FREE). <br/>Once you are registered, update your profile from "My Profile".</div>
-
-         <h3>...If You Want to Request an Item</h3>
-         <div class="step">
-           <div class="step-number">1</div>
-           <p>On "Search" page, search for a user by "Travel destination" and "Residence City" to find someone who lives near you, and is traveling to the city where you want your item from.</p>
-         </div>
-         <div class="step">
-           <div class="step-number">2</div>
-           <p>From that user's "Profile" page, fill out and send a request form with the description of the item and proposed price.</p>
-         </div>
-         <div class="step">
-           <div class="step-number">3</div>
-           <p>If the requested user approves your request, Souvenir will notify you through an e-mail.</p>
-         </div>
-         <div class="step">
-           <div class="step-number">4</div>
-           <p>Through the link on the e-mail, make a payment for the agreed price. Souvenir will keep your payment until your item is received :)</p>
-         </div>
-         <div class="step">
-           <div class="step-number">5</div>
-           <p>Please notify Souvenir once you receive the item. Enjoy!</p>
-         </div>
-
-         <h3>...If You Receive a Request</h3>
-         <div class="step">
-           <div class="step-number">1</div>
-             <p>Check the request either from the link on the notification e-mail or on "Transaction Status" page.</p>
+           <div class="wrapper clearfix">
+            <div class="how-it-works-left">
+             <h3>...If You Want to Request an Item</h3>
+             <div class="step">
+               <div class="step-number">1</div>
+               <p>Search for a user by "Travel destination" and "Residence City" to find someone who lives near you, and is traveling to the city where you want your item from.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">2</div>
+               <p>Once you find a good match, fill out and send a request form with descriptions of the item, a date that you want the item by, and a proposed price <a class="details" href="/how-it-works#proposed-price">*What's Proposed Price?</a></p>
+             </div>
+             <div class="step">
+               <div class="step-number">3</div>
+               <p>If the requested user approves your request, Souvenir will notify you through an e-mail.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">4</div>
+               <p>Through the link on the e-mail, make a payment for the proposed price plus 3% transaction fee.  <a class="details" href="/how-it-works#transaction-fee">*What's transaction fee?</a> <br/> Souvenir will keep your payment until your item is received :)</p>
+             </div>
+             <div class="step">
+               <div class="step-number">5</div>
+               <p>Please notify Souvenir once you receive the item. Enjoy!</p>
+             </div>
            </div>
-         <div class="step">
-           <div class="step-number">2</div>
-           <p>If you are ok with getting the item for the proposed price, click "Accept".</p>
-         </div>
-         <div class="step">
-           <div class="step-number">3</div>
-           <p>The requesting user will make a payment, and Souvenir will notify you for the receipt of the payment through an e-mail.</p>
-         </div>
-         <div class="step">
-           <div class="step-number">4</div>
-           <p>Buy the requested item on your trip. Ship it or hand it to the user in person once you get back from the trip.</p>
-         </div>
-         <div class="step">
-           <div class="step-number">5</div>
-           <p>Once the item is received by the requesting user, Souvrnir will send you the payment.</p>
-         </div>
-       </div>
+
+           <div class="how-it-works-right">
+             <h3>...If You Receive a Request to Buy an Item</h3>
+             <div class="step">
+               <div class="step-number">1</div>
+                 <p>Check the request either from the link on the notification e-mail or on "Transaction Status" page.</p>
+               </div>
+             <div class="step">
+               <div class="step-number">2</div>
+               <p>If you are willing to get the item for the proposed price by the specified date, click "Accept" in the request form.<br/><a class="details" href="/how-it-works#proposed-price">*What's proposed price?</a> </p>
+             </div>
+             <div class="step">
+               <div class="step-number">3</div>
+               <p>The requesting user will make a payment, and Souvenir will notify you for the receipt of the payment through an e-mail.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">4</div>
+               <p>Purchase the requested item on your trip. Ship it or meet up with the user before the date specified in the request form.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">5</div>
+               <p>Once the item is received by the requesting user, Souvenir will send you the payment.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">6</div>
+               <p>Congraturations! When you want to request an item, your next transaction fee will be waived. <a class="details" href="/how-it-works#proposed-price">*What's transaction fee?</a> </p>
+             </div>
+           </div>
+          </div>
+
+          <h3>Transaction Fee</h3>
+          <p class="to-get-started">For each request, the requesting user will be charged 3% transaction fee.
+          <br/><br/>This transaction fee will be waived if you have completed someone's request previously.</p>
+          <h3 id="proposed-price">Proposed Price</h3>
+          <p class="to-get-started">
+            The proposed price should include a price of an item and shipping (if you choose shipping as a delivery method).
+            <br/>It should be determined based on a retail price. Attaching an item URL will give a better idea for both users!
+            <br/><br/>The requesting user will be paying this proposed price PLUS 3% transaction fee.
+            <br/><br/>The full proposed price will be paid to the requested user when the transaction is completed.
+          </p>
+          <h3>Item Delivery</h3>
+          <p class="to-get-started">
+            An item can be delivered either by shipping or by meet-up. The requesting user will choose either option when sending a request.
+            <br/><br/> Contact information necessary for the delivery will be provided to each party once the payment of the item takes place.
+          </p>
+          <h3>Returns</h3>
+          <p class="to-get-started">
+            The requested user will be accountable for any wrong or damaged item, and the requesting user will be refunded in full.
+            <br/><br/>In order for the item to be a "wrong item", the requesting user should include an item ID in a request form.
+            <br/><br/><br/>Any personal reasons such as an item being different from a picture, or a size issue, items are not refundable.
+          </p>
+    </div>
     </div>
 
-    <div class="sidemenu-mobile">
-    <ul>
-    <li><a href="#">My Profile<span>></span></a></li>
-    <li><a href="#">Transaction Status<span>></span></a></li>
-    <li><a href="#">Message Box<span>></span></a></li>
-    <li><a href="#">Edit Profile<span>></span></a></li>
-    <li><a href="#">Edit Account<span>></span></a></li>
-    <li><a href="#">Logout<span>></span></a></li>
-    <li><a href="#">Help<span>></span></a></li>
-    </ul>
-    </div>
 
-  <footer>
-  FOOTER CONTENTS TO BE DETERMINED
-  <FontAwesomeIcon icon="igloo" />
-  </footer>
+    <footer>
+    FOOTER CONTENTS TO BE DETERMINED
+    <FontAwesomeIcon icon="igloo" />
+    </footer>
 </div>
 
     )

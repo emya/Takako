@@ -7,6 +7,36 @@ import '../css/style_LP.scss';
 import Header from './Header'
 
 class Takako extends Component {
+  /*
+  componentDidMount() {
+    this.props.fetchNotes();
+  }
+
+  state = {
+    text: "",
+    updateNoteId: null,
+  }
+
+
+  resetForm = () => {
+    this.setState({text: "", updateNoteId: null});
+  }
+
+  selectForEdit = (id) => {
+    let note = this.props.notes[id];
+    this.setState({text: note.text, updateNoteId: id});
+  }
+
+  submitNote = (e) => {
+    e.preventDefault();
+    if (this.state.updateNoteId === null) {
+      this.props.addNote(this.state.text).then(this.resetForm)
+    } else {
+      this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
+    }
+    //this.resetForm();
+  }
+  */
 
   render() {
     return (
@@ -23,6 +53,7 @@ class Takako extends Component {
             <div class="login">
               <a class="register" href="/register">Get Started</a>
               <a class="signin" href="/login">Sign in</a>
+              <a class="signin" onClick={this.props.logout}>logout</a>
             </div>
           </div>
 
@@ -33,14 +64,14 @@ class Takako extends Component {
           </div>
 
         <div class="menu">
-          <a href="/search">Search</a>
-          <a href="/how-it-works">How it Works</a>
+          <a href="#">Search</a>
+          <a href="#">How it Works</a>
         </div>
 
 
           <div class="catchcopy clearfix">
             <div class="content">
-              <h1 class="site-title">Find Someone Who Can Get You an Item That You Can't.
+              <h1 class="site-title">Find Someone Who Can Get You Item That You Can’t.
               </h1>
               <p class="site-description">Request nearest traveler to buy and bring back whatever from wherever, just like how you ask your friend.
               </p>
@@ -51,6 +82,7 @@ class Takako extends Component {
 
         <section class="how">
           <h2 class="heading">How It Works</h2>
+          {/*
           <div class="how-wrapper">
             <div class="how-box">
               <div class="how-title">Request Item</div>
@@ -68,6 +100,30 @@ class Takako extends Component {
               </div>
             </div>
           </div>
+          */}
+          {/*}<img class="lp-how" src={require('../img/LP_HOW.png')}/>*/}
+            <a class="button" href="#">GET STARTED</a>
+        </section>
+
+        <section class="service">
+        <h2 class="heading s">Our Services</h2>
+        <div class="wrapper-service">
+        <div class="service-box">
+        <i class="service-icon fa fa-lightbulb-o">★</i>
+        <div class="service-title">Propose<br/>Price of the Item</div>
+        <p class="service-text">Requesting user will pay proposed item price + fixed 3% transaction fee. No more excessive premium or international shipping!</p>
+        </div>
+        <div class="service-box">
+        <i class="service-icon fa fa-lightbulb-o">★</i>
+        <div class="service-title">Access to<br/>Unique Item</div>
+        <p class="service-text">You can reach ANY items that are not available in your area.</p>
+        </div>
+        <div class="service-box">
+        <i class="service-icon fa fa-lightbulb-o">★</i>
+        <div class="service-title">Easy and Sefe<br/>Transaction</div>
+        <p class="service-text">Just send a request form! No cumbersome negotiation.Souvenir will keep your payment until the item is delivered.</p>
+        </div>
+        </div>
         </section>
 
         <section class="use">
@@ -93,31 +149,6 @@ class Takako extends Component {
           <a class="button" href="#">GET STARTED</a>
         </section>
 
-        <section class="service">
-          <h2 class="heading s">Our Services</h2>
-          <div class="wrapper-service">
-            <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o">★</i>
-              <div class="service-title">Affordable</div>
-              <p class="service-text">Just pay agreed price. No excessive premium or international shipping!</p>
-            </div>
-            <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o">★</i>
-              <div class="service-title">Reachable</div>
-              <p class="service-text">You can reach ANY items that are not available domestically.</p>
-            </div>
-            <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o">★</i>
-              <div class="service-title">Safe</div>
-              <p class="service-text">Otsukai will handle and dispatch your payment when item is received.</p>
-            </div>
-            <div class="service-box">
-              <i class="service-icon fa fa-lightbulb-o">★</i>
-              <div class="service-title">Free</div>
-              <p class="service-text">Join our community and enjoy NO transaction fee!</p>
-            </div>
-          </div>
-        </section>
 
         <section class="latest">
           <h2 class="heading">Latest Requests</h2>
@@ -149,4 +180,37 @@ class Takako extends Component {
   }
 }
 
-export default Takako;
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    /*
+    fetchNotes: () => {
+      dispatch(notes.fetchNotes());
+    },
+    addNote: (text) => {
+      return dispatch(notes.addNote(text));
+    },
+    //addNote: (text) => {
+    //  dispatch(notes.addNote(text));
+    //},
+    updateNote: (id, text) => {
+      return dispatch(notes.updateNote(id, text));
+      //dispatch(notes.updateNote(id, text));
+    },
+    deleteNote: (id) => {
+      dispatch(notes.deleteNote(id));
+    },
+    */
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+//export default Takako;
+export default connect(mapStateToProps, mapDispatchToProps)(Takako);
