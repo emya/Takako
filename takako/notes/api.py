@@ -5,11 +5,12 @@ from rest_framework.response import Response
 
 from knox.models import AuthToken
 
-from .models import Note, Profile, Transaction, TravelerProfile, Trip
+from .models import Note, Profile, Transaction, TravelerProfile, Trip, ItemRequest
 from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
     TransactionSerializer,
+    ItemRequestSerializer,
     ProfileSerializer,
     TripSerializer,
     TravelerProfileSerializer,
@@ -34,6 +35,18 @@ class TransactionAPI(generics.GenericAPIView):
         # Transaction for received requests
         queryset_respondent = Transaction.objects.all().filter(respondent=request.user)
         return Response({ 'sent_requests': queryset_requester, 'received_requests': queryset_respondent})
+
+class ItemRequestViewSet(viewsets.ModelViewSet):
+    serializer_class = ItemRequestSerializer
+
+    def create(self, request):
+        respondent_id = request.data.pop("respondent_id")
+        trip_id = request.data.pop("trip_id")
+        respondent = User.objects.get(pk=respondent_id)
+        trip = Trip.objects.get(pk=trip_id)
+        item_request = ItemRequest.objects.create(requester=request.user, respondent=respondent, trip=trip, **request.data)
+        serializer = self.serializer_class(item_request)
+        return Response(serializer.data)
 
 class TripViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated,]

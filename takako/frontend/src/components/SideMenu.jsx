@@ -10,8 +10,6 @@ render() {
           <li><a href={'/myprofile'}>My Profile</a></li>
           <li><a href="/transaction/status">Transaction Status</a></li>
           <li><a href="#">Message Box</a></li>
-          <li><a href="#">Edit Profile</a></li>
-          <li><a href="#">Edit Account</a></li>
           <li><a onClick={this.props.logout} style={{color: "white"}}>Logout</a></li>
           <li><a href="#">Help</a></li>
         </ul>
