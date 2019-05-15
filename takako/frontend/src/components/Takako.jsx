@@ -101,8 +101,7 @@ class Takako extends Component {
             </div>
           </div>
           */}
-          {/*}<img class="lp-how" src={require('../img/LP_HOW.png')}/>*/}
-            <a class="button" href="#">GET STARTED</a>
+          <img class="lp-how" src={require('../img/LP_HOW.PNG')}/>
         </section>
 
         <section class="service">
@@ -121,7 +120,7 @@ class Takako extends Component {
         <div class="service-box">
         <i class="service-icon fa fa-lightbulb-o">★</i>
         <div class="service-title">Easy and Sefe<br/>Transaction</div>
-        <p class="service-text">Just send a request form! No cumbersome negotiation.Souvenir will keep your payment until the item is delivered.</p>
+        <p class="service-text">Just send a request form! No cumbersome negotiation. Souvenir will keep your payment until the item is delivered.</p>
         </div>
         </div>
         </section>
