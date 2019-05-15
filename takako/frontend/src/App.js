@@ -57,7 +57,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/" component={Takako} />
                     <PrivateRoute exact path="/note" component={Note} />
                     <PrivateRoute exact path="/search" component={Search} />
-                    <PrivateRoute exact path="/how-it-works" component={HowItWorks} />
+                    <Route exact path="/how-it-works" component={HowItWorks} />
                     <PrivateRoute exact path="/request/form/:userId/:tripId" component={RequestForm} />
                     <PrivateRoute exact path="/transaction/status" component={Transaction} />
                     <PrivateRoute exact path="/transaction/history" component={TransactionHistory} />
