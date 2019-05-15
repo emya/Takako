@@ -7,7 +7,12 @@ import '../css/style_LP.scss';
 
 class UpcomingTrips extends Component {
   componentDidMount() {
-    this.props.fetchTrips();
+    if (this.props.is_other == "true") {
+      this.props.fetchTrips(this.props.userId);
+    } else {
+      this.props.fetchTrips(this.props.user.id);
+    }
+    console.log("this.props", this.props);
   }
 
   state = {
@@ -41,6 +46,14 @@ class UpcomingTrips extends Component {
   }
 
   render() {
+    let userId;
+    let is_other = false;
+    if (this.props.is_other && this.props.is_other == "true") {
+      is_other = true;
+      userId = this.props.userId;
+    }
+    console.log("is_other", is_other);
+
     return (
     <div>
       <table class="table-data">
@@ -52,26 +65,33 @@ class UpcomingTrips extends Component {
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
+            {is_other && <a href={`/request/form/${userId}/${trip.id}`} style={{color: "black"}}>Request Item</a> }
           </tr>
         ))}
       </table>
 
-      <h3>Add new trip</h3>
-      <form onSubmit={this.submitTrip}>
-        <input value={this.state.departure_date}
-          placeholder="Enter departure date"
-          onChange={(e) => this.setState({departure_date: e.target.value})}
-          required />
-        <input value={this.state.arrival_date}
-          placeholder="Enter arrival date"
-          onChange={(e) => this.setState({arrival_date: e.target.value})}
-          required />
-        <input value={this.state.destination}
-          placeholder="Enter destination"
-          onChange={(e) => this.setState({destination: e.target.value})}
-          required />
-        <input type="submit" value="Save Trip" />
-      </form>
+      {!is_other &&
+        <div>
+          <h3>Add new trip</h3>
+          <form onSubmit={this.submitTrip}>
+            <input value={this.state.departure_date}
+            placeholder="Enter departure date"
+            onChange={(e) => this.setState({departure_date: e.target.value})}
+            required />
+
+            <input value={this.state.arrival_date}
+            placeholder="Enter arrival date"
+            onChange={(e) => this.setState({arrival_date: e.target.value})}
+            required />
+
+            <input value={this.state.destination}
+            placeholder="Enter destination"
+            onChange={(e) => this.setState({destination: e.target.value})}
+            required />
+            <input type="submit" value="Save Trip" />
+          </form>
+        </div>
+      }
     </div>
 
     )
@@ -81,14 +101,15 @@ class UpcomingTrips extends Component {
 const mapStateToProps = state => {
   return {
     trips: state.trips,
+    user: state.auth.user,
   }
 }
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTrips: () => {
-      dispatch(trips.fetchTrips());
+    fetchTrips: (userId) => {
+      dispatch(trips.fetchTrips(userId));
     },
     addTrip: (departure_date, arrival_date, destination) => {
       return dispatch(trips.addTrip(departure_date, arrival_date, destination));

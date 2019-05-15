@@ -50,3 +50,17 @@ class Trip(models.Model):
     status = models.IntegerField(default=0)
     # Status
     # 0: just create the trip
+
+class ItemRequest(models.Model):
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_created')
+    respondent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_received')
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    item_name = models.CharField(max_length=200, blank=True)
+    item_id = models.CharField(max_length=200, blank=True)
+    item_url = models.CharField(max_length=300, blank=True)
+    proposed_price = models.IntegerField()
+    delivery_method = models.IntegerField()
+    # method
+    # 0: ship
+    # 1: meet-up
+    comment = models.CharField(max_length=200, blank=True)

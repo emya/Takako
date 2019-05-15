@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
 import SideMenu from './SideMenu'
+import UpcomingTrips from './UpcomingTrips'
 
 library.add(faIgloo)
 
@@ -43,6 +44,7 @@ class Profile extends Component {
   }
 
   render() {
+    const userId = this.props.match.params.userId;
     return (
   <div>
     <Header />
@@ -51,36 +53,23 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
-        <a class="message-btn" href="/request/form">Request shopping</a>
-
-          {this.props.profile.map((profile) => (
-            <div>
-              <img src="./img/woman3.jpg"/>
-              <p class="user-data"> {profile.user.username} </p>
-              <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
-              <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-              <p class="object">Residence</p>
-               {profile.residence}
-              <p class="object">Occupation</p>
-               {profile.occupation}
-              <p class="object">Bio</p>
-               {profile.bio}
-            </div>
-          ))}
+        {this.props.profile.map((profile) => (
+          <div>
+            <img src="./img/woman3.jpg"/>
+            <p class="user-data"> {profile.user.username} </p>
+            <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+            <p class="object">Residence</p>
+             {profile.residence}
+            <p class="object">Occupation</p>
+             {profile.occupation}
+            <p class="object">Bio</p>
+             {profile.bio}
+          </div>
+        ))}
 
         <h2>Upcoming Trips</h2>
-        <table class="table-data">
-          <tr class="table-heading">
-            <td>Date</td>
-            <td>residence</td>
-            <td>Note</td>
-          </tr>
-          <tr>
-            <td>4/5/2019 - 4/12/2019</td>
-            <td>Tokyo, Japan</td>
-            <td>Business Trip</td>
-          </tr>
-        </table>
+        <UpcomingTrips is_other="true" userId={`${userId}`}/>
 
         <h2>Past Transactions</h2>
         <table class="table-data">

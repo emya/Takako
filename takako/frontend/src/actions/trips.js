@@ -69,7 +69,7 @@ export const deleteTrip = index => {
   }
 }
 
-export const fetchTrips = () => {
+export const fetchTrips = (userId) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -80,7 +80,7 @@ export const fetchTrips = () => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    return fetch("/api/trips/", {headers, })
+    return fetch(`/api/trips/?userId=${userId}`, {headers, })
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

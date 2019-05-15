@@ -6,6 +6,7 @@ from .api import (
     TransactionAPI,
     ProfileViewSet,
     TripViewSet,
+    ItemRequestViewSet,
     TravelerProfileViewSet,
     RegistrationAPI,
     LoginAPI,
@@ -18,6 +19,7 @@ router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('trips', TripViewSet, 'trips')
+router.register('requests/item', ItemRequestViewSet, 'request_item')
 router.register('travelers/profiles', TravelerProfileViewSet, 'traveler_profiles')
 #router.register('notes', NoteViewSet, 'notes')
 

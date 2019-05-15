@@ -71,7 +71,7 @@ class MyProfile extends Component {
         </form>
 
         <h2>Upcoming Trips</h2>
-        <UpcomingTrips />
+        <UpcomingTrips is_other="false"/>
 
         <h2>Past Transactions</h2>
         <table class="table-data">
