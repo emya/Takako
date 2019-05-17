@@ -1,5 +1,3 @@
-import { push } from 'react-router-redux';
-
 export const sendItemRequest = (respondent_id, trip_id, item_name, item_id, item_url, proposed_price, delivery_method, comment) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
