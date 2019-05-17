@@ -22,6 +22,13 @@ class RequestForm extends Component {
     delivery_method: "0",
     comment: "",
     updateTripId: null,
+    isSubmissionSucceeded: null,
+  }
+
+   componentWillReceiveProps(newProps){
+     if(newProps.isSubmissionSucceeded != this.props.isSubmissionSucceeded){
+         this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
+     }
   }
 
   submitRequest = (e) => {
@@ -38,6 +45,35 @@ class RequestForm extends Component {
   }
 
   render() {
+    if (this.state.isSubmissionSucceeded) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+         <SideMenu />
+         <p>Your request was successfully submitted</p>
+        </div>
+
+        <div class="sidemenu-mobile">
+          <ul>
+          <li><a href="#">My Profile<span>></span></a></li>
+          <li><a href="#">Transaction Status<span>></span></a></li>
+          <li><a href="#">Message Box<span>></span></a></li>
+          <li><a href="#">Edit Profile<span>></span></a></li>
+          <li><a href="#">Edit Account<span>></span></a></li>
+          <li><a href="#">Logout<span>></span></a></li>
+          <li><a href="#">Help<span>></span></a></li>
+          </ul>
+        </div>
+
+        <footer>
+          FOOTER CONTENTS TO BE DETERMINED
+          <FontAwesomeIcon icon="igloo" />
+        </footer>
+      </div>
+      )
+    }
     return (
   <div>
     <Header />
@@ -97,6 +133,7 @@ class RequestForm extends Component {
 const mapStateToProps = state => {
   return {
     respondent_id: state.respondent_id,
+    isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
   }
 }
 
