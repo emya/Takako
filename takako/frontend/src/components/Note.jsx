@@ -38,10 +38,6 @@ class Note extends Component {
         <h2>Welcome to Takako!</h2>
         <hr />
 
-        <div style={{textAlign: "right"}}>
-          {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
-        </div>
-
         <h3>Notes</h3>
         <table>
           <tbody>

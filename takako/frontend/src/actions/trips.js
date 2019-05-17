@@ -126,7 +126,7 @@ export const addTrip = (departure_date, arrival_date, destination) => {
         }
       })
       .then(res => {
-        if (res.status === 201) {
+        if (res.status === 200) {
           return dispatch({type: 'ADD_TRIP', trip: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});

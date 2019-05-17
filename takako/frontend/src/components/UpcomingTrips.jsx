@@ -12,7 +12,6 @@ class UpcomingTrips extends Component {
     } else {
       this.props.fetchTrips(this.props.user.id);
     }
-    console.log("this.props", this.props);
   }
 
   state = {
