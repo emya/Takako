@@ -49,17 +49,13 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-        print("list")
         userId = request.GET.get('userId')
         queryset = ItemRequest.objects.all()
-        print(queryset.__dict__)
 
         if userId:
             user = User.objects.get(pk=userId)
             queryset_respondent = ItemRequest.objects.filter(respondent=user)
-            print("queryset_respondent")
             queryset_requester = ItemRequest.objects.filter(requester=user)
-            print("queryset_requester")
 
             custom_data = {
                 'sent_item_requests': self.serializer_class(queryset_requester, many=True).data,
