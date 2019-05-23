@@ -42,6 +42,10 @@ class TripSerializer(serializers.ModelSerializer):
         fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
 
 class ItemRequestSerializer(serializers.ModelSerializer):
+    requester = UserSerializer(read_only=True)
+    respondent = UserSerializer(read_only=True)
+    trip = TripSerializer(read_only=True)
+
     class Meta:
         model = ItemRequest
         fields = ('id', 'requester', 'respondent', 'trip', 'item_name', 'item_id', 'item_url', 'proposed_price', 'delivery_method', 'comment')
