@@ -74,8 +74,6 @@ export const fetchTrips = (userId) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
 
-    console.log("token at fetch Trips", token);
-
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }

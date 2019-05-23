@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 
 class Note(models.Model):
@@ -64,3 +65,4 @@ class ItemRequest(models.Model):
     # 0: ship
     # 1: meet-up
     comment = models.CharField(max_length=200, blank=True)
+    created_at = models.DateField(default=datetime.date.today)

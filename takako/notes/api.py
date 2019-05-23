@@ -48,6 +48,42 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(item_request)
         return Response(serializer.data)
 
+    def list(self, request):
+        print("list")
+        userId = request.GET.get('userId')
+        queryset = ItemRequest.objects.all()
+        print(queryset.__dict__)
+
+        if userId:
+            user = User.objects.get(pk=userId)
+            queryset_respondent = ItemRequest.objects.filter(respondent=user)
+            print("queryset_respondent")
+            queryset_requester = ItemRequest.objects.filter(requester=user)
+            print("queryset_requester")
+
+            custom_data = {
+                'sent_item_requests': self.serializer_class(queryset_requester, many=True).data,
+                'received_item_requests': self.serializer_class(queryset_respondent, many=True).data,
+            }
+            return Response(custom_data)
+
+        return queryset
+
+    def get_queryset(self):
+        userId = self.request.GET.get('userId')
+
+        queryset = ItemRequest.objects.all()
+
+        if userId:
+            user = User.objects.get(pk=userId)
+            queryset_requester = queryset.filter(requester=user)
+            queryset_respondent = queryset.filter(respondent=user)
+            return queryset
+
+        # TODO: handle exception
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
 class TripViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated,]
     serializer_class = TripSerializer
