@@ -29,34 +29,36 @@ class TransactionHistory extends Component {
 
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
-         <h2>Received Request</h2>
+         <h2>Sent Request</h2>
 
          <h3>Transaction Status</h3>
-         <div class="status">(*memo to Emi: after initial request is received) Accept or Decline the request!</div>
-         <div class="status">(*memo to Emi: when waiting for the pmt) Souvenir will notify you once the payment is made.</div>
-         <div class="status">(*memo to Emi: after pmt is made) Purchase the item and notify Souvenir.
+         <div class="status">(*memo to Emi: after initial request is sent) Souvenir will notify you once your request is accepted/declined.</div>
+         <div class="status">(*memo to Emi: after request accepted) Your request was accepted, now make a payment!
+          <button class="action-btn">Pay</button>
+          <div class="status">(*memo to Emi: after pmt is made) Souvenir will notify you once your item was purchased.</div>
+         <div class="status">(*memo to Emi: after item is purchased) Notify Souvenir when you receive the item!
           <button class="action-btn">Notify</button>
          </div>
 
          <h3>Transaction History</h3>
          <div class="history-box">
            <div class="history-wrapper">
-             <p>Item received by Emi</p><p>5/6/2019</p>
+             <p>Item received by You</p><p>5/6/2019</p>
           </div>
          </div>
          <div class="history-box">
            <div class="history-wrapper">
-             <p>Payment made by Emi</p><p>5/4/2019</p>
+             <p>Payment made by You</p><p>5/4/2019</p>
            </div>
          </div>
          <div class="history-box">
            <div class="history-wrapper">
-             <p>Request accepted by you</p><p>5/2/2019</p>
+             <p>Request accepted by Chiaki</p><p>5/2/2019</p>
            </div>
          </div>
          <div class="history-box initial">
            <div class="history-wrapper">
-             <p>Request sent by Emi</p><p>5/1/2019</p>
+             <p>Request sent by You</p><p>5/1/2019</p>
            </div>
            <ul class="request-data">
              <li>User Name:   Emi</li>
@@ -70,8 +72,6 @@ class TransactionHistory extends Component {
              <li>Preferred Delivery Method:   Ship</li>
              <li>Comments (Optional):</li>
            </ul>
-           <button class="action-btn">Accept</button>
-           <button class="action-btn decline">Decline</button>
          </div>
        </div>
      </div>
