@@ -316,6 +316,21 @@ h2 {
 
 // Transaction msg-history
 
+.transaction-history h3 {
+    margin: 70px 0 25px 0;
+}
+
+.status {
+  display: inline-box;
+  text-align: left;
+  width: 70%;
+  height: 50px;
+  border: 1px dashed grey;
+  padding-left: 50px;
+  margin: 0 auto 50px auto;
+  line-height: 50px;
+}
+
 .transaction-history {
   float: right;
   text-align: center;
@@ -331,7 +346,7 @@ h2 {
 }
 
 .history-box.initial {
-  height: 350px;
+  height: 400px;
 }
 
 .history-wrapper {
@@ -361,6 +376,23 @@ h2 {
 
 .bread-crumb a:link, .bread-crumb a:visited{
   color: #78BBE6;
+}
+
+.action-btn {
+  height: 30px;
+  width: 100px;
+  margin: 10px 10px 0 0;
+  background-color: #F99F48;
+  box-shadow: none;
+  color: white;
+}
+
+.action-btn.decline {
+  background-color: #78BBE6;
+}
+
+.status > .action-btn {
+  float: right;
 }
 
 
