@@ -7,6 +7,7 @@ from .api import (
     ProfileViewSet,
     TripViewSet,
     ItemRequestViewSet,
+    RequestHistoryAPI,
     TravelerProfileViewSet,
     RegistrationAPI,
     LoginAPI,
@@ -19,6 +20,7 @@ router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('trips', TripViewSet, 'trips')
+#router.register('requests/item/?P<id>\d+)$', ItemRequestViewSet, 'request_item')
 router.register('requests/item', ItemRequestViewSet, 'request_item')
 router.register('travelers/profiles', TravelerProfileViewSet, 'traveler_profiles')
 #router.register('notes', NoteViewSet, 'notes')
@@ -29,5 +31,6 @@ urlpatterns = [
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
     url('^transactions/$', TransactionAPI.as_view()),
+    url('^requests/history/$', RequestHistoryAPI.as_view()),
 ]
 

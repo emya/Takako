@@ -10,6 +10,9 @@ export default function requests(state=initialState, action) {
     case 'FETCH_ITEM_REQUESTS':
         return {...state, ...action.data};
 
+    case 'FETCH_REQUEST_HISTORY':
+        return {...state, requestHistory: action.data};
+
     default:
       return state;
   }
