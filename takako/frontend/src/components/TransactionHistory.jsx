@@ -19,6 +19,14 @@ class TransactionHistory extends Component {
     updateNoteId: null,
   }
 
+  acceptItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 2});
+  }
+
+  declineItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3});
+  }
+
   render() {
     console.log(this.props);
     let has_history = false;
@@ -94,8 +102,8 @@ class TransactionHistory extends Component {
                </ul>
                  {is_respondent  && this.props.requests.requestHistory.status == 0 && (
                    <div>
-                     <button class="action-btn">Accept</button>
-                     <button class="action-btn decline">Decline</button>
+                     <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
+                     <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
                    </div>
                  )}
 
@@ -139,6 +147,10 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchRequestHistory: (requestId) => {
       dispatch(requests.fetchRequestHistory(requestId));
+    },
+    updateItemRequest: (requestId, item_request) => {
+      return dispatch(requests.updateItemRequest(requestId, item_request));
+      //dispatch(notes.updateNote(id, text));
     },
     logout: () => dispatch(auth.logout()),
   }

@@ -13,6 +13,9 @@ export default function requests(state=initialState, action) {
     case 'FETCH_REQUEST_HISTORY':
         return {...state, requestHistory: action.data};
 
+    case 'UPDATE_ITEM_REQUEST':
+        return {...state, requestHistory: action.data};
+
     default:
       return state;
   }

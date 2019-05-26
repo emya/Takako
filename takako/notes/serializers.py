@@ -48,7 +48,10 @@ class ItemRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ItemRequest
-        fields = ('id', 'requester', 'respondent', 'trip', 'item_name', 'item_id', 'item_url', 'proposed_price', 'delivery_method', 'comment', 'status')
+        fields = (
+            'id', 'requester', 'respondent', 'trip',
+            'item_name', 'item_id', 'item_url', 'proposed_price',
+            'delivery_method', 'comment', 'status')
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
