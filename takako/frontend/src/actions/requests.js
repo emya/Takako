@@ -115,7 +115,6 @@ export const updateItemRequest = (requestId, item_request) => {
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
-            console.log("data", data);
             return {status: res.status, data};
           })
         } else {
