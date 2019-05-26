@@ -20,7 +20,20 @@ class TransactionHistory extends Component {
   }
 
   render() {
-    console.log(this.props.requests);
+    console.log(this.props);
+    let has_history = false;
+    let is_requester = false;
+    let is_respondent = false;
+    if (this.props.requests.requestHistory) {
+      has_history = true;
+      if (this.props.user.id == this.props.requests.requestHistory.requester.id){
+        is_requester = true;
+      }
+
+      if (this.props.user.id == this.props.requests.requestHistory.respondent.id){
+        is_respondent = true;
+      }
+    }
     return (
   <div>
      <Header />
@@ -55,12 +68,21 @@ class TransactionHistory extends Component {
              <p>Request accepted by you</p><p>5/2/2019</p>
            </div>
          </div>
-         {this.props.requests.requestHistory && (
+         {has_history && (
              <div class="history-box initial">
                <div class="history-wrapper">
-                 <p>Request sent by {this.props.requests.requestHistory.requester.username}</p><p>5/1/2019</p>
+                 {is_requester ? (
+                   <p>Request sent by You</p>
+                 ) : (
+                   <p>Request sent by {this.props.requests.requestHistory.requester.username}</p>
+                 )}
                </div>
                <ul class="request-data">
+                 {is_respondent ? (
+                   <li>User Name:   You</li>
+                 ) : (
+                   <li>User Name:   {this.props.requests.requestHistory.respondent.username}</li>
+                 )}
                  <li>User Name:   {this.props.requests.requestHistory.requester.username}</li>
                  <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
                  <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
@@ -70,8 +92,13 @@ class TransactionHistory extends Component {
                  <li>Preferred Delivery Method:   Ship</li>
                  <li>Comments (Optional): {this.props.requests.requestHistory.comment}</li>
                </ul>
-               <button class="action-btn">Accept</button>
-               <button class="action-btn decline">Decline</button>
+                 {is_respondent  && this.props.requests.requestHistory.status == 0 && (
+                   <div>
+                     <button class="action-btn">Accept</button>
+                     <button class="action-btn decline">Decline</button>
+                   </div>
+                 )}
+
              </div>
          )}
 

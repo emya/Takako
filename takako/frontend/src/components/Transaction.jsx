@@ -73,7 +73,7 @@ class Transaction extends Component {
                 <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
-                <td>Accepted <a href="/transaction/history" style={{color: "#78BBE6"}}>details</a></td>
+                <td>Accepted <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a></td>
               </tr>
             ))}
             <tr class="transaction-data total">
