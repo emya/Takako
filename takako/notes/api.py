@@ -36,8 +36,12 @@ class TransactionAPI(generics.GenericAPIView):
         queryset_respondent = Transaction.objects.all().filter(respondent=request.user)
         return Response({ 'sent_requests': queryset_requester, 'received_requests': queryset_respondent})
 
+class RequestHistoryAPI(generics.RetrieveAPIView):
+    serializer_class = ItemRequestSerializer
+
 class ItemRequestViewSet(viewsets.ModelViewSet):
     serializer_class = ItemRequestSerializer
+    queryset = ItemRequest.objects.all()
 
     def create(self, request):
         respondent_id = request.data.pop("respondent_id")
@@ -50,7 +54,6 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         userId = request.GET.get('userId')
-        queryset = ItemRequest.objects.all()
 
         if userId:
             user = User.objects.get(pk=userId)
@@ -63,8 +66,9 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
             }
             return Response(custom_data)
 
-        return queryset
+        return self.queryset
 
+    """
     def get_queryset(self):
         userId = self.request.GET.get('userId')
 
@@ -79,6 +83,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
         return queryset
+    """
 
 class TripViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated,]

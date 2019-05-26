@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {transactions, auth} from "../actions";
+import {requests, auth} from "../actions";
 import '../css/style.scss';
 import MediaQuery from 'react-responsive';
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -11,7 +11,7 @@ import SideMenu from './SideMenu'
 
 class TransactionHistory extends Component {
   componentDidMount() {
-    this.props.fetchTransactions();
+    this.props.fetchRequestHistory(this.props.match.params.requestId);
   }
 
   state = {
@@ -19,7 +19,29 @@ class TransactionHistory extends Component {
     updateNoteId: null,
   }
 
+  acceptItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 2});
+  }
+
+  declineItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3});
+  }
+
   render() {
+    console.log(this.props);
+    let has_history = false;
+    let is_requester = false;
+    let is_respondent = false;
+    if (this.props.requests.requestHistory) {
+      has_history = true;
+      if (this.props.user.id == this.props.requests.requestHistory.requester.id){
+        is_requester = true;
+      }
+
+      if (this.props.user.id == this.props.requests.requestHistory.respondent.id){
+        is_respondent = true;
+      }
+    }
     return (
   <div>
      <Header />
@@ -54,25 +76,40 @@ class TransactionHistory extends Component {
              <p>Request accepted by you</p><p>5/2/2019</p>
            </div>
          </div>
-         <div class="history-box initial">
-           <div class="history-wrapper">
-             <p>Request sent by Emi</p><p>5/1/2019</p>
-           </div>
-           <ul class="request-data">
-             <li>User Name:   Emi</li>
-             <li>Location:   Seattle</li>
-             <li>Item Name:   Chocolate</li>
-             <li>Item ID (Optional):   12345</li>
-             <li>Item URL (Optional):   https://chocolate.com</li>
-             <li>Item Category:   Food</li>
-             <li>Delivery by:    6/1/2019</li>
-             <li>Proposed Price (item price + commission):   $20</li>
-             <li>Preferred Delivery Method:   Ship</li>
-             <li>Comments (Optional):</li>
-           </ul>
-           <button class="action-btn">Accept</button>
-           <button class="action-btn decline">Decline</button>
-         </div>
+         {has_history && (
+             <div class="history-box initial">
+               <div class="history-wrapper">
+                 {is_requester ? (
+                   <p>Request sent by You</p>
+                 ) : (
+                   <p>Request sent by {this.props.requests.requestHistory.requester.username}</p>
+                 )}
+               </div>
+               <ul class="request-data">
+                 {is_respondent ? (
+                   <li>User Name:   You</li>
+                 ) : (
+                   <li>User Name:   {this.props.requests.requestHistory.respondent.username}</li>
+                 )}
+                 <li>User Name:   {this.props.requests.requestHistory.requester.username}</li>
+                 <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
+                 <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
+                 <li>Item ID (Optional):   {this.props.requests.requestHistory.item_id}</li>
+                 <li>Item URL (Optional):   {this.props.requests.requestHistory.item_url}</li>
+                 <li>Proposed Price (item price + commission):   {this.props.requests.requestHistory.proposed_price}</li>
+                 <li>Preferred Delivery Method:   Ship</li>
+                 <li>Comments (Optional): {this.props.requests.requestHistory.comment}</li>
+               </ul>
+                 {is_respondent  && this.props.requests.requestHistory.status == 0 && (
+                   <div>
+                     <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
+                     <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
+                   </div>
+                 )}
+
+             </div>
+         )}
+
        </div>
      </div>
 
@@ -100,8 +137,7 @@ class TransactionHistory extends Component {
 
 const mapStateToProps = state => {
   return {
-    sent_requests: state.sent_requests,
-    received_requests: state.received_requests,
+    requests: state.requests,
     user: state.auth.user,
   }
 }
@@ -109,8 +145,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTransactions: () => {
-      dispatch(transactions.fetchTransactions());
+    fetchRequestHistory: (requestId) => {
+      dispatch(requests.fetchRequestHistory(requestId));
+    },
+    updateItemRequest: (requestId, item_request) => {
+      return dispatch(requests.updateItemRequest(requestId, item_request));
+      //dispatch(notes.updateNote(id, text));
     },
     logout: () => dispatch(auth.logout()),
   }
