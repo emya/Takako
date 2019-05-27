@@ -12,6 +12,7 @@ export const updateProfile = (id, bio, residence) => {
 
     let body = JSON.stringify({bio, residence, });
     console.log(body);
+    console.log(id);
 
     return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body})
       .then(res => {
@@ -26,6 +27,7 @@ export const updateProfile = (id, bio, residence) => {
       })
       .then(res => {
         if (res.status === 200) {
+          console.log("UPDATE_PROFILE", res.data, typeof(res.data));
           return dispatch({type: 'UPDATE_PROFILE', profile: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
@@ -57,6 +59,7 @@ export const fetchProfile = userId => {
       })
       .then(res => {
         if (res.status === 200) {
+          console.log("FETCH_PROFILES", res.data, typeof(res.data));
           return dispatch({type: 'FETCH_PROFILES', profile: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});

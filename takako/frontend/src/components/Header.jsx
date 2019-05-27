@@ -23,6 +23,7 @@ render() {
         <a href="/search">Search</a>
         <a href="/how-it-works">How it works</a>
       </div>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfgrBpQoP8IdjYhIWgPDOojf8wDMA9unk&libraries=places"></script>
     </header>
 </div>
   )}

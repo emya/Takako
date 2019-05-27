@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {profile, auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
+
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +11,9 @@ import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
 import SideMenu from './SideMenu'
 import UpcomingTrips from './UpcomingTrips'
+
+import ReactGoogleMapLoader from "react-google-maps-loader";
+import ReactGooglePlacesSuggest from "react-google-places-suggest";
 
 library.add(faIgloo)
 
@@ -21,29 +25,34 @@ class MyProfile extends Component {
   state = {
     bio: "",
     residence: "",
-    updateProfileId: null,
+    search: "",
   }
 
   resetForm = () => {
-    this.setState({bio: "", residence: "", updateProfileId: null});
-  }
-
-  selectForEdit = (profile) => {
-    console.log("selectForEdit", profile)
-    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
+    this.setState({bio: "", residence: ""});
   }
 
   submitProfile = (e) => {
     e.preventDefault();
-    this.props.updateProfile(this.state.updateProfileId, this.state.bio, this.state.residence).then(this.resetForm);
+    this.props.updateProfile(this.props.profile[0].id, this.state.bio, this.state.residence).then(this.resetForm);
   }
 
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
-    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
+    this.setState({bio: profile.bio, residence: profile.residence});
+  }
+
+  handleResidenceChange(e) {
+    this.setState({search: e.target.value, residence: e.target.value})
+  }
+
+  handleSelectResidenceSuggest(suggest) {
+    console.log(suggest.formatted_address);
+    this.setState({search: "", residence: suggest.formatted_address})
   }
 
   render() {
+    const API_KEY = "";
     return (
   <div>
     <Header />
@@ -59,8 +68,35 @@ class MyProfile extends Component {
               <p class="user-data"> {profile.user.username} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+
               <p class="object">Residence</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'residence', profile)} value={profile.residence}/>
+
+              <ReactGoogleMapLoader
+                params={{
+                  key: API_KEY,
+                  libraries: "places,geocode",
+                }}
+                render={googleMaps =>
+                  googleMaps && (
+                    <div>
+                      <ReactGooglePlacesSuggest
+                        autocompletionRequest={{input: this.state.search}}
+                        googleMaps={googleMaps}
+                        onSelectSuggest={this.handleSelectResidenceSuggest.bind(this)}
+                      >
+                        <input
+                          id="residence"
+                          class="user-data"
+                          type="text"
+                          value={profile.residence}
+                          onChange={this.handleResidenceChange.bind(this)}
+                        />
+                      </ReactGooglePlacesSuggest>
+                    </div>
+                  )
+                }
+              />
+
               <p class="object">Occupation</p>
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
               <p class="object">Bio</p>
