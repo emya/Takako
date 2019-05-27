@@ -14,7 +14,6 @@ class SearchBar extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log("submit");
     this.props.handleFormSubmit(this.state.residence, this.state.destination);
   }
 
@@ -27,12 +26,10 @@ class SearchBar extends Component {
   }
 
   handleSelectResidenceSuggest(suggest) {
-    console.log(suggest.formatted_address);
     this.setState({search: "", residence: suggest.formatted_address})
   }
 
   handleSelectDestinationSuggest(suggest) {
-    console.log(suggest.formatted_address);
     this.setState({search: "", destination: suggest.formatted_address})
   }
 
