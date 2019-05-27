@@ -16,14 +16,7 @@ export default function profile(state=initialState, action) {
       return [...state, ...action.profile];
 
     case 'FETCH_PROFILES':
-      console.log("FETCH_PROFILES");
       return [...state, ...action.profile];
-
-    case 'FETCH_PSPROFILES':
-      console.log("FETCH_PSPROFILES");
-      console.log("action", action)
-      console.log("action.psprofile", action.psprofile)
-      return [...state, ...action.psprofile];
 
     default:
       return state;

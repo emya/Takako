@@ -11,7 +11,6 @@ export const updateProfile = (id, bio, residence) => {
     console.log(`id: ${id}, bio: ${bio}, residence: ${residence}`)
 
     let body = JSON.stringify({bio, residence, });
-    console.log(body);
 
     return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body})
       .then(res => {
