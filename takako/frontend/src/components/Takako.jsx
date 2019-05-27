@@ -110,7 +110,7 @@ class Takako extends Component {
         <div class="service-box">
         <i class="service-icon fa fa-lightbulb-o">★</i>
         <div class="service-title">Propose<br/>Price of the Item</div>
-        <p class="service-text">Requesting user will pay proposed item price + fixed 3% transaction fee. No more excessive premium or international shipping!</p>
+        <p class="service-text">Requesting user will pay proposed item price (including commision to purchasing user) + fixed 3% transaction fee.</p>
         </div>
         <div class="service-box">
         <i class="service-icon fa fa-lightbulb-o">★</i>
@@ -120,7 +120,7 @@ class Takako extends Component {
         <div class="service-box">
         <i class="service-icon fa fa-lightbulb-o">★</i>
         <div class="service-title">Easy and Sefe<br/>Transaction</div>
-        <p class="service-text">Just send a request form! No cumbersome negotiation. Souvenir will keep your payment until the item is delivered.</p>
+        <p class="service-text">Just send a request form! No cumbersome negotiation. Souvenir will release your payment when the item is delivered.</p>
         </div>
         </div>
         </section>

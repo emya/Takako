@@ -26,7 +26,7 @@ class HowItWorks extends Component {
 
            <div class="wrapper clearfix">
             <div class="how-it-works-left">
-             <h3>...If You Want to Request an Item</h3>
+             <h3>...If You Are "Requesting User" Who Wants to Request an Item</h3>
              <div class="step">
                <div class="step-number">1</div>
                <p>Search for a user by "Travel destination" and "Residence City" to find someone who lives near you, and is traveling to the city where you want your item from.</p>
@@ -37,27 +37,31 @@ class HowItWorks extends Component {
              </div>
              <div class="step">
                <div class="step-number">3</div>
-               <p>If the requested user approves your request, Souvenir will notify you through an e-mail.</p>
+               <p>If the purchasing user approves your request, Souvenir will notify you through an e-mail.</p>
              </div>
              <div class="step">
                <div class="step-number">4</div>
-               <p>Through the link on the e-mail, make a payment for the proposed price plus 3% transaction fee.  <a class="details" href="/how-it-works#transaction-fee">*What's transaction fee?</a> <br/> Souvenir will keep your payment until your item is received :)</p>
+               <p>Make a payment for the proposed price plus 3% transaction fee.  <a class="details" href="/how-it-works#transaction-fee">*What's transaction fee?</a> <br/> Souvenir will release your payment only when your item is received :)</p>
              </div>
              <div class="step">
                <div class="step-number">5</div>
+               <p>Wait to receive a notification that the purchasing user purchased your item. Agree to the meet-up details if you chose "meet-up" as the means of delivery.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">6</div>
                <p>Please notify Souvenir once you receive the item. Enjoy!</p>
              </div>
            </div>
 
            <div class="how-it-works-right">
-             <h3>...If You Receive a Request to Buy an Item</h3>
+             <h3>...If You Are "Purchasing User" Who Receives a Request to Buy an Item</h3>
              <div class="step">
                <div class="step-number">1</div>
                  <p>Check the request either from the link on the notification e-mail or on "Transaction Status" page.</p>
                </div>
              <div class="step">
                <div class="step-number">2</div>
-               <p>If you are willing to get the item for the proposed price by the specified date, click "Accept" in the request form.<br/><a class="details" href="/how-it-works#proposed-price">*What's proposed price?</a> </p>
+               <p>If you are willing to purchase the item for the proposed price by the specified date, click "Accept" in the request form.<br/><a class="details" href="/how-it-works#proposed-price">*What's proposed price?</a> </p>
              </div>
              <div class="step">
                <div class="step-number">3</div>
@@ -65,14 +69,18 @@ class HowItWorks extends Component {
              </div>
              <div class="step">
                <div class="step-number">4</div>
-               <p>Purchase the requested item on your trip. Ship it or meet up with the user before the date specified in the request form.</p>
+               <p>Purchase the requested item on your trip. Notify the requesting user with any meet-up details.</p>
              </div>
              <div class="step">
                <div class="step-number">5</div>
-               <p>Once the item is received by the requesting user, Souvenir will send you the payment.</p>
+               <p>Ship it or meet up with the user before the date specified in the request form.</p>
              </div>
              <div class="step">
                <div class="step-number">6</div>
+               <p>Once the item is received by the requesting user, Souvenir will send you the payment.</p>
+             </div>
+             <div class="step">
+               <div class="step-number">7</div>
                <p>Congraturations! When you want to request an item, your next transaction fee will be waived. <a class="details" href="/how-it-works#proposed-price">*What's transaction fee?</a> </p>
              </div>
            </div>
@@ -80,24 +88,24 @@ class HowItWorks extends Component {
 
           <h3>Transaction Fee</h3>
           <p class="to-get-started">For each request, the requesting user will be charged 3% transaction fee.
-          <br/><br/>This transaction fee will be waived if you have completed someone's request previously.</p>
+          <br/><br/>This transaction fee will be waived one-time if you have completed someone's request previously.</p>
           <h3 id="proposed-price">Proposed Price</h3>
           <p class="to-get-started">
-            The proposed price should include a price of an item and shipping (if you choose shipping as a delivery method).
-            <br/>It should be determined based on a retail price. Attaching an item URL will give a better idea for both users!
-            <br/><br/>The requesting user will be paying this proposed price PLUS 3% transaction fee.
-            <br/><br/>The full proposed price will be paid to the requested user when the transaction is completed.
+            The proposed price should include a price of an item and commission to the purchasing user.
+            <br/>Attaching an item URL will give a better idea for both users!
+            <br/><br/>The requesting user will be paying this proposed price including the commission, PLUS 3% transaction fee.
+            <br/><br/>The full proposed price will be paid to the purchasing user when the transaction is complete.
           </p>
           <h3>Item Delivery</h3>
           <p class="to-get-started">
             An item can be delivered either by shipping or by meet-up. The requesting user will choose either option when sending a request.
-            <br/><br/> Contact information necessary for the delivery will be provided to each party once the payment of the item takes place.
+            <br/><br/> Contact information necessary for the delivery will be provided to each party once the request was approved by the purchasing user.
           </p>
           <h3>Returns</h3>
           <p class="to-get-started">
-            The requested user will be accountable for any wrong or damaged item, and the requesting user will be refunded in full.
-            <br/><br/>In order for the item to be a "wrong item", the requesting user should include an item ID in a request form.
-            <br/><br/><br/>Any personal reasons such as an item being different from a picture, or a size issue, items are not refundable.
+            The purchasing user will be accountable for any wrong or damaged item, and the requesting user will be refunded in full.
+            <br/><br/>In order for the item to be a "wrong item", the requesting user should include an item ID/SKU and item URL in a request form.
+            <br/><br/><br/>Any personal reasons such as an item being different from a picture, or a size issue, payments are not refundable.
           </p>
     </div>
     </div>

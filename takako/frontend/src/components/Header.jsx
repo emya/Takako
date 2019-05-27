@@ -20,7 +20,7 @@ render() {
         </div>
 
       <div class="menu">
-        <a href="/search">Search</a>
+        <a href="/search">Request Item</a>
         <a href="/how-it-works">How it works</a>
       </div>
     </header>
