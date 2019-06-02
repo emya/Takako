@@ -7,3 +7,6 @@ __pycache__
 *keys.js
 keys.js
 db.sqlite3
+webpack-stats.*
+webpack-stats*.json
+webpack-stats.*.json
