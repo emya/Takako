@@ -15,6 +15,8 @@ import UpcomingTrips from './UpcomingTrips'
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
 
+import { keys } from '../keys.js';
+
 library.add(faIgloo)
 
 class MyProfile extends Component {
@@ -52,7 +54,6 @@ class MyProfile extends Component {
   }
 
   render() {
-    const API_KEY = "";
     return (
   <div>
     <Header />
@@ -73,7 +74,7 @@ class MyProfile extends Component {
 
               <ReactGoogleMapLoader
                 params={{
-                  key: API_KEY,
+                  key: keys.MAP_JS_API,
                   libraries: "places,geocode",
                 }}
                 render={googleMaps =>
