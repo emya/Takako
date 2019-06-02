@@ -3,3 +3,10 @@
 .idea/
 takako/db.sqlite3
 __pycache__
+*.env
+*keys.js
+keys.js
+db.sqlite3
+webpack-stats.*
+webpack-stats*.json
+webpack-stats.*.json

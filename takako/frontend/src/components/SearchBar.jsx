@@ -4,12 +4,15 @@ import {connect} from 'react-redux';
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
 
+import { keys } from '../keys.js';
+
 class SearchBar extends Component {
   state = {
     residence: "",
     destination: "",
     profiles: [],
-    search: "",
+    search_residence: "",
+    search_destination: "",
   }
 
   handleSubmit = event => {
@@ -18,36 +21,34 @@ class SearchBar extends Component {
   }
 
   handleResidenceChange(e) {
-    this.setState({search: e.target.value, residence: e.target.value})
+    this.setState({search_residence: e.target.value, residence: e.target.value})
   }
 
   handleDestinationChange(e) {
-    this.setState({search: e.target.value, destination: e.target.value})
+    this.setState({search_destination: e.target.value, destination: e.target.value})
   }
 
   handleSelectResidenceSuggest(suggest) {
-    this.setState({search: "", residence: suggest.formatted_address})
+    this.setState({search_residence: "", residence: suggest.formatted_address})
   }
 
   handleSelectDestinationSuggest(suggest) {
-    this.setState({search: "", destination: suggest.formatted_address})
+    this.setState({search_destination: "", destination: suggest.formatted_address})
   }
 
   render() {
-    const API_KEY = "";
-
     return(
     <form onSubmit={this.handleSubmit}>
       <ReactGoogleMapLoader
         params={{
-          key: API_KEY,
+          key: keys.MAP_JS_API,
           libraries: "places,geocode",
         }}
         render={googleMaps =>
           googleMaps && (
             <div>
               <ReactGooglePlacesSuggest
-                autocompletionRequest={{input: this.state.search}}
+                autocompletionRequest={{input: this.state.search_residence}}
                 googleMaps={googleMaps}
                 onSelectSuggest={this.handleSelectResidenceSuggest.bind(this)}
               >
@@ -62,7 +63,7 @@ class SearchBar extends Component {
               </ReactGooglePlacesSuggest>
 
               <ReactGooglePlacesSuggest
-                autocompletionRequest={{input: this.state.search}}
+                autocompletionRequest={{input: this.state.search_destination}}
                 googleMaps={googleMaps}
                 onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
               >

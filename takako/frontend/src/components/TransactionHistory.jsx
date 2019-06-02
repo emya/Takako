@@ -3,11 +3,13 @@ import {connect} from 'react-redux';
 import {requests, auth} from "../actions";
 import '../css/style.scss';
 import MediaQuery from 'react-responsive';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
-import SideMenu from './SideMenu'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
+import SideMenu from './SideMenu';
+import StripeCheckout from 'react-stripe-checkout';
+import { keys } from '../keys.js'
 
 class TransactionHistory extends Component {
   componentDidMount() {
@@ -23,16 +25,22 @@ class TransactionHistory extends Component {
     this.props.updateItemRequest(this.props.match.params.requestId, {"status": 2});
   }
 
+  onToken = (token, addresses) => {
+    // TODO: Send the token information and any other
+  };
+
   declineItemRequest = () => {
     this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3});
   }
 
   render() {
-    console.log(this.props);
     let has_history = false;
     let is_requester = false;
     let is_respondent = false;
+    let item_request_status = 0;
     if (this.props.requests.requestHistory) {
+      item_request_status = this.props.requests.requestHistory.status;
+      console.log(item_request_status);
       has_history = true;
       if (this.props.user.id == this.props.requests.requestHistory.requester.id){
         is_requester = true;
@@ -51,7 +59,11 @@ class TransactionHistory extends Component {
 
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
-         <h2>Received Request</h2>
+         {is_requester ? (
+           <h2>Sent Request</h2>
+         ) : (
+           <h2>Received Request</h2>
+         )}
 
          <h3>Transaction Status</h3>
          <div class="status">(*memo to Emi: after initial request is received) Accept or Decline the request!</div>
@@ -66,16 +78,40 @@ class TransactionHistory extends Component {
              <p>Item received by Emi</p><p>5/6/2019</p>
           </div>
          </div>
-         <div class="history-box">
-           <div class="history-wrapper">
-             <p>Payment made by Emi</p><p>5/4/2019</p>
+         {has_history && is_requester && item_request_status == 2 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Payment </p>
+
+               <StripeCheckout
+                 stripeKey={keys.STRIPE_PUBLISHABLE_KEY}
+                 token={this.onToken}
+               />
+
+             </div>
            </div>
-         </div>
-         <div class="history-box">
-           <div class="history-wrapper">
-             <p>Request accepted by you</p><p>5/2/2019</p>
+         )}
+         {has_history && is_requester && item_request_status == 0 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Waiting response by {this.props.requests.requestHistory.respondent.username}</p>
+             </div>
            </div>
-         </div>
+         )}
+         {has_history && is_requester && item_request_status == 3 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.username}</p>
+             </div>
+           </div>
+         )}
+         {has_history && is_respondent && item_request_status == 2 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Request accepted by you</p><p>5/2/2019</p>
+             </div>
+           </div>
+         )}
          {has_history && (
              <div class="history-box initial">
                <div class="history-wrapper">
@@ -91,7 +127,6 @@ class TransactionHistory extends Component {
                  ) : (
                    <li>User Name:   {this.props.requests.requestHistory.respondent.username}</li>
                  )}
-                 <li>User Name:   {this.props.requests.requestHistory.requester.username}</li>
                  <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
                  <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
                  <li>Item ID (Optional):   {this.props.requests.requestHistory.item_id}</li>
