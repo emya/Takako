@@ -59,12 +59,13 @@ class UpcomingTrips extends Component {
         <tr class="table-heading">
           <td>Date</td>
           <td>Destination</td>
+          <td></td>
         </tr>
         {this.props.trips.map((trip) => (
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
-            {is_other && <a href={`/request/form/${userId}/${trip.id}`} style={{color: "black"}}>Request Item</a> }
+            <td>{is_other && <a class="request-btn" href={`/request/form/${userId}/${trip.id}`} >Request Item</a> }</td>
           </tr>
         ))}
       </table>

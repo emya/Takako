@@ -82,7 +82,8 @@ class RequestForm extends Component {
       <SideMenu />
 
       <form onSubmit={this.submitRequest} class="request-form">
-        <h2>Item Request</h2>
+      <h2>Item Request</h2>
+      <div class="request-form-wrapper">
         <p class="request-form-index">Item Name</p>
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} required /><br/>
 
@@ -92,19 +93,35 @@ class RequestForm extends Component {
         <p class="request-form-index">Item URL</p>
         <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
 
-        <p class="request-form-index">Proposed Price (incl. shipping)</p>
-        <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
-
         <p class="request-form-index">Preferred Delivery Method</p>
         <select onChange={this.selectDeliverMethod} value={this.state.delivery_method}>
-          <option value="0">Ship</option>
-          <option value="1">Pick UP/Meet Up</option>
+        <option value="0">Ship</option>
+        <option value="1">Pick UP/Meet Up</option>
         </select><br/>
+
+        <p class="request-form-index">Item Price</p>
+        <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
+
+        <p class="request-form-index">Commission to Purchaser</p>
+        <input placeholder=""/><br/>
+
+        <p class="request-form-index">Transaction Fee (3%)</p>
+        <input placeholder=""/><br/>
+
+        <p class="request-form-index">Shipping Estimate</p>
+        <input placeholder="(If Applicable)"/><br/>
+
+        <p class="request-form-index">My Total Payment</p>
+        <input placeholder=""/><br/>
+
+        <p class="request-form-index">Deadline</p>
+        <input placeholder=""/><br/>
 
         <p class="request-form-index">Comments</p>
         <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})} /><br/>
 
-        <input type="submit" value="Send request" />
+      </div>
+        <input class="form-send-btn" type="submit" value="Send request" />
       </form>
 
     </div>

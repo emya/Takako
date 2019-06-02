@@ -5,6 +5,8 @@ import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
 import '../css/style_LP.scss';
 import Header from './Header'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign, faLightbulb, faGift } from '@fortawesome/free-solid-svg-icons'
 
 class Takako extends Component {
   /*
@@ -108,18 +110,18 @@ class Takako extends Component {
         <h2 class="heading s">Our Services</h2>
         <div class="wrapper-service">
         <div class="service-box">
-        <i class="service-icon fa fa-lightbulb-o">★</i>
+        <FontAwesomeIcon className="service-icon" icon={faDollarSign} />
         <div class="service-title">Propose<br/>Price of the Item</div>
         <p class="service-text">Requesting user will pay proposed item price (including commision to purchasing user) + fixed 3% transaction fee.</p>
         </div>
         <div class="service-box">
-        <i class="service-icon fa fa-lightbulb-o">★</i>
+        <FontAwesomeIcon className="service-icon" icon={faGift} />
         <div class="service-title">Access to<br/>Unique Item</div>
         <p class="service-text">You can reach ANY items that are not available in your area.</p>
         </div>
         <div class="service-box">
-        <i class="service-icon fa fa-lightbulb-o">★</i>
-        <div class="service-title">Easy and Sefe<br/>Transaction</div>
+        <FontAwesomeIcon className="service-icon" icon={faLightbulb} />
+        <div class="service-title">Easy and Safe<br/>Transaction</div>
         <p class="service-text">Just send a request form! No cumbersome negotiation. Souvenir will release your payment when the item is delivered.</p>
         </div>
         </div>

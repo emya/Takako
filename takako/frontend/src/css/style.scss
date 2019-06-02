@@ -10,7 +10,7 @@ body {
   color: #1B435D;
   text-align: center;
   font-size: 1.4rem;
-  font-family: Raleway, "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif;
+  font-family: 'Avenir','Helvetica Neue','Helvetica','Candara','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
 }
 
 *, *::after, *::before {
@@ -191,27 +191,20 @@ h2 {
   float: left;
 }
 
-.message-btn {
+.request-btn {
+  background-color: #1B435D;
   display: block;
-  float: right;
-  width: 30%;
-  height: 50px;
-  margin: 40px 5% 0 70%;
-  font-weight: bold;
-  line-height: 50px;
-  border: 2px solid #F99F48;
+  width: 80%;
+  height: 30px;
+  // margin: 40px 5% 0 70%;
+  // font-weight: bold;
+  line-height: 30px;
   border-radius: 10px;
-  letter-spacing: 2px;
+  // letter-spacing: 2px;
 }
 
-.message-btn {
-  @media (max-width: 767px) {
-    float: none;
-    width: 80%;
-    height: 50px;
-    margin: 20px auto;
-    line-height: 50px;
-  }
+.request-btn:hover {
+  opacity: 0.7;
 }
 
 .message-btn:link, .message-btn:visited, .message-btn:hover, .message-btn:active {
@@ -437,13 +430,23 @@ h2 {
   margin-bottom: 10px;
 }
 
+.search-user-wrapper {
+  overflow: scroll;
+  height: 1070px;
+}
+
 .profile-card {
   display: inline-block;
   background: white;
-  width: 47%;
-  height: 240px;
+  width: 40%;
+  height: 180px;
   padding: 20px;
-  margin-right: 20px;
+  margin: 30px 30px 0 30px;
+  box-shadow: 0 0 8px lightgray;
+}
+
+.profile-card:hover {
+  box-shadow: 0 0 8px #78BBE6;
 }
 
 .profile-card-name {
@@ -469,6 +472,23 @@ h2 {
 .subject {
   color: #78BBE6;
   margin-top: 10px;
+}
+
+.search-box {
+  display: inline-block;
+  margin: 20px 0 0 0;
+  width: 500px;
+  height: 50px;
+  padding: 5px;
+}
+
+.search-btn {
+  display: inline-block;
+  background-color: #F99F48;
+  width: 200px;
+  height: 30px;
+  color: white;
+  margin: 20px 0;
 }
 
 // Message Box
@@ -635,6 +655,7 @@ h2 {
 }
 
 .request-form {
+  display: block;
   float: right;
   width: 75%;
 }
@@ -649,7 +670,25 @@ h2 {
   font-weight: bold;
 }
 
-.send-request {
+.request-form-wrapper p {
+  text-align: left;
+  margin: 0 auto;
+  width: 30%;
+}
+
+.request-form-wrapper select, input {
+  width: 300px;
+  margin-bottom: 15px;
+}
+
+.form-send-btn {
+  color: white;
+  background-color: #1B435D;
+  // display: block;
+  width: 50%;
+  height: 50px;
+  // line-height: 30px;
+  // border-radius: 10px;
   margin-top: 50px;
 }
 

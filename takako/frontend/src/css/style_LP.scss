@@ -8,7 +8,7 @@ body {
   color: #1B435D;
   text-align: center;
   font-size: 1.4rem;
-  font-family: Raleway, "Hiragino Kaku Gothic ProN",  Meiryo,  sans-serif;
+  font-family: 'Avenir','Helvetica Neue','Helvetica','Candara','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
 }
 
 *, *::after, *::before {
@@ -387,8 +387,8 @@ a:link, a:visited, a:hover, a:active {
   }}
 
 .service-icon {
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   margin-bottom: 30px;
   // border: 4px solid;
   // border-radius: 50%;

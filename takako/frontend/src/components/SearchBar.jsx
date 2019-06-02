@@ -55,8 +55,9 @@ class SearchBar extends Component {
                   id="residence"
                   type="text"
                   value={this.state.residence}
-                  placeholder="Search by Residence"
+                  placeholder="Search by Purchaser's Residence"
                   onChange={this.handleResidenceChange.bind(this)}
+                  class="search-box"
                 />
               </ReactGooglePlacesSuggest>
 
@@ -71,17 +72,17 @@ class SearchBar extends Component {
                   value={this.state.destination}
                   placeholder="Search by trip destination"
                   onChange={this.handleDestinationChange.bind(this)}
+                  class="search-box"
                 />
               </ReactGooglePlacesSuggest>
             </div>
           )
         }
       />
-      <button>Search</button>
+      <button class="search-btn">Search</button>
     </form>
     )
   }
 }
 
 export default SearchBar;
-
