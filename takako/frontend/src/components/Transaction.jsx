@@ -49,7 +49,13 @@ class Transaction extends Component {
                 <td>{sent_item_request.trip.departure_date} - {sent_item_request.trip.arrival_date}</td>
                 <td>{sent_item_request.item_name}</td>
                 <td>{sent_item_request.trip.destination}</td>
-                <td>Accepted <a href={`/transaction/history/${sent_item_request.id}`} style={{color: "#78BBE6"}}>details</a></td>
+                <td>
+                  {sent_item_request.status == 0 && ("Pending")}
+                  {sent_item_request.status == 1 && ("Cancelled")}
+                  {sent_item_request.status == 2 && ("Accepted")}
+                  {sent_item_request.status == 3 && ("Rejected")}
+                  <a href={`/transaction/history/${sent_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
+                </td>
               </tr>
             ))}
 
@@ -73,13 +79,15 @@ class Transaction extends Component {
                 <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
-                <td>Accepted <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a></td>
+                <td>
+                  {received_item_request.status == 0 && ("Pending")}
+                  {received_item_request.status == 1 && ("Cancelled")}
+                  {received_item_request.status == 2 && ("Accepted")}
+                  {received_item_request.status == 3 && ("Rejected")}
+                  <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
+                </td>
               </tr>
             ))}
-            <tr class="transaction-data total">
-              <td colspan="5">Total Earnings</td>
-              <td>$30</td>
-            </tr>
           </table>
         </div>
       </div>
