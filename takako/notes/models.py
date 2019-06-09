@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
+from django.utils import timezone
 
+import datetime
 
 class Note(models.Model):
     text = models.CharField(max_length=255)
@@ -72,3 +73,4 @@ class ItemRequest(models.Model):
     # 3: rejected request
     status = models.IntegerField(default=0)
     created_at = models.DateField(default=datetime.date.today)
+
