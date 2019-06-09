@@ -1,6 +1,9 @@
 from rest_framework import serializers
 
-from .models import Note, Profile, TravelerProfile, Transaction, Trip, ItemRequest
+from .models import (
+    Note, Profile, TravelerProfile,
+    Transaction, Trip, ItemRequest,
+)
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
@@ -12,15 +15,18 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ('id', 'text', )
 
+
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = ('id', 'requester', 'respondent', 'status', 'price', 'created_at', 'updated_at', )
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username')
+
 
 class TravelerProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -29,6 +35,7 @@ class TravelerProfileSerializer(serializers.ModelSerializer):
         model = TravelerProfile
         fields = ('id', 'bio', 'user')
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
@@ -36,10 +43,12 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'user')
 
+
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
         fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
+
 
 class ItemRequestSerializer(serializers.ModelSerializer):
     requester = UserSerializer(read_only=True)
@@ -53,6 +62,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'item_name', 'item_id', 'item_url', 'proposed_price',
             'delivery_method', 'comment', 'status')
 
+
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -64,6 +74,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
                                         None,
                                         validated_data['password'])
         return user
+
 
 class LoginUserSerializer(serializers.Serializer):
     username = serializers.CharField()

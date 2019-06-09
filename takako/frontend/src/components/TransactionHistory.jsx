@@ -73,11 +73,6 @@ class TransactionHistory extends Component {
          </div>
 
          <h3>Transaction History</h3>
-         <div class="history-box">
-           <div class="history-wrapper">
-             <p>Item received by Emi</p><p>5/6/2019</p>
-          </div>
-         </div>
          {has_history && is_requester && item_request_status == 2 && (
            <div class="history-box">
              <div class="history-wrapper">
