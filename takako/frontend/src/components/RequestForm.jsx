@@ -52,7 +52,26 @@ class RequestForm extends Component {
 
         <div class="wrapper clearfix">
          <SideMenu />
-         <p>Your request was successfully submitted</p>
+         <div class="request-conf">
+          <p>Your request was successfully submitted</p>
+
+
+          <h2>Your Request Summary</h2>
+          <div class="request-summary">
+            <p>Item Name: xx</p>
+            <p>Item ID: xx</p>
+            <p>Item URL: xx</p>
+            <p>Preffered Delivery Method: xx</p>
+            <p>Deadline: xx</p>
+            <p>Item Price: xx</p>
+            <p>Commission to Purchaser: xx</p>
+            <p>Transaction fee: xx</p>
+            <p>Shipping Estimate: xx</p>
+            <p>My Total Payment: xx</p>
+            <p>Comments: xx</p>
+          </div>
+          <input class="form-send-btn" type="submit" value="Confirm and Send Request" />
+        </div>
         </div>
 
         <div class="sidemenu-mobile">
@@ -122,6 +141,19 @@ class RequestForm extends Component {
 
       </div>
         <input class="form-send-btn" type="submit" value="Send request" />
+      </form>
+
+      <form onSubmit={this.submitRequest} class="request-form">
+        <h2>Meet-Up Request</h2>
+        <div class="request-form-wrapper">
+          <p class="request-form-index">Meet-up Date</p>
+          <input/><br/>
+          <p class="request-form-index">Place</p>
+          <input/><br/>
+          <p class="request-form-index">Contact</p>
+          <input/><br/>
+        </div>
+        <input class="form-send-btn" type="submit" value="Send Request" />
       </form>
 
     </div>

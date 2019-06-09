@@ -71,24 +71,24 @@ class UpcomingTrips extends Component {
       </table>
 
       {!is_other &&
-        <div>
-          <h3>Add new trip</h3>
+        <div class="add-new-trip">
+          <h3>Add New Trip</h3>
           <form onSubmit={this.submitTrip}>
-            <input value={this.state.departure_date}
+            <input class="trip-entry" value={this.state.departure_date}
             placeholder="Enter departure date"
             onChange={(e) => this.setState({departure_date: e.target.value})}
             required />
 
-            <input value={this.state.arrival_date}
+            <input class="trip-entry" value={this.state.arrival_date}
             placeholder="Enter arrival date"
             onChange={(e) => this.setState({arrival_date: e.target.value})}
             required />
 
-            <input value={this.state.destination}
+            <input class="trip-entry" value={this.state.destination}
             placeholder="Enter destination"
             onChange={(e) => this.setState({destination: e.target.value})}
             required />
-            <input type="submit" value="Save Trip" />
+            <input class="submit-btn" type="submit" value="Save Trip" />
           </form>
         </div>
       }
