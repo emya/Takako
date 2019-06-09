@@ -199,7 +199,7 @@ h2 {
   // margin: 40px 5% 0 70%;
   // font-weight: bold;
   line-height: 30px;
-  border-radius: 10px;
+  // border-radius: 10px;
   // letter-spacing: 2px;
 }
 
@@ -284,6 +284,19 @@ h2 {
 // .table-data .transaction-data td:nth-child(6) {
 //   font-weight: bold;
 // }
+
+.add-new-trip {
+  background: #D5EEFF;
+  margin: 60px auto 80px;
+  width: 90%;
+  padding: 10px;
+}
+
+
+.trip-entry {
+  width: 30%;
+  margin: 5px;
+}
 
 .transaction-data.total {
   font-weight: bold;
@@ -489,6 +502,7 @@ h2 {
   height: 30px;
   color: white;
   margin: 20px 0;
+  border: none;
 }
 
 // Message Box
@@ -589,7 +603,12 @@ h2 {
 }
 
 .submit-btn {
-   background-color: red;
+  color: white;
+  margin-top: 20px;
+  background-color: #78BBE6;
+  width: 200px;
+  border: none;
+  padding: 10px;
 }
 
 // howItWorks
@@ -691,6 +710,29 @@ h2 {
   // border-radius: 10px;
   margin-top: 50px;
 }
+
+// request
+
+.request-conf {
+  float: right;
+  width: 75%;
+}
+
+.request-summary {
+  // text-align: left;
+  margin: 0 auto;
+}
+
+.request-summary {
+  display: block;
+  // text-align: left;
+  margin: 0 auto;
+}
+
+.request-summary p span {
+  text-align: right;
+}
+
 
 /* footer */
 
