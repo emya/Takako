@@ -41,7 +41,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'user')
+        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'user')
 
 
 class TripSerializer(serializers.ModelSerializer):

@@ -100,7 +100,7 @@ export const fetchTrips = (userId) => {
   }
 }
 
-export const addTrip = (departure_date, arrival_date, destination) => {
+export const addTrip = (departure, arrival, destination) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -109,7 +109,8 @@ export const addTrip = (departure_date, arrival_date, destination) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("token at add Trip", token);
+    let departure_date = formatDate(departure);
+    let arrival_date = formatDate(arrival);
 
     let body = JSON.stringify({departure_date, arrival_date, destination, });
     return fetch("/api/trips/", {headers, method: "POST", body})
@@ -132,5 +133,17 @@ export const addTrip = (departure_date, arrival_date, destination) => {
         }
       })
   }
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
 }
 

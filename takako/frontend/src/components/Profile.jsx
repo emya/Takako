@@ -55,7 +55,7 @@ class Profile extends Component {
       <div class="profile">
         {this.props.profile.map((profile) => (
           <div>
-            <img src="./img/woman3.jpg"/>
+            <img src={require('../img/default.png')} />
             <p class="user-data"> {profile.user.username} </p>
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
             <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
