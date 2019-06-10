@@ -18,8 +18,6 @@ class UpcomingTrips extends Component {
   }
 
   state = {
-    //departure_date: "",
-    //arrival_date: "",
     departure_date: null,
     arrival_date: null,
     destination: "",
@@ -27,7 +25,6 @@ class UpcomingTrips extends Component {
   }
 
   handleDepartureDateChange(date) {
-    console.log(date);
     this.setState({departure_date: date});
   }
 

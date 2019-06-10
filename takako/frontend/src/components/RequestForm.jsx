@@ -47,10 +47,7 @@ class RequestForm extends Component {
 
   proceedRequest = (e) => {
     e.preventDefault();
-    console.log("proceed!")
-    this.setState({isProceeded: true}, () => {
-      console.log(this.state);
-    });
+    this.setState({isProceeded: true});
   }
 
 
