@@ -52,7 +52,6 @@
     "react-geosuggest": "^2.12.0",
     "react-google-maps-loader": "^4.2.5",
     "react-google-places-suggest": "^3.8.0",
-    "react-input-calendar": "^0.5.4",
     "react-redux": "^6.0.0",
     "react-responsive": "^6.1.1",
     "react-router-dom": "^4.3.1",
