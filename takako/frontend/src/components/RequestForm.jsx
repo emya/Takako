@@ -177,7 +177,7 @@ class RequestForm extends Component {
         <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})} /><br/>
 
       </div>
-        <button class="form-send-btn" onClick={this.proceedRequest}>Send Request!</button>
+        <button class="form-send-btn" onClick={this.proceedRequest}>Send Request</button>
       </form>
 
       <form class="request-form">
