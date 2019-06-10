@@ -23,6 +23,7 @@ class RequestForm extends Component {
     comment: "",
     updateTripId: null,
     isSubmissionSucceeded: null,
+    isProceeded: null,
   }
 
    componentWillReceiveProps(newProps){
@@ -44,8 +45,17 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
+  proceedRequest = (e) => {
+    e.preventDefault();
+    console.log("proceed!")
+    this.setState({isProceeded: true}, () => {
+      console.log(this.state);
+    });
+  }
+
+
   render() {
-    if (this.state.isSubmissionSucceeded) {
+    if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
       <div>
         <Header />
@@ -54,23 +64,53 @@ class RequestForm extends Component {
          <SideMenu />
          <div class="request-conf">
           <p>Your request was successfully submitted</p>
+        </div>
+        </div>
 
+        <div class="sidemenu-mobile">
+          <ul>
+          <li><a href="#">My Profile<span>></span></a></li>
+          <li><a href="#">Transaction Status<span>></span></a></li>
+          <li><a href="#">Message Box<span>></span></a></li>
+          <li><a href="#">Edit Profile<span>></span></a></li>
+          <li><a href="#">Edit Account<span>></span></a></li>
+          <li><a href="#">Logout<span>></span></a></li>
+          <li><a href="#">Help<span>></span></a></li>
+          </ul>
+        </div>
 
+        <footer>
+          FOOTER CONTENTS TO BE DETERMINED
+          <FontAwesomeIcon icon="igloo" />
+        </footer>
+      </div>
+      )
+    }
+    if (this.state.isProceeded) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+         <SideMenu />
+         <div class="request-conf">
           <h2>Your Request Summary</h2>
           <div class="request-summary">
-            <p>Item Name: xx</p>
-            <p>Item ID: xx</p>
-            <p>Item URL: xx</p>
-            <p>Preffered Delivery Method: xx</p>
-            <p>Deadline: xx</p>
-            <p>Item Price: xx</p>
+            <p>Item Name: {this.state.item_name} </p>
+            <p>Item ID: {this.state.item_id} </p>
+            <p>Item URL: {this.state.item_url} </p>
+            <p>Preffered Delivery Method:
+              {this.state.delivery_method == 0 && ("Ship")}
+              {this.state.delivery_method == 1 && ("Pick UP/Meet Up")}
+            </p>
+            <p>Item Price: {this.state.proposed_price} </p>
             <p>Commission to Purchaser: xx</p>
             <p>Transaction fee: xx</p>
-            <p>Shipping Estimate: xx</p>
             <p>My Total Payment: xx</p>
-            <p>Comments: xx</p>
+            <p>Comments: {this.state.comment} </p>
           </div>
-          <input class="form-send-btn" type="submit" value="Confirm and Send Request" />
+          <button class="form-send-btn" onClick={this.submitRequest.bind(this)}>Confirm Request</button>
+
         </div>
         </div>
 
@@ -100,7 +140,7 @@ class RequestForm extends Component {
     <div class="wrapper clearfix">
       <SideMenu />
 
-      <form onSubmit={this.submitRequest} class="request-form">
+      <form class="request-form">
       <h2>Item Request</h2>
       <div class="request-form-wrapper">
         <p class="request-form-index">Item Name</p>
@@ -140,10 +180,10 @@ class RequestForm extends Component {
         <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})} /><br/>
 
       </div>
-        <input class="form-send-btn" type="submit" value="Send request" />
+        <button class="form-send-btn" onClick={this.proceedRequest}>Send Request!</button>
       </form>
 
-      <form onSubmit={this.submitRequest} class="request-form">
+      <form class="request-form">
         <h2>Meet-Up Request</h2>
         <div class="request-form-wrapper">
           <p class="request-form-index">Meet-up Date</p>
@@ -183,6 +223,7 @@ const mapStateToProps = state => {
   return {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
+    isProceeded: state.requests.isProceeded,
   }
 }
 

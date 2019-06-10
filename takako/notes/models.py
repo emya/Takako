@@ -18,6 +18,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     residence = models.CharField(max_length=100, blank=True)
     occupation = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
 class TravelerProfile(models.Model):

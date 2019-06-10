@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {trips, auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
+
+import DatePicker from "react-datepicker";
+import "../../node_modules/react-datepicker/dist/react-datepicker.css";
 import '../css/style_LP.scss';
 
 class UpcomingTrips extends Component {
@@ -15,10 +18,21 @@ class UpcomingTrips extends Component {
   }
 
   state = {
-    departure_date: "",
-    arrival_date: "",
+    //departure_date: "",
+    //arrival_date: "",
+    departure_date: null,
+    arrival_date: null,
     destination: "",
     updateTripId: null,
+  }
+
+  handleDepartureDateChange(date) {
+    console.log(date);
+    this.setState({departure_date: date});
+  }
+
+  handleArrivalDateChange(date) {
+    this.setState({arrival_date: date});
   }
 
   resetForm = () => {
@@ -74,16 +88,12 @@ class UpcomingTrips extends Component {
         <div class="add-new-trip">
           <h3>Add New Trip</h3>
           <form onSubmit={this.submitTrip}>
-            <input class="trip-entry" value={this.state.departure_date}
-            placeholder="Enter departure date"
-            onChange={(e) => this.setState({departure_date: e.target.value})}
-            required />
+            <p class="object">Departure Date</p>
+            <DatePicker selected={this.state.departure_date} onChange={this.handleDepartureDateChange.bind(this)}/>
+            <p class="object">Arrival Date</p>
+            <DatePicker selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
 
-            <input class="trip-entry" value={this.state.arrival_date}
-            placeholder="Enter arrival date"
-            onChange={(e) => this.setState({arrival_date: e.target.value})}
-            required />
-
+            <p class="object">Trip Destination</p>
             <input class="trip-entry" value={this.state.destination}
             placeholder="Enter destination"
             onChange={(e) => this.setState({destination: e.target.value})}
