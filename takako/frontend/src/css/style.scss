@@ -17,6 +17,10 @@ body {
   box-sizing: border-box;
 }
 
+.wrapper {
+  overflow:hidden;
+}
+
 .clearfix::after {
   content: '';
   display: block;
@@ -118,10 +122,12 @@ h2 {
 
 .sidemenu {
   float: left;
-  height: 1300px;
+  // height: 1300px;
   width: 25%;
   background-color: #1B435D;
   letter-spacing: 3px;
+  padding-bottom: 10000px;
+  margin-bottom: -10000px;
 }
 
 .sidemenu {
@@ -219,9 +225,10 @@ h2 {
 
 .profile {
   float: right;
-  height: 1000px;
+  // height: 1000px;
   width: 75%;
   background-color: white;
+  padding: 0 0 100px 0;
 }
 
 .profile {
@@ -289,12 +296,13 @@ h2 {
   background: #D5EEFF;
   margin: 60px auto 80px;
   width: 90%;
-  padding: 10px;
+  padding: 10px 10px 20px 10px;
 }
 
 
 .trip-entry {
-  width: 30%;
+  display: block;
+  width: 100%;
   margin: 5px;
 }
 
@@ -341,6 +349,7 @@ h2 {
   float: right;
   text-align: center;
   width: 75%;
+  padding: 0 0 100px 0;
 }
 
 .history-box {
