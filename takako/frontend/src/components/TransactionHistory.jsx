@@ -28,9 +28,6 @@ class TransactionHistory extends Component {
 
   onToken = (token, addresses) => {
     // TODO: Send the token information and any other
-    console.log("token", token);
-    console.log("address", addresses);
-
     /*
     var FormData = require('form-data');
     let body = new FormData();
@@ -45,7 +42,6 @@ class TransactionHistory extends Component {
     body["stripeToken"] = token.id;
     body["stripeTokenType"] = token.type;
 
-    console.log(body);
     this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body);
   };
 
