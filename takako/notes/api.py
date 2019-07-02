@@ -3,18 +3,19 @@ from rest_framework import status, viewsets, permissions, generics
 
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.conf import settings
 
 from knox.models import AuthToken
 
 from .models import (
-    Note, Profile, Transaction,
-    TravelerProfile, Trip, ItemRequest,
+    Note, Profile, TravelerProfile,
+    Trip, ItemRequest, Charge,
 )
 from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
-    TransactionSerializer,
     ItemRequestSerializer,
+    ChargeSerializer,
     ProfileSerializer,
     TripSerializer,
     TravelerProfileSerializer,
@@ -29,16 +30,6 @@ class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     #permission_classes = [permissions.AllowAny, ]
     serializer_class = NoteSerializer
-
-class TransactionAPI(generics.GenericAPIView):
-    serializer_class = TransactionSerializer
-
-    def get(self, request):
-        # Transaction for sent requests
-        queryset_requester = Transaction.objects.all().filter(requester=request.user)
-        # Transaction for received requests
-        queryset_respondent = Transaction.objects.all().filter(respondent=request.user)
-        return Response({ 'sent_requests': queryset_requester, 'received_requests': queryset_respondent})
 
 class RequestHistoryAPI(generics.RetrieveAPIView):
     serializer_class = ItemRequestSerializer
@@ -88,6 +79,42 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         queryset = queryset.filter(user=self.request.user)
         return queryset
     """
+
+import stripe
+class ChargeViewSet(viewsets.ModelViewSet):
+    stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+    queryset = Charge.objects.all()
+    serializer_class = ChargeSerializer
+
+    def create(self, request):
+        item_request_id = request.data.pop("item_request_id")
+        body = request.data.pop("stripe_body")
+        stripe_token = body["stripeToken"]
+        stripe_charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='A Django charge',
+            source=stripe_token
+        )
+        amount = stripe_charge["amount"]
+        charge_id = stripe_charge["id"]
+        status = stripe_charge["status"]
+        card = stripe_charge["payment_method_details"].get("card")
+        type = stripe_charge["payment_method_details"].get("type")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        charge = Charge.objects.create(
+            user=request.user,
+            amount=amount,
+            item_request=item_request,
+            card=card,
+            charge_id=charge_id,
+            token_id=stripe_token,
+            type=type,
+            status=status,
+        )
+        serializer = self.serializer_class(charge)
+        return Response(serializer.data)
 
 class TripViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated,]

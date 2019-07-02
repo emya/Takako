@@ -11,6 +11,7 @@ import SideMenu from './SideMenu';
 import StripeCheckout from 'react-stripe-checkout';
 import { keys } from '../keys.js'
 
+
 class TransactionHistory extends Component {
   componentDidMount() {
     this.props.fetchRequestHistory(this.props.match.params.requestId);
@@ -27,6 +28,25 @@ class TransactionHistory extends Component {
 
   onToken = (token, addresses) => {
     // TODO: Send the token information and any other
+    console.log("token", token);
+    console.log("address", addresses);
+
+    /*
+    var FormData = require('form-data');
+    let body = new FormData();
+
+    body.append("stripeEmail", token.email);
+    body.append("stripeToken", token.id);
+    body.append("stripeTokenType", token.type);
+    */
+
+    var body = {};
+    body["stripeEmail"] = token.email;
+    body["stripeToken"] = token.id;
+    body["stripeTokenType"] = token.type;
+
+    console.log(body);
+    this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body);
   };
 
   declineItemRequest = () => {
@@ -180,7 +200,9 @@ const mapDispatchToProps = dispatch => {
     },
     updateItemRequest: (requestId, item_request) => {
       return dispatch(requests.updateItemRequest(requestId, item_request));
-      //dispatch(notes.updateNote(id, text));
+    },
+    chargeItemRequest: (itemRequestId, userId, body) => {
+      return dispatch(requests.chargeItemRequest(itemRequestId, userId, body));
     },
     logout: () => dispatch(auth.logout()),
   }

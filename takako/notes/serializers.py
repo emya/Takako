@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import (
     Note, Profile, TravelerProfile,
-    Transaction, Trip, ItemRequest,
+    Trip, ItemRequest, Charge,
 )
 
 from rest_framework import serializers
@@ -15,18 +15,10 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ('id', 'text', )
 
-
-class TransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Transaction
-        fields = ('id', 'requester', 'respondent', 'status', 'price', 'created_at', 'updated_at', )
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username')
-
 
 class TravelerProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -35,7 +27,6 @@ class TravelerProfileSerializer(serializers.ModelSerializer):
         model = TravelerProfile
         fields = ('id', 'bio', 'user')
 
-
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
@@ -43,12 +34,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'user')
 
-
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
         fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
-
 
 class ItemRequestSerializer(serializers.ModelSerializer):
     requester = UserSerializer(read_only=True)
@@ -61,6 +50,17 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
             'delivery_method', 'comment', 'status')
+
+class ChargeSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    item_request = ItemRequestSerializer(read_only=True)
+
+    class Meta:
+        model = Charge
+        fields = (
+            'id', 'amount', 'user', 'item_request', 'card',
+            'charge_id', 'email', 'token_id', 'type', 'status',
+            'created_at', )
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
