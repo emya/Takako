@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from jsonfield import JSONField
+
 import datetime
 
 class Note(models.Model):
@@ -29,21 +31,6 @@ class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
     photo = models.ImageField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-class Transaction(models.Model):
-    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_created')
-    respondent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_received')
-    # Status
-    # 0: sent request
-    # 1: canceled request
-    # 2: accepted request
-    # 3: rejected request
-    # 4: purchased
-    # 5: done (paid to respondent)
-    status = models.IntegerField()
-    price = models.IntegerField()
-    created_at = models.DateField(null=True, blank=True)
-    updated_at = models.DateField(null=True, blank=True)
 
 class Trip(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -75,3 +62,15 @@ class ItemRequest(models.Model):
     status = models.IntegerField(default=0)
     created_at = models.DateField(default=datetime.date.today)
 
+class Charge(models.Model):
+    amount = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
+    card = JSONField()
+    charge_id = models.CharField(max_length=100)
+    # Null = True for now
+    email = models.EmailField(null=True)
+    token_id = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    created_at = models.DateField(default=datetime.date.today)
