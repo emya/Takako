@@ -29,7 +29,6 @@ from .serializers import (
 
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
-    #permission_classes = [permissions.AllowAny, ]
     serializer_class = NoteSerializer
 
 class ItemRequestHistoryViewSet(viewsets.ModelViewSet):

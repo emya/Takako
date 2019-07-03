@@ -54,7 +54,6 @@ class ItemRequestSerializer(serializers.ModelSerializer):
 
 class ChargeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    #item_request = ItemRequestSerializer(read_only=True)
 
     class Meta:
         model = Charge
@@ -68,13 +67,6 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
     requester = UserSerializer(read_only=True)
     respondent = UserSerializer(read_only=True)
     trip = TripSerializer(read_only=True)
-    """
-    charge = ChargeSerializer(read_only=True, many=True)
-    charge = serializers.SlugRelatedField(
-        slug_field='item_request',
-        queryset=Charge.objects.all()  # Might be redundant with read_only=True
-    )
-    """
 
     class Meta:
         model = ItemRequest
@@ -84,10 +76,7 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
             'delivery_method', 'comment', 'status', 'charge')
 
     def get_charge(self, obj):
-        print("obj", obj)
-        #qs = obj.charges.all().order_by('index')
         qs = obj.charges.all()
-        print("qs", qs)
         return ChargeSerializer(qs, many=True, read_only=True).data
 
 class CreateUserSerializer(serializers.ModelSerializer):

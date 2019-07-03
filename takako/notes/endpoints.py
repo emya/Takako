@@ -33,6 +33,5 @@ urlpatterns = [
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
     url(r"^stripe/", include("djstripe.urls", namespace="djstripe")),
-    #url('^requests/history/$', RequestHistoryAPI.as_view()),
 ]
 
