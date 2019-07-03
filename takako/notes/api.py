@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
     ItemRequestSerializer,
+    ItemRequestHistorySerializer,
     ChargeSerializer,
     ProfileSerializer,
     TripSerializer,
@@ -31,8 +32,9 @@ class NoteViewSet(viewsets.ModelViewSet):
     #permission_classes = [permissions.AllowAny, ]
     serializer_class = NoteSerializer
 
-class RequestHistoryAPI(generics.RetrieveAPIView):
-    serializer_class = ItemRequestSerializer
+class ItemRequestHistoryViewSet(viewsets.ModelViewSet):
+    queryset = ItemRequest.objects.all()
+    serializer_class = ItemRequestHistorySerializer
 
 class ItemRequestViewSet(viewsets.ModelViewSet):
     serializer_class = ItemRequestSerializer

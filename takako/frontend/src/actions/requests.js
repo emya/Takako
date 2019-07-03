@@ -112,11 +112,10 @@ export const fetchRequestHistory = (requestId) => {
 
     console.log("headers", headers);
 
-    return fetch(`/api/requests/item/${requestId}/`, {headers, method: "GET"})
+    return fetch(`/api/requests/history/${requestId}/`, {headers, method: "GET"})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
-            console.log("data", data);
             return {status: res.status, data};
           })
         } else {

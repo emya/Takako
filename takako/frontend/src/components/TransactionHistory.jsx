@@ -53,6 +53,7 @@ class TransactionHistory extends Component {
     let has_history = false;
     let is_requester = false;
     let is_respondent = false;
+    let is_charged = false;
     let item_request_status = 0;
     if (this.props.requests.requestHistory) {
       item_request_status = this.props.requests.requestHistory.status;
@@ -64,6 +65,14 @@ class TransactionHistory extends Component {
 
       if (this.props.user.id == this.props.requests.requestHistory.respondent.id){
         is_respondent = true;
+      }
+
+      if (this.props.requests.requestHistory.charge && this.props.requests.requestHistory.charge.length > 0){
+        const charge = this.props.requests.requestHistory.charge[0];
+        if (charge.status == "succeeded"){
+          is_charged = true;
+        }
+
       }
     }
     return (
@@ -89,7 +98,14 @@ class TransactionHistory extends Component {
          </div>
 
          <h3>Transaction History</h3>
-         {has_history && is_requester && item_request_status == 2 && (
+         {has_history && is_requester && item_request_status == 2 && is_charged && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You paid</p>
+             </div>
+           </div>
+         )}
+         {has_history && is_requester && item_request_status == 2 && !is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Payment </p>
