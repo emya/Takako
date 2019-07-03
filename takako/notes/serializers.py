@@ -39,6 +39,7 @@ class TripSerializer(serializers.ModelSerializer):
         model = Trip
         fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
 
+
 class ItemRequestSerializer(serializers.ModelSerializer):
     requester = UserSerializer(read_only=True)
     respondent = UserSerializer(read_only=True)
@@ -53,7 +54,6 @@ class ItemRequestSerializer(serializers.ModelSerializer):
 
 class ChargeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    item_request = ItemRequestSerializer(read_only=True)
 
     class Meta:
         model = Charge
@@ -62,6 +62,22 @@ class ChargeSerializer(serializers.ModelSerializer):
             'charge_id', 'email', 'token_id', 'type', 'status',
             'created_at', )
 
+class ItemRequestHistorySerializer(serializers.ModelSerializer):
+    charge = serializers.SerializerMethodField()
+    requester = UserSerializer(read_only=True)
+    respondent = UserSerializer(read_only=True)
+    trip = TripSerializer(read_only=True)
+
+    class Meta:
+        model = ItemRequest
+        fields = (
+            'id', 'requester', 'respondent', 'trip',
+            'item_name', 'item_id', 'item_url', 'proposed_price',
+            'delivery_method', 'comment', 'status', 'charge')
+
+    def get_charge(self, obj):
+        qs = obj.charges.all()
+        return ChargeSerializer(qs, many=True, read_only=True).data
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
