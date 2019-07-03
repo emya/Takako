@@ -8,13 +8,15 @@ import {auth} from "../actions";
 class Login extends Component {
 
   state = {
-    username: "",
+    first_name: "",
+    last_name: "",
+    email: "",
     password: "",
   }
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.register(this.state.username, this.state.password);
+    this.props.register(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
   }
 
   render() {
@@ -33,16 +35,28 @@ class Login extends Component {
             </ul>
           )}
           <p>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="first_name">First Name</label>
             <input
-              type="text" id="username"
-              onChange={e => this.setState({username: e.target.value})} />
+              type="text" id="first_name"
+              onChange={e => this.setState({first_name: e.target.value})} required/>
+          </p>
+          <p>
+            <label htmlFor="first_name">Last Name</label>
+            <input
+              type="text" id="last_name"
+              onChange={e => this.setState({last_name: e.target.value})} required/>
+          </p>
+          <p>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email" id="email"
+              onChange={e => this.setState({email: e.target.value})} required/>
           </p>
           <p>
             <label htmlFor="password">Password</label>
             <input
               type="password" id="password"
-              onChange={e => this.setState({password: e.target.value})} />
+              onChange={e => this.setState({password: e.target.value})} required/>
           </p>
           <p>
             <button type="submit">Register</button>
@@ -73,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: (username, password) => dispatch(auth.register(username, password)),
+    register: (first_name, last_name, email, password) => dispatch(auth.register(first_name, last_name, email, password)),
   };
 }
 

@@ -8,10 +8,10 @@ from django.conf import settings
 from knox.models import AuthToken
 
 from .models import (
-    Note, Profile, TravelerProfile,
+    User, Note, Profile, TravelerProfile,
     Trip, ItemRequest, Charge,
 )
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
     ItemRequestSerializer,
@@ -220,7 +220,6 @@ class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginUserSerializer
 
     def post(self, request, *args, **kwargs):
-        print("login request", request)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
