@@ -34,10 +34,10 @@ export const loadUser = () => {
   }
 }
 
-export const register = (username, password) => {
+export const register = (first_name, last_name, email, password) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
-    let body = JSON.stringify({username, password});
+    let body = JSON.stringify({first_name, last_name, email, password});
 
     return fetch("/api/auth/register/", {headers, body, method: "POST"})
       .then(res => {
@@ -65,7 +65,7 @@ export const register = (username, password) => {
   }
 }
 
-export const login = (username, password) => {
+export const login = (email, password) => {
   return (dispatch, getState) => {
     const token = getState().auth.token;
 
@@ -76,7 +76,7 @@ export const login = (username, password) => {
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
-    let body = JSON.stringify({username, password});
+    let body = JSON.stringify({email, password});
 
     return fetch("/api/auth/login/", {headers, body, method: "POST"})
       .then(res => {
