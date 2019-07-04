@@ -9,6 +9,8 @@ from jsonfield import JSONField
 import datetime
 from django.utils import timezone
 
+import uuid
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -50,6 +52,7 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254, null=True, blank=True)
