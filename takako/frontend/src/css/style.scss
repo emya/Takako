@@ -40,6 +40,12 @@ h2 {
   letter-spacing: 2px;
 }
 
+input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #EEEEEE;
+}
+
 
 /* topbar */
 
@@ -705,7 +711,7 @@ h2 {
   width: 80%;
   border-radius: 10px;
   margin: 30px auto 0px;
-  padding: 30px;
+  padding: 50px;
 }
 
 .form-heading {
@@ -717,13 +723,37 @@ h2 {
 
 .form-section input {
   width: 100%;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 30px 0;
+}
+
+.meetup-option {
+  width: 21%!important;
+  margin-left: 15px!important;
+}
+
+.contact-option {
+  width: 30%!important;
+  margin-left: 15px!important;
 }
 
 .form-data {
   display: inline-block;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 30px 0;
   text-align: right;
+}
+
+.meetup {
+  margin-right: 50px;
+}
+
+.btn.accept {
+    display: inline-block;
+    width: 30%;
+    height: 30px;
+    line-height: 20px;
+    color: white;
+    margin: 10px 0;
+    background-color: orange;
 }
 
 .form-send-btn {
@@ -736,6 +766,8 @@ h2 {
   // border-radius: 10px;
   margin-top: 50px;
 }
+
+
 
 
 /* footer */
