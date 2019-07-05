@@ -88,17 +88,13 @@ class Profile(models.Model):
     gender = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-class TravelerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-
 class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
     photo = models.ImageField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Trip(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="trips")
     destination = models.CharField(max_length=100, blank=True)
     departure_date = models.DateField(null=True, blank=True)
     arrival_date = models.DateField(null=True, blank=True)

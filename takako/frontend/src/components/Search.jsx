@@ -28,7 +28,7 @@ class Search extends Component {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    fetch(`/api/profiles/?others=True&destination=${destination}&residence=${residence}`, {headers, })
+    fetch(`/api/travelers/profiles/?others=True&destination=${destination}`, {headers, })
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
@@ -61,7 +61,7 @@ class Search extends Component {
         <SideMenu />
 
         <SearchBar handleFormSubmit={this.handleFormSubmit}/>
-        <SearchResults profiles={this.state.profiles}/>
+        <SearchResults travelers={this.state.profiles}/>
       </div>
 
       <div class="sidemenu-mobile">

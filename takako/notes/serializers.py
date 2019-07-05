@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import (
-    User, Note, Profile, TravelerProfile,
+    User, Note, Profile,
     Trip, ItemRequest, Charge,
 )
 
@@ -21,11 +21,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'email')
 
 class TravelerProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    trip = serializers.SerializerMethodField()
 
     class Meta:
-        model = TravelerProfile
-        fields = ('id', 'bio', 'user')
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'trip')
+
+    def get_trip(self, obj):
+        qs = obj.trips.all()
+        return TripSerializer(qs, many=True, read_only=True).data
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

@@ -4,11 +4,12 @@ from rest_framework import status, viewsets, permissions, generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
+from django.db.models import Prefetch
 
 from knox.models import AuthToken
 
 from .models import (
-    User, Note, Profile, TravelerProfile,
+    User, Note, Profile,
     Trip, ItemRequest, Charge,
 )
 #from django.contrib.auth.models import User
@@ -159,21 +160,18 @@ class ProfileViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
-        userId = self.request.GET.get('userId')
         all = self.request.GET.get('all')
         others = self.request.GET.get('others')
-        residence = self.request.GET.get('residence')
+        #residence = self.request.GET.get('residence')
         destination = self.request.GET.get('destination')
 
         queryset = Profile.objects.all()
+        print("queryset", queryset)
 
-        if userId:
-            user = User.objects.get(pk=userId)
-            queryset = queryset.filter(user=user)
-            return queryset
-
-        if residence:
-            queryset = queryset.filter(residence=residence)
+        if destination:
+            # Users living in NY and have trips to the destination
+            queryset = queryset.filter(destination=destination)
+            # Users living in the destination and visits to NY
 
         if all:
             return queryset
@@ -192,15 +190,29 @@ class TravelerProfileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         others = self.request.GET.get('others')
         all = self.request.GET.get('all')
-        queryset = TravelerProfile.objects.all()
+        destination = self.request.GET.get('destination')
+        queryset = User.objects.all()
+
+        if destination:
+            # Users living in NY and have trips to the destination
+            queryset = queryset.filter(
+                trips__destination=destination
+            ).prefetch_related(Prefetch(
+                'trips',
+                queryset=Trip.objects.filter(
+                    destination=destination
+                )
+            )).order_by('trips__arrival_date')
+            # Users living in the destination and visits to NY
+            return queryset
 
         if all:
             return queryset
         if others:
-            queryset = queryset.exclude(user=self.request.user)
+            queryset = queryset.exclude(id=self.request.user.id)
             return queryset
 
-        queryset = queryset.filter(user=self.request.user)
+        queryset = queryset.filter(id=self.request.user.id)
         return queryset
 
 class RegistrationAPI(generics.GenericAPIView):

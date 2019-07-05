@@ -21,21 +21,24 @@ class SearchResults extends Component {
 }
 */
 
-const SearchResults = ({profiles}) => {
-    console.log("searchResults", {profiles});
+const SearchResults = ({travelers}) => {
+    console.log("searchResults", {travelers});
     return(
       <div class="search-user-wrapper">
-        {profiles.map((profile, key) => (
-          <a href={`/profile/${profile.user.id}`} style={{color: "black"}}>
+        {travelers.map((traveler, key) => (
+          <a href={`/profile/${traveler.id}`} style={{color: "black"}}>
           <div class="profile-card">
             <img class="profile-card-img" src="./img/woman3.jpg"/>
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
             <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
             <div class="profile-card-contents">
-              <p class="profile-card-name">{profile.user.username}</p>
-              <div class="profile-card-data subject">Residence:</div><div class="profile-card-data">{profile.residence}</div>
-              <div class="profile-card-data subject">Occupation:</div><div class="profile-card-data">{profile.occupation}</div>
-              <div class="profile-card-data subject">Next Trip:</div><div class="profile-card-data">9/2019 Spain</div>
+              <p class="profile-card-name">{traveler.first_name} {traveler.last_name}</p>
+              {traveler.trip && traveler.trip.length > 0 && (
+                <div>
+                  <div class="profile-card-data subject">Next Trip:</div>
+                  <div class="profile-card-data">{traveler.trip[0].departure_date} - {traveler.trip[0].arrival_date} {traveler.trip[0].destination}</div>
+                </div>
+              )}
             </div>
           </div>
           </a>
