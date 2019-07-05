@@ -88,11 +88,9 @@ class TransactionHistory extends Component {
            <div>
              <h2>Sent Request</h2>
              <h3>Transaction History with {this.props.requests.requestHistory.respondent.first_name}</h3>
-             <p>
-                Request you sent
-               <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
-               <li>Price    :  {this.props.requests.requestHistory.proposed_price}</li>
-             </p>
+             <p>Request you sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
            </div>
          )}
 
@@ -100,11 +98,9 @@ class TransactionHistory extends Component {
            <div>
              <h2>Received Request</h2>
              <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
-             <p>
-                Request {this.props.requests.requestHistory.requester.first_name} sent
-               <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
-               <li>Price    :  {this.props.requests.requestHistory.proposed_price}</li>
-             </p>
+             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
            </div>
          )}
 
