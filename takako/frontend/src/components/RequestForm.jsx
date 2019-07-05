@@ -24,6 +24,7 @@ class RequestForm extends Component {
     updateTripId: null,
     isSubmissionSucceeded: null,
     isProceeded: null,
+    errors: []
   }
 
    componentWillReceiveProps(newProps){
@@ -45,13 +46,36 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
+  validateForm = (item_name, price) => {
+    // we are going to store errors for all fields
+    // in a signle array
+    const errors = [];
+
+    if (item_name.length === 0) {
+      errors.push("Item Name can't be empty");
+    }
+
+    if (price.length === 0) {
+      errors.push("Price can't be empty");
+    }
+
+    return errors;
+  }
+
   proceedRequest = (e) => {
     e.preventDefault();
+    const errors = this.validateForm(this.state.item_name, this.state.proposed_price);
+
+    if (errors.length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
     this.setState({isProceeded: true});
   }
 
-
   render() {
+    const errors = this.state.errors;
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
       <div>
@@ -156,7 +180,10 @@ class RequestForm extends Component {
       <div class="form-wrapper">
 
       <div class="form-section">
-        <p class="form-heading">Item Name</p><br/>
+        {errors.map(error => (
+          <p key={error}>Error: {error}</p>
+        ))}
+        <p class="form-heading">Item Name (required)</p><br/>
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} required /><br/>
 
         <p class="form-heading">Item URL</p><br/>
@@ -167,7 +194,7 @@ class RequestForm extends Component {
       </div>
 
       <div class="form-section">
-        <p class="form-heading">Item Price</p><br/>
+        <p class="form-heading">Item Price (required)</p><br/>
         <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
 
         <p class="form-heading">Transaction Fee (3%)</p><br/>
