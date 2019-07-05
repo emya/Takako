@@ -48,21 +48,6 @@ class SearchBar extends Component {
           googleMaps && (
             <div>
               <ReactGooglePlacesSuggest
-                autocompletionRequest={{input: this.state.search_residence}}
-                googleMaps={googleMaps}
-                onSelectSuggest={this.handleSelectResidenceSuggest.bind(this)}
-              >
-                <input
-                  id="residence"
-                  type="text"
-                  value={this.state.residence}
-                  placeholder="Search by Purchaser's Residence"
-                  onChange={this.handleResidenceChange.bind(this)}
-                  class="search-box"
-                />
-              </ReactGooglePlacesSuggest>
-
-              <ReactGooglePlacesSuggest
                 autocompletionRequest={{input: this.state.search_destination}}
                 googleMaps={googleMaps}
                 onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
@@ -71,11 +56,12 @@ class SearchBar extends Component {
                   id="destination"
                   type="text"
                   value={this.state.destination}
-                  placeholder="Search by trip destination"
+                  placeholder="Where item(s) you want is from?"
                   onChange={this.handleDestinationChange.bind(this)}
                   class="search-box"
                 />
               </ReactGooglePlacesSuggest>
+              <p>Meetup to receive item(s) should happen in NY, Manhattan</p>
             </div>
           )
         }
