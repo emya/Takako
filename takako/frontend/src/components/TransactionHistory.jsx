@@ -84,13 +84,30 @@ class TransactionHistory extends Component {
 
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
-         {is_requester ? (
-           <h2>Sent Request</h2>
-         ) : (
-           <h2>Received Request</h2>
+         {has_history && is_requester && (
+           <div>
+             <h2>Sent Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.respondent.first_name}</h3>
+             <p>
+                Request you sent
+               <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
+               <li>Price    :  {this.props.requests.requestHistory.proposed_price}</li>
+             </p>
+           </div>
          )}
 
-         <h3>Transaction History</h3>
+         {has_history && is_respondent && (
+           <div>
+             <h2>Received Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
+             <p>
+                Request {this.props.requests.requestHistory.requester.first_name} sent
+               <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
+               <li>Price    :  {this.props.requests.requestHistory.proposed_price}</li>
+             </p>
+           </div>
+         )}
+
          {has_history && is_requester && item_request_status == 2 && is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
