@@ -162,17 +162,14 @@ class ProfileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         all = self.request.GET.get('all')
         others = self.request.GET.get('others')
-        #residence = self.request.GET.get('residence')
-        destination = self.request.GET.get('destination')
+        user_id = self.request.GET.get('userId')
 
         queryset = Profile.objects.all()
-        print("queryset", queryset)
 
-        if destination:
-            # Users living in NY and have trips to the destination
-            queryset = queryset.filter(destination=destination)
-            # Users living in the destination and visits to NY
-
+        if user_id:
+            user = User.objects.get(pk=user_id)
+            queryset = queryset.filter(user=user)
+            return queryset
         if all:
             return queryset
         if others:

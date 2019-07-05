@@ -90,13 +90,6 @@ class TransactionHistory extends Component {
            <h2>Received Request</h2>
          )}
 
-         <h3>Transaction Status</h3>
-         <div class="status">(*memo to Emi: after initial request is received) Accept or Decline the request!</div>
-         <div class="status">(*memo to Emi: when waiting for the pmt) Souvenir will notify you once the payment is made.</div>
-         <div class="status">(*memo to Emi: after pmt is made) Purchase the item and notify Souvenir.
-          <button class="action-btn">Notify</button>
-         </div>
-
          <h3>Transaction History</h3>
          {has_history && is_requester && item_request_status == 2 && is_charged && (
            <div class="history-box">
@@ -121,14 +114,14 @@ class TransactionHistory extends Component {
          {has_history && is_requester && item_request_status == 0 && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Waiting response by {this.props.requests.requestHistory.respondent.username}</p>
+               <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
              </div>
            </div>
          )}
          {has_history && is_requester && item_request_status == 3 && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.username}</p>
+               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
              </div>
            </div>
          )}
@@ -145,14 +138,14 @@ class TransactionHistory extends Component {
                  {is_requester ? (
                    <p>Request sent by You</p>
                  ) : (
-                   <p>Request sent by {this.props.requests.requestHistory.requester.username}</p>
+                   <p>Request sent by {this.props.requests.requestHistory.requester.first_name}</p>
                  )}
                </div>
                <ul class="request-data">
                  {is_respondent ? (
                    <li>User Name:   You</li>
                  ) : (
-                   <li>User Name:   {this.props.requests.requestHistory.respondent.username}</li>
+                   <li>User Name:   {this.props.requests.requestHistory.respondent.first_name}</li>
                  )}
                  <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
                  <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
