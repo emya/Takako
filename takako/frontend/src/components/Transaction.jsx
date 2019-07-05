@@ -45,7 +45,7 @@ class Transaction extends Component {
             {this.props.requests.sent_item_requests && this.props.requests.sent_item_requests.map((sent_item_request) => (
               <tr class="transaction-data">
                 <td>{sent_item_request.created_at}</td>
-                <td>{sent_item_request.respondent.username}</td>
+                <td>{sent_item_request.respondent.first_name} {sent_item_request.respondent.last_name}</td>
                 <td>{sent_item_request.trip.departure_date} - {sent_item_request.trip.arrival_date}</td>
                 <td>{sent_item_request.item_name}</td>
                 <td>{sent_item_request.trip.destination}</td>
@@ -75,7 +75,7 @@ class Transaction extends Component {
             {this.props.requests.received_item_requests && this.props.requests.received_item_requests.map((received_item_request) => (
               <tr class="transaction-data">
                 <td>{received_item_request.created_at}</td>
-                <td>{received_item_request.requester.username}</td>
+                <td>{received_item_request.requester.first_name} {received_item_request.requester.last_name}}</td>
                 <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
