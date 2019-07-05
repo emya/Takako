@@ -6,6 +6,8 @@ import {Route, Switch, BrowserRouter, Redirect} from 'react-router-dom';
 import Takako from "./components/Takako";
 import Note from "./components/Note";
 import Test from "./components/Test";
+import PurchaseNotification from "./components/PurchaseNotification";
+import NewMeetupRequest from "./components/NewMeetupRequest";
 import Transaction from "./components/Transaction";
 import TransactionHistory from "./components/TransactionHistory";
 import Search from "./components/Search";
@@ -61,6 +63,8 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/search" component={Search} />
                     <Route exact path="/how-it-works" component={HowItWorks} />
                     <PrivateRoute exact path="/request/form/:userId/:tripId" component={RequestForm} />
+                    <PrivateRoute exact path="/notification/purchase/form" component={PurchaseNotification} />
+                    <PrivateRoute exact path="/request/meetup/form" component={NewMeetupRequest} />
                     <PrivateRoute exact path="/transaction/status" component={Transaction} />
                     <PrivateRoute exact path="/transaction/history/:requestId" component={TransactionHistory} />
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
