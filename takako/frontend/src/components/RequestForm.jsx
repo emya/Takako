@@ -90,24 +90,38 @@ class RequestForm extends Component {
 
         <div class="wrapper clearfix">
          <SideMenu />
-         <div class="request-conf">
+         <div class="form">
           <h2>Your Request Summary</h2>
-          <div class="request-summary">
-            <p>Item Name: {this.state.item_name} </p>
-            <p>Item ID: {this.state.item_id} </p>
-            <p>Item URL: {this.state.item_url} </p>
-            <p>Preffered Delivery Method:
-              {this.state.delivery_method == 0 && ("Ship")}
-              {this.state.delivery_method == 1 && ("Pick UP/Meet Up")}
-            </p>
-            <p>Item Price: {this.state.proposed_price} </p>
-            <p>Commission to Purchaser: xx</p>
-            <p>Transaction fee: xx</p>
-            <p>My Total Payment: xx</p>
-            <p>Comments: {this.state.comment} </p>
-          </div>
-          <button class="form-send-btn" onClick={this.submitRequest.bind(this)}>Confirm Request</button>
+          <div class="form-wrapper">
 
+          <div class="request-summary">
+            <div class="form-section">
+              <p class="form-heading">Item Name</p><br />
+              <p class="form-data">{this.state.item_name}</p><br />
+              <p class="form-heading">Item URL</p><br />
+              <p class="form-data">{this.state.item_url} </p><br />
+            </div>
+
+            <div class="form-section">
+              <p class="form-heading">Item Price</p><br />
+              <p class="form-data">{this.state.proposed_price} </p><br />
+              <p class="form-heading">Commission to Traveler</p><br />
+              <p class="form-data">xx</p><br />
+              <p class="form-heading">Transaction fee</p><br />
+              <p class="form-data">xx</p><br />
+              <p class="form-heading">Your Total Payment</p><br />
+              <p class="form-data">xx</p><br />
+            </div>
+
+            <div class="form-section">
+              <p class="form-heading">Comments</p><br />
+              <p class="form-data">{this.state.comment}</p><br />
+              </div>
+            </div>
+
+            </div>
+          <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+          <button class="form-send-btn btn" onClick={this.submitRequest.bind(this)}>Confirm and Send</button>
         </div>
         </div>
 
@@ -137,60 +151,48 @@ class RequestForm extends Component {
     <div class="wrapper clearfix">
       <SideMenu />
 
-      <form class="request-form">
+      <form class="form">
       <h2>Item Request</h2>
-      <div class="request-form-wrapper">
-        <p class="request-form-index">Item Name</p>
+      <div class="form-wrapper">
+
+      <div class="form-section">
+        <p class="form-heading">Item Name</p><br/>
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} required /><br/>
 
-        <p class="request-form-index">Item ID</p>
-        <input value={this.state.item_id} placeholder="(Optional)" onChange={(e) => this.setState({item_id: e.target.value})} /><br/>
-
-        <p class="request-form-index">Item URL</p>
+        <p class="form-heading">Item URL</p><br/>
         <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
 
-        <p class="request-form-index">Preferred Delivery Method</p>
-        <select onChange={this.selectDeliverMethod} value={this.state.delivery_method}>
-        <option value="0">Ship</option>
-        <option value="1">Pick UP/Meet Up</option>
-        </select><br/>
+        <p class="form-heading">Item Image</p><br/>
+        <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
+      </div>
 
-        <p class="request-form-index">Item Price</p>
+      <div class="form-section">
+        <p class="form-heading">Item Price</p><br/>
         <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
 
-        <p class="request-form-index">Commission to Purchaser</p>
+        <p class="form-heading">Transaction Fee (3%)</p><br/>
         <input placeholder=""/><br/>
 
-        <p class="request-form-index">Transaction Fee (3%)</p>
+        <p class="form-heading">Commission to Traveler</p><br/>
+        <input placeholder="(Min. $10)"/><br/>
+
+        <p class="form-heading">Your Total Payment</p><br/>
         <input placeholder=""/><br/>
 
-        <p class="request-form-index">Shipping Estimate</p>
-        <input placeholder="(If Applicable)"/><br/>
+      </div>
 
-        <p class="request-form-index">My Total Payment</p>
-        <input placeholder=""/><br/>
 
-        <p class="request-form-index">Deadline</p>
-        <input placeholder=""/><br/>
-
-        <p class="request-form-index">Comments</p>
+      <div class="form-section">
+        <p class="form-heading">Comments</p><br/>
         <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})} /><br/>
 
       </div>
-        <button class="form-send-btn" onClick={this.proceedRequest}>Send Request</button>
-      </form>
 
-      <form class="request-form">
-        <h2>Meet-Up Request</h2>
-        <div class="request-form-wrapper">
-          <p class="request-form-index">Meet-up Date</p>
-          <input/><br/>
-          <p class="request-form-index">Place</p>
-          <input/><br/>
-          <p class="request-form-index">Contact</p>
-          <input/><br/>
-        </div>
-        <input class="form-send-btn" type="submit" value="Send Request" />
+
+      </div>
+
+      <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+        <button class="form-send-btn btn" onClick={this.proceedRequest}>Next</button>
       </form>
 
     </div>
