@@ -37,8 +37,8 @@ class Test extends Component {
       </div>
 
     <footer>
-    FOOTER CONTENTS TO BE DETERMINED
-    <FontAwesomeIcon icon="igloo" />
+      FOOTER CONTENTS TO BE DETERMINED
+      <FontAwesomeIcon icon="igloo" />
     </footer>
   </div>
     )
