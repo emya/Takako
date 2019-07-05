@@ -19,9 +19,74 @@ class Test extends Component {
 
       <div class="wrapper clearfix">
         <SideMenu />
-        Test Contents here!
+        <form class="form">
+        <h2>Notify Purchase and Arrange Meetup</h2>
+        <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+        <div class="form-wrapper">
 
-      </div>
+        <div class="form-section">
+        <p class="form-heading">Requester</p><br/>
+        <p class="form-data">xx</p><br />
+        <p class="form-heading">Item Name</p><br/>
+        <p class="form-data">xx</p><br />
+        </div>
+
+        <div class="form-section">
+          <p class="form-heading">Your Preferred Contact</p><br />
+          <input class="contact-option" placeholder="Phone Number"/><input class="contact-option" placeholder="e-mail"/>
+        </div>
+
+        <div class="form-section">
+          <p class="form-heading">Meetup Option 1</p><br />
+          <input class="meetup-option" placeholder="Choose Date"/><input class="meetup-option" placeholder="Choose Time"/><input class="meetup-option" placeholder="Enter Address"/><input class="meetup-option" placeholder="Note (e.g. front door)"/><br />
+          <p class="form-heading">Meetup Option 2</p><br />
+          <input class="meetup-option" placeholder="Choose Date"/><input class="meetup-option" placeholder="Choose Time"/><input class="meetup-option" placeholder="Enter Address"/><input class="meetup-option" placeholder="Note (e.g. front door)"/><br />
+          <p class="form-heading">Meetup Option 3</p><br />
+          <input class="meetup-option" placeholder="Choose Date"/><input class="meetup-option" placeholder="Choose Time"/><input class="meetup-option" placeholder="Enter Address"/><input class="meetup-option" placeholder="Note (e.g. front door)"/><br />
+        </div>
+        </div>
+          <button class="form-send-btn btn" onClick={this.proceedRequest}>Notify and Request</button>
+        </form>
+
+        <form class="form">
+        <h2>Accept Meetup Request</h2>
+        <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+        <div class="form-wrapper">
+
+        <div class="form-section">
+        <p class="form-heading">Traveler</p><br/>
+        <p class="form-data">xx</p><br />
+        <p class="form-heading">Traveler Contant Info</p><br/>
+        <p class="form-data">123-456-7890</p><br />
+        <p class="form-heading">Item Name</p><br/>
+        <p class="form-data">xx</p><br />
+        </div>
+
+        <div class="form-section">
+          <p class="form-heading">Your Preferred Contact</p><br />
+          <input class="contact-option" placeholder="Phone Number"/><input class="contact-option" placeholder="e-mail"/>
+        </div>
+
+        <div class="form-section">
+          <p class="form-heading">Meetup Option 1</p><br />
+          <p class="form-data meetup">1/1/2020</p><p class="form-data meetup">10:00AM</p><p class="form-data meetup">Hilton NY</p><p class="form-data meetup">Lobby</p>
+          <button class="btn accept">Accept</button><br />
+          <p class="form-heading">Meetup Option 2</p><br />
+          <p class="form-data meetup">1/1/2020</p><p class="form-data meetup">10:00AM</p><p class="form-data meetup">Hilton NY</p><p class="form-data meetup">Lobby</p>
+          <button class="btn accept">Accept</button><br />
+          <p class="form-heading">Meetup Option 3</p><br />
+          <p class="form-data meetup">1/1/2020</p><p class="form-data meetup">10:00AM</p><p class="form-data meetup">Hilton NY</p><p class="form-data meetup">Lobby</p>
+          <button class="btn accept">Accept</button><br />
+        </div>
+        </div>
+
+        <button class="form-send-btn btn" onClick={this.proceedRequest}>Request New Meetup Date/Place</button>
+
+        </form>
+
+        </div>
+
+
 
       <div class="sidemenu-mobile">
       <ul>
@@ -46,5 +111,3 @@ class Test extends Component {
 
 
 export default Test;
-
-
