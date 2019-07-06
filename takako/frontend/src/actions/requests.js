@@ -33,7 +33,9 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body) => {
   }
 }
 
-export const sendItemRequest = (respondent_id, trip_id, item_name, item_id, item_url, proposed_price, delivery_method, comment) => {
+export const sendItemRequest = (
+  respondent_id, trip_id, item_name, item_id, item_url,
+  proposed_price, delivery_method, preferred_meetup_location, preferred_meetup_date, comment) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -42,7 +44,10 @@ export const sendItemRequest = (respondent_id, trip_id, item_name, item_id, item
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let body = JSON.stringify({respondent_id, trip_id, item_name, item_id, item_url, proposed_price: parseInt(proposed_price), delivery_method, comment, });
+    let body = JSON.stringify({
+      respondent_id, trip_id, item_name, item_id, item_url,
+      proposed_price: parseInt(proposed_price), delivery_method,
+      preferred_meetup_location, preferred_meetup_date, comment, });
 
     console.log("body", body);
     return fetch("/api/requests/item/", {headers, method: "POST", body})

@@ -24,6 +24,9 @@ export default function trips(state=initialState, action) {
     case 'FETCH_TRIPS':
       return [...state, ...action.trips];
 
+    case 'FETCH_TRIP':
+      return {...state, trip: action.trip};
+
     default:
       return state;
   }

@@ -135,6 +135,11 @@ class TripViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        if pk:
+            queryset = Trip.objects.filter(pk=int(pk))
+            return queryset
+
         userId = self.request.GET.get('userId')
 
         queryset = Trip.objects.all()
@@ -162,17 +167,14 @@ class ProfileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         all = self.request.GET.get('all')
         others = self.request.GET.get('others')
-        #residence = self.request.GET.get('residence')
-        destination = self.request.GET.get('destination')
+        user_id = self.request.GET.get('userId')
 
         queryset = Profile.objects.all()
-        print("queryset", queryset)
 
-        if destination:
-            # Users living in NY and have trips to the destination
-            queryset = queryset.filter(destination=destination)
-            # Users living in the destination and visits to NY
-
+        if user_id:
+            user = User.objects.get(pk=user_id)
+            queryset = queryset.filter(user=user)
+            return queryset
         if all:
             return queryset
         if others:

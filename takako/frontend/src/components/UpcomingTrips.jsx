@@ -22,6 +22,7 @@ class UpcomingTrips extends Component {
     arrival_date: null,
     destination: "",
     updateTripId: null,
+    errors: []
   }
 
   handleDepartureDateChange(date) {
@@ -36,6 +37,26 @@ class UpcomingTrips extends Component {
     this.setState({departure_date: "", arrival_date: "",  destination: "", updateNoteId: null});
   }
 
+  validateForm = (departure_date, arrival_date, destination) => {
+    // we are going to store errors for all fields
+    // in a signle array
+    const errors = [];
+
+    if (!departure_date) {
+      errors.push("Departure Date can't be empty");
+    }
+
+    if (!arrival_date) {
+      errors.push("Arrival Date can't be empty");
+    }
+
+    if (destination.length === 0) {
+      errors.push("Trip Destination can't be empty");
+    }
+
+    return errors;
+  }
+
   selectForEdit = (id) => {
     let trip = this.props.trips[id];
     this.setState({
@@ -47,6 +68,13 @@ class UpcomingTrips extends Component {
 
   submitTrip = (e) => {
     e.preventDefault();
+    const errors = this.validateForm(this.state.departure_date, this.state.arrival_date, this.state.destination);
+
+    if (errors.length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
     if (this.state.updateTripId === null) {
       this.props.addTrip(this.state.departure_date, this.state.arrival_date, this.state.destination).then(this.resetForm)
     } else {
@@ -62,7 +90,7 @@ class UpcomingTrips extends Component {
       is_other = true;
       userId = this.props.userId;
     }
-    console.log("is_other", is_other);
+    const errors = this.state.errors;
 
     return (
     <div>
@@ -85,6 +113,9 @@ class UpcomingTrips extends Component {
         <div class="add-new-trip">
           <h3>Add New Trip</h3>
           <form onSubmit={this.submitTrip}>
+             {errors.map(error => (
+               <p key={error}>Error: {error}</p>
+             ))}
             <p class="object">Departure Date</p>
             <DatePicker selected={this.state.departure_date} onChange={this.handleDepartureDateChange.bind(this)}/>
             <p class="object">Arrival Date</p>

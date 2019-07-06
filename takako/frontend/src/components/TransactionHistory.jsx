@@ -84,20 +84,26 @@ class TransactionHistory extends Component {
 
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
-         {is_requester ? (
-           <h2>Sent Request</h2>
-         ) : (
-           <h2>Received Request</h2>
+         {has_history && is_requester && (
+           <div>
+             <h2>Sent Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.respondent.first_name}</h3>
+             <p>Request you sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
+           </div>
          )}
 
-         <h3>Transaction Status</h3>
-         <div class="status">(*memo to Emi: after initial request is received) Accept or Decline the request!</div>
-         <div class="status">(*memo to Emi: when waiting for the pmt) Souvenir will notify you once the payment is made.</div>
-         <div class="status">(*memo to Emi: after pmt is made) Purchase the item and notify Souvenir.
-          <button class="action-btn">Notify</button>
-         </div>
+         {has_history && is_respondent && (
+           <div>
+             <h2>Received Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
+             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
+           </div>
+         )}
 
-         <h3>Transaction History</h3>
          {has_history && is_requester && item_request_status == 2 && is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
@@ -121,14 +127,14 @@ class TransactionHistory extends Component {
          {has_history && is_requester && item_request_status == 0 && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Waiting response by {this.props.requests.requestHistory.respondent.username}</p>
+               <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
              </div>
            </div>
          )}
          {has_history && is_requester && item_request_status == 3 && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.username}</p>
+               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
              </div>
            </div>
          )}
@@ -145,14 +151,14 @@ class TransactionHistory extends Component {
                  {is_requester ? (
                    <p>Request sent by You</p>
                  ) : (
-                   <p>Request sent by {this.props.requests.requestHistory.requester.username}</p>
+                   <p>Request sent by {this.props.requests.requestHistory.requester.first_name}</p>
                  )}
                </div>
                <ul class="request-data">
                  {is_respondent ? (
                    <li>User Name:   You</li>
                  ) : (
-                   <li>User Name:   {this.props.requests.requestHistory.respondent.username}</li>
+                   <li>User Name:   {this.props.requests.requestHistory.respondent.first_name}</li>
                  )}
                  <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
                  <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>

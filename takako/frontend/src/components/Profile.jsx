@@ -24,25 +24,6 @@ class Profile extends Component {
     updateProfileId: null,
   }
 
-  resetForm = () => {
-    this.setState({bio: "", residence: "", updateProfileId: null});
-  }
-
-  selectForEdit = (profile) => {
-    console.log("selectForEdit", profile)
-    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
-  }
-
-  submitProfile = (e) => {
-    e.preventDefault();
-    this.props.updateProfile(this.state.updateProfileId, this.state.bio, this.state.residence).then(this.resetForm);
-  }
-
-  handleChange = (propertyName, profile, event) => {
-    profile[propertyName] = event.target.value;
-    this.setState({bio: profile.bio, residence: profile.residence, updateProfileId: profile.id});
-  }
-
   render() {
     const userId = this.props.match.params.userId;
     return (
@@ -101,8 +82,8 @@ class Profile extends Component {
     </div>
 
   <footer>
-  FOOTER CONTENTS TO BE DETERMINED
-  <FontAwesomeIcon icon="igloo" />
+    FOOTER CONTENTS TO BE DETERMINED
+    <FontAwesomeIcon icon="igloo" />
   </footer>
 </div>
 
@@ -120,24 +101,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-  /*
-    fetchNotes: () => {
-      dispatch(notes.fetchNotes());
-    },
-    addNote: (text) => {
-      return dispatch(notes.addNote(text));
-    },
-    deleteNote: (id) => {
-      dispatch(notes.deleteNote(id));
-    },
-  */
     fetchProfile: (userId) => {
       dispatch(profile.fetchProfile(userId));
     },
-    updateProfile: (id, bio, residence) => {
-      return dispatch(profile.updateProfile(id, bio, residence));
-      //dispatch(notes.updateNote(id, text));
-    },
+
     logout: () => dispatch(auth.logout()),
   }
 }

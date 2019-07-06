@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {requests, auth} from "../actions";
+import {requests, trips, auth} from "../actions";
 import {Link, Redirect} from "react-router-dom";
 import MediaQuery from 'react-responsive';
 import '../css/style.scss';
@@ -13,6 +13,9 @@ import SideMenu from './SideMenu'
 library.add(faIgloo)
 
 class RequestForm extends Component {
+  componentDidMount() {
+    this.props.fetchTrip(this.props.match.params.tripId);
+  }
 
   state = {
     item_name: "",
@@ -20,6 +23,8 @@ class RequestForm extends Component {
     item_url: "",
     proposed_price: "",
     delivery_method: "0",
+    preferred_meetup_location: "",
+    preferred_meetup_date: "",
     comment: "",
     updateTripId: null,
     isSubmissionSucceeded: null,
@@ -37,8 +42,8 @@ class RequestForm extends Component {
     e.preventDefault();
     this.props.sendRequest(
       this.props.match.params.userId, this.props.match.params.tripId, this.state.item_name,
-      this.state.item_id, this.state.item_url, this.state.proposed_price,
-      this.state.delivery_method, this.state.comment
+      this.state.item_id, this.state.item_url, this.state.proposed_price, this.state.delivery_method,
+      this.state.preferred_meetup_location, this.state.preferred_meetup_date, this.state.comment
     );
   }
 
@@ -138,6 +143,13 @@ class RequestForm extends Component {
             </div>
 
             <div class="form-section">
+              <p class="form-heading">Preferred meetup location</p><br />
+              <p class="form-data">{this.state.preferred_meetup_location} </p><br />
+              <p class="form-heading">Preferred meetup date/time</p><br />
+              <p class="form-data">{this.state.preferred_meetup_date} </p><br />
+            </div>
+
+            <div class="form-section">
               <p class="form-heading">Comments</p><br />
               <p class="form-data">{this.state.comment}</p><br />
               </div>
@@ -177,6 +189,13 @@ class RequestForm extends Component {
 
       <form class="form">
       <h2>Item Request</h2>
+
+      {this.props.trip && (
+        <div>
+          <p>Trip summary</p>
+          <p>Destination: {this.props.trip.destination}</p>
+        </div>
+      )}
       <div class="form-wrapper">
 
       <div class="form-section">
@@ -184,10 +203,10 @@ class RequestForm extends Component {
           <p key={error}>Error: {error}</p>
         ))}
         <p class="form-heading">Item Name<span class="asterisk">*</span></p><br/>
-        <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} required /><br/>
+        <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required /><br/>
 
         <p class="form-heading">Item URL</p><br/>
-        <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
+        <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
 
         <p class="form-heading">Item Image</p><br/>
         <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
@@ -208,17 +227,28 @@ class RequestForm extends Component {
 
       </div>
 
+      <div class="form-section">
+        We highly recommend you fill up the following fields if you have some restriction on meetup location or date/time
+        <p class="form-heading">Preferred meetup location (optional)</p><br/>
+        <input type="text" value={this.state.preferred_meetup_location} onChange={(e) => this.setState({preferred_meetup_location: e.target.value})}  maxLength="300"/><br/>
+
+        <p class="form-heading">Preferred meetup date/time (optional)</p><br/>
+        <input type="text" value={this.state.preferred_meetup_date} onChange={(e) => this.setState({preferred_meetup_date: e.target.value})}  maxLength="300"/><br/>
+      </div>
+
 
       <div class="form-section">
         <p class="form-heading">Comments</p><br/>
-        <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})} /><br/>
+        <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})}  maxLength="200"/><br/>
 
       </div>
 
 
       </div>
 
-      <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+      {this.props.trip && (
+        <div class="meetup-rule">Meetup will take place between {this.props.trip.departure_date} - {this.props.trip.arrival_date}</div>
+      )}
         <button class="form-send-btn btn" onClick={this.proceedRequest}>Next</button>
       </form>
 
@@ -246,17 +276,29 @@ class RequestForm extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
     isProceeded: state.requests.isProceeded,
+    trip: state.trips.trip
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendRequest: (respondent_id, trip_id, item_name, item_id, item_url, proposed_price, delivery_method, comment)  => {
-      return dispatch(requests.sendItemRequest(respondent_id, trip_id, item_name, item_id, item_url, proposed_price, delivery_method, comment));
+    fetchTrip: (tripId) => {
+      dispatch(trips.fetchTrip(tripId));
+    },
+    sendRequest: (
+      respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
+      delivery_method, preferred_meetup_location, preferred_meetup_date, comment)  => {
+      return dispatch(
+        requests.sendItemRequest(
+          respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
+          delivery_method, preferred_meetup_location, preferred_meetup_date, comment
+        )
+      );
       //dispatch(notes.updateNote(id, text));
     },
   }
