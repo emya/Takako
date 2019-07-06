@@ -78,11 +78,8 @@ export const fetchTrip = (tripId) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(tripId);
-
     return fetch(`/api/trips/${tripId}/`, {headers, })
       .then(res => {
-        console.log(res);
         if (res.status < 500) {
           return res.json().then(data => {
             return {status: res.status, data};
