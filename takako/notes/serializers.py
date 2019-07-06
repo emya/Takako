@@ -54,7 +54,8 @@ class ItemRequestSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
-            'delivery_method', 'comment', 'status')
+            'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
+            'comment', 'status')
 
 class ChargeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)

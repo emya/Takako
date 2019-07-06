@@ -41,6 +41,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
 
     def create(self, request):
+        print(request.data)
         respondent_id = request.data.pop("respondent_id")
         trip_id = request.data.pop("trip_id")
         respondent = User.objects.get(pk=respondent_id)
@@ -135,6 +136,12 @@ class TripViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        if pk:
+            print(pk, type(pk))
+            queryset = Trip.objects.filter(pk=int(pk))
+            return queryset
+
         userId = self.request.GET.get('userId')
 
         queryset = Trip.objects.all()

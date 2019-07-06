@@ -112,9 +112,11 @@ class ItemRequest(models.Model):
     proposed_price = models.IntegerField()
     delivery_method = models.IntegerField()
     # method
-    # 0: ship
-    # 1: meet-up
+    # 0: meet-up
+    # 1: ship
     comment = models.CharField(max_length=200, blank=True)
+    preferred_meetup_location = models.CharField(max_length=300, blank=True)
+    preferred_meetup_date = models.CharField(max_length=300, blank=True)
     # Status
     # 0: sent request
     # 1: canceled request
