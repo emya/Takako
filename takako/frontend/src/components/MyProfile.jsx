@@ -104,10 +104,10 @@ class MyProfile extends Component {
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
           ))}
-          <input class="submit-btn" type="submit" value="Save Profile" />
+          <input class="btn savep" type="submit" value="Save Profile" />
         </form>
 
-        <h2>Upcoming Trips</h2>
+        <h2 class="upcoming">Upcoming Trips</h2>
         <UpcomingTrips is_other="false"/>
 
         <h2>Past Transactions</h2>

@@ -62,11 +62,11 @@ class SearchBar extends Component {
                 />
               </ReactGooglePlacesSuggest>
               <p>Meetup to receive item(s) should happen in NY, Manhattan</p>
+              <button class="btn search">Search</button>
             </div>
           )
         }
       />
-      <button class="search-btn">Search</button>
     </form>
     )
   }

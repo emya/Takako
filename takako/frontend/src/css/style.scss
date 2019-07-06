@@ -7,10 +7,10 @@ html {
 
 body {
   width: 100%;
-  color: #1B435D;
+  color: #4A4A4A;
   text-align: center;
   font-size: 1.4rem;
-  font-family: 'Avenir','Helvetica Neue','Helvetica','Candara','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+  font-family: 'Helvetica Neue','Helvetica','Arial',sans-serif;
 }
 
 *, *::after, *::before {
@@ -34,18 +34,62 @@ a:link, a:visited, a:hover, a:active {
 }
 
 h2 {
-  color: #F99F48;
+  color: #FFBF5D;
   margin-top: 50px;
   margin-bottom: 30px;
   letter-spacing: 2px;
+}
+
+h3 {
+  margin-top: 30px
 }
 
 input {
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #EEEEEE;
+  height: 30px;
+  padding: 10px;
 }
 
+.asterisk {
+font-size: 100%;
+vertical-align: top;
+position: relative;
+top: -0.1em;
+color: red;
+}
+
+.suptext {
+font-size: 65%;
+vertical-align: top;
+position: relative;
+top: -0.1em;
+color: #4A4A4A;
+}
+
+.btn {
+  background-color: #16C4FD;
+  display: block;
+  width: 300px;
+  height: 40px;
+  margin: 30px auto;
+  line-height: 40px;
+  border-radius: 5px;
+  box: none;
+  color: white;
+  border-style: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #0a5770;
+  transition: 0.3s ;
+}
+
+li {
+  margin: 7px;
+}
 
 /* topbar */
 
@@ -53,7 +97,7 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #78BBE6;
+  background-color: #FFB23B;
   height: 80px;
   width: 100%;
   padding: 1% 5%;
@@ -111,7 +155,7 @@ input {
 
 .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
   display: inline-block;
-  color: #1B435D;
+  color: #4A4A4A;
   text-decoration: none;
   margin: 30px 40px;
   font-weight: bold;
@@ -130,7 +174,7 @@ input {
   float: left;
   // height: 1300px;
   width: 25%;
-  background-color: #1B435D;
+  background-color: #4A4A4A;
   letter-spacing: 3px;
   padding-bottom: 10000px;
   margin-bottom: -10000px;
@@ -155,7 +199,7 @@ input {
   height: 300px;
   width: 100%;
   padding: 3% 5%;
-  background-color: #1B435D;
+  background-color: #4A4A4A;
   letter-spacing: 3px;
   vertical-align: middle;
 }
@@ -203,31 +247,8 @@ input {
   float: left;
 }
 
-.request-btn {
-  background-color: #1B435D;
-  display: block;
-  width: 80%;
-  height: 30px;
-  // margin: 40px 5% 0 70%;
-  // font-weight: bold;
-  line-height: 30px;
-  // border-radius: 10px;
-  // letter-spacing: 2px;
-}
 
-.request-btn:hover {
-  opacity: 0.7;
-}
 
-.message-btn:link, .message-btn:visited, .message-btn:hover, .message-btn:active {
-  color: #F99F48;
-}
-
-.message-btn:hover {
-  background-color: #F99F48;
-  color: white;
-  opacity: 0.7;
-}
 
 .profile {
   float: right;
@@ -265,33 +286,33 @@ input {
 
 .user-data {
   font-size: 2rem;
-  color: #1B435D;
+  // color: #1B435D;
 }
 
 .active-info {
   margin-bottom: 40px;
-  color: #1B435D;
+  // color: #1B435D;
 }
 
 .object {
-  color: #78BBE6;
+  color: #999999;
 }
 
 .table-heading {
-  color: #78BBE6;
+  color: #BBBBBB;
   font-weight: bold;
 }
 
 .table-data {
   width: 90%;
-  color: #1B435D;
+  // color: #1B435D;
   border-collapse: collapse;
   margin: 0 auto;
 }
 
 .table-data td {
   padding: 13px 13px;
-  border-bottom: 1px solid #78BBE6;
+  border-bottom: 1px solid #BBBBBB;
 }
 
 // .table-data .transaction-data td:nth-child(6) {
@@ -299,17 +320,28 @@ input {
 // }
 
 .add-new-trip {
-  background: #D5EEFF;
-  margin: 60px auto 80px;
+  background: #D7EEFF;
+  margin: 90px auto 130px;
   width: 90%;
   padding: 10px 10px 20px 10px;
+  border-radius: 10px;
 }
 
+.upcoming {
+  margin-top: 100px;
+}
+
+.btn.savep {
+  line-height: 10px!important;
+}
 
 .trip-entry {
   display: block;
-  width: 100%;
-  margin: 5px;
+  margin: 5px auto 5px;
+}
+
+.datepicker {
+  display: inline-block;
 }
 
 .transaction-data.total {
@@ -470,11 +502,11 @@ input {
   height: 180px;
   padding: 20px;
   margin: 30px 30px 0 30px;
-  box-shadow: 0 0 8px lightgray;
+  box-shadow: 0 0 20px lightgray;
 }
 
 .profile-card:hover {
-  box-shadow: 0 0 8px #78BBE6;
+  box-shadow: 0 0 20px #78BBE6;
 }
 
 .profile-card-name {
@@ -498,7 +530,7 @@ input {
 }
 
 .subject {
-  color: #78BBE6;
+  color: #FFB23B;
   margin-top: 10px;
 }
 
@@ -506,18 +538,16 @@ input {
   display: inline-block;
   margin: 20px 0 0 0;
   width: 500px;
-  height: 50px;
+  height: 40px;
   padding: 5px;
 }
 
-.search-btn {
+.btn.search {
   display: inline-block;
-  background-color: #F99F48;
-  width: 200px;
-  height: 30px;
-  color: white;
+  // background-color: #F17816;
   margin: 20px 0;
   border: none;
+  width: 30%;
 }
 
 // Message Box
@@ -617,76 +647,116 @@ input {
   padding: 8px;
 }
 
-.submit-btn {
-  color: white;
-  margin-top: 20px;
-  background-color: #78BBE6;
-  width: 200px;
-  border: none;
-  padding: 10px;
-}
 
 // howItWorks
 
-.how-it-works {
-  width: 100%;
-  float: right;
-  padding: 0;
-  height: 2000px;
-}
-
-.how-it-works h3 {
-  text-align: left;
-  margin: 50px 0 40px 36px;
-}
-
-.how-it-works-left {
-  float: left;
-  width: 50%;
-}
-
-.how-it-works-right {
-  float: right;
-  width: 50%;
-}
-
-.to-get-started {
-  text-align: left;
-  margin: 0 0 50px 36px;
-
-}
-
-.details:link, .details:visited, .details:hover, .details:active {
-  color: #F99F48;
-}
-
-
-.step {
-  position: relative;
-  display: block;
-  text-align: left;
-  // background-color: #D5EEFF;
+.wrapper-clearfix.howto {
   width: 80%;
-  height: 40px;
-  margin: 60px auto;
-  padding-left: 40px;
-  overflow-wrap: break-word;
+  margin: 0 auto;
 }
 
-.step-number {
-  position: absolute;
-  text-align: center;
-  top: -30%;
-  left: -3%;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 2rem;
-  color: white;
-  font-weight: bold;
-  background-color: #78BBE6;
-  border-radius: 50%;
+.how-to-requester, .how-to-arrow, .how-to-traveler {
+  height: 1100px;
+  background-color: #D7EEFF;
+  margin-bottom: 100px;
 }
+
+.how-to-requester {
+  // background-color: pink;
+  float: left;
+  width: 45%;
+}
+
+.how-to-arrow {
+  // background-color: yellow;
+  float: left;
+  width: 10%;
+  padding: 60px 0;
+}
+
+.how-to-traveler {
+  // background-color: red;
+  float: right;
+  width: 45%;
+}
+
+.arrow-box {
+  width: 107px;
+  height: 100px;
+  background-color: #FFBF5D;
+  padding-top: 30px;
+}
+
+.arrow-box p {
+  font-size: 1.2em;
+  color: white;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 53px solid transparent;
+  border-right: 53px solid transparent;
+  border-top: 53px solid #FFBF5D;
+  margin-bottom: 5px;
+}
+
+.arrow-box.meetup {
+  background-color: #F17816;
+}
+
+.triangle.meetup {
+  border-top: 53px solid #F17816;
+}
+
+.how-box {
+  display: block;
+  width: 95%;
+  // height: 100px;
+  margin: 20px auto 210px;
+  background-color: white;
+  text-align: left;
+  vertical-align: top;
+  // border: solid 1px #BBBBBB;
+  border-radius: 10px;
+  padding: 2px 20px;
+}
+
+.how-heading {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #4A4A4A;
+}
+
+.requester {
+  color: #16C4FD;
+    // font-size: 1.2em;
+}
+
+.traveler-name {
+  color: #FFB23B;
+  // font-size: 1.2rem;
+}
+
+.how-box.third {
+  margin: 20px auto 70px;
+}
+
+.how-box.traveler {
+  margin: 180px auto 0;
+}
+
+.how-box.traveler.last {
+  margin: 400px auto 0;
+}
+
+.how-detail {
+  text-align: left;
+  width: 80%;
+  margin: 100px auto 100px;
+}
+
+
 
 // form
 
@@ -709,7 +779,7 @@ input {
 .form-section {
   background-color: white;
   width: 80%;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 30px auto 0px;
   padding: 50px;
 }
@@ -749,7 +819,6 @@ input {
 .btn.accept {
     display: inline-block;
     width: 30%;
-    height: 30px;
     line-height: 20px;
     color: white;
     margin: 10px 0;
@@ -758,7 +827,7 @@ input {
 
 .form-send-btn {
   color: white;
-  background-color: #1B435D;
+  // background-color: #1B435D;
   // display: block;
   width: 50%;
   height: 50px;
@@ -774,21 +843,13 @@ input {
 
 footer {
   display: block;
-  background-color: #78BBE6;
+  background-color: #FFB23B;
   width: 100%;
   height: 300px;
   padding: 3% 5%;
 }
 
-.btn {
-  background-color: #1B435D;
-  display: block;
-  width: 50%;
-  height: 40px;
-  margin: 30px auto;
-  // font-weight: bold;
-  line-height: 30px;
-  border-radius: 10px;
-  box: none;
-  // letter-spacing: 2px;
+.btn.request {
+  margin: 1px 1px;
+  width: 80%;
 }

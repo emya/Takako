@@ -202,8 +202,8 @@ class RequestForm extends Component {
         {errors.map(error => (
           <p key={error}>Error: {error}</p>
         ))}
-        <p class="form-heading">Item Name (required)</p><br/>
-        <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required/><br/>
+        <p class="form-heading">Item Name<span class="asterisk">*</span></p><br/>
+        <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required /><br/>
 
         <p class="form-heading">Item URL</p><br/>
         <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
@@ -213,7 +213,7 @@ class RequestForm extends Component {
       </div>
 
       <div class="form-section">
-        <p class="form-heading">Item Price (required)</p><br/>
+        <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
         <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
 
         <p class="form-heading">Transaction Fee (3%)</p><br/>

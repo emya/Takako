@@ -104,7 +104,7 @@ class UpcomingTrips extends Component {
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
-            <td>{is_other && <a class="request-btn" href={`/request/form/${userId}/${trip.id}`} >Request Item</a> }</td>
+            <td>{is_other && <a class="btn request" href={`/request/form/${userId}/${trip.id}`} >Request Item</a> }</td>
           </tr>
         ))}
       </table>
@@ -126,7 +126,7 @@ class UpcomingTrips extends Component {
             placeholder="Enter destination"
             onChange={(e) => this.setState({destination: e.target.value})}
             required />
-            <input class="submit-btn" type="submit" value="Save Trip" />
+            <input class="btn savep" type="submit" value="Save Trip" />
           </form>
         </div>
       }
