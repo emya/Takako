@@ -85,6 +85,7 @@ class PurchaseNotification extends Component {
   }
 
   render() {
+    const errors = this.state.errors;
     if (this.state.isSubmissionSucceeded) {
       return (
       <div>
