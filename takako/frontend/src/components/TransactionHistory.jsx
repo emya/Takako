@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
 import '../css/style.scss';
 import MediaQuery from 'react-responsive';
@@ -57,7 +58,6 @@ class TransactionHistory extends Component {
     let item_request_status = 0;
     if (this.props.requests.requestHistory) {
       item_request_status = this.props.requests.requestHistory.status;
-      console.log(item_request_status);
       has_history = true;
       if (this.props.user.id == this.props.requests.requestHistory.requester.id){
         is_requester = true;
@@ -72,7 +72,6 @@ class TransactionHistory extends Component {
         if (charge.status == "succeeded"){
           is_charged = true;
         }
-
       }
     }
     return (
@@ -84,7 +83,8 @@ class TransactionHistory extends Component {
 
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
-         {has_history && is_requester && (
+         {/* This use is requester */
+         has_history && is_requester && (
            <div>
              <h2>Sent Request</h2>
              <h3>Transaction History with {this.props.requests.requestHistory.respondent.first_name}</h3>
@@ -93,25 +93,17 @@ class TransactionHistory extends Component {
              <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
            </div>
          )}
-
-         {has_history && is_respondent && (
-           <div>
-             <h2>Received Request</h2>
-             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
-             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
-             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
-             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
-           </div>
-         )}
-
-         {has_history && is_requester && item_request_status == 2 && is_charged && (
+         {
+         /* the user already paid */
+         has_history && is_requester && item_request_status == 2 && is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>You paid</p>
              </div>
            </div>
          )}
-         {has_history && is_requester && item_request_status == 2 && !is_charged && (
+         {/* the user doesn't pay yet */
+         has_history && is_requester && item_request_status == 2 && !is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Payment </p>
@@ -124,12 +116,73 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
-         {has_history && is_requester && item_request_status == 0 && (
+         {/* the traveler doesn't respond yet */
+         has_history && is_requester && item_request_status == 0 && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
              </div>
            </div>
+         )}
+         {/* the traveler rejected */
+         has_history && is_requester && item_request_status == 3 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+         )}
+
+         {/* This use is traveler */
+         has_history && is_respondent && (
+           <div>
+             <h2>Received Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
+             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
+           </div>
+         )}
+         {has_history && is_respondent && item_request_status == 2 && !is_charged && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Waiting payment by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You accepted the request </p>
+             </div>
+           </div>
+         </div>
+         )}
+         {has_history && is_respondent && item_request_status == 2 && is_charged && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Notify that you purchased the item
+                 <Link to={{
+                   pathname: `/notification/purchase/form/${this.props.match.params.requestId}`,
+                   state: {
+                     requests: this.state.requests,
+                   }
+                 }} style={{color: "black"}}>Notify
+                 </Link>
+               </p>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Payment completed by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You accepted the request </p>
+             </div>
+           </div>
+         </div>
          )}
          {has_history && is_requester && item_request_status == 3 && (
            <div class="history-box">
@@ -138,13 +191,7 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
-         {has_history && is_respondent && item_request_status == 2 && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>Request accepted by you</p><p>5/2/2019</p>
-             </div>
-           </div>
-         )}
+
          {has_history && (
              <div class="history-box initial">
                <div class="history-wrapper">

@@ -11,10 +11,12 @@ from knox.models import AuthToken
 from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
+    PurchaseNotification, Meetup
 )
 #from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
+    PurchaseNotificationSerializer,
     ItemRequestSerializer,
     ItemRequestHistorySerializer,
     ChargeSerializer,
@@ -31,6 +33,36 @@ from .serializers import (
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+class PurchaseNotificationViewSet(viewsets.ModelViewSet):
+    queryset = PurchaseNotification.objects.all()
+    serializer_class = PurchaseNotificationSerializer
+
+    def create(self, request):
+        request_id = request.data.pop("request_id")
+        item_request = ItemRequest.objects.get(pk=request_id)
+
+        meetup_option1 = request.data.pop("meetup_option1")
+        meetup_option2 = request.data.pop("meetup_option2", None)
+        meetup_option3 = request.data.pop("meetup_option3", None)
+
+        meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
+        meetup2 = None
+        meetup3 = None
+
+        if meetup_option2:
+            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
+
+        if meetup_option3:
+            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
+
+        purchase_notification = PurchaseNotification.objects.create(
+            item_request=item_request, meetup_option1=meetup1,
+            meetup_option2=meetup2, meetup_option3=meetup3,
+            final_meetup=None, **request.data
+        )
+        serializer = self.serializer_class(purchase_notification)
+        return Response(serializer.data)
 
 class ItemRequestHistoryViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()

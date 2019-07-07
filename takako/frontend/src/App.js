@@ -63,7 +63,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/how-it-works" component={HowItWorks} />
                     <PrivateRoute exact path="/test" component={Test} />
                     <PrivateRoute exact path="/request/form/:userId/:tripId" component={RequestForm} />
-                    <PrivateRoute exact path="/notification/purchase/form" component={PurchaseNotification} />
+                    <PrivateRoute exact path="/notification/purchase/form/:requestId" component={PurchaseNotification} />
                     <PrivateRoute exact path="/request/meetup/form" component={NewMeetupRequest} />
                     <PrivateRoute exact path="/transaction/status" component={Transaction} />
                     <PrivateRoute exact path="/transaction/history/:requestId" component={TransactionHistory} />

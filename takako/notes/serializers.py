@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
+    Meetup, PurchaseNotification,
 )
 
 from rest_framework import serializers
@@ -31,6 +32,14 @@ class TravelerProfileSerializer(serializers.ModelSerializer):
         qs = obj.trips.all()
         return TripSerializer(qs, many=True, read_only=True).data
 
+class MeetupSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Meetup
+        fields = ('id', 'user', 'date', 'dtime', 'address', 'comment')
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
@@ -57,6 +66,21 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status')
 
+class PurchaseNotificationSerializer(serializers.ModelSerializer):
+    item_request = ItemRequestSerializer(read_only=True)
+    meetup_option1 = MeetupSerializer(read_only=True)
+    meetup_option2 = MeetupSerializer(read_only=True)
+    meetup_option3 = MeetupSerializer(read_only=True)
+    final_meetup = MeetupSerializer(read_only=True)
+
+    class Meta:
+        model = PurchaseNotification
+        fields = (
+            'id', 'item_request', 'preferred_phone', 'preferred_email', 'meetup_option1',
+            'meetup_option2', 'meetup_option3', 'final_meetup'
+        )
+
+
 class ChargeSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
@@ -69,6 +93,7 @@ class ChargeSerializer(serializers.ModelSerializer):
 
 class ItemRequestHistorySerializer(serializers.ModelSerializer):
     charge = serializers.SerializerMethodField()
+    purchase_notification = serializers.SerializerMethodField()
     requester = UserSerializer(read_only=True)
     respondent = UserSerializer(read_only=True)
     trip = TripSerializer(read_only=True)
@@ -78,11 +103,15 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
         fields = (
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
-            'delivery_method', 'comment', 'status', 'charge')
+            'delivery_method', 'comment', 'status', 'charge', 'purchase_notification')
 
     def get_charge(self, obj):
         qs = obj.charges.all()
         return ChargeSerializer(qs, many=True, read_only=True).data
+
+    def get_purchase_notification(self, obj):
+        qs = obj.purchase_notification.all()
+        return PurchaseNotificationSerializer(qs, many=True, read_only=True).data
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
