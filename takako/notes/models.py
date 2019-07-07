@@ -137,3 +137,20 @@ class Charge(models.Model):
     type = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
     created_at = models.DateField(default=datetime.date.today)
+
+class Meetup(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(null=True, blank=True)
+    dtime = models.CharField(max_length=100, blank=True)
+    address = models.CharField(max_length=300, blank=True)
+    comment = models.CharField(max_length=300, blank=True)
+
+class PurchaseNotification(models.Model):
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="purchase_notification")
+    preferred_phone = models.CharField(max_length=100, blank=True)
+    preferred_email = models.CharField(max_length=200, blank=True)
+    meetup_option1 = models.ForeignKey(Meetup, on_delete=models.CASCADE, related_name="purcharse_notification_meetup1")
+    meetup_option2 = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_meetup2")
+    meetup_option3 = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_meetup3")
+    final_meetup = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_finalmeetup")
+

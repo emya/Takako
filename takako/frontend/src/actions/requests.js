@@ -171,3 +171,63 @@ export const updateItemRequest = (requestId, item_request) => {
       })
   }
 }
+
+export const sendPurchaseNotification= (
+  request_id, preferred_phone, preferred_email,
+  meetup_option1_d, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let meetup_option1_date = formatDate(meetup_option1_d);
+    let meetup_option1 = {
+      "date": meetup_option1_date,
+      "dtime": meetup_option1_dtime,
+      "address": meetup_option1_address,
+      "comment": meetup_option1_comment,
+    }
+
+    let body = JSON.stringify({
+      request_id, preferred_phone, preferred_email, meetup_option1,
+    });
+
+    console.log("body", body);
+    return fetch("/api/purchase/notification/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            console.log("data", data);
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          console.log("NOTIFY_PURCHASE_SUCCESSFUL", res.data);
+          return dispatch({type: 'NOTIFY_PURCHASE_SUCCESSFUL', trip: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}

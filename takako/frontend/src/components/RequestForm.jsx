@@ -90,6 +90,9 @@ class RequestForm extends Component {
          <SideMenu />
          <div class="request-conf">
           <p>Your request was successfully submitted</p>
+          <p><a href="/transaction/status" style={{color: "black"}}>
+            Back to the conversation
+          </a></p>
         </div>
         </div>
 
