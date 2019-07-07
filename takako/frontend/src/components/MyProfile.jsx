@@ -36,12 +36,14 @@ class MyProfile extends Component {
 
   submitProfile = (e) => {
     e.preventDefault();
-    this.props.updateProfile(this.props.profile[0].id, this.state.bio, this.state.residence).then(this.resetForm);
+    this.props.updateProfile(
+      this.props.profile[0].id, this.state.bio, this.state.residence, this.state.occupation, this.state.gender
+    ).then(this.resetForm);
   }
 
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
-    this.setState({bio: profile.bio, residence: profile.residence});
+    this.setState({bio: profile.bio, residence: profile.residence, occupation: profile.occupation, gender: profile.gender});
   }
 
   handleResidenceChange(e) {
@@ -100,6 +102,8 @@ class MyProfile extends Component {
 
               <p class="object">Occupation</p>
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
+              <p class="object">Gender</p>
+              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'gender', profile)} value={profile.gender}/>
               <p class="object">Bio</p>
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
@@ -173,8 +177,8 @@ const mapDispatchToProps = dispatch => {
     fetchProfile: (userId) => {
       dispatch(profile.fetchProfile(userId));
     },
-    updateProfile: (id, bio, residence) => {
-      return dispatch(profile.updateProfile(id, bio, residence));
+    updateProfile: (id, bio, residence, occupation, gender) => {
+      return dispatch(profile.updateProfile(id, bio, residence, occupation, gender));
       //dispatch(notes.updateNote(id, text));
     },
     logout: () => dispatch(auth.logout()),

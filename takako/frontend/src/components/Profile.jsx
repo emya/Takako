@@ -45,6 +45,8 @@ class Profile extends Component {
              {profile.residence}
             <p class="object">Occupation</p>
              {profile.occupation}
+            <p class="object">Gender</p>
+             {profile.gender}
             <p class="object">Bio</p>
              {profile.bio}
           </div>
