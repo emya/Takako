@@ -46,23 +46,21 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         meetup_option2 = request.data.pop("meetup_option2", None)
         meetup_option3 = request.data.pop("meetup_option3", None)
 
-        print(meetup_option1)
         meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
         meetup2 = None
         meetup3 = None
 
         if meetup_option2:
-            meetup2 = Meetup.objects.create(meetup_option2)
+            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
 
         if meetup_option3:
-            meetup3 = Meetup.objects.create(meetup_option3)
+            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
 
         purchase_notification = PurchaseNotification.objects.create(
             item_request=item_request, meetup_option1=meetup1,
             meetup_option2=meetup2, meetup_option3=meetup3,
             final_meetup=None, **request.data
         )
-        print(purchase_notification.__dict__)
         serializer = self.serializer_class(purchase_notification)
         return Response(serializer.data)
 

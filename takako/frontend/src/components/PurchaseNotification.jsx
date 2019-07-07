@@ -85,10 +85,6 @@ class PurchaseNotification extends Component {
   }
 
   render() {
-    console.log(this.props.requests);
-    console.log(this.state);
-    const errors = this.state.errors;
-
     if (this.state.isSubmissionSucceeded) {
       return (
       <div>
@@ -207,7 +203,6 @@ class PurchaseNotification extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state", state);
   return {
     requests: state.requests,
     user: state.auth.user,

@@ -57,7 +57,6 @@ class TransactionHistory extends Component {
     let is_charged = false;
     let item_request_status = 0;
     if (this.props.requests.requestHistory) {
-      console.log(this.props.requests.requestHistory);
       item_request_status = this.props.requests.requestHistory.status;
       has_history = true;
       if (this.props.user.id == this.props.requests.requestHistory.requester.id){
