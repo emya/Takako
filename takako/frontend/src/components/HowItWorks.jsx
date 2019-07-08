@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {profile, auth} from "../actions";
-import {Link, Redirect} from "react-router-dom";
-import MediaQuery from 'react-responsive';
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
-import SideMenu from './SideMenu'
+import Footer from './Footer'
 
 library.add(faIgloo)
 
@@ -86,10 +81,7 @@ class HowItWorks extends Component {
     </div>
 
 
-    <footer>
-    FOOTER CONTENTS TO BE DETERMINED
-    <FontAwesomeIcon icon="igloo" />
-    </footer>
+    <Footer />
   </div>
 </div>
 

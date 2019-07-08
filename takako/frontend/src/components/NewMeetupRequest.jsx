@@ -10,6 +10,7 @@ import {Provider, connect} from 'react-redux';
 
 import Header from './Header'
 import SideMenu from './SideMenu'
+import Footer from './Footer'
 
 class NewMeetupRequest extends Component {
   render() {
@@ -68,11 +69,8 @@ class NewMeetupRequest extends Component {
         </ul>
       </div>
 
-    <footer>
-      FOOTER CONTENTS TO BE DETERMINED
-      <FontAwesomeIcon icon="igloo" />
-    </footer>
-  </div>
+      <Footer />
+    </div>
     )
   }
 }

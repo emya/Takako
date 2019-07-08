@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {requests, trips, auth} from "../actions";
-import {Link, Redirect} from "react-router-dom";
-import MediaQuery from 'react-responsive';
+import {requests, trips} from "../actions";
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,7 +31,7 @@ class RequestForm extends Component {
   }
 
    componentWillReceiveProps(newProps){
-     if(newProps.isSubmissionSucceeded != this.props.isSubmissionSucceeded){
+     if(newProps.isSubmissionSucceeded !== this.props.isSubmissionSucceeded){
          this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
      }
   }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {trips, auth} from "../actions";
-import {Link, Redirect} from "react-router-dom";
-import MediaQuery from 'react-responsive';
+import {trips} from "../actions";
 
 import DatePicker from "react-datepicker";
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
@@ -10,7 +8,7 @@ import '../css/style_LP.scss';
 
 class UpcomingTrips extends Component {
   componentDidMount() {
-    if (this.props.is_other == "true") {
+    if (this.props.is_other === "true") {
       this.props.fetchTrips(this.props.userId);
     } else {
       this.props.fetchTrips(this.props.user.id);
@@ -86,7 +84,7 @@ class UpcomingTrips extends Component {
   render() {
     let userId;
     let is_other = false;
-    if (this.props.is_other && this.props.is_other == "true") {
+    if (this.props.is_other && this.props.is_other === "true") {
       is_other = true;
       userId = this.props.userId;
     }
