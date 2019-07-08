@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {auth} from "../actions";
-import {Link, Redirect} from "react-router-dom";
-import MediaQuery from 'react-responsive';
 import '../css/style_LP.scss';
-import Header from './Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign, faLightbulb, faGift } from '@fortawesome/free-solid-svg-icons'
 

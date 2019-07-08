@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {requests, auth} from "../actions";
 import '../css/style.scss';
-import MediaQuery from 'react-responsive';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import Header from './Header';
 import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer';
 import StripeCheckout from 'react-stripe-checkout';
 import { keys } from '../keys.js'
 
@@ -59,11 +57,11 @@ class TransactionHistory extends Component {
     if (this.props.requests.requestHistory) {
       item_request_status = this.props.requests.requestHistory.status;
       has_history = true;
-      if (this.props.user.id == this.props.requests.requestHistory.requester.id){
+      if (this.props.user.id === this.props.requests.requestHistory.requester.id){
         is_requester = true;
       }
 
-      if (this.props.user.id == this.props.requests.requestHistory.respondent.id){
+      if (this.props.user.id === this.props.requests.requestHistory.respondent.id){
         is_respondent = true;
       }
 
@@ -95,7 +93,7 @@ class TransactionHistory extends Component {
          )}
          {
          /* the user already paid */
-         has_history && is_requester && item_request_status == 2 && is_charged && (
+         has_history && is_requester && item_request_status === 2 && is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>You paid</p>
@@ -103,7 +101,7 @@ class TransactionHistory extends Component {
            </div>
          )}
          {/* the user doesn't pay yet */
-         has_history && is_requester && item_request_status == 2 && !is_charged && (
+         has_history && is_requester && item_request_status === 2 && !is_charged && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Payment </p>
@@ -117,7 +115,7 @@ class TransactionHistory extends Component {
            </div>
          )}
          {/* the traveler doesn't respond yet */
-         has_history && is_requester && item_request_status == 0 && (
+         has_history && is_requester && item_request_status === 0 && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
@@ -125,7 +123,7 @@ class TransactionHistory extends Component {
            </div>
          )}
          {/* the traveler rejected */
-         has_history && is_requester && item_request_status == 3 && (
+         has_history && is_requester && item_request_status === 3 && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
@@ -143,7 +141,7 @@ class TransactionHistory extends Component {
              <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
            </div>
          )}
-         {has_history && is_respondent && item_request_status == 2 && !is_charged && (
+         {has_history && is_respondent && item_request_status === 2 && !is_charged && (
          <div>
            <div class="history-box">
              <div class="history-wrapper">
@@ -157,7 +155,7 @@ class TransactionHistory extends Component {
            </div>
          </div>
          )}
-         {has_history && is_respondent && item_request_status == 2 && is_charged && (
+         {has_history && is_respondent && item_request_status === 2 && is_charged && (
          <div>
            <div class="history-box">
              <div class="history-wrapper">
@@ -184,7 +182,7 @@ class TransactionHistory extends Component {
            </div>
          </div>
          )}
-         {has_history && is_requester && item_request_status == 3 && (
+         {has_history && is_requester && item_request_status === 3 && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
@@ -215,7 +213,7 @@ class TransactionHistory extends Component {
                  <li>Preferred Delivery Method:   Ship</li>
                  <li>Comments (Optional): {this.props.requests.requestHistory.comment}</li>
                </ul>
-                 {is_respondent  && this.props.requests.requestHistory.status == 0 && (
+                 {is_respondent  && this.props.requests.requestHistory.status === 0 && (
                    <div>
                      <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
                      <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
@@ -228,23 +226,9 @@ class TransactionHistory extends Component {
        </div>
      </div>
 
-     <div class="sidemenu-mobile">
-       <ul>
-       <li><a href="#">My Profile<span>></span></a></li>
-       <li><a href="#">Transaction Status<span>></span></a></li>
-       <li><a href="#">Message Box<span>></span></a></li>
-       <li><a href="#">Edit Profile<span>></span></a></li>
-       <li><a href="#">Edit Account<span>></span></a></li>
-       <li><a href="#">Logout<span>></span></a></li>
-       <li><a href="#">Help<span>></span></a></li>
-       </ul>
-     </div>
-
-     <footer>
-       FOOTER CONTENTS TO BE DETERMINED
-       <FontAwesomeIcon icon="igloo" />
-     </footer>
-  </div>
+     <MobileSideMenu />
+     <Footer />
+   </div>
     )
   }
 }

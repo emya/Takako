@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requests, auth} from "../actions";
 import '../css/style.scss';
-import MediaQuery from 'react-responsive';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import Header from './Header'
 import SideMenu from './SideMenu'
+import MobileSideMenu from './MobileSideMenu'
+import Footer from './Footer'
 
 class Transaction extends Component {
   componentDidMount() {
@@ -50,10 +48,10 @@ class Transaction extends Component {
                 <td>{sent_item_request.item_name}</td>
                 <td>{sent_item_request.trip.destination}</td>
                 <td>
-                  {sent_item_request.status == 0 && ("Pending")}
-                  {sent_item_request.status == 1 && ("Cancelled")}
-                  {sent_item_request.status == 2 && ("Accepted")}
-                  {sent_item_request.status == 3 && ("Rejected")}
+                  {sent_item_request.status === 0 && ("Pending")}
+                  {sent_item_request.status === 1 && ("Cancelled")}
+                  {sent_item_request.status === 2 && ("Accepted")}
+                  {sent_item_request.status === 3 && ("Rejected")}
                   <a href={`/transaction/history/${sent_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
                 </td>
               </tr>
@@ -80,10 +78,10 @@ class Transaction extends Component {
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
                 <td>
-                  {received_item_request.status == 0 && ("Pending")}
-                  {received_item_request.status == 1 && ("Cancelled")}
-                  {received_item_request.status == 2 && ("Accepted")}
-                  {received_item_request.status == 3 && ("Rejected")}
+                  {received_item_request.status === 0 && ("Pending")}
+                  {received_item_request.status === 1 && ("Cancelled")}
+                  {received_item_request.status === 2 && ("Accepted")}
+                  {received_item_request.status === 3 && ("Rejected")}
                   <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
                 </td>
               </tr>
@@ -92,23 +90,9 @@ class Transaction extends Component {
         </div>
       </div>
 
-      <div class="sidemenu-mobile">
-      <ul>
-      <li><a href="#">My Profile<span>></span></a></li>
-      <li><a href="#">Transaction Status<span>></span></a></li>
-      <li><a href="#">Message Box<span>></span></a></li>
-      <li><a href="#">Edit Profile<span>></span></a></li>
-      <li><a href="#">Edit Account<span>></span></a></li>
-      <li><a href="#">Logout<span>></span></a></li>
-      <li><a href="#">Help<span>></span></a></li>
-      </ul>
-      </div>
-
-    <footer>
-    FOOTER CONTENTS TO BE DETERMINED
-    <FontAwesomeIcon icon="igloo" />
-    </footer>
-  </div>
+      <MobileSideMenu />
+      <Footer />
+    </div>
     )
   }
 }

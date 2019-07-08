@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import MediaQuery from 'react-responsive';
 import {requests, auth} from "../actions";
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 
 import DatePicker from "react-datepicker";
 
-import {createStore} from 'redux';
-import {Provider, connect} from 'react-redux';
+import {connect} from 'react-redux';
 
 import Header from './Header'
 import SideMenu from './SideMenu'
@@ -36,7 +32,7 @@ class PurchaseNotification extends Component {
   }
 
   componentWillReceiveProps(newProps){
-    if(newProps.isSubmissionSucceeded != this.props.isSubmissionSucceeded){
+    if(newProps.isSubmissionSucceeded !== this.props.isSubmissionSucceeded){
       this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
     }
   }
