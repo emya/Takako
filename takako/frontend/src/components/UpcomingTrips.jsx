@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {trips} from "../actions";
+import {Link} from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
@@ -102,7 +103,14 @@ class UpcomingTrips extends Component {
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
-            <td>{is_other && <a class="btn request" href={`/request/form/${userId}/${trip.id}`} >Request Item</a> }</td>
+            <td>{is_other &&
+                 <Link to={{
+                   pathname: `/request/form/${userId}/${trip.id}`,
+                   state: {
+                     trip: trip,
+                   }
+                 }} class="btn request" >Request Item</Link> }
+            </td>
           </tr>
         ))}
       </table>
