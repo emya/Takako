@@ -123,6 +123,9 @@ class ItemRequest(models.Model):
     # 2: accepted request
     # 3: rejected request
     status = models.IntegerField(default=0)
+    # Status
+    # 0. request_sent
+    process_status = models.CharField(max_length=100, default="request_sent")
     created_at = models.DateField(default=datetime.date.today)
 
 class Charge(models.Model):

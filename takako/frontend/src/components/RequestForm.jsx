@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {requests, trips} from "../actions";
+import {requests} from "../actions";
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,10 +11,6 @@ import SideMenu from './SideMenu'
 library.add(faIgloo)
 
 class RequestForm extends Component {
-  componentDidMount() {
-    this.props.fetchTrip(this.props.match.params.tripId);
-  }
-
   state = {
     item_name: "",
     item_id: "",
@@ -78,6 +74,7 @@ class RequestForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const errors = this.state.errors;
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
@@ -282,15 +279,13 @@ const mapStateToProps = state => {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
     isProceeded: state.requests.isProceeded,
-    trip: state.trips.trip
+    //TODO: Handle trip in reducer
+    trip: state.trips[0],
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTrip: (tripId) => {
-      dispatch(trips.fetchTrip(tripId));
-    },
     sendRequest: (
       respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
       delivery_method, preferred_meetup_location, preferred_meetup_date, comment)  => {

@@ -24,7 +24,7 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body) => {
       .then(res => {
         if (res.status === 200) {
           console.log("REQUEST_ITEM_CHARGE_SUCCESSFUL", res.data);
-          return dispatch({type: 'REQUEST_ITEM_CHARGE_SUCCESSFUL', trip: res.data});
+          return dispatch({type: 'REQUEST_ITEM_CHARGE_SUCCESSFUL', data: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
           throw res.data;
@@ -65,7 +65,7 @@ export const sendItemRequest = (
       .then(res => {
         if (res.status === 200) {
           console.log("REQUEST_ITEM_SUCCESSFUL", res.data);
-          return dispatch({type: 'REQUEST_ITEM_SUCCESSFUL', trip: res.data});
+          return dispatch({type: 'REQUEST_ITEM_SUCCESSFUL', data: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
           throw res.data;
@@ -208,7 +208,7 @@ export const sendPurchaseNotification= (
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'NOTIFY_PURCHASE_SUCCESSFUL', trip: res.data});
+          return dispatch({type: 'NOTIFY_PURCHASE_SUCCESSFUL', data: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
           throw res.data;

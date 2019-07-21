@@ -53,23 +53,32 @@ class TransactionHistory extends Component {
     let is_requester = false;
     let is_respondent = false;
     let is_charged = false;
+    let is_notified = false;
     let item_request_status = 0;
     if (this.props.requests.requestHistory) {
-      item_request_status = this.props.requests.requestHistory.status;
+      const requestHistory = this.props.requests.requestHistory;
+
+      console.log(requestHistory);
+
+      item_request_status = requestHistory.status;
       has_history = true;
-      if (this.props.user.id === this.props.requests.requestHistory.requester.id){
+      if (this.props.user.id === requestHistory.requester.id){
         is_requester = true;
       }
 
-      if (this.props.user.id === this.props.requests.requestHistory.respondent.id){
+      if (this.props.user.id === requestHistory.respondent.id){
         is_respondent = true;
       }
 
-      if (this.props.requests.requestHistory.charge && this.props.requests.requestHistory.charge.length > 0){
-        const charge = this.props.requests.requestHistory.charge[0];
+      if (requestHistory.charge && requestHistory.charge.length > 0){
+        const charge = requestHistory.charge[0];
         if (charge.status == "succeeded"){
           is_charged = true;
         }
+      }
+
+      if (requestHistory.purchase_notification && requestHistory.purchase_notification.length > 0){
+        is_notified = true;
       }
     }
     return (
@@ -141,6 +150,7 @@ class TransactionHistory extends Component {
              <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
            </div>
          )}
+
          {has_history && is_respondent && item_request_status === 2 && !is_charged && (
          <div>
            <div class="history-box">
@@ -155,7 +165,16 @@ class TransactionHistory extends Component {
            </div>
          </div>
          )}
-         {has_history && is_respondent && item_request_status === 2 && is_charged && (
+
+         {has_history && is_respondent && item_request_status === 2 && is_charged && is_notified && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You notified that you purchased the item</p>
+             </div>
+           </div>
+         )}
+
+         {has_history && is_respondent && item_request_status === 2 && is_charged && !is_notified && (
          <div>
            <div class="history-box">
              <div class="history-wrapper">
@@ -182,6 +201,8 @@ class TransactionHistory extends Component {
            </div>
          </div>
          )}
+
+
          {has_history && is_requester && item_request_status === 3 && (
            <div class="history-box">
              <div class="history-wrapper">

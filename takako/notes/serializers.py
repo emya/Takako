@@ -64,7 +64,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
-            'comment', 'status')
+            'comment', 'status', 'process_status')
 
 class PurchaseNotificationSerializer(serializers.ModelSerializer):
     item_request = ItemRequestSerializer(read_only=True)
