@@ -74,7 +74,6 @@ class RequestForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     const errors = this.state.errors;
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
