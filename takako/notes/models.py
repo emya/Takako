@@ -149,6 +149,7 @@ class Meetup(models.Model):
     comment = models.CharField(max_length=300, blank=True)
 
 class SharedContact(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     preferred_phone = models.CharField(max_length=100, blank=True)
     preferred_email = models.CharField(max_length=200, blank=True)
 
@@ -159,5 +160,9 @@ class PurchaseNotification(models.Model):
     meetup_option1 = models.ForeignKey(Meetup, on_delete=models.CASCADE, related_name="purcharse_notification_meetup1")
     meetup_option2 = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_meetup2")
     meetup_option3 = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_meetup3")
+    # action_taken_by
+    # 0: traveler
+    # 1: requester
+    action_taken_by = models.IntegerField(default=0)
     final_meetup = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_finalmeetup")
 

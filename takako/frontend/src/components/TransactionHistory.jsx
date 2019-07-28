@@ -186,7 +186,7 @@ class TransactionHistory extends Component {
                      meetup: this.props.requests.requestHistory.purchase_notification[0].meetup_option1,
                    }
                  }}>
-                 <button class="action-btn">Accept</button>
+                 <button class="btn accept">Accept</button>
                </Link>
              </ul>
              <Link to={{
