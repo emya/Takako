@@ -148,6 +148,10 @@ class Meetup(models.Model):
     address = models.CharField(max_length=300, blank=True)
     comment = models.CharField(max_length=300, blank=True)
 
+class SharedContact(models.Model):
+    preferred_phone = models.CharField(max_length=100, blank=True)
+    preferred_email = models.CharField(max_length=200, blank=True)
+
 class PurchaseNotification(models.Model):
     item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="purchase_notification")
     preferred_phone = models.CharField(max_length=100, blank=True)
