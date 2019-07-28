@@ -165,10 +165,35 @@ class TransactionHistory extends Component {
          )}
 
          {has_history && is_respondent && item_request_status === 2 && is_charged && is_notified && (
-           <div class="history-box">
+           <div class="history-box initial">
              <div class="history-wrapper">
-               <p>You notified that you purchased the item</p>
+               <p>{this.props.requests.requestHistory.respondent.first_name} purchased the item you requested </p>
              </div>
+             <ul class="request-data">
+               <li>Phone number: {this.props.requests.requestHistory.purchase_notification[0].preferred_phone} </li>
+               <li>Email address: {this.props.requests.requestHistory.purchase_notification[0].preferred_email} </li>
+               <li>Meetup option1:</li>
+               <li>
+                 {this.props.requests.requestHistory.purchase_notification[0].meetup_option1.date}
+                 {this.props.requests.requestHistory.purchase_notification[0].meetup_option1.dtime}
+                 {this.props.requests.requestHistory.purchase_notification[0].meetup_option1.address}
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     meetup: this.props.requests.requestHistory.purchase_notification[0].meetup_option1,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+             </ul>
+             <Link to={{
+                   pathname: "/request/meetup/form",
+                   state: {
+                     requests: this.props.requests.requestHistory,
+                   }
+                 }} style={{color: "black"}}>Suggest other meetup options
+             </Link>
            </div>
          )}
 
@@ -238,7 +263,6 @@ class TransactionHistory extends Component {
                      <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
                    </div>
                  )}
-
              </div>
          )}
 

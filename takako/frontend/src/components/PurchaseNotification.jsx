@@ -40,7 +40,6 @@ class PurchaseNotification extends Component {
   validateForm = (preferred_phone, preferred_email, meetup_option1_date, meetup_option1_dtime, meetup_option1_address) => {
     // we are going to store errors for all fields
     // in a signle array
-    console.log(preferred_phone, preferred_email, meetup_option1_date);
     const errors = [];
 
     if (preferred_phone.length === 0 && preferred_email.length ===0) {
@@ -65,8 +64,6 @@ class PurchaseNotification extends Component {
       this.state.meetup_option1_date, this.state.meetup_option1_dtime,
       this.state.meetup_option1_address
     );
-
-    console.log("error", errors);
 
     if (errors.length > 0) {
       this.setState({ errors });
