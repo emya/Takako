@@ -56,7 +56,6 @@ class NewMeetupRequest extends Component {
   }
 
   render() {
-    console.log(this.props.location.state.requests);
     let has_requests = false;
     let requestHistory;
     if (this.props.location.state.requests) {
