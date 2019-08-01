@@ -229,12 +229,10 @@ export const shareContact = (
       purchase_notification_id, preferred_phone, preferred_email, process_status
     });
 
-    console.log("body", body);
     return fetch("/api/share/contact/", {headers, method: "POST", body})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
-            console.log("data", data);
             return {status: res.status, data};
           })
         } else {

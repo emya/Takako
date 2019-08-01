@@ -63,8 +63,6 @@ class TransactionHistory extends Component {
       has_history = true;
       requestHistory = this.props.requests.requestHistory;
 
-      console.log(requestHistory);
-
       item_request_status = requestHistory.status;
       process_status = requestHistory.process_status;
 
