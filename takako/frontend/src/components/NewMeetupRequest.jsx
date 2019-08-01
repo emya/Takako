@@ -9,6 +9,7 @@ import {createStore} from 'redux';
 import {Provider, connect} from 'react-redux';
 
 import DatePicker from "react-datepicker";
+import {requests, auth} from "../actions";
 
 import Header from './Header';
 import SideMenu from './SideMenu';
@@ -55,6 +56,10 @@ class NewMeetupRequest extends Component {
     this.setState({meetup_option1_date: date});
   }
 
+  shareContact = (purchase_notification_id) => {
+    this.props.shareContact(purchase_notification_id, this.state.preferred_phone, this.state.preferred_email);
+  }
+
   render() {
     let has_requests = false;
     let requestHistory;
@@ -84,7 +89,8 @@ class NewMeetupRequest extends Component {
 
             <div class="form-section">
               <p class="form-heading">Your Preferred Contact</p><br />
-              <input class="contact-option" placeholder="Phone Number"/><input class="contact-option" placeholder="e-mail"/>
+               <input class="contact-option" placeholder="Phone Number" value={this.state.preferred_phone} onChange={(e) => this.setState({preferred_phone: e.target.value})}/>
+              <input class="contact-option" placeholder="e-mail" value={this.state.preferred_email} onChange={(e) => this.setState({preferred_email: e.target.value})} />
             </div>
 
             <div class="form-section">
@@ -121,5 +127,14 @@ class NewMeetupRequest extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    shareContact: (purchase_notification_id, preferred_phone, preferred_email) => {
+      dispatch(requests.shareContact(purchase_notification_id, preferred_phone, preferred_email));
+    },
+    logout: () => dispatch(auth.logout()),
+  }
+}
 
-export default NewMeetupRequest;
+
+export default connect(null, mapDispatchToProps)(NewMeetupRequest);

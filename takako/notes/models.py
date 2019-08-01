@@ -125,6 +125,11 @@ class ItemRequest(models.Model):
     status = models.IntegerField(default=0)
     # Status
     # 0. request_sent
+    # 1. request_responded
+    # 2. payment_made
+    # 3. purchase_notified
+    # 4. meetup_suggested
+    # 5. meetup_decided
     process_status = models.CharField(max_length=100, default="request_sent")
     created_at = models.DateField(default=datetime.date.today)
 
@@ -148,11 +153,6 @@ class Meetup(models.Model):
     address = models.CharField(max_length=300, blank=True)
     comment = models.CharField(max_length=300, blank=True)
 
-class SharedContact(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    preferred_phone = models.CharField(max_length=100, blank=True)
-    preferred_email = models.CharField(max_length=200, blank=True)
-
 class PurchaseNotification(models.Model):
     item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="purchase_notification")
     preferred_phone = models.CharField(max_length=100, blank=True)
@@ -165,4 +165,10 @@ class PurchaseNotification(models.Model):
     # 1: requester
     action_taken_by = models.IntegerField(default=0)
     final_meetup = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purcharse_notification_finalmeetup")
+
+class SharedContact(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    preferred_phone = models.CharField(max_length=100, blank=True)
+    preferred_email = models.CharField(max_length=200, blank=True)
+    purchase_notification = models.ForeignKey(PurchaseNotification, on_delete=models.CASCADE, related_name="shared_contact")
 

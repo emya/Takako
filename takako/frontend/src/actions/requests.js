@@ -115,8 +115,6 @@ export const fetchRequestHistory = (requestId) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("headers", headers);
-
     return fetch(`/api/requests/history/${requestId}/`, {headers, method: "GET"})
       .then(res => {
         if (res.status < 500) {
@@ -216,6 +214,46 @@ export const sendPurchaseNotification= (
       })
   }
 }
+
+export const shareContact = (
+  purchase_notification_id, preferred_phone, preferred_email, process_status) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({
+      purchase_notification_id, preferred_phone, preferred_email, process_status
+    });
+
+    console.log("body", body);
+    return fetch("/api/share/contact/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            console.log("data", data);
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          console.log("SHARE_CONTACT_SUCCESSFUL", res.data);
+          return dispatch({type: 'SHARE_CONTACT_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
 
 function formatDate(date) {
     var d = new Date(date),

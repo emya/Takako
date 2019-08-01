@@ -11,11 +11,13 @@ from knox.models import AuthToken
 from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
-    PurchaseNotification, Meetup
+    PurchaseNotification, Meetup,
+    SharedContact
 )
 #from django.contrib.auth.models import User
 from .serializers import (
     NoteSerializer,
+    SharedContactSerializer,
     PurchaseNotificationSerializer,
     ItemRequestSerializer,
     ItemRequestHistorySerializer,
@@ -34,6 +36,30 @@ class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
+class SharedContactViewSet(viewsets.ModelViewSet):
+    queryset = SharedContact.objects.all()
+    serializer_class = SharedContactSerializer
+
+    def create(self, request):
+        purchase_notification_id = request.data.pop("purchase_notification_id")
+        purchase_notification = PurchaseNotification.objects.get(pk=purchase_notification_id)
+
+        purchase_notification.action_taken_by = 1
+        purchase_notification.save()
+
+        process_status = request.data.pop("process_status")
+
+        purchase_notification.item_request.process_status = process_status
+        purchase_notification.item_request.save()
+
+        shared_contact = SharedContact.objects.create(
+            purchase_notification=purchase_notification,
+            user=self.request.user,
+            **request.data
+        )
+        serializer = self.serializer_class(shared_contact)
+        return Response(serializer.data)
+
 class PurchaseNotificationViewSet(viewsets.ModelViewSet):
     queryset = PurchaseNotification.objects.all()
     serializer_class = PurchaseNotificationSerializer
@@ -41,6 +67,8 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
     def create(self, request):
         request_id = request.data.pop("request_id")
         item_request = ItemRequest.objects.get(pk=request_id)
+        item_request.process_status = "purchase_notified"
+        item_request.save()
 
         meetup_option1 = request.data.pop("meetup_option1")
         meetup_option2 = request.data.pop("meetup_option2", None)
@@ -97,23 +125,6 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
 
         return self.queryset
 
-    """
-    def get_queryset(self):
-        userId = self.request.GET.get('userId')
-
-        queryset = ItemRequest.objects.all()
-
-        if userId:
-            user = User.objects.get(pk=userId)
-            queryset_requester = queryset.filter(requester=user)
-            queryset_respondent = queryset.filter(respondent=user)
-            return queryset
-
-        # TODO: handle exception
-        queryset = queryset.filter(user=self.request.user)
-        return queryset
-    """
-
 import stripe
 class ChargeViewSet(viewsets.ModelViewSet):
     stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
@@ -137,6 +148,9 @@ class ChargeViewSet(viewsets.ModelViewSet):
         card = stripe_charge["payment_method_details"].get("card")
         type = stripe_charge["payment_method_details"].get("type")
         item_request = ItemRequest.objects.get(pk=item_request_id)
+        if status == "succeeded":
+            item_request.process_status = "payment_made"
+            item_request.save()
         charge = Charge.objects.create(
             user=request.user,
             amount=amount,
