@@ -22,7 +22,11 @@ class TransactionHistory extends Component {
   }
 
   acceptItemRequest = () => {
-    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 2});
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 2, "process_status": "request_responded"});
+  }
+
+  declineItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3, "process_status": "request_responded"});
   }
 
   onToken = (token, addresses) => {
@@ -51,33 +55,28 @@ class TransactionHistory extends Component {
   render() {
     let has_history = false;
     let is_requester = false;
-    let is_respondent = false;
-    let is_charged = false;
-    let is_notified = false;
+    let is_traveler = false;
     let item_request_status = 0;
+    let process_status;
+    let requestHistory;
     if (this.props.requests.requestHistory) {
-      const requestHistory = this.props.requests.requestHistory;
+      has_history = true;
+      requestHistory = this.props.requests.requestHistory;
 
       item_request_status = requestHistory.status;
-      has_history = true;
+      process_status = requestHistory.process_status;
+
       if (this.props.user.id === requestHistory.requester.id){
         is_requester = true;
       }
 
       if (this.props.user.id === requestHistory.respondent.id){
-        is_respondent = true;
+        is_traveler = true;
       }
+    }
 
-      if (requestHistory.charge && requestHistory.charge.length > 0){
-        const charge = requestHistory.charge[0];
-        if (charge.status == "succeeded"){
-          is_charged = true;
-        }
-      }
-
-      if (requestHistory.purchase_notification && requestHistory.purchase_notification.length > 0){
-        is_notified = true;
-      }
+    if (!has_history) {
+        return null;
     }
     return (
   <div>
@@ -89,7 +88,7 @@ class TransactionHistory extends Component {
        <div class="transaction-history">
          <p class="bread-crumb"><a href="/transaction/status">Back to Transaction Status</a></p>
          {/* This use is requester */
-         has_history && is_requester && (
+         is_requester && (
            <div>
              <h2>Sent Request</h2>
              <h3>Transaction History with {this.props.requests.requestHistory.respondent.first_name}</h3>
@@ -99,72 +98,18 @@ class TransactionHistory extends Component {
            </div>
          )}
          {
-         /* the user already paid */
-         has_history && is_requester && item_request_status === 2 && is_charged && (
+         /* meetup option decided */
+         is_requester && item_request_status === 2 && process_status === "meetup_decided" && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>You paid</p>
+               <p>Meetup decided!</p>
              </div>
            </div>
-         )}
-         {/* the user doesn't pay yet */
-         has_history && is_requester && item_request_status === 2 && !is_charged && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>Payment </p>
 
-               <StripeCheckout
-                 stripeKey={keys.STRIPE_PUBLISHABLE_KEY}
-                 token={this.onToken}
-               />
-
-             </div>
-           </div>
          )}
-         {/* the traveler doesn't respond yet */
-         has_history && is_requester && item_request_status === 0 && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
-             </div>
-           </div>
-         )}
-         {/* the traveler rejected */
-         has_history && is_requester && item_request_status === 3 && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
-             </div>
-           </div>
-         )}
-
-         {/* This use is traveler */
-         has_history && is_respondent && (
-           <div>
-             <h2>Received Request</h2>
-             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
-             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
-             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
-             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
-           </div>
-         )}
-
-         {has_history && is_respondent && item_request_status === 2 && !is_charged && (
-         <div>
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>Waiting payment by {this.props.requests.requestHistory.respondent.first_name}</p>
-             </div>
-           </div>
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>You accepted the request </p>
-             </div>
-           </div>
-         </div>
-         )}
-
-         {has_history && is_respondent && item_request_status === 2 && is_charged && is_notified && (
+         {
+         /* the traveler already notified */
+         is_requester && item_request_status === 2 && process_status === "purchase_notified" && (
            <div class="history-box initial">
              <div class="history-wrapper">
                <p>{this.props.requests.requestHistory.respondent.first_name} purchased the item you requested </p>
@@ -181,6 +126,7 @@ class TransactionHistory extends Component {
                <Link to={{
                    pathname: "/share/contact",
                    state: {
+                     purchase_notification: this.props.requests.requestHistory.purchase_notification[0],
                      meetup: this.props.requests.requestHistory.purchase_notification[0].meetup_option1,
                    }
                  }}>
@@ -196,8 +142,86 @@ class TransactionHistory extends Component {
              </Link>
            </div>
          )}
+         {
+         /* the user already paid */
+         is_requester && item_request_status === 2 && process_status === "payment_made" && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You paid</p>
+             </div>
+           </div>
+         )}
+         {/* the user doesn't pay yet */
+         is_requester && item_request_status === 2 && process_status === "request_responded" && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Payment </p>
 
-         {has_history && is_respondent && item_request_status === 2 && is_charged && !is_notified && (
+               <StripeCheckout
+                 stripeKey={keys.STRIPE_PUBLISHABLE_KEY}
+                 token={this.onToken}
+               />
+
+             </div>
+           </div>
+         )}
+         {/* the traveler doesn't respond yet */
+         is_requester && process_status === "request_sent" && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Waiting response by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+         )}
+         {/* the traveler rejected */
+         is_requester && item_request_status === 3 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+         )}
+
+         {/* This use is traveler */
+         is_traveler && (
+           <div>
+             <h2>Received Request</h2>
+             <h3>Transaction History with {this.props.requests.requestHistory.requester.first_name}</h3>
+             <p>Request {this.props.requests.requestHistory.requester.first_name} sent</p>
+             <p>Item Name:  {this.props.requests.requestHistory.item_name}</p>
+             <p>Price    :  {this.props.requests.requestHistory.proposed_price}</p>
+           </div>
+         )}
+
+         {
+         /* meetup option decided */
+         is_traveler && item_request_status === 2 && process_status === "meetup_decided" && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Meetup decided!</p>
+             </div>
+           </div>
+
+         )}
+
+         {/* the traveler accepted request but payment is not made yet */
+         is_traveler && item_request_status === 2 && process_status === "request_responded" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Waiting payment by {this.props.requests.requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You accepted the request </p>
+             </div>
+           </div>
+         </div>
+         )}
+
+         {/* the requester made payment so the traveler notify the purchase */
+         is_traveler && process_status === "payment_made" && (
          <div>
            <div class="history-box">
              <div class="history-wrapper">
@@ -225,8 +249,8 @@ class TransactionHistory extends Component {
          </div>
          )}
 
-
-         {has_history && is_requester && item_request_status === 3 && (
+         {/*the traveler rejected the request*/
+         is_traveler && item_request_status === 3 && (
            <div class="history-box">
              <div class="history-wrapper">
                <p>Your request was rejected by {this.props.requests.requestHistory.respondent.first_name}</p>
@@ -234,38 +258,35 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         {has_history && (
-             <div class="history-box initial">
-               <div class="history-wrapper">
-                 {is_requester ? (
-                   <p>Request sent by You</p>
-                 ) : (
-                   <p>Request sent by {this.props.requests.requestHistory.requester.first_name}</p>
-                 )}
+         <div class="history-box initial">
+           <div class="history-wrapper">
+             {is_requester ? (
+               <p>Request sent by You</p>
+             ) : (
+               <p>Request sent by {requestHistory.requester.first_name}</p>
+             )}
+           </div>
+           <ul class="request-data">
+             {is_traveler ? (
+               <li>User Name:   You</li>
+             ) : (
+               <li>User Name:   {requestHistory.respondent.first_name}</li>
+             )}
+             <li>Location:   {requestHistory.trip.destination}</li>
+             <li>Item Name:  {requestHistory.item_name}</li>
+             <li>Item ID (Optional):   {requestHistory.item_id}</li>
+             <li>Item URL (Optional):   {requestHistory.item_url}</li>
+             <li>Proposed Price (item price + commission):   {requestHistory.proposed_price}</li>
+             <li>Preferred Delivery Method:   Ship</li>
+             <li>Comments (Optional): {requestHistory.comment}</li>
+           </ul>
+             {is_traveler  && requestHistory.status === 0 && (
+               <div>
+                 <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
+                 <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
                </div>
-               <ul class="request-data">
-                 {is_respondent ? (
-                   <li>User Name:   You</li>
-                 ) : (
-                   <li>User Name:   {this.props.requests.requestHistory.respondent.first_name}</li>
-                 )}
-                 <li>Location:   {this.props.requests.requestHistory.trip.destination}</li>
-                 <li>Item Name:  {this.props.requests.requestHistory.item_name}</li>
-                 <li>Item ID (Optional):   {this.props.requests.requestHistory.item_id}</li>
-                 <li>Item URL (Optional):   {this.props.requests.requestHistory.item_url}</li>
-                 <li>Proposed Price (item price + commission):   {this.props.requests.requestHistory.proposed_price}</li>
-                 <li>Preferred Delivery Method:   Ship</li>
-                 <li>Comments (Optional): {this.props.requests.requestHistory.comment}</li>
-               </ul>
-                 {is_respondent  && this.props.requests.requestHistory.status === 0 && (
-                   <div>
-                     <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
-                     <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
-                   </div>
-                 )}
-             </div>
-         )}
-
+             )}
+         </div>
        </div>
      </div>
 

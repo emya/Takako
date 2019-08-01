@@ -4,6 +4,7 @@ from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
+    SharedContact
 )
 
 from rest_framework import serializers
@@ -72,13 +73,18 @@ class PurchaseNotificationSerializer(serializers.ModelSerializer):
     meetup_option2 = MeetupSerializer(read_only=True)
     meetup_option3 = MeetupSerializer(read_only=True)
     final_meetup = MeetupSerializer(read_only=True)
+    shared_contact = serializers.SerializerMethodField()
 
     class Meta:
         model = PurchaseNotification
         fields = (
             'id', 'item_request', 'preferred_phone', 'preferred_email', 'meetup_option1',
-            'meetup_option2', 'meetup_option3', 'final_meetup'
+            'meetup_option2', 'meetup_option3', 'action_taken_by', 'final_meetup', 'shared_contact'
         )
+
+    def get_shared_contact(self, obj):
+        qs = obj.shared_contact.all()
+        return SharedContactSerializer(qs, many=True, read_only=True).data
 
 
 class ChargeSerializer(serializers.ModelSerializer):
@@ -103,7 +109,8 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
         fields = (
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
-            'delivery_method', 'comment', 'status', 'charge', 'purchase_notification')
+            'delivery_method', 'comment', 'status', 'charge',
+            'process_status', 'purchase_notification')
 
     def get_charge(self, obj):
         qs = obj.charges.all()
@@ -112,6 +119,14 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
     def get_purchase_notification(self, obj):
         qs = obj.purchase_notification.all()
         return PurchaseNotificationSerializer(qs, many=True, read_only=True).data
+
+class SharedContactSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = SharedContact
+        fields = ('id', 'user', 'preferred_phone', 'preferred_email', )
+
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
