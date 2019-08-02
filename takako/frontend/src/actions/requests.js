@@ -216,7 +216,7 @@ export const sendPurchaseNotification= (
 }
 
 export const shareContact = (
-  purchase_notification_id, preferred_phone, preferred_email, process_status) => {
+  purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id, process_status) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -226,7 +226,7 @@ export const shareContact = (
     }
 
     let body = JSON.stringify({
-      purchase_notification_id, preferred_phone, preferred_email, process_status
+      purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id, process_status
     });
 
     return fetch("/api/share/contact/", {headers, method: "POST", body})

@@ -44,13 +44,18 @@ class SharedContactViewSet(viewsets.ModelViewSet):
         purchase_notification_id = request.data.pop("purchase_notification_id")
         purchase_notification = PurchaseNotification.objects.get(pk=purchase_notification_id)
 
-        purchase_notification.action_taken_by = 1
-        purchase_notification.save()
 
         process_status = request.data.pop("process_status")
 
         purchase_notification.item_request.process_status = process_status
         purchase_notification.item_request.save()
+
+        accepted_meetup_id = request.data.pop("accepted_meetup_id")
+        accepted_meetup = Meetup.objects.get(pk=accepted_meetup_id)
+        purchase_notification.final_meetup = accepted_meetup
+
+        purchase_notification.action_taken_by = 1
+        purchase_notification.save()
 
         shared_contact = SharedContact.objects.create(
             purchase_notification=purchase_notification,
