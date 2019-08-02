@@ -55,7 +55,8 @@ class ShareContact extends Component {
     this.props.shareContact(
       this.props.location.state.purchase_notification.id,
       this.state.preferred_phone,
-      this.state.preferred_email
+      this.state.preferred_email,
+      this.props.location.state.meetup.id,
     );
   }
 
@@ -138,8 +139,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    shareContact: (purchase_notification_id, preferred_phone, preferred_email) => {
-      dispatch(requests.shareContact(purchase_notification_id, preferred_phone, preferred_email, "meetup_decided"));
+    shareContact: (purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id) => {
+      dispatch(
+        requests.shareContact(
+          purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id, "meetup_decided"
+        )
+      );
     },
     logout: () => dispatch(auth.logout()),
   }
