@@ -110,10 +110,10 @@ class ItemRequest(models.Model):
     item_id = models.CharField(max_length=200, blank=True)
     item_url = models.CharField(max_length=300, blank=True)
     proposed_price = models.IntegerField()
-    delivery_method = models.IntegerField()
     # method
     # 0: meet-up
     # 1: ship
+    delivery_method = models.IntegerField(default=0)
     comment = models.CharField(max_length=200, blank=True)
     preferred_meetup_location = models.CharField(max_length=300, blank=True)
     preferred_meetup_date = models.CharField(max_length=300, blank=True)

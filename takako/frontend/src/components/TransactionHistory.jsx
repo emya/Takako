@@ -63,6 +63,8 @@ class TransactionHistory extends Component {
       has_history = true;
       requestHistory = this.props.requests.requestHistory;
 
+      console.log(requestHistory);
+
       item_request_status = requestHistory.status;
       process_status = requestHistory.process_status;
 
@@ -109,6 +111,9 @@ class TransactionHistory extends Component {
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
              </ul>
+             <h3>Contact Info of {requestHistory.respondent.first_name}</h3>
+             <p> {requestHistory.purchase_notification[0].preferred_phone} </p>
+             <p> {requestHistory.purchase_notification[0].preferred_email} </p>
            </div>
          )}
          {
@@ -209,6 +214,9 @@ class TransactionHistory extends Component {
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
              </ul>
+             <h3>Contact Info of {requestHistory.requester.first_name}</h3>
+             <p> {requestHistory.purchase_notification[0].shared_contact[0].preferred_phone} </p>
+             <p> {requestHistory.purchase_notification[0].shared_contact[0].preferred_email} </p>
            </div>
          )}
 
@@ -285,7 +293,7 @@ class TransactionHistory extends Component {
              <li>Item ID (Optional):   {requestHistory.item_id}</li>
              <li>Item URL (Optional):   {requestHistory.item_url}</li>
              <li>Proposed Price (item price + commission):   {requestHistory.proposed_price}</li>
-             <li>Preferred Delivery Method:   Ship</li>
+             <li>Delivery Method:   Meetup</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
              {is_traveler  && requestHistory.status === 0 && (
