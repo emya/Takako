@@ -105,7 +105,7 @@ class TransactionHistory extends Component {
            <div class="history-box initial">
              <div class="history-wrapper">
                <p>Meetup place/time decided!</p>
-             </div>`
+             </div>
              <ul class="request-data">
                <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
@@ -146,6 +146,7 @@ class TransactionHistory extends Component {
                    pathname: "/request/meetup/form",
                    state: {
                      requests: requestHistory,
+                     action_taken_by: 1,
                    }
                  }} style={{color: "black"}}>Suggest other meetup options
              </Link>
@@ -292,7 +293,14 @@ class TransactionHistory extends Component {
              <li>Item Name:  {requestHistory.item_name}</li>
              <li>Item ID (Optional):   {requestHistory.item_id}</li>
              <li>Item URL (Optional):   {requestHistory.item_url}</li>
-             <li>Proposed Price (item price + commission):   {requestHistory.proposed_price}</li>
+             <li>Proposed Price:   {requestHistory.proposed_price}</li>
+             <li>Commission Fee:   {requestHistory.commission_fee}</li>
+             {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee}</li>)}
+             {is_requester && (
+               <li>
+                 Total Payment: {requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
+               </li>
+             )}
              <li>Delivery Method:   Meetup</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>

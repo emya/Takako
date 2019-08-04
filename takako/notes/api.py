@@ -97,6 +97,49 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(purchase_notification)
         return Response(serializer.data)
 
+class MeetupSuggestionViewSet(viewsets.ModelViewSet):
+    queryset = PurchaseNotification.objects.all()
+    serializer_class = PurchaseNotificationSerializer
+
+    def partial_update(self, request, pk):
+        print("partial_update", pk)
+
+        instance = self.get_object()
+
+        meetup_option1 = request.data.pop("meetup_option1")
+        meetup_option2 = request.data.pop("meetup_option2", None)
+        meetup_option3 = request.data.pop("meetup_option3", None)
+        action_taken_by = int(request.data.pop("action_taken_by"))
+        process_status = request.data.pop("process_status")
+
+        instance.item_request.process = process_status
+        instance.save()
+
+        meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
+        meetup2 = None
+        meetup3 = None
+
+        if meetup_option2:
+            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
+
+        if meetup_option3:
+            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
+
+        data = {
+            "meetup_option1": meetup1,
+            "meetup_option2": meetup2,
+            "meetup_option3": meetup3,
+            "action_taken_by": action_taken_by,
+        }
+        serializer = self.serializer_class(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        print(Response(serializer.data))
+
+        return Response(serializer.data)
+
+
 class ItemRequestHistoryViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
     serializer_class = ItemRequestHistorySerializer
@@ -106,6 +149,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
 
     def create(self, request):
+        print(request.data)
         respondent_id = request.data.pop("respondent_id")
         trip_id = request.data.pop("trip_id")
         respondent = User.objects.get(pk=respondent_id)

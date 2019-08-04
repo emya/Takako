@@ -4,6 +4,7 @@ from rest_framework import routers
 from .api import (
     NoteViewSet,
     SharedContactViewSet,
+    MeetupSuggestionViewSet,
     PurchaseNotificationViewSet,
     ProfileViewSet,
     TripViewSet,
@@ -21,6 +22,7 @@ from .api import (
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
 router.register('purchase/notification', PurchaseNotificationViewSet, 'purchase_notification')
+router.register('suggest/meetups', MeetupSuggestionViewSet, 'suggest_meetup')
 router.register('share/contact', SharedContactViewSet, 'share_contact')
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('trips', TripViewSet, 'trips')

@@ -13,6 +13,9 @@ export default function requests(state=initialState, action) {
     case 'SHARE_CONTACT_SUCCESSFUL':
         return {...state, ...action.data, isSubmissionSucceeded: true};
 
+    case 'SUGGEST_MEETUPS_SUCCESSFUL':
+        return {...state, ...action.data, isSubmissionSucceeded: true};
+
     case 'NOTIFY_PURCHASE_SUCCESSFUL':
         return {...state, ...action.data, isSubmissionSucceeded: true};
 

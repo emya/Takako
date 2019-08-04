@@ -36,6 +36,12 @@ class NewMeetupRequest extends Component {
     errors: []
   }
 
+  componentWillReceiveProps(newProps){
+    if(newProps.isSubmissionSucceeded !== this.props.isSubmissionSucceeded){
+      this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
+    }
+  }
+
   validateForm = (preferred_phone, preferred_email, meetup_option1_date, meetup_option1_dtime, meetup_option1_address) => {
     // we are going to store errors for all fields
     // in a signle array
@@ -56,15 +62,44 @@ class NewMeetupRequest extends Component {
     this.setState({meetup_option1_date: date});
   }
 
-  shareContact = (purchase_notification_id) => {
-    this.props.shareContact(purchase_notification_id, this.state.preferred_phone, this.state.preferred_email);
+  suggestNewMeetup = (purchase_notification_id, action_taken_by) => {
+    this.props.suggestNewMeetup(
+      purchase_notification_id,
+      this.state.meetup_option1_date, this.state.meetup_option1_dtime,
+      this.state.meetup_option1_address, this.state.meetup_option1_comment,
+      this.state.preferred_phone, this.state.preferred_email, action_taken_by,
+    );
   }
 
   render() {
+    console.log(this.state);
+    console.log(this.props);
+    if (this.state.isSubmissionSucceeded) {
+      return (
+        <div>
+          <Header />
+
+          <div class="wrapper clearfix">
+            <SideMenu />
+            <div class="request-conf">
+              <p>Your request was successfully submitted</p>
+              <p><a href="/transaction/status" style={{color: "black"}}>
+                Back to the conversation
+              </a></p>
+            </div>
+          </div>
+          <MobileSideMenu />
+          <Footer />
+        </div>
+      )
+    }
+
     let has_requests = false;
     let requestHistory;
+    let action_taken_by;
     if (this.props.location.state.requests) {
       requestHistory = this.props.location.state.requests;
+      action_taken_by = this.props.location.state.action_taken_by;
     } else {
       return null
     }
@@ -82,7 +117,7 @@ class NewMeetupRequest extends Component {
           <div class="form-wrapper">
 
             <div class="form-section">
-              <p class="form-heading">{requestHistory.requester.first_name} Contact Info</p><br/>
+              <p class="form-heading">{requestHistory.respondent.first_name} Contact Info</p><br/>
               <p class="form-data">{requestHistory.purchase_notification[0].preferred_phone} </p><br />
               <p class="form-data">{requestHistory.purchase_notification[0].preferred_email} </p><br />
             </div>
@@ -116,7 +151,10 @@ class NewMeetupRequest extends Component {
             </div>
           </div>
 
-          <button class="form-send-btn btn" onClick={this.proceedRequest}>Request New Meetup Date/Place</button>
+          <button class="form-send-btn btn"
+            onClick={() => this.suggestNewMeetup(requestHistory.purchase_notification[0].id, action_taken_by)}>
+            Request New Meetup Date/Place
+          </button>
 
         </form>
       </div>
@@ -127,14 +165,28 @@ class NewMeetupRequest extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    shareContact: (purchase_notification_id, preferred_phone, preferred_email) => {
-      dispatch(requests.shareContact(purchase_notification_id, preferred_phone, preferred_email));
+    suggestNewMeetup: (
+      purchase_notification_id,
+      meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+      preferred_phone, preferred_email, action_taken_by,
+      ) => {
+      return dispatch(requests.suggestNewMeetup(
+        purchase_notification_id,
+        meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+        preferred_phone, preferred_email, action_taken_by, "meetup_suggested"
+      ));
     },
     logout: () => dispatch(auth.logout()),
   }
 }
 
 
-export default connect(null, mapDispatchToProps)(NewMeetupRequest);
+export default connect(mapStateToProps, mapDispatchToProps)(NewMeetupRequest);
