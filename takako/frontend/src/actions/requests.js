@@ -84,9 +84,6 @@ export const fetchItemRequests = (userId) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log("token", token);
-    console.log("endpoint", `/api/requests/item/?userId=${userId}`);
-
     return fetch(`/api/requests/item/?userId=${userId}`, {headers, method: "GET"})
       .then(res => {
         if (res.status < 500) {
@@ -121,7 +118,6 @@ export const fetchRequestHistory = (requestId) => {
 
     return fetch(`/api/requests/history/${requestId}/`, {headers, method: "GET"})
       .then(res => {
-        console.log(res);
         if (res.status < 500) {
           return res.json().then(data => {
             return {status: res.status, data};
@@ -271,7 +267,6 @@ export const suggestNewMeetup = (
     }
 
     let meetup_option1_date = formatDate(meetup_option1_d);
-    console.log("meetup_option1_date", meetup_option1_date)
 
     let meetup_option1 = {
       "date": meetup_option1_date,

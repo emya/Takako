@@ -144,7 +144,6 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
 
     def create(self, request):
-        print(request.data)
         respondent_id = request.data.pop("respondent_id")
         trip_id = request.data.pop("trip_id")
         respondent = User.objects.get(pk=respondent_id)
