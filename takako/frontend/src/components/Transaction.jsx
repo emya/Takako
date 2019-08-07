@@ -50,8 +50,13 @@ class Transaction extends Component {
                 <td>
                   {sent_item_request.status === 0 && ("Pending")}
                   {sent_item_request.status === 1 && ("Cancelled")}
-                  {sent_item_request.status === 2 && ("Accepted")}
                   {sent_item_request.status === 3 && ("Rejected")}
+
+                  {sent_item_request.status === 2 && sent_item_request.process_status == "request_responded" && ("Accepted [Action Required]")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status == "payment_made" && ("Paid")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status == "purchase_notified" && ("Purchased [Action Required]")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
                   <a href={`/transaction/history/${sent_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
                 </td>
               </tr>
@@ -78,10 +83,16 @@ class Transaction extends Component {
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
                 <td>
-                  {received_item_request.status === 0 && ("Pending")}
+                  {received_item_request.status === 0 && ("Pending [Action Required]")}
                   {received_item_request.status === 1 && ("Cancelled")}
-                  {received_item_request.status === 2 && ("Accepted")}
                   {received_item_request.status === 3 && ("Rejected")}
+
+                  {received_item_request.status === 2 && received_item_request.process_status == "request_responded" && ("Accepted")}
+                  {received_item_request.status === 2 && received_item_request.process_status == "payment_made" && ("Paid [Action Required]")}
+                  {received_item_request.status === 2 && received_item_request.process_status == "purchase_notified" && ("Purchased")}
+                  {received_item_request.status === 2 && received_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
+                  {received_item_request.status === 2 && received_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
+                  {received_item_request.status === 2 && ("Accepted")}
                   <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
                 </td>
               </tr>
