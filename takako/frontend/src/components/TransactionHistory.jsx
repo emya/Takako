@@ -45,7 +45,10 @@ class TransactionHistory extends Component {
     body["stripeToken"] = token.id;
     body["stripeTokenType"] = token.type;
 
-    this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body);
+    let requestHistory = this.props.requests.requestHistory;
+    let amount = requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price;
+
+    this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body, amount);
   };
 
   declineItemRequest = () => {
@@ -220,13 +223,22 @@ class TransactionHistory extends Component {
          )}
          {/* the user doesn't pay yet */
          is_requester && item_request_status === 2 && process_status === "request_responded" && (
-           <div class="history-box">
+           <div class="history-box initial">
              <div class="history-wrapper">
-               <p>Payment </p>
+               <p>Payment Detail</p>
+               <ul class="request-data">
+                 <li>Proposed Price:   {requestHistory.proposed_price}</li>
+                 <li>Commission Fee:   {requestHistory.commission_fee}</li>
+                 <li>Transaction Fee (3% of the proposed price):   {requestHistory.transaction_fee}</li>
+                 <li>
+                 Total Payment: {requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
+                 </li>
+               </ul>
 
                <StripeCheckout
                  stripeKey={keys.STRIPE_PUBLISHABLE_KEY}
                  token={this.onToken}
+                 amount={(requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price)*100}
                />
 
              </div>
@@ -454,8 +466,8 @@ const mapDispatchToProps = dispatch => {
     updateItemRequest: (requestId, item_request) => {
       return dispatch(requests.updateItemRequest(requestId, item_request));
     },
-    chargeItemRequest: (itemRequestId, userId, body) => {
-      return dispatch(requests.chargeItemRequest(itemRequestId, userId, body));
+    chargeItemRequest: (itemRequestId, userId, body, amount) => {
+      return dispatch(requests.chargeItemRequest(itemRequestId, userId, body, amount));
     },
     logout: () => dispatch(auth.logout()),
   }
