@@ -62,13 +62,28 @@ class NewMeetupRequest extends Component {
     this.setState({meetup_option1_date: date});
   }
 
-  suggestNewMeetup = (purchase_notification_id, action_taken_by) => {
+  suggestNewMeetup = (e) => {
+    e.preventDefault();
+    const errors = this.validateForm(
+      this.state.preferred_phone, this.state.preferred_email,
+      this.state.meetup_option1_date, this.state.meetup_option1_dtime,
+      this.state.meetup_option1_address
+    );
+
+    if (errors.length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
+    let purchase_notification_id = this.props.location.state.requests.purchase_notification[0].id;
+    let action_taken_by = this.props.location.state.action_taken_by;
     this.props.suggestNewMeetup(
       purchase_notification_id,
       this.state.meetup_option1_date, this.state.meetup_option1_dtime,
       this.state.meetup_option1_address, this.state.meetup_option1_comment,
       this.state.preferred_phone, this.state.preferred_email, action_taken_by,
     );
+
   }
 
   render() {
@@ -152,7 +167,7 @@ class NewMeetupRequest extends Component {
           </div>
 
           <button class="form-send-btn btn"
-            onClick={() => this.suggestNewMeetup(requestHistory.purchase_notification[0].id, action_taken_by)}>
+            onClick={this.suggestNewMeetup}>
             Request New Meetup Date/Place
           </button>
 

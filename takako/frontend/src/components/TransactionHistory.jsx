@@ -117,6 +117,63 @@ class TransactionHistory extends Component {
            </div>
          )}
          {
+         /* meetup option suggested by this requester */
+         is_requester && item_request_status === 2 &&
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p>You suggested following meetup options</p>
+             </div>
+             <ul class="request-data">
+               <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
+               <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
+               <li>Meetup option1:</li>
+               <li>
+                 {requestHistory.purchase_notification[0].meetup_option1.date}
+                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
+                 {requestHistory.purchase_notification[0].meetup_option1.address}
+               </li>
+             </ul>
+           </div>
+         )}
+         {
+         /* meetup option suggested by traveler */
+         is_requester && item_request_status === 2 &&
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p>{requestHistory.respondent.first_name} purchased the item you requested </p>
+             </div>
+             <ul class="request-data">
+               <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
+               <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
+               <li>Meetup option1:</li>
+               <li>
+                 {requestHistory.purchase_notification[0].meetup_option1.date}
+                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
+                 {requestHistory.purchase_notification[0].meetup_option1.address}
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option1,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+             </ul>
+             <Link to={{
+                   pathname: "/request/meetup/form",
+                   state: {
+                     requests: requestHistory,
+                     action_taken_by: 1,
+                   }
+                 }} style={{color: "black"}}>Suggest other meetup options
+             </Link>
+           </div>
+         )}
+         {
          /* the traveler already notified */
          is_requester && item_request_status === 2 && process_status === "purchase_notified" && (
            <div class="history-box initial">
@@ -218,6 +275,65 @@ class TransactionHistory extends Component {
              <h3>Contact Info of {requestHistory.requester.first_name}</h3>
              <p> {requestHistory.purchase_notification[0].shared_contact[0].preferred_phone} </p>
              <p> {requestHistory.purchase_notification[0].shared_contact[0].preferred_email} </p>
+           </div>
+         )}
+
+         {
+         /* meetup option suggested by this traveler */
+         is_traveler && item_request_status === 2 &&
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p>You suggested following meetup options</p>
+             </div>
+             <ul class="request-data">
+               <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
+               <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
+               <li>Meetup option1:</li>
+               <li>
+                 {requestHistory.purchase_notification[0].meetup_option1.date}
+                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
+                 {requestHistory.purchase_notification[0].meetup_option1.address}
+               </li>
+             </ul>
+           </div>
+         )}
+
+         {
+         /* meetup option suggested by requester */
+         is_traveler && item_request_status === 2 &&
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p>{requestHistory.requester.first_name} suggested following meetup options </p>
+             </div>
+             <ul class="request-data">
+               <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
+               <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
+               <li>Meetup option1:</li>
+               <li>
+                 {requestHistory.purchase_notification[0].meetup_option1.date}
+                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
+                 {requestHistory.purchase_notification[0].meetup_option1.address}
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option1,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+             </ul>
+             <Link to={{
+                   pathname: "/request/meetup/form",
+                   state: {
+                     requests: requestHistory,
+                     action_taken_by: 0,
+                   }
+                 }} style={{color: "black"}}>Suggest other meetup options
+             </Link>
            </div>
          )}
 

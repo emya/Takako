@@ -281,16 +281,12 @@ export const suggestNewMeetup = (
     }
 
     let body = JSON.stringify({
-      preferred_phone, preferred_email,
+      purchase_notification_id, preferred_phone, preferred_email,
       meetup_option1, action_taken_by, process_status
     });
 
-    let res = fetch(`/api/suggest/meetups/${purchase_notification_id}/`, {headers, method: "PATCH", body});
-    console.log("res", res);
-
-    return fetch(`/api/suggest/meetups/${purchase_notification_id}/`, {headers, method: "PATCH", body})
+    return fetch(`/api/suggest/meetups/`, {headers, method: "POST", body})
       .then(res => {
-        console.log(res);
         if (res.status < 500) {
           return res.json().then(data => {
             return {status: res.status, data};
@@ -302,7 +298,6 @@ export const suggestNewMeetup = (
       })
       .then(res => {
         if (res.status === 200) {
-          console.log('SUGGEST_MEETUPS_SUCCESSFUL')
           return dispatch({type: 'SUGGEST_MEETUPS_SUCCESSFUL', data: res.data});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
