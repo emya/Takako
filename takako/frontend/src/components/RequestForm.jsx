@@ -15,7 +15,9 @@ class RequestForm extends Component {
     item_name: "",
     item_id: "",
     item_url: "",
-    proposed_price: "",
+    proposed_price: 0,
+    transaction_fee: 0,
+    commission_fee: 10,
     delivery_method: "0",
     preferred_meetup_location: "",
     preferred_meetup_date: "",
@@ -36,7 +38,8 @@ class RequestForm extends Component {
     e.preventDefault();
     this.props.sendRequest(
       this.props.match.params.userId, this.props.match.params.tripId, this.state.item_name,
-      this.state.item_id, this.state.item_url, this.state.proposed_price, this.state.delivery_method,
+      this.state.item_id, this.state.item_url, this.state.proposed_price,
+      this.state.commission_fee, this.state.transaction_fee, this.state.delivery_method,
       this.state.preferred_meetup_location, this.state.preferred_meetup_date, this.state.comment
     );
   }
@@ -132,11 +135,11 @@ class RequestForm extends Component {
               <p class="form-heading">Item Price</p><br />
               <p class="form-data">{this.state.proposed_price} </p><br />
               <p class="form-heading">Commission to Traveler</p><br />
-              <p class="form-data">xx</p><br />
+              <p class="form-data">{this.state.commission_fee}</p><br />
               <p class="form-heading">Transaction fee</p><br />
-              <p class="form-data">xx</p><br />
+              <p class="form-data">{this.state.transaction_fee}</p><br />
               <p class="form-heading">Your Total Payment</p><br />
-              <p class="form-data">xx</p><br />
+              <p class="form-data">{+this.state.proposed_price + +this.state.commission_fee + +this.state.transaction_fee}</p><br />
             </div>
 
             <div class="form-section">
@@ -211,16 +214,18 @@ class RequestForm extends Component {
 
       <div class="form-section">
         <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
-        <input type="number" value={this.state.proposed_price} onChange={(e) => this.setState({proposed_price: e.target.value})} required /><br/>
+        <input type="number" min="0" value={this.state.proposed_price}
+         onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.ceil(e.target.value*0.03)})}
+         required /><br/>
 
         <p class="form-heading">Transaction Fee (3%)</p><br/>
-        <input placeholder=""/><br/>
+        <input placeholder="" value={this.state.transaction_fee} /><br/>
 
-        <p class="form-heading">Commission to Traveler</p><br/>
-        <input placeholder="(Min. $10)"/><br/>
+        <p class="form-heading">Commission to Traveler (Min. $10)</p><br/>
+        <input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
-        <input placeholder=""/><br/>
+        <input type="number" value={+this.state.proposed_price + +this.state.transaction_fee + +this.state.commission_fee} /><br/>
 
       </div>
 
@@ -239,7 +244,6 @@ class RequestForm extends Component {
         <input value={this.state.comment} placeholder="(Optional)" onChange={(e) => this.setState({comment: e.target.value})}  maxLength="200"/><br/>
 
       </div>
-
 
       </div>
 
@@ -287,11 +291,13 @@ const mapDispatchToProps = dispatch => {
   return {
     sendRequest: (
       respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
-      delivery_method, preferred_meetup_location, preferred_meetup_date, comment)  => {
+      commission_fee, transaction_fee, delivery_method,
+      preferred_meetup_location, preferred_meetup_date, comment)  => {
       return dispatch(
         requests.sendItemRequest(
           respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
-          delivery_method, preferred_meetup_location, preferred_meetup_date, comment
+          commission_fee, transaction_fee, delivery_method,
+          preferred_meetup_location, preferred_meetup_date, comment
         )
       );
       //dispatch(notes.updateNote(id, text));

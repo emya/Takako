@@ -34,8 +34,9 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body) => {
 }
 
 export const sendItemRequest = (
-  respondent_id, trip_id, item_name, item_id, item_url,
-  proposed_price, delivery_method, preferred_meetup_location, preferred_meetup_date, comment) => {
+  respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
+  commission_fee, transaction_fee, delivery_method,
+  preferred_meetup_location, preferred_meetup_date, comment) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -46,10 +47,10 @@ export const sendItemRequest = (
 
     let body = JSON.stringify({
       respondent_id, trip_id, item_name, item_id, item_url,
-      proposed_price: parseInt(proposed_price), delivery_method,
+      proposed_price: parseInt(proposed_price), commission_fee: parseInt(commission_fee),
+      transaction_fee: parseInt(transaction_fee), delivery_method,
       preferred_meetup_location, preferred_meetup_date, comment, });
 
-    console.log("body", body);
     return fetch("/api/requests/item/", {headers, method: "POST", body})
       .then(res => {
         if (res.status < 500) {
@@ -170,7 +171,7 @@ export const updateItemRequest = (requestId, item_request) => {
   }
 }
 
-export const sendPurchaseNotification= (
+export const sendPurchaseNotification = (
   request_id, preferred_phone, preferred_email,
   meetup_option1_d, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment) => {
   return (dispatch, getState) => {
@@ -252,6 +253,55 @@ export const shareContact = (
   }
 }
 
+export const suggestNewMeetup = (
+  purchase_notification_id, meetup_option1_d,
+  meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+  preferred_phone, preferred_email, action_taken_by, process_status) => {
+
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let meetup_option1_date = formatDate(meetup_option1_d);
+
+    let meetup_option1 = {
+      "date": meetup_option1_date,
+      "dtime": meetup_option1_dtime,
+      "address": meetup_option1_address,
+      "comment": meetup_option1_comment,
+    }
+
+    let body = JSON.stringify({
+      purchase_notification_id, preferred_phone, preferred_email,
+      meetup_option1, action_taken_by, process_status
+    });
+
+    return fetch(`/api/suggest/meetups/`, {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: 'SUGGEST_MEETUPS_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+
+}
 
 function formatDate(date) {
     var d = new Date(date),

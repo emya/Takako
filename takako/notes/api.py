@@ -97,6 +97,44 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(purchase_notification)
         return Response(serializer.data)
 
+class MeetupSuggestionViewSet(viewsets.ModelViewSet):
+    queryset = PurchaseNotification.objects.all()
+    serializer_class = PurchaseNotificationSerializer
+
+    def create(self, request):
+        purchase_notification_id = request.data.pop("purchase_notification_id")
+        purchase_notification = PurchaseNotification.objects.get(pk=purchase_notification_id)
+
+
+        meetup_option1 = request.data.pop("meetup_option1")
+        meetup_option2 = request.data.pop("meetup_option2", None)
+        meetup_option3 = request.data.pop("meetup_option3", None)
+        process_status = request.data.pop("process_status")
+        action_taken_by = int(request.data.pop("action_taken_by"))
+
+        meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
+        meetup2 = None
+        meetup3 = None
+
+        if meetup_option2:
+            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
+
+        if meetup_option3:
+            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
+
+        purchase_notification.meetup_option1 = meetup1
+        purchase_notification.meetup_option2 = meetup2
+        purchase_notification.meetup_option3 = meetup3
+        purchase_notification.action_taken_by = action_taken_by
+        purchase_notification.save()
+
+        purchase_notification.item_request.process_status = process_status
+        purchase_notification.item_request.save()
+
+        serializer = self.serializer_class(purchase_notification)
+        return Response(serializer.data)
+
+
 class ItemRequestHistoryViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
     serializer_class = ItemRequestHistorySerializer

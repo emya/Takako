@@ -109,6 +109,7 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
         fields = (
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'proposed_price',
+            'commission_fee', 'transaction_fee',
             'delivery_method', 'comment', 'status', 'charge',
             'process_status', 'purchase_notification')
 
