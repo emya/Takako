@@ -45,10 +45,12 @@ class TransactionHistory extends Component {
     body["stripeToken"] = token.id;
     body["stripeTokenType"] = token.type;
 
+    console.log("addresses", addresses);
+
     let requestHistory = this.props.requests.requestHistory;
     let amount = requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price;
 
-    this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body, amount);
+    this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body, addresses, amount);
   };
 
   declineItemRequest = () => {
@@ -239,6 +241,7 @@ class TransactionHistory extends Component {
                  stripeKey={keys.STRIPE_PUBLISHABLE_KEY}
                  token={this.onToken}
                  amount={(requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price)*100}
+                 billingAddress={true}
                />
 
              </div>
@@ -466,8 +469,8 @@ const mapDispatchToProps = dispatch => {
     updateItemRequest: (requestId, item_request) => {
       return dispatch(requests.updateItemRequest(requestId, item_request));
     },
-    chargeItemRequest: (itemRequestId, userId, body, amount) => {
-      return dispatch(requests.chargeItemRequest(itemRequestId, userId, body, amount));
+    chargeItemRequest: (itemRequestId, userId, body, addresses, amount) => {
+      return dispatch(requests.chargeItemRequest(itemRequestId, userId, body, addresses, amount));
     },
     logout: () => dispatch(auth.logout()),
   }

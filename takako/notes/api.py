@@ -179,7 +179,10 @@ class ChargeViewSet(viewsets.ModelViewSet):
         item_request_id = request.data.pop("item_request_id")
         body = request.data.pop("stripe_body")
         amount = request.data.pop("amount")
+        address = request.data.pop("addresses")
         stripe_token = body["stripeToken"]
+        print("address", address)
+
         stripe_charge = stripe.Charge.create(
             amount=amount*100,
             currency='usd',
@@ -199,6 +202,7 @@ class ChargeViewSet(viewsets.ModelViewSet):
         charge = Charge.objects.create(
             user=request.user,
             amount=amount,
+            address=address,
             item_request=item_request,
             card=card,
             charge_id=charge_id,

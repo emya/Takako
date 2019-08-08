@@ -1,4 +1,4 @@
-export const chargeItemRequest = (item_request_id, user_id, stripe_body, amount) => {
+export const chargeItemRequest = (item_request_id, user_id, stripe_body, addresses, amount) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -7,7 +7,7 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body, amount)
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let body = JSON.stringify({item_request_id, user_id, stripe_body, amount});
+    let body = JSON.stringify({item_request_id, user_id, stripe_body, addresses, amount});
 
     return fetch("/api/requests/charge/", {headers, method: "POST", body})
       .then(res => {

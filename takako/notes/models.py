@@ -141,6 +141,7 @@ class Charge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="charges")
     card = JSONField()
+    address = JSONField()
     charge_id = models.CharField(max_length=100)
     # Null = True for now
     email = models.EmailField(null=True)
