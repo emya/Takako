@@ -153,6 +153,8 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def list(self, request):
+
+
         userId = request.GET.get('userId')
 
         if userId:
@@ -320,6 +322,9 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         Profile.objects.create(user=user)
+
+        send_email("Welcome to Torimo!", "Thank you for joining us!", user.email)
+
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)
@@ -343,3 +348,15 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+def send_email(subject, message, to_email):
+    from django.core.mail import send_mail
+    from django.conf import settings
+
+    send_mail(
+        subject,
+        message,
+        settings.EMAIL_HOST_USER,
+        [to_email],
+        fail_silently=False,
+    )
