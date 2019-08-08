@@ -45,8 +45,6 @@ class TransactionHistory extends Component {
     body["stripeToken"] = token.id;
     body["stripeTokenType"] = token.type;
 
-    console.log("addresses", addresses);
-
     let requestHistory = this.props.requests.requestHistory;
     let amount = requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price;
 
