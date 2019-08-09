@@ -150,6 +150,9 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         trip = Trip.objects.get(pk=trip_id)
         item_request = ItemRequest.objects.create(requester=request.user, respondent=respondent, trip=trip, **request.data)
         serializer = self.serializer_class(item_request)
+
+        # Notify respondent
+        send_email("You got new Request!", "You got new Request! Check at Torimo!", respondent.email)
         return Response(serializer.data)
 
     def list(self, request):
