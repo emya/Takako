@@ -171,14 +171,12 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-
-
         userId = request.GET.get('userId')
 
         if userId:
             user = User.objects.get(pk=userId)
-            queryset_respondent = ItemRequest.objects.filter(respondent=user)
-            queryset_requester = ItemRequest.objects.filter(requester=user)
+            queryset_respondent = ItemRequest.objects.filter(respondent=user).order_by('-created_at')
+            queryset_requester = ItemRequest.objects.filter(requester=user).order_by('-created_at')
 
             custom_data = {
                 'sent_item_requests': self.serializer_class(queryset_requester, many=True).data,
