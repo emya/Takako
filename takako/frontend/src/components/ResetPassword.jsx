@@ -61,7 +61,7 @@ class ResetPassword extends Component {
     }
     if (this.state.isPasswordUpdated){
       return (
-        <p> Password is successfully updated! Login here </p>
+        <p> Password is successfully updated! Login <Link to="/login" style={{color: "black"}}>here</Link> </p>
       )
     }
 

@@ -155,5 +155,3 @@ class LoginUserSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError("Unable to log in with provided credentials.")
 
-class CustomTokenSerializer(serializers.Serializer):
-    token = serializers.CharField()

@@ -15,7 +15,6 @@ from .api import (
     RegistrationAPI,
     LoginAPI,
     UserAPI,
-    CustomPasswordTokenVerificationView
 )
 
 #from .views import ListNote
