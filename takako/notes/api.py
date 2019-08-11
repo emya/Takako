@@ -1,10 +1,25 @@
 import json
-from rest_framework import status, viewsets, permissions, generics
+from rest_framework import (
+    status, viewsets, permissions, generics,
+    parsers, renderers
+)
 
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.db.models import Prefetch
+
+from django.dispatch import receiver
+from django_rest_passwordreset.signals import reset_password_token_created
+from django.core.mail import EmailMultiAlternatives
+
+from django_rest_passwordreset.models import ResetPasswordToken
+from django_rest_passwordreset.views import get_password_reset_token_expiry_time
+from django_rest_passwordreset.signals import reset_password_token_created
+from django.utils import timezone
+from django.urls import reverse
+
+from datetime import timedelta
 
 from knox.models import AuthToken
 
@@ -27,7 +42,8 @@ from .serializers import (
     TravelerProfileSerializer,
     CreateUserSerializer,
     UserSerializer,
-    LoginUserSerializer
+    LoginUserSerializer,
+    CustomTokenSerializer
 )
 
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -351,6 +367,83 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class CustomPasswordResetView:
+    @receiver(reset_password_token_created)
+    def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
+        """
+          Handles password reset tokens
+          When a token is created, an e-mail needs to be sent to the user
+        """
+        site_url = "http://localhost:8000"
+        site_name = "Torimo"
+
+        # send an e-mail to the user
+        context = {
+            'current_user': reset_password_token.user,
+            'email': reset_password_token.user.email,
+            'reset_password_url': "{}/password-reset/{}".format(site_url, reset_password_token.key),
+            'site_name': site_name,
+            'site_domain': site_url
+        }
+
+        # render email text
+        #email_html_message = render_to_string('email/user_reset_password.html', context)
+        #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
+        email_plaintext_message = f"Hey let's change passward at {site_url}/reset/password/{reset_password_token.key}"
+
+        msg = EmailMultiAlternatives(
+            # title:
+            "Password Reset for {}".format(site_name),
+            # message:
+            email_plaintext_message,
+            # from:
+            "noreply@{}".format(site_url),
+            # to:
+            [reset_password_token.user.email]
+        )
+        #msg.attach_alternative(email_html_message, "text/html")
+        msg.send()
+
+
+class CustomPasswordTokenVerificationView(generics.GenericAPIView):
+    """
+      An Api View which provides a method to verifiy that a given pw-reset token is valid before actually confirming the
+      reset.
+    """
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+    serializer_class = CustomTokenSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        token = serializer.validated_data['token']
+
+        # get token validation time
+        password_reset_token_validation_time = get_password_reset_token_expiry_time()
+
+        # find token
+        reset_password_token = ResetPasswordToken.objects.filter(key=token).first()
+
+        if reset_password_token is None:
+            return Response({'status': 'invalid'}, status=status.HTTP_404_NOT_FOUND)
+
+        # check expiry date
+        expiry_date = reset_password_token.created_at + timedelta(hours=password_reset_token_validation_time)
+
+        if timezone.now() > expiry_date:
+            # delete expired token
+            reset_password_token.delete()
+            return Response({'status': 'expired'}, status=status.HTTP_404_NOT_FOUND)
+
+        # check if user has password to change
+        if not reset_password_token.user.has_usable_password():
+            return Response({'status': 'irrelevant'})
+
+        return Response({'status': 'OK'})
 
 def send_email(subject, message, to_email):
     from django.core.mail import send_mail
