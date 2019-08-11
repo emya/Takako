@@ -1,6 +1,9 @@
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
+  isForgotEmailSent: null,
+  isPasswordUpdated: null,
+  isValidToken: null,
   isLoading: true,
   user: null,
   errors: {},
@@ -30,6 +33,17 @@ export default function auth(state=initialState, action) {
         return {...state, errors: action.data, token: null, user: null,
             isAuthenticated: false, isLoading: false};
 
+    case 'FORGOT_PASSWORD_SUCCESSFUL':
+        return {...state, isForgotEmailSent: true};
+
+    case 'UPDATE_PASSWORD_SUCCESSFUL':
+        return {...state, isPasswordUpdated: true};
+
+    case 'UPDATE_PASSWORD_ERROR':
+        return {...state, errors: action.data};
+
+    case 'VALIDATE_TOKEN_SUCCESSFUL':
+        return {...state, isValidToken: true};
 
     default:
       return state;

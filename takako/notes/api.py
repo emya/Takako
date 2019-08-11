@@ -1,10 +1,25 @@
 import json
-from rest_framework import status, viewsets, permissions, generics
+from rest_framework import (
+    status, viewsets, permissions, generics,
+    parsers, renderers
+)
 
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.db.models import Prefetch
+
+from django.dispatch import receiver
+from django_rest_passwordreset.signals import reset_password_token_created
+from django.core.mail import EmailMultiAlternatives
+
+from django_rest_passwordreset.models import ResetPasswordToken
+from django_rest_passwordreset.views import get_password_reset_token_expiry_time
+from django_rest_passwordreset.signals import reset_password_token_created
+from django.utils import timezone
+from django.urls import reverse
+
+from datetime import timedelta
 
 from knox.models import AuthToken
 
@@ -27,7 +42,7 @@ from .serializers import (
     TravelerProfileSerializer,
     CreateUserSerializer,
     UserSerializer,
-    LoginUserSerializer
+    LoginUserSerializer,
 )
 
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -351,6 +366,43 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class CustomPasswordResetView:
+    @receiver(reset_password_token_created)
+    def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
+        """
+          Handles password reset tokens
+          When a token is created, an e-mail needs to be sent to the user
+        """
+        site_url = "http://localhost:8000"
+        site_name = "Torimo"
+
+        # send an e-mail to the user
+        context = {
+            'current_user': reset_password_token.user,
+            'email': reset_password_token.user.email,
+            'reset_password_url': "{}/password-reset/{}".format(site_url, reset_password_token.key),
+            'site_name': site_name,
+            'site_domain': site_url
+        }
+
+        # render email text
+        #email_html_message = render_to_string('email/user_reset_password.html', context)
+        #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
+        email_plaintext_message = f"Hey let's change passward at {site_url}/reset/password/{reset_password_token.key}"
+
+        msg = EmailMultiAlternatives(
+            # title:
+            "Password Reset for {}".format(site_name),
+            # message:
+            email_plaintext_message,
+            # from:
+            "noreply@{}".format(site_url),
+            # to:
+            [reset_password_token.user.email]
+        )
+        #msg.attach_alternative(email_html_message, "text/html")
+        msg.send()
 
 def send_email(subject, message, to_email):
     from django.core.mail import send_mail

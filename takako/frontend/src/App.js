@@ -29,6 +29,9 @@ import thunk from "redux-thunk";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+
 
 let store = createStore(takakoApp, applyMiddleware(thunk));
 
@@ -75,6 +78,8 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/traveler/profile" component={TravelerProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/reset/password" component={ForgotPassword} />
+                    <Route exact path="/reset/password/:token" component={ResetPassword} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>

@@ -28,10 +28,10 @@ class RequestForm extends Component {
     errors: []
   }
 
-   componentWillReceiveProps(newProps){
-     if(newProps.isSubmissionSucceeded !== this.props.isSubmissionSucceeded){
-         this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
-     }
+  componentWillReceiveProps(newProps){
+    if(newProps.isSubmissionSucceeded !== this.props.isSubmissionSucceeded){
+      this.setState({isSubmissionSucceeded: newProps.isSubmissionSucceeded })
+    }
   }
 
   submitRequest = (e) => {

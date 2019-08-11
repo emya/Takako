@@ -14,7 +14,7 @@ from .api import (
     TravelerProfileViewSet,
     RegistrationAPI,
     LoginAPI,
-    UserAPI
+    UserAPI,
 )
 
 #from .views import ListNote
@@ -39,5 +39,8 @@ urlpatterns = [
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
     url(r"^stripe/", include("djstripe.urls", namespace="djstripe")),
+
+    # NEW: The django-rest-passwordreset urls to request a token and confirm pw-reset
+    url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
 
