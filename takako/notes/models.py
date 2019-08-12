@@ -132,6 +132,7 @@ class ItemRequest(models.Model):
     # 3. purchase_notified
     # 4. meetup_suggested
     # 5. meetup_decided
+    # 6. request_cancelled
     process_status = models.CharField(max_length=100, default="request_sent")
     created_at = models.DateField(default=timezone.now)
 
