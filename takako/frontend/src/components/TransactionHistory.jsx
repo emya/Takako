@@ -29,6 +29,10 @@ class TransactionHistory extends Component {
     this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3, "process_status": "request_responded"});
   }
 
+  cancelItemRequest = () => {
+    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 1, "process_status": "request_cancelled"});
+  }
+
   onToken = (token, addresses) => {
     // TODO: Send the token information and any other
     /*
@@ -50,10 +54,6 @@ class TransactionHistory extends Component {
 
     this.props.chargeItemRequest(this.props.requests.requestHistory.id, this.props.user.id, body, addresses, amount);
   };
-
-  declineItemRequest = () => {
-    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3});
-  }
 
   render() {
     let has_history = false;
@@ -261,6 +261,14 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
+         {/*the request was cancelled*/
+         is_requester && item_request_status === 1 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You cancelled the request</p>
+             </div>
+           </div>
+         )}
 
          {/* This use is traveler */
          is_traveler && (
@@ -399,7 +407,16 @@ class TransactionHistory extends Component {
          is_traveler && item_request_status === 3 && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Your request was rejected by {requestHistory.respondent.first_name}</p>
+               <p>You rejected the request</p>
+             </div>
+           </div>
+         )}
+
+         {/*the request was cancelled*/
+         is_traveler && item_request_status === 1 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>The request was cancelled</p>
              </div>
            </div>
          )}
@@ -437,6 +454,11 @@ class TransactionHistory extends Component {
                <div>
                  <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
                  <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
+               </div>
+             )}
+             {is_requester  && requestHistory.status === 0 && (
+               <div>
+                 <button class="action-btn decline" onClick={this.cancelItemRequest}>Cancel request</button>
                </div>
              )}
          </div>
