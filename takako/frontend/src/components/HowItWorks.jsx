@@ -63,7 +63,7 @@ class HowItWorks extends Component {
       <h3>Cancelation</h3>
       <ul>
         <li>Requester can cancel request and get refunded up until Traveler’s trip begin date.</li>
-        <li>Traveler can cancel request anytime and it would not this would hurt their rating.</li>
+        <li>Traveler can cancel request anytime and this would not hurt their rating.</li>
       </ul>
       <h3>Deadline/Cutoff</h3>
       <ul>
