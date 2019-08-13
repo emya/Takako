@@ -58,11 +58,11 @@ class HowItWorks extends Component {
       <h3 id="whatscommision">Commision to Traveler</h3>
       <ul>
         <li>Commision to Traveler is minimum of $10 and varries depending on size, weight and difficulty to purchase the item.</li>
-        <li>Transaction fee is 3% of the item price.</li>
+        <li>Transaction fee is 5% of the item price.</li>
       </ul>
       <h3>Cancelation</h3>
       <ul>
-        <li>Requester can cancel request and get refunded up until Traveler’s trip begin date.</li>
+        <li>Requester can cancel request until Traveler accepts the offer.</li>
         <li>Traveler can cancel request anytime and this would not hurt their rating.</li>
       </ul>
       <h3>Deadline/Cutoff</h3>
