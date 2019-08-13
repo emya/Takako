@@ -48,7 +48,7 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
-  validateForm = (item_name, price) => {
+  validateForm = (item_name, price, commission_fee) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
@@ -61,12 +61,16 @@ class RequestForm extends Component {
       errors.push("Price can't be empty");
     }
 
+    if (commission_fee < 10) {
+      errors.push("Minimum commission fee is 10$");
+    }
+
     return errors;
   }
 
   proceedRequest = (e) => {
     e.preventDefault();
-    const errors = this.validateForm(this.state.item_name, this.state.proposed_price);
+    const errors = this.validateForm(this.state.item_name, this.state.proposed_price, this.state.commission_fee);
 
     if (errors.length > 0) {
       this.setState({ errors });
@@ -215,10 +219,10 @@ class RequestForm extends Component {
       <div class="form-section">
         <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
         <input type="number" min="0" value={this.state.proposed_price}
-         onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.ceil(e.target.value*0.03)})}
+         onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.round(e.target.value*0.05)})}
          required /><br/>
 
-        <p class="form-heading">Transaction Fee (3%)</p><br/>
+        <p class="form-heading">Transaction Fee (5%)</p><br/>
         <input placeholder="" value={this.state.transaction_fee} /><br/>
 
         <p class="form-heading">Commission to Traveler (Min. $10)</p><br/>
