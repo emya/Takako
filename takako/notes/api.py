@@ -23,6 +23,8 @@ from datetime import timedelta
 
 from knox.models import AuthToken
 
+from celery import Celery
+
 from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
@@ -44,6 +46,8 @@ from .serializers import (
     UserSerializer,
     LoginUserSerializer,
 )
+
+from .tasks import send_email
 
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
@@ -167,7 +171,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(item_request)
 
         # Notify respondent
-        send_email("You got new Request!", "You got new Request! Check at Torimo!", respondent.email)
+        send_email.delay("You got new Request!", "You got new Request! Check at Torimo!", respondent.email)
         return Response(serializer.data)
 
     def list(self, request):
@@ -199,7 +203,6 @@ class ChargeViewSet(viewsets.ModelViewSet):
         amount = request.data.pop("amount")
         address = request.data.pop("addresses")
         stripe_token = body["stripeToken"]
-        print("address", address)
 
         stripe_charge = stripe.Charge.create(
             amount=amount*100,
@@ -339,7 +342,7 @@ class RegistrationAPI(generics.GenericAPIView):
         user = serializer.save()
         Profile.objects.create(user=user)
 
-        send_email("Welcome to Torimo!", "Thank you for joining us!", user.email)
+        send_email.delay("Welcome to Torimo!", "Thank you for joining us!", user.email)
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
@@ -402,14 +405,3 @@ class CustomPasswordResetView:
         #msg.attach_alternative(email_html_message, "text/html")
         msg.send()
 
-def send_email(subject, message, to_email):
-    from django.core.mail import send_mail
-    from django.conf import settings
-
-    send_mail(
-        subject,
-        message,
-        settings.EMAIL_HOST_USER,
-        [to_email],
-        fail_silently=False,
-    )
