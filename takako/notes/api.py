@@ -49,6 +49,8 @@ from .serializers import (
 
 from .tasks import send_email
 
+from .permissions import BaseUserPermissions, BaseTransactionPermissions
+
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -155,6 +157,7 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
 
 
 class ItemRequestHistoryViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseTransactionPermissions,]
     queryset = ItemRequest.objects.all()
     serializer_class = ItemRequestHistorySerializer
 
@@ -270,7 +273,7 @@ class TripViewSet(viewsets.ModelViewSet):
         return queryset
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    #permission_classes = [permissions.AllowAny, ]
+    permission_classes = [BaseUserPermissions, ]
     serializer_class = ProfileSerializer
 
     def update(self, request, pk):

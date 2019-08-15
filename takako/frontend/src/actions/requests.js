@@ -130,8 +130,11 @@ export const fetchRequestHistory = (requestId) => {
       .then(res => {
         if (res.status === 200) {
           return dispatch({type: 'FETCH_REQUEST_HISTORY', data: res.data});
-        } else if (res.status === 401 || res.status === 403) {
+        } else if (res.status === 401) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        } else if (res.status === 403) {
+          dispatch({type: "FORBIDDEN_ERROR", data: res.data});
           throw res.data;
         }
       })

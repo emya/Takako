@@ -1,5 +1,6 @@
 const initialState = {
   isSubmissionSucceeded: null,
+  isForbidden: null,
 };
 
 export default function requests(state=initialState, action) {
@@ -27,6 +28,9 @@ export default function requests(state=initialState, action) {
 
     case 'UPDATE_ITEM_REQUEST':
         return {...state, requestHistory: action.data};
+
+    case 'FORBIDDEN_ERROR':
+        return {...state, ...action.data, isForbidden: true};
 
     default:
       return state;

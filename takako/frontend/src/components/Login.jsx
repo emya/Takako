@@ -18,7 +18,6 @@ class Login extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      console.log("isAuthenticated", this.props)
       return <Redirect to='/myprofile' />
     }
     return (

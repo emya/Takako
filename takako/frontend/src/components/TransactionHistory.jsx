@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
 import '../css/style.scss';
 import Header from './Header';
@@ -56,6 +56,9 @@ class TransactionHistory extends Component {
   };
 
   render() {
+    if (this.props.isForbidden) {
+      return <Redirect to='/transaction/status' />
+    }
     let has_history = false;
     let is_requester = false;
     let is_traveler = false;
@@ -475,6 +478,7 @@ class TransactionHistory extends Component {
 
 const mapStateToProps = state => {
   return {
+    isForbidden: state.requests.isForbidden,
     requests: state.requests,
     user: state.auth.user,
   }
