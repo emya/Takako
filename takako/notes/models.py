@@ -109,6 +109,7 @@ class ItemRequest(models.Model):
     item_name = models.CharField(max_length=200, blank=True)
     item_id = models.CharField(max_length=200, blank=True)
     item_url = models.CharField(max_length=300, blank=True)
+    n_items = models.IntegerField(default=1)
     proposed_price = models.IntegerField()
     commission_fee = models.IntegerField()
     transaction_fee = models.IntegerField()
