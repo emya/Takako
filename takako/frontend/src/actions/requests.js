@@ -34,8 +34,8 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body, address
 }
 
 export const sendItemRequest = (
-  respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
-  commission_fee, transaction_fee, delivery_method,
+  respondent_id, trip_id, item_name, item_id, item_url, n_items,
+  proposed_price, commission_fee, transaction_fee, delivery_method,
   preferred_meetup_location, preferred_meetup_date, comment) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
@@ -46,7 +46,7 @@ export const sendItemRequest = (
     }
 
     let body = JSON.stringify({
-      respondent_id, trip_id, item_name, item_id, item_url,
+      respondent_id, trip_id, item_name, item_id, item_url, n_items,
       proposed_price: parseInt(proposed_price), commission_fee: parseInt(commission_fee),
       transaction_fee: parseInt(transaction_fee), delivery_method,
       preferred_meetup_location, preferred_meetup_date, comment, });

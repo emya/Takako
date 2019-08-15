@@ -63,7 +63,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
         model = ItemRequest
         fields = (
             'id', 'requester', 'respondent', 'trip',
-            'item_name', 'item_id', 'item_url', 'proposed_price',
+            'item_name', 'item_id', 'item_url', 'n_items', 'proposed_price',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status', 'process_status')
 
@@ -108,8 +108,8 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
         model = ItemRequest
         fields = (
             'id', 'requester', 'respondent', 'trip',
-            'item_name', 'item_id', 'item_url', 'proposed_price',
-            'commission_fee', 'transaction_fee',
+            'item_name', 'item_id', 'item_url', 'n_items',
+            'proposed_price', 'commission_fee', 'transaction_fee',
             'delivery_method', 'comment', 'status', 'charge',
             'process_status', 'purchase_notification')
 

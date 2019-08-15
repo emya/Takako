@@ -15,6 +15,7 @@ class RequestForm extends Component {
     item_name: "",
     item_id: "",
     item_url: "",
+    n_items: 1,
     proposed_price: 0,
     transaction_fee: 0,
     commission_fee: 10,
@@ -38,7 +39,7 @@ class RequestForm extends Component {
     e.preventDefault();
     this.props.sendRequest(
       this.props.match.params.userId, this.props.match.params.tripId, this.state.item_name,
-      this.state.item_id, this.state.item_url, this.state.proposed_price,
+      this.state.item_id, this.state.item_url, this.state.n_items, this.state.proposed_price,
       this.state.commission_fee, this.state.transaction_fee, this.state.delivery_method,
       this.state.preferred_meetup_location, this.state.preferred_meetup_date, this.state.comment
     );
@@ -48,13 +49,17 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
-  validateForm = (item_name, price, commission_fee) => {
+  validateForm = (item_name, n_items, price, commission_fee) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
 
     if (item_name.length === 0) {
       errors.push("Item Name can't be empty");
+    }
+
+    if (n_items <= 0) {
+      errors.push("Minimum number of items is 1");
     }
 
     if (price.length === 0) {
@@ -70,7 +75,8 @@ class RequestForm extends Component {
 
   proceedRequest = (e) => {
     e.preventDefault();
-    const errors = this.validateForm(this.state.item_name, this.state.proposed_price, this.state.commission_fee);
+    const errors = this.validateForm(
+      this.state.item_name, this.state.n_items, this.state.proposed_price, this.state.commission_fee);
 
     if (errors.length > 0) {
       this.setState({ errors });
@@ -133,6 +139,8 @@ class RequestForm extends Component {
               <p class="form-data">{this.state.item_name}</p><br />
               <p class="form-heading">Item URL</p><br />
               <p class="form-data">{this.state.item_url} </p><br />
+              <p class="form-heading">Number of Item(s)</p><br />
+              <p class="form-data">{this.state.n_items} </p><br />
             </div>
 
             <div class="form-section">
@@ -214,6 +222,9 @@ class RequestForm extends Component {
 
         <p class="form-heading">Item Image</p><br/>
         <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
+
+        <p class="form-heading">Number of Item(s)</p><br/>
+        <input type="number" value={this.state.n_items} onChange={(e) => this.setState({n_items: e.target.value})} /><br/>
       </div>
 
       <div class="form-section">
@@ -294,13 +305,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     sendRequest: (
-      respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
-      commission_fee, transaction_fee, delivery_method,
+      respondent_id, trip_id, item_name, item_id, item_url, n_items,
+      proposed_price, commission_fee, transaction_fee, delivery_method,
       preferred_meetup_location, preferred_meetup_date, comment)  => {
       return dispatch(
         requests.sendItemRequest(
-          respondent_id, trip_id, item_name, item_id, item_url, proposed_price,
-          commission_fee, transaction_fee, delivery_method,
+          respondent_id, trip_id, item_name, item_id, item_url, n_items,
+          proposed_price, commission_fee, transaction_fee, delivery_method,
           preferred_meetup_location, preferred_meetup_date, comment
         )
       );

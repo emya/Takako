@@ -102,6 +102,7 @@ class TransactionHistory extends Component {
              <h3>Transaction History with {requestHistory.respondent.first_name}</h3>
              <p>Request you sent</p>
              <p>Item Name:  {requestHistory.item_name}</p>
+             <p>Number of Item(s):  {requestHistory.n_items}</p>
              <p>Price    :  {requestHistory.proposed_price}</p>
            </div>
          )}
@@ -440,8 +441,8 @@ class TransactionHistory extends Component {
              )}
              <li>Location:   {requestHistory.trip.destination}</li>
              <li>Item Name:  {requestHistory.item_name}</li>
-             <li>Item ID (Optional):   {requestHistory.item_id}</li>
              <li>Item URL (Optional):   {requestHistory.item_url}</li>
+             <li>Number of Item(s):   {requestHistory.n_items}</li>
              <li>Proposed Price:   {requestHistory.proposed_price}</li>
              <li>Commission Fee:   {requestHistory.commission_fee}</li>
              {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee}</li>)}
