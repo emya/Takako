@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
+
 import '../css/style.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import Header from './Header';
 import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
@@ -19,6 +22,17 @@ class TransactionHistory extends Component {
   state = {
     text: "",
     updateNoteId: null,
+    isDeclineSelected: null,
+    decline_reason: 0,
+    decline_reason_comment: "",
+  }
+
+  selectDeclineItemRequest = () => {
+    this.setState({isDeclineSelected: true});
+  }
+
+  selectDeclineReason = (e) => {
+    this.setState({decline_reason: e.target.value});
   }
 
   acceptItemRequest = () => {
@@ -26,7 +40,14 @@ class TransactionHistory extends Component {
   }
 
   declineItemRequest = () => {
-    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 3, "process_status": "request_responded"});
+    this.props.updateItemRequest(
+      this.props.match.params.requestId,
+      {
+          "status": 3, "decline_reason": this.state.decline_reason,
+          "decline_reason_comment": this.state.decline_reason_comment,
+          "process_status": "request_responded"
+      }
+    );
   }
 
   cancelItemRequest = () => {
@@ -59,6 +80,84 @@ class TransactionHistory extends Component {
     if (this.props.isForbidden) {
       return <Redirect to='/transaction/status' />
     }
+    if (this.props.isResponded) {
+     return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <p>Your notification was successfully submitted</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+              Back to the conversation
+            </a></p>
+          </div>
+        </div>
+
+        <div class="sidemenu-mobile">
+          <ul>
+          <li><a href="#">My Profile<span>></span></a></li>
+          <li><a href="#">Transaction Status<span>></span></a></li>
+          <li><a href="#">Message Box<span>></span></a></li>
+          <li><a href="#">Edit Profile<span>></span></a></li>
+          <li><a href="#">Edit Account<span>></span></a></li>
+          <li><a href="#">Logout<span>></span></a></li>
+          <li><a href="#">Help<span>></span></a></li>
+          </ul>
+        </div>
+
+        <footer>
+          FOOTER CONTENTS TO BE DETERMINED
+          <FontAwesomeIcon icon="igloo" />
+        </footer>
+      </div>
+      )
+    }
+
+    if (this.state.isDeclineSelected) {
+      return (
+  <div>
+    <Header />
+
+    <div class="wrapper clearfix">
+      <SideMenu />
+      <div class="form-section">
+        <p>Thank you for your response</p>
+        <p>Please select reason you decline the offer</p>
+
+        <select onChange={this.selectDeclineReason} value={this.state.decline_reason}>
+          <option value="1">The proposed price is not enough</option>
+          <option value="2">The commission fee is not enough</option>
+          <option value="3">The item is too big/heavy</option>
+          <option value="4">The item is hard to get</option>
+          <option value="0">Other</option>
+        </select>
+        <input type="text" class="meetup-option" maxlength="200" placeholder="Comment to share with the reason"
+          value={this.state.decline_reason_comment} onChange={(e) => this.setState({decline_reason_comment: e.target.value})} />
+        <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
+      </div>
+    </div>
+
+    <div class="sidemenu-mobile">
+      <ul>
+        <li><a href="#">My Profile<span>></span></a></li>
+        <li><a href="#">Transaction Status<span>></span></a></li>
+        <li><a href="#">Message Box<span>></span></a></li>
+        <li><a href="#">Edit Profile<span>></span></a></li>
+        <li><a href="#">Edit Account<span>></span></a></li>
+        <li><a href="#">Logout<span>></span></a></li>
+        <li><a href="#">Help<span>></span></a></li>
+      </ul>
+    </div>
+
+    <footer>
+      FOOTER CONTENTS TO BE DETERMINED
+      <FontAwesomeIcon icon="igloo" />
+    </footer>
+  </div>
+    )}
+
     let has_history = false;
     let is_requester = false;
     let is_traveler = false;
@@ -612,7 +711,7 @@ class TransactionHistory extends Component {
              {is_traveler  && requestHistory.status === 0 && (
                <div>
                  <button class="action-btn" onClick={this.acceptItemRequest}>Accept</button>
-                 <button class="action-btn decline" onClick={this.declineItemRequest}>Decline</button>
+                 <button class="action-btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
                </div>
              )}
              {is_requester  && requestHistory.status === 0 && (
@@ -635,6 +734,7 @@ class TransactionHistory extends Component {
 const mapStateToProps = state => {
   return {
     isForbidden: state.requests.isForbidden,
+    isResponded: state.requests.isResponded,
     requests: state.requests,
     user: state.auth.user,
   }

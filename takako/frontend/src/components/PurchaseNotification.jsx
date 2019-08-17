@@ -110,13 +110,13 @@ class PurchaseNotification extends Component {
         <Header />
 
         <div class="wrapper clearfix">
-         <SideMenu />
-         <div class="request-conf">
-          <p>Your notification was successfully submitted</p>
-          <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
-            Back to the conversation
-          </a></p>
-        </div>
+          <SideMenu />
+          <div class="request-conf">
+            <p>Your notification was successfully submitted</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+              Back to the conversation
+            </a></p>
+          </div>
         </div>
 
         <div class="sidemenu-mobile">

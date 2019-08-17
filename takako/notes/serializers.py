@@ -65,7 +65,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'n_items', 'proposed_price',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
-            'comment', 'status', 'process_status')
+            'comment', 'status', 'process_status', 'decline_reason', 'decline_reason_comment',)
 
 class PurchaseNotificationSerializer(serializers.ModelSerializer):
     item_request = ItemRequestSerializer(read_only=True)
@@ -111,7 +111,8 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
             'item_name', 'item_id', 'item_url', 'n_items',
             'proposed_price', 'commission_fee', 'transaction_fee',
             'delivery_method', 'comment', 'status', 'charge',
-            'process_status', 'purchase_notification')
+            'process_status', 'decline_reason',
+            'decline_reason_comment', 'purchase_notification')
 
     def get_charge(self, obj):
         qs = obj.charges.all()

@@ -113,7 +113,7 @@ class ItemRequest(models.Model):
     proposed_price = models.IntegerField()
     commission_fee = models.IntegerField()
     transaction_fee = models.IntegerField()
-    # method
+    # Method
     # 0: meet-up
     # 1: ship
     delivery_method = models.IntegerField(default=0)
@@ -126,7 +126,7 @@ class ItemRequest(models.Model):
     # 2: accepted request
     # 3: rejected request
     status = models.IntegerField(default=0)
-    # Status
+    # Process Status
     # 0. request_sent
     # 1. request_responded
     # 2. payment_made
@@ -135,6 +135,14 @@ class ItemRequest(models.Model):
     # 5. meetup_decided
     # 6. request_cancelled
     process_status = models.CharField(max_length=100, default="request_sent")
+    # Decline Reason
+    # 0: Other
+    # 1: The proposed price is not enough
+    # 2: The commission fee is not enough
+    # 3: The item is too big/heavy
+    # 4: The item is hard to get
+    decline_reason = models.IntegerField(default=-1)
+    decline_reason_comment = models.CharField(max_length=200, blank=True)
     created_at = models.DateField(default=timezone.now)
 
 class Charge(models.Model):
