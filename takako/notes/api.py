@@ -126,22 +126,15 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
         purchase_notification_id = request.data.pop("purchase_notification_id")
         purchase_notification = PurchaseNotification.objects.get(pk=purchase_notification_id)
 
-
         meetup_option1 = request.data.pop("meetup_option1")
-        meetup_option2 = request.data.pop("meetup_option2", None)
-        meetup_option3 = request.data.pop("meetup_option3", None)
+        meetup_option2 = request.data.pop("meetup_option2")
+        meetup_option3 = request.data.pop("meetup_option3")
         process_status = request.data.pop("process_status")
         action_taken_by = int(request.data.pop("action_taken_by"))
 
         meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
-        meetup2 = None
-        meetup3 = None
-
-        if meetup_option2:
-            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
-
-        if meetup_option3:
-            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
+        meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
+        meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
 
         purchase_notification.meetup_option1 = meetup1
         purchase_notification.meetup_option2 = meetup2

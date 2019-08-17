@@ -127,7 +127,7 @@ class TransactionHistory extends Component {
          /* meetup option suggested by this requester */
          is_requester && item_request_status === 2 &&
          process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
-           <div class="history-box initial">
+           <div class="history-box meetups">
              <div class="history-wrapper">
                <p>You suggested following meetup options</p>
              </div>
@@ -136,9 +136,29 @@ class TransactionHistory extends Component {
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
                <li>Meetup option1:</li>
                <li>
-                 {requestHistory.purchase_notification[0].meetup_option1.date}
-                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
-                 {requestHistory.purchase_notification[0].meetup_option1.address}
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                 </ul>
+               </li>
+
+               <li>Meetup option2:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                 </ul>
+               </li>
+
+               <li>Meetup option3:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                 </ul>
                </li>
              </ul>
            </div>
@@ -147,7 +167,7 @@ class TransactionHistory extends Component {
          /* meetup option suggested by traveler */
          is_requester && item_request_status === 2 &&
          process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
-           <div class="history-box initial">
+           <div class="history-box meetups">
              <div class="history-wrapper">
                <p>{requestHistory.respondent.first_name} purchased the item you requested </p>
              </div>
@@ -156,15 +176,53 @@ class TransactionHistory extends Component {
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
                <li>Meetup option1:</li>
                <li>
-                 {requestHistory.purchase_notification[0].meetup_option1.date}
-                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
-                 {requestHistory.purchase_notification[0].meetup_option1.address}
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                 </ul>
                </li>
                <Link to={{
                    pathname: "/share/contact",
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
+               <li>Meetup option2:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option2,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
+               <li>Meetup option3:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option3,
                    }
                  }}>
                  <button class="btn accept">Accept</button>
@@ -183,7 +241,7 @@ class TransactionHistory extends Component {
          {
          /* the traveler already notified */
          is_requester && item_request_status === 2 && process_status === "purchase_notified" && (
-           <div class="history-box initial">
+           <div class="history-box meetups">
              <div class="history-wrapper">
                <p>{requestHistory.respondent.first_name} purchased the item you requested </p>
              </div>
@@ -192,15 +250,53 @@ class TransactionHistory extends Component {
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
                <li>Meetup option1:</li>
                <li>
-                 {requestHistory.purchase_notification[0].meetup_option1.date}
-                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
-                 {requestHistory.purchase_notification[0].meetup_option1.address}
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                 </ul>
                </li>
                <Link to={{
                    pathname: "/share/contact",
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
+               <li>Meetup option2:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option2,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
+               <li>Meetup option3:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option3,
                    }
                  }}>
                  <button class="btn accept">Accept</button>
@@ -307,7 +403,7 @@ class TransactionHistory extends Component {
          /* meetup option suggested by this traveler */
          is_traveler && item_request_status === 2 &&
          process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
-           <div class="history-box initial">
+           <div class="history-box meetups">
              <div class="history-wrapper">
                <p>You suggested following meetup options</p>
              </div>
@@ -316,9 +412,29 @@ class TransactionHistory extends Component {
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
                <li>Meetup option1:</li>
                <li>
-                 {requestHistory.purchase_notification[0].meetup_option1.date}
-                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
-                 {requestHistory.purchase_notification[0].meetup_option1.address}
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                 </ul>
+               </li>
+
+               <li>Meetup option2:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                 </ul>
+               </li>
+
+               <li>Meetup option3:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                 </ul>
                </li>
              </ul>
            </div>
@@ -328,7 +444,7 @@ class TransactionHistory extends Component {
          /* meetup option suggested by requester */
          is_traveler && item_request_status === 2 &&
          process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
-           <div class="history-box initial">
+           <div class="history-box meetups">
              <div class="history-wrapper">
                <p>{requestHistory.requester.first_name} suggested following meetup options </p>
              </div>
@@ -337,9 +453,11 @@ class TransactionHistory extends Component {
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
                <li>Meetup option1:</li>
                <li>
-                 {requestHistory.purchase_notification[0].meetup_option1.date}
-                 {requestHistory.purchase_notification[0].meetup_option1.dtime}
-                 {requestHistory.purchase_notification[0].meetup_option1.address}
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                 </ul>
                </li>
                <Link to={{
                    pathname: "/share/contact",
@@ -350,6 +468,43 @@ class TransactionHistory extends Component {
                  }}>
                  <button class="btn accept">Accept</button>
                </Link>
+
+               <li>Meetup option2:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option2,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
+               <li>Meetup option3:</li>
+               <li>
+                 <ul class="request-data">
+                   <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
+                   <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
+                   <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                 </ul>
+               </li>
+               <Link to={{
+                   pathname: "/share/contact",
+                   state: {
+                     purchase_notification: requestHistory.purchase_notification[0],
+                     meetup: requestHistory.purchase_notification[0].meetup_option3,
+                   }
+                 }}>
+                 <button class="btn accept">Accept</button>
+               </Link>
+
              </ul>
              <Link to={{
                    pathname: "/request/meetup/form",

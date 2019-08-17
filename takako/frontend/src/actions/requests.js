@@ -176,7 +176,10 @@ export const updateItemRequest = (requestId, item_request) => {
 
 export const sendPurchaseNotification = (
   request_id, preferred_phone, preferred_email,
-  meetup_option1_d, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment) => {
+  meetup_option1_d, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+  meetup_option2_d, meetup_option2_dtime, meetup_option2_address, meetup_option2_comment,
+  meetup_option3_d, meetup_option3_dtime, meetup_option3_address, meetup_option3_comment,
+  ) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -193,8 +196,24 @@ export const sendPurchaseNotification = (
       "comment": meetup_option1_comment,
     }
 
+    let meetup_option2_date = formatDate(meetup_option2_d);
+    let meetup_option2 = {
+      "date": meetup_option2_date,
+      "dtime": meetup_option2_dtime,
+      "address": meetup_option2_address,
+      "comment": meetup_option2_comment,
+    }
+
+    let meetup_option3_date = formatDate(meetup_option3_d);
+    let meetup_option3 = {
+      "date": meetup_option3_date,
+      "dtime": meetup_option3_dtime,
+      "address": meetup_option3_address,
+      "comment": meetup_option3_comment,
+    }
+
     let body = JSON.stringify({
-      request_id, preferred_phone, preferred_email, meetup_option1,
+      request_id, preferred_phone, preferred_email, meetup_option1, meetup_option2, meetup_option3
     });
 
     return fetch("/api/purchase/notification/", {headers, method: "POST", body})
@@ -257,8 +276,10 @@ export const shareContact = (
 }
 
 export const suggestNewMeetup = (
-  purchase_notification_id, meetup_option1_d,
-  meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+  purchase_notification_id,
+  meetup_option1_d, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+  meetup_option2_d, meetup_option2_dtime, meetup_option2_address, meetup_option2_comment,
+  meetup_option3_d, meetup_option3_dtime, meetup_option3_address, meetup_option3_comment,
   preferred_phone, preferred_email, action_taken_by, process_status) => {
 
   return (dispatch, getState) => {
@@ -278,9 +299,28 @@ export const suggestNewMeetup = (
       "comment": meetup_option1_comment,
     }
 
+    let meetup_option2_date = formatDate(meetup_option2_d);
+
+    let meetup_option2 = {
+      "date": meetup_option2_date,
+      "dtime": meetup_option2_dtime,
+      "address": meetup_option2_address,
+      "comment": meetup_option2_comment,
+    }
+
+    let meetup_option3_date = formatDate(meetup_option3_d);
+
+    let meetup_option3 = {
+      "date": meetup_option3_date,
+      "dtime": meetup_option3_dtime,
+      "address": meetup_option3_address,
+      "comment": meetup_option3_comment,
+    }
+
     let body = JSON.stringify({
       purchase_notification_id, preferred_phone, preferred_email,
-      meetup_option1, action_taken_by, process_status
+      meetup_option1, meetup_option2, meetup_option3,
+      action_taken_by, process_status
     });
 
     return fetch(`/api/suggest/meetups/`, {headers, method: "POST", body})
