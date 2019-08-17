@@ -3,6 +3,8 @@ import {requests, auth} from "../actions";
 import '../css/style.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import moment from 'moment';
+
 import DatePicker from "react-datepicker";
 
 import {connect} from 'react-redux';
@@ -37,7 +39,12 @@ class PurchaseNotification extends Component {
     }
   }
 
-  validateForm = (preferred_phone, preferred_email, meetup_option1_date, meetup_option1_dtime, meetup_option1_address) => {
+  validateForm = (
+    preferred_phone, preferred_email,
+    meetup_option1_date, meetup_option1_dtime, meetup_option1_address,
+    meetup_option2_date, meetup_option2_dtime, meetup_option2_address,
+    meetup_option3_date, meetup_option3_dtime, meetup_option3_address,
+    ) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
@@ -47,22 +54,39 @@ class PurchaseNotification extends Component {
     }
 
     if (!meetup_option1_date || meetup_option1_dtime.length === 0 || meetup_option1_address.length === 0) {
-      errors.push("Meet option 1 is required. Please fill out Date, Time and Address");
+      errors.push("Meetup option 1 is required. Please fill out Date, Time and Address");
+    }
+
+    if (!meetup_option2_date || meetup_option2_dtime.length === 0 || meetup_option2_address.length === 0) {
+      errors.push("Meetup option 2 is required. Please fill out Date, Time and Address");
+    }
+
+    if (!meetup_option3_date || meetup_option3_dtime.length === 0 || meetup_option3_address.length === 0) {
+      errors.push("Meetup option 3 is required. Please fill out Date, Time and Address");
     }
 
     return errors;
   }
 
-  handleMeetupDateChange(date) {
+  handleMeetup1DateChange(date) {
     this.setState({meetup_option1_date: date});
+  }
+
+  handleMeetup2DateChange(date) {
+    this.setState({meetup_option2_date: date});
+  }
+
+  handleMeetup3DateChange(date) {
+    this.setState({meetup_option3_date: date});
   }
 
   notifyPurchase = (e) => {
     e.preventDefault();
     const errors = this.validateForm(
       this.state.preferred_phone, this.state.preferred_email,
-      this.state.meetup_option1_date, this.state.meetup_option1_dtime,
-      this.state.meetup_option1_address
+      this.state.meetup_option1_date, this.state.meetup_option1_dtime, this.state.meetup_option1_address,
+      this.state.meetup_option2_date, this.state.meetup_option2_dtime, this.state.meetup_option2_address,
+      this.state.meetup_option3_date, this.state.meetup_option3_dtime, this.state.meetup_option3_address,
     );
 
     if (errors.length > 0) {
@@ -72,8 +96,9 @@ class PurchaseNotification extends Component {
 
     this.props.sendPurchaseNotification(
       this.props.match.params.requestId, this.state.preferred_phone, this.state.preferred_email,
-      this.state.meetup_option1_date, this.state.meetup_option1_dtime,
-      this.state.meetup_option1_address, this.state.meetup_option1_comment
+      this.state.meetup_option1_date, this.state.meetup_option1_dtime, this.state.meetup_option1_address, this.state.meetup_option1_comment,
+      this.state.meetup_option2_date, this.state.meetup_option2_dtime, this.state.meetup_option2_address, this.state.meetup_option2_comment,
+      this.state.meetup_option3_date, this.state.meetup_option3_dtime, this.state.meetup_option3_address, this.state.meetup_option3_comment,
     );
   }
 
@@ -152,23 +177,25 @@ class PurchaseNotification extends Component {
             <div class="form-section">
               <p class="form-heading">Meetup Option 1</p>
               <br />
-              <DatePicker selected={this.state.meetup_option1_date} onChange={this.handleMeetupDateChange.bind(this)}/>
+              <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
               <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option1_dtime} onChange={(e) => this.setState({meetup_option1_dtime: e.target.value})}/>
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option1_address} onChange={(e) => this.setState({meetup_option1_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option1_comment} onChange={(e) => this.setState({meetup_option1_comment: e.target.value})} />
               <br />
 
               <p class="form-heading">Meetup Option 2</p><br />
-              <input class="meetup-option" placeholder="Choose Date"/>
-              <input class="meetup-option" placeholder="Choose Time"/>
-              <input class="meetup-option" placeholder="Enter Address"/>
-              <input class="meetup-option" placeholder="Note (e.g. front door)"/><br />
+              <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
+              <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option2_dtime} onChange={(e) => this.setState({meetup_option2_dtime: e.target.value})}/>
+              <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option2_address} onChange={(e) => this.setState({meetup_option2_address: e.target.value})} />
+              <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option2_comment} onChange={(e) => this.setState({meetup_option2_comment: e.target.value})} />
+              <br />
 
               <p class="form-heading">Meetup Option 3</p><br />
-              <input class="meetup-option" placeholder="Choose Date"/>
-              <input class="meetup-option" placeholder="Choose Time"/>
-              <input class="meetup-option" placeholder="Enter Address"/>
-              <input class="meetup-option" placeholder="Note (e.g. front door)"/><br />
+              <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
+              <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option3_dtime} onChange={(e) => this.setState({meetup_option3_dtime: e.target.value})}/>
+              <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option3_address} onChange={(e) => this.setState({meetup_option3_address: e.target.value})} />
+              <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option3_comment} onChange={(e) => this.setState({meetup_option3_comment: e.target.value})} />
+              <br />
             </div>
           </div>
           <button class="form-send-btn btn" onClick={this.notifyPurchase}>Notify and Request</button>
@@ -209,11 +236,15 @@ const mapDispatchToProps = dispatch => {
   return {
     sendPurchaseNotification: (
       item_request_id, preferred_phone, preferred_email,
-      meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment
+      meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+      meetup_option2_date, meetup_option2_dtime, meetup_option2_address, meetup_option2_comment,
+      meetup_option3_date, meetup_option3_dtime, meetup_option3_address, meetup_option3_comment,
     ) => {
       return dispatch(requests.sendPurchaseNotification(
         item_request_id, preferred_phone, preferred_email,
-        meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment
+        meetup_option1_date, meetup_option1_dtime, meetup_option1_address, meetup_option1_comment,
+        meetup_option2_date, meetup_option2_dtime, meetup_option2_address, meetup_option2_comment,
+        meetup_option3_date, meetup_option3_dtime, meetup_option3_address, meetup_option3_comment,
       ));
     },
     logout: () => dispatch(auth.logout()),
