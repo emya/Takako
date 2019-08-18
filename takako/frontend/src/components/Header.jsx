@@ -5,13 +5,14 @@ render() {
     return (
 <div>
     <header class="header">
-        <div class="topbar-contents">
-          <a href="/"><img class="logo" src={require('../img/Souvenir_logo.png')}/></a>
-          <div class="login">
-            <a class="register" href="#">Get Started</a>
-            <a class="signin" href="#">Sign in</a>
-          </div>
+      <div class="topbar-contents">
+        <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
+        <div class="login">
+          <a class="register" href="/register">Get Started</a>
+          <a class="signin" href="/login">Sign in</a>
+          <a class="signin" onClick={this.props.logout}>logout</a>
         </div>
+      </div>
 
         <div class="mobile-topbar-contents">
           <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>

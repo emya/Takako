@@ -5,6 +5,7 @@ import '../css/style_LP.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign, faLightbulb, faGift } from '@fortawesome/free-solid-svg-icons'
 
+
 class Takako extends Component {
   /*
   componentDidMount() {
@@ -48,7 +49,7 @@ class Takako extends Component {
               <input class="search-button" type="submit" value="Search"/>
             </form>
             */}
-            <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')} /></a>
+            <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
             <div class="login">
               <a class="register" href="/register">Get Started</a>
               <a class="signin" href="/login">Sign in</a>
@@ -62,25 +63,31 @@ class Takako extends Component {
             <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
           </div>
 
-        <div class="menu">
-          <a href="#">Search</a>
-          <a href="/how-it-works">How it Works</a>
-        </div>
-
-
           <div class="catchcopy clearfix">
+            <img class="lpimage" src={require('../img/top3.png')}/>
             <div class="content">
-              <h1 class="site-title">Find Someone Who Can Get You Item That You Can’t.
-              </h1>
-              <p class="site-description">Request nearest traveler to buy and bring back whatever from wherever, just like how you ask your friend.
-              </p>
+              <div class="catch">
+                <h1 class="site-title">Use the extra space in your suitcase to earn money.</h1>
+                <p class="site-desc">Use the extra space in your suitcase to earn money (tentative).</p>
+              </div>
+              <div class="catch2">
+                <h1 class="site-title2">Shop abroad without leaving your couch.</h1>
+                <p class="site-desc">Shop abroad without leaving your couch (tentative).</p>
+              </div>
             </div>
-            <img class="lpimage" src={require('../img/LP.png')}/>
           </div>
           </header>
 
+          <div class="menu">
+            <a href="#">Request Item</a>
+            <a href="#">About Us</a>
+            <a href="/how-it-works">How it Works</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+          </div>
+
         <section class="how">
-          <h2 class="heading">How It Works</h2>
+          <h2 class="heading-h">How It Works</h2>
           {/*
           <div class="how-wrapper">
             <div class="how-box">
@@ -100,77 +107,100 @@ class Takako extends Component {
             </div>
           </div>
           */}
-          <img class="lp-how" src={require('../img/LP_HOW.PNG')}/>
+          <p class="how-intro">Torimo matches users, who live in NY and want to purchase items from abroad (“Requester”), <br/>with someone traveling to or from the destination where the items can be purchased (“Traveler”)
+</p>
+          <img class="lp-how" src={require('../img/how-steps.png')}/>
+          <div class="how-container">
+            <p class="how-1">Requester Request Item & Buy</p>
+            <p class="how-2">Traveler Purchase Item</p>
+            <p class="how-3">Requester Meet Traveler & Receive Item</p>
+            <p class="how-4">Traveler Get Paid</p>
+          </div>
+          <a class="button" href="#">Get Started</a>
         </section>
 
         <section class="service">
         <h2 class="heading s">Our Services</h2>
         <div class="wrapper-service">
         <div class="service-box">
-        <FontAwesomeIcon className="service-icon" icon={faDollarSign} />
+        <img class="service-icon" src={require('../img/shopping-cart.png')} />
         <div class="service-title">Propose<br/>Price of the Item</div>
-        <p class="service-text">Requesting user will pay proposed item price (including commision to purchasing user) + fixed 3% transaction fee.</p>
+        <p class="service-text">Requester will propose and pay item cost + commission to Traveler + fixed 5% service fee.</p>
         </div>
         <div class="service-box">
-        <FontAwesomeIcon className="service-icon" icon={faGift} />
+        <img class="service-icon" src={require('../img/globe.png')} />
         <div class="service-title">Access to<br/>Unique Item</div>
-        <p class="service-text">You can reach ANY items that are not available in your area.</p>
+        <p class="service-text">You can reach ANY items that are not available locally or online.</p>
         </div>
         <div class="service-box">
-        <FontAwesomeIcon className="service-icon" icon={faLightbulb} />
+        <img class="service-icon" src={require('../img/traveler.png')} />
+        <div class="service-title">Travel &<br/>Make Money</div>
+        <p class="service-text">Traveler can subside their costly international trips by sparing just a corner of their suitcases.</p>
+        </div>
+        <div class="service-box">
+        <img class="service-icon" src={require('../img/pay.png')} />
         <div class="service-title">Easy and Safe<br/>Transaction</div>
-        <p class="service-text">Just send a request form! No cumbersome negotiation. Souvenir will release your payment when the item is delivered.</p>
+        <p class="service-text">No cumbersome negotiation. Torimo will release your payment when the item is delivered.</p>
         </div>
         </div>
         </section>
 
-        <section class="use">
-          <h2 class="heading">Great for Someone Who..</h2>
-          <div class="wrapper-shopper">
-            <div class="use-box clearfix">
-                <div class="use-example">“I want to buy cosmetics at duty-free prices”
-                </div>
-                <img class="use-image" src={require('../img/LP.png')}/>
+       <section class="why-use">
+        <h2 class="heading w">Why Use Torimo?</h2>
+        <div class="use-case">
+          <div class="item-image">
+            <p class="item-title">Cosmetics from Japan</p>
+            <img src={require('../img/cosme.png')}/>
+          </div>
+          <div class="saving-container">
+            <div class="saving">
+              <div class="user-pic"><img src={require('../img/requester1.png')}/></div>
+              <p>Requester</p>
+              <p class="amount">Save $60</p>
             </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“I can’t find my favorite brand from home”
-              </div>
-                <img class="use-image" src={require("../img/clothing.png")}/>
-            </div>
-            <div class="use-box clearfix">
-              <div class="use-example">“Imported items are too expensive.”
-              </div>
-                <img class="use-image" src={require("../img/electronics.png")}/>
+            <div class="saving">
+              <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
+              <p>Traveler</p>
+              <p class="amount">Earn $40</p>
             </div>
           </div>
-
-          <a class="button" href="#">GET STARTED</a>
-        </section>
-
-
-        <section class="latest">
-          <h2 class="heading">Latest Requests</h2>
-          <a class="request-box">
-            <img class="request-img" src={require("../img/books.png")}/>
-            <div class="request-title">Kimono<br/>Japan</div>
-            <time class="date" datetime="2019-02-14">02.14.2019</time>
-          </a>
-          <a class="request-box">
-            <img class="request-img" src={require("../img/books.png")}/>
-            <div class="request-title">Eyeshadow<br/>UK</div>
-            <time class="date" datetime="2019-02-15">02.15.2019</time>
-          </a>
-          <a class="request-box">
-            <img class="request-img" src={require("../img/books.png")}/>
-            <div class="request-title">Facial Cream<br/>India</div>
-            <time class="date" datetime="2019-02-10">02.10.2019</time>
-          </a>
-          <br/>
-          <a class="button" href="#">GET STARTED</a>
-        </section>
+        </div>
+        <div class="use-case">
+        <div class="item-image">
+          <p class="item-title">Select Clothing from S Korea</p>
+          <img src={require('../img/clothes.png')}/>
+        </div>
+        <div class="saving-container">
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
+            <p>Requester</p>
+            <p class="amount">Not Available</p>
+          </div>
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
+            <p>Traveler</p>
+            <p class="amount">Earn $25</p>
+          </div>
+        </div>
+        </div>
+        <a class="button" href="#">Get Started</a>
+       </section>
 
       <footer>
-        <div class="footer"></div>
+        <div class="footer-item">
+          <ul>
+            <li>About Us</li>
+            <li>Terms of Services</li>
+            <li>Privacy Policy</li>
+          </ul>
+        </div>
+        <div class="footer-item">
+          <ul>
+            <li>How It Works</li>
+            <li>FAQ</li>
+            <li>Contact Us</li>
+          </ul>
+        </div>
       </footer>
 
       </body>

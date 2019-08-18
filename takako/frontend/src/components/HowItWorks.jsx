@@ -13,6 +13,13 @@ class HowItWorks extends Component {
     return (
 <div>
    <Header />
+   <div class="menu">
+     <a href="#">Request Item</a>
+     <a href="#">About Us</a>
+     <a href="/how-it-works">How it Works</a>
+     <a href="#">FAQ</a>
+     <a href="#">Contact</a>
+   </div>
    <h2>How It Works</h2>
    <div class="wrapper-clearfix">
      <div class="wrapper-clearfix howto">
