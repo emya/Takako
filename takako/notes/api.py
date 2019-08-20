@@ -29,7 +29,7 @@ from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
     PurchaseNotification, Meetup,
-    SharedContact
+    SharedContact, ContactUs
 )
 #from django.contrib.auth.models import User
 from .serializers import (
@@ -38,6 +38,7 @@ from .serializers import (
     PurchaseNotificationSerializer,
     ItemRequestSerializer,
     ItemRequestHistorySerializer,
+    ContactUsSerializer,
     ChargeSerializer,
     ProfileSerializer,
     TripSerializer,
@@ -185,6 +186,21 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
             return Response(custom_data)
 
         return self.queryset
+
+class ContactUsViewSet(viewsets.ModelViewSet):
+    serializer_class = ContactUsSerializer
+    queryset = ContactUs.objects.all()
+
+    def create(self, request):
+        user = request.user
+        contactus = ContactUs.objects.create(user=user, **request.data)
+        serializer = self.serializer_class(contactus)
+
+        # Notify user
+        send_email.delay("Thank you for your message", "We will be in touch as soon as possible", request.data['email'])
+        # Notify us
+        send_email.delay("New message from our user", request.data['message'], settings.EMAIL_HOST_USER)
+        return Response(serializer.data)
 
 import stripe
 class ChargeViewSet(viewsets.ModelViewSet):

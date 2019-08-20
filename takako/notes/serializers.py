@@ -4,7 +4,7 @@ from .models import (
     User, Note, Profile,
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
-    SharedContact
+    SharedContact, ContactUs
 )
 
 from rest_framework import serializers
@@ -128,6 +128,13 @@ class SharedContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = SharedContact
         fields = ('id', 'user', 'preferred_phone', 'preferred_email', )
+
+class ContactUsSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = ContactUs
+        fields = ('id', 'user', 'name', 'email', 'message', )
 
 
 class CreateUserSerializer(serializers.ModelSerializer):

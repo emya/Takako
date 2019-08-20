@@ -189,3 +189,9 @@ class SharedContact(models.Model):
     purchase_notification = models.ForeignKey(PurchaseNotification, on_delete=models.CASCADE, related_name="shared_contact")
     created_at = models.DateField(default=timezone.now)
 
+class ContactUs(models.Model):
+    user = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.CharField(max_length=200)
+    message = models.CharField(max_length=300)
+

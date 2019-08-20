@@ -18,6 +18,7 @@ import MessageBox from "./components/MessageBox";
 import TravelerProfile from "./components/TravelerProfile";
 import NotFound from "./components/NotFound";
 import HowItWorks from "./components/HowItWorks";
+import ContactUs from "./components/ContactUs";
 import RequestForm from "./components/RequestForm";
 
 import {auth} from "./actions";
@@ -75,6 +76,7 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/myprofile" component={MyProfile} />
                     <PrivateRoute exact path="/profile/:userId" component={Profile} />
                     <PrivateRoute exact path="/message" component={MessageBox} />
+                    <PrivateRoute exact path="/contact/us" component={ContactUs} />
                     <PrivateRoute exact path="/traveler/profile" component={TravelerProfile} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />

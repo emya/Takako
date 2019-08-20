@@ -4,6 +4,11 @@ import {trips} from "../actions";
 import {Link} from "react-router-dom";
 
 import DatePicker from "react-datepicker";
+import ReactGoogleMapLoader from "react-google-maps-loader";
+import ReactGooglePlacesSuggest from "react-google-places-suggest";
+
+import { keys } from '../keys.js';
+
 import "../../node_modules/react-datepicker/dist/react-datepicker.css";
 import '../css/style_LP.scss';
 
@@ -21,6 +26,7 @@ class UpcomingTrips extends Component {
     arrival_date: null,
     destination: "",
     updateTripId: null,
+    search: "",
     errors: []
   }
 
@@ -63,6 +69,14 @@ class UpcomingTrips extends Component {
       arrival_date: trip.arrival_date,
       destination: trip.destination,
       updateTripId: id});
+  }
+
+  handleSelectDestinationSuggest(suggest) {
+    this.setState({search: "", destination: suggest.formatted_address})
+  }
+
+  handleDestinationChange(e) {
+    this.setState({search: e.target.value, destination: e.target.value})
   }
 
   submitTrip = (e) => {
@@ -132,6 +146,33 @@ class UpcomingTrips extends Component {
             placeholder="Enter destination"
             onChange={(e) => this.setState({destination: e.target.value})}
             required />
+
+
+            <ReactGoogleMapLoader
+                params={{
+                  key: keys.MAP_JS_API,
+                  libraries: "places,geocode",
+                }}
+                render={googleMaps =>
+                  googleMaps && (
+                    <div>
+                      <ReactGooglePlacesSuggest
+                        autocompletionRequest={{input: this.state.search}}
+                        googleMaps={googleMaps}
+                        onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
+                      >
+                        <input
+                          id="residence"
+                          class="trip-entry"
+                          placeholder="Enter destination"
+                          value={this.state.destination}
+                          onChange={this.handleDestinationChange.bind(this)}
+                        />
+                      </ReactGooglePlacesSuggest>
+                    </div>
+                  )
+                }
+              />
             <input class="btn savep" type="submit" value="Save Trip" />
           </form>
         </div>

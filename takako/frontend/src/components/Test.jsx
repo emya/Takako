@@ -10,11 +10,12 @@ import {Provider, connect} from 'react-redux';
 
 import Header from './Header'
 import SideMenu from './SideMenu'
+import MobileSideMenu from './MobileSideMenu'
 
 class Test extends Component {
   render() {
     return (
-   <div>
+    <div>
       <Header />
 
       <div class="wrapper clearfix">
@@ -22,25 +23,13 @@ class Test extends Component {
 
       </div>
 
+      <MobileSideMenu />
 
-
-      <div class="sidemenu-mobile">
-        <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-        </ul>
-      </div>
-
-    <footer>
-      FOOTER CONTENTS TO BE DETERMINED
-      <FontAwesomeIcon icon="igloo" />
-    </footer>
-  </div>
+      <footer>
+        FOOTER CONTENTS TO BE DETERMINED
+        <FontAwesomeIcon icon="igloo" />
+      </footer>
+    </div>
     )
   }
 }
