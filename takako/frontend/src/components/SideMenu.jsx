@@ -7,10 +7,11 @@ render() {
     return (
       <div class="sidemenu">
         <ul>
+          <li><a href={'/search'}>Find Traveler</a></li>
           <li><a href={'/myprofile'}>My Profile</a></li>
-          <li><a href="/transaction/status">My Transactions</a></li>
-          <li><a onClick={this.props.logout} style={{color: "white"}}>Logout</a></li>
-          <li><a href="#">Help</a></li>
+          <li><a href={'/transaction/status'}>My Transactions</a></li>
+          <li><a href={'/how-it-works'}>How It Works</a></li>
+          <li><a href={'/contact/us'}>Contact Us</a></li>
         </ul>
       </div>
   )}

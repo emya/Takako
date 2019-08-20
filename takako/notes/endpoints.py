@@ -9,6 +9,7 @@ from .api import (
     ProfileViewSet,
     TripViewSet,
     ItemRequestViewSet,
+    ContactUsViewSet,
     ChargeViewSet,
     ItemRequestHistoryViewSet,
     TravelerProfileViewSet,
@@ -24,6 +25,7 @@ router.register('notes', NoteViewSet, 'notes')
 router.register('purchase/notification', PurchaseNotificationViewSet, 'purchase_notification')
 router.register('suggest/meetups', MeetupSuggestionViewSet, 'suggest_meetup')
 router.register('share/contact', SharedContactViewSet, 'share_contact')
+router.register('contact/us', ContactUsViewSet, 'contact_us')
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('trips', TripViewSet, 'trips')
 #router.register('requests/item/?P<id>\d+)$', ItemRequestViewSet, 'request_item')

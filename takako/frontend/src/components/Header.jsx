@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {auth} from "../actions";
 
 class Header extends Component {
 render() {
@@ -29,4 +31,10 @@ render() {
   )}
 }
 
-export default Header;
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(auth.logout()),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Header);
