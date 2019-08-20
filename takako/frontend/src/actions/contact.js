@@ -13,7 +13,6 @@ export const sendContactUs = (name, email, message) => {
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
-            console.log("data", data);
             return {status: res.status, data};
           })
         } else {

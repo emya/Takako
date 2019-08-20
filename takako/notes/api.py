@@ -198,7 +198,7 @@ class ContactUsViewSet(viewsets.ModelViewSet):
 
         # Notify user
         send_email.delay("Thank you for your message", "We will be in touch as soon as possible", request.data['email'])
-        # Notify ourself
+        # Notify us
         send_email.delay("New message from our user", request.data['message'], settings.EMAIL_HOST_USER)
         return Response(serializer.data)
 
