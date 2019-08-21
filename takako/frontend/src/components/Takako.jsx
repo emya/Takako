@@ -53,7 +53,7 @@ class Takako extends Component {
             <div class="login">
               <a class="register" href="/register">Get Started</a>
               <a class="signin" href="/login">Sign in</a>
-              <a class="signin" onClick={this.props.logout}>logout</a>
+              <a class="signin" onClick={this.props.logout}>Logout</a>
             </div>
           </div>
 
@@ -64,26 +64,23 @@ class Takako extends Component {
           </div>
 
           <div class="catchcopy clearfix">
-            <img class="lpimage" src={require('../img/top3.png')}/>
+            <img class="lpimage" src={require('../img/top4.png')}/>
             <div class="content">
               <div class="catch">
                 <h1 class="site-title">Use the extra space in your suitcase to earn money.</h1>
-                <p class="site-desc">Use the extra space in your suitcase to earn money (tentative).</p>
               </div>
               <div class="catch2">
                 <h1 class="site-title2">Shop abroad without leaving your couch.</h1>
-                <p class="site-desc">Shop abroad without leaving your couch (tentative).</p>
               </div>
             </div>
           </div>
           </header>
 
           <div class="menu">
-            <a href="#">Request Item</a>
+          <a href="/how-it-works">How It Works</a>
+            <a href="#">Find Traveler</a>
             <a href="#">About Us</a>
-            <a href="/how-it-works">How it Works</a>
-            <a href="#">FAQ</a>
-            <a href="#">Contact</a>
+            <a href="#">Contact Us</a>
           </div>
 
         <section class="how">
@@ -107,14 +104,14 @@ class Takako extends Component {
             </div>
           </div>
           */}
-          <p class="how-intro">Torimo matches users, who live in NY and want to purchase items from abroad (“Requester”), <br/>with someone traveling to or from the destination where the items can be purchased (“Traveler”)
+          <p class="how-intro">Torimo matches NY-based users who want to purchase item from abroad (“Requester”)<br/>with someone traveling to or from the destination where the items can be purchased (“Traveler”).
 </p>
           <img class="lp-how" src={require('../img/how-steps.png')}/>
           <div class="how-container">
-            <p class="how-1">Requester Request Item & Buy</p>
-            <p class="how-2">Traveler Purchase Item</p>
-            <p class="how-3">Requester Meet Traveler & Receive Item</p>
-            <p class="how-4">Traveler Get Paid</p>
+            <p class="how-1">Requester requests item & pays</p>
+            <p class="how-2">Traveler purchases item</p>
+            <p class="how-3">Requester meets Traveler & receives item</p>
+            <p class="how-4">Traveler gets paid!</p>
           </div>
           <a class="button" href="#">Get Started</a>
         </section>
@@ -124,23 +121,23 @@ class Takako extends Component {
         <div class="wrapper-service">
         <div class="service-box">
         <img class="service-icon" src={require('../img/shopping-cart.png')} />
-        <div class="service-title">Propose<br/>Price of the Item</div>
-        <p class="service-text">Requester will propose and pay item cost + commission to Traveler + fixed 5% service fee.</p>
+        <div class="service-title">Propose<br/>Price of Item</div>
+        <p class="service-text">Requester proposes item(s) price. If Traveler agrees to the price, Requester pays for the item(s) + a negotiated commission to Traveler.</p>
         </div>
         <div class="service-box">
         <img class="service-icon" src={require('../img/globe.png')} />
         <div class="service-title">Access to<br/>Unique Item</div>
-        <p class="service-text">You can reach ANY items that are not available locally or online.</p>
+        <p class="service-text">Requester can reach ANY items that are not available locally or online.</p>
         </div>
         <div class="service-box">
         <img class="service-icon" src={require('../img/traveler.png')} />
         <div class="service-title">Travel &<br/>Make Money</div>
-        <p class="service-text">Traveler can subside their costly international trips by sparing just a corner of their suitcases.</p>
+        <p class="service-text">Traveler can subsidize their costly international trips by sparing just a corner of their suitcase.</p>
         </div>
         <div class="service-box">
         <img class="service-icon" src={require('../img/pay.png')} />
         <div class="service-title">Easy and Safe<br/>Transaction</div>
-        <p class="service-text">No cumbersome negotiation. Torimo will release your payment when the item is delivered.</p>
+        <p class="service-text">No cumbersome negotiation. Torimo will release the payment when the item is delivered.</p>
         </div>
         </div>
         </section>
@@ -156,32 +153,34 @@ class Takako extends Component {
             <div class="saving">
               <div class="user-pic"><img src={require('../img/requester1.png')}/></div>
               <p>Requester</p>
-              <p class="amount">Save $60</p>
+              <p class="amount">Save $50<span class="ast">*</span></p>
             </div>
             <div class="saving">
               <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
               <p>Traveler</p>
-              <p class="amount">Earn $40</p>
+              <p class="amount">Earn $30<span class="ast">*</span></p>
             </div>
           </div>
+          <p class="use-disclaimer">*Simulated data</p>
         </div>
         <div class="use-case">
         <div class="item-image">
-          <p class="item-title">Select Clothing from S Korea</p>
+          <p class="item-title">Select Clothing from South Korea</p>
           <img src={require('../img/clothes.png')}/>
         </div>
         <div class="saving-container">
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount">Not Available</p>
+            <p class="amount s">Item Unavailable in NY</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
             <p>Traveler</p>
-            <p class="amount">Earn $25</p>
+            <p class="amount">Earn $45<span class="ast">*</span></p>
           </div>
         </div>
+        <p class="use-disclaimer">*Simulated data</p>
         </div>
         <a class="button" href="#">Get Started</a>
        </section>
