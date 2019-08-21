@@ -142,12 +142,6 @@ class UpcomingTrips extends Component {
             <DatePicker selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
 
             <p class="object">Trip Destination</p>
-            <input class="trip-entry" value={this.state.destination}
-            placeholder="Enter destination"
-            onChange={(e) => this.setState({destination: e.target.value})}
-            required />
-
-
             <ReactGoogleMapLoader
                 params={{
                   key: keys.MAP_JS_API,
@@ -157,7 +151,7 @@ class UpcomingTrips extends Component {
                   googleMaps && (
                     <div>
                       <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.search}}
+                        autocompletionRequest={{input: this.state.search, types: ['(cities)']}}
                         googleMaps={googleMaps}
                         onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
                       >
