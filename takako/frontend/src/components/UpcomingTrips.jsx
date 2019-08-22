@@ -151,7 +151,7 @@ class UpcomingTrips extends Component {
                   googleMaps && (
                     <div>
                       <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.search, types: ['(cities)']}}
+                        autocompletionRequest={{input: this.state.search, types: ['(regions)']}}
                         googleMaps={googleMaps}
                         onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
                       >

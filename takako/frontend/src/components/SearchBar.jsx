@@ -48,7 +48,7 @@ class SearchBar extends Component {
           googleMaps && (
             <div>
               <ReactGooglePlacesSuggest
-                autocompletionRequest={{input: this.state.search_destination}}
+                autocompletionRequest={{input: this.state.search_destination, types: ['(regions)']}}
                 googleMaps={googleMaps}
                 onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
               >

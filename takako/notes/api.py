@@ -326,11 +326,11 @@ class TravelerProfileViewSet(viewsets.ModelViewSet):
         if destination:
             # Users living in NY and have trips to the destination
             queryset = queryset.filter(
-                trips__destination=destination
+                trips__destination__contains=destination
             ).prefetch_related(Prefetch(
                 'trips',
                 queryset=Trip.objects.filter(
-                    destination=destination
+                    destination__contains=destination
                 )
             )).order_by('trips__arrival_date')
             # Users living in the destination and visits to NY
