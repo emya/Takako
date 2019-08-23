@@ -65,14 +65,12 @@ class Takako extends Component {
 
           <div class="catchcopy clearfix">
             <img class="lpimage" src={require('../img/top4.png')}/>
-            <div class="content">
               <div class="catch">
                 <h1 class="site-title">Use the extra space in your suitcase to earn money.</h1>
               </div>
               <div class="catch2">
                 <h1 class="site-title2">Shop abroad without leaving your couch.</h1>
               </div>
-            </div>
           </div>
           </header>
 
@@ -108,9 +106,9 @@ class Takako extends Component {
 </p>
           <img class="lp-how" src={require('../img/how-steps.png')}/>
           <div class="how-container">
-            <p class="how-1">Requester requests item & pays</p>
+            <p class="how-1">Requester requests item<br/> & pays</p>
             <p class="how-2">Traveler purchases item</p>
-            <p class="how-3">Requester meets Traveler & receives item</p>
+            <p class="how-3">Requester meets Traveler<br/> & receives item</p>
             <p class="how-4">Traveler gets paid!</p>
           </div>
           <a class="button" href="#">Get Started</a>
@@ -165,14 +163,14 @@ class Takako extends Component {
         </div>
         <div class="use-case">
         <div class="item-image">
-          <p class="item-title">Select Clothing from South Korea</p>
+          <p class="item-title">Select Clothing from Italy</p>
           <img src={require('../img/clothes.png')}/>
         </div>
         <div class="saving-container">
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount s">Item Unavailable in NY</p>
+            <p class="amount s">Item Unavailable</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>

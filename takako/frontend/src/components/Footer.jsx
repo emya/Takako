@@ -8,8 +8,20 @@ class Footer extends Component {
 render() {
     return (
       <footer>
-        FOOTER CONTENTS TO BE DETERMINED
-        <FontAwesomeIcon icon="igloo" />
+      <div class="footer-item">
+        <ul>
+          <li>About Us</li>
+          <li>Terms of Services</li>
+          <li>Privacy Policy</li>
+        </ul>
+      </div>
+      <div class="footer-item">
+        <ul>
+          <li>How It Works</li>
+          <li>FAQ</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
       </footer>
   )}
 }
