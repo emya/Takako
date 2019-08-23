@@ -37,7 +37,7 @@ a:link, a:visited, a:hover, a:active {
 
 h2 {
   color: #FFBF5D;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-bottom: 30px;
   letter-spacing: 2px;
 }
@@ -669,8 +669,8 @@ li {
 }
 
 .how-to-requester, .how-to-arrow, .how-to-traveler {
-  height: 1200px;
-  background-color: #F1F8FE;
+  height: 1090px;
+  // background-color: #4A4A4A;
   margin-bottom: 100px;
 }
 
@@ -715,22 +715,22 @@ li {
 }
 
 .arrow-box.meetup {
-  background-color: #F17816;
+  background-color: #16C4FD;
 }
 
 .triangle.meetup {
-  border-top: 53px solid #F17816;
+  border-top: 53px solid #16C4FD;
 }
 
 .how-box {
   display: block;
   width: 95%;
   // height: 100px;
-  margin: 20px auto 210px;
+  margin: 20px auto 180px;
   background-color: white;
   text-align: left;
   vertical-align: top;
-  // border: solid 1px #BBBBBB;
+  border: solid 1px #BBBBBB;
   border-radius: 7px;
   padding: 2px 20px;
 }
@@ -752,15 +752,15 @@ li {
 }
 
 .how-box.third {
-  margin: 20px auto 70px;
+  margin: 20px auto 30px;
 }
 
 .how-box.traveler {
-  margin: 180px auto 0;
+  margin: 150px auto 0;
 }
 
 .how-box.traveler.last {
-  margin: 400px auto 0;
+  margin: 330px auto 0;
 }
 
 .how-detail {

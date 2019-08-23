@@ -131,48 +131,31 @@ a:link, a:visited, a:hover, a:active {
   height: 580px;
 }
 
-.content {
-  display: block;
-  position: relative;
-  float: left;
-  color: white;
-  // background-color: #1B435D;
-  height: 500px;
-  width: 60%;
-  position: absolute;
-  left: 250px;
-  top: 0;
-}
-
-.content {
-  @media (max-width: 767px) {
-    width: 100%;
-    height: 400px;
-  }}
-
 .catch {
   // font-family: baskerville;
   position: absolute;
   top: 110px;
-  right: 50%;
+  right: 38%;
+  color: white;
   // font-size: 6rem;
   // line-height: 80px;
-  width: 80%;
+  width: 55%;
   // padding: 0 30px;
-  // margin-top: 90px;
+  // margin: 10px 30% 70px 2%;
   // letter-spacing: 2px;
 }
 
 .catch2 {
   // font-family: baskerville;
+  color: white;
   position: absolute;
-  bottom: -10px;
-  left: 50%;
+  bottom: 40px;
+  left: 38%;
   // font-size: 6rem;
   // line-height: 80px;
-  width: 80%;
+  width: 55%;
   // padding: 0 30px;
-  // margin-top: 90px;
+  // margin: 10% 40% 30% 2%;
 }
 
 .catch h1, .catch2 h1 {
@@ -210,6 +193,7 @@ a:link, a:visited, a:hover, a:active {
 
 .lpimage {
   // float: right;
+  position: relative;
   width: 100%;
   height: 100%;
   opacity: 0.8;
@@ -286,9 +270,11 @@ a:link, a:visited, a:hover, a:active {
 // }
 
 .lp-how {
-  // width: 80%;
+  width: 60%;
+  max-width: 60%;
+  height: auto
   // height: 400px;
-  margin: 50px 0 0;
+  // margin: 50px 0 0;
 }
 
 .how-container {
@@ -307,7 +293,7 @@ a:link, a:visited, a:hover, a:active {
 .how-intro {
   display: inline-block;
   width: 70%;
-  margin: auto;
+  margin: auto auto 50px;
 }
 
 /* Use Case */
@@ -541,17 +527,19 @@ a:link, a:visited, a:hover, a:active {
 .saving {
   display: inline-block;
   width: 43%;
+  min-width: 100px;
   height: 280px;
   // background-color: green;
   margin: 10px;
 }
 
 .amount {
-  font-size: 1.9rem;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #F17816;
-  margin: 30px 0 10px 0;
+  margin: auto 0 10px 0;
   // vertical-align: baseline;
+  line-height: 30px;
 }
 
 .ast {
@@ -559,12 +547,16 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .amount.s {
+  // display: inline;
   font-size: 1.5rem;
+  // vertical-align: center;
+  line-height: 30px;
 }
 
-.user-pic {
-  width: 150px;
-  height: 150px;
+.user-pic img {
+  width: 90%;
+  max-width: 90%;
+  height: auto;
   // background-color: black;
   margin: 20px auto 0px;
 }
