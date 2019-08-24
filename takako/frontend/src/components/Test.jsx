@@ -11,6 +11,7 @@ import {Provider, connect} from 'react-redux';
 import Header from './Header'
 import SideMenu from './SideMenu'
 import MobileSideMenu from './MobileSideMenu'
+import Footer from './Footer'
 
 class Test extends Component {
   render() {
@@ -18,17 +19,11 @@ class Test extends Component {
     <div>
       <Header />
 
-      <div class="wrapper clearfix">
-        <SideMenu />
-
-      </div>
+      testtesttest
 
       <MobileSideMenu />
 
-      <footer>
-        FOOTER CONTENTS TO BE DETERMINED
-        <FontAwesomeIcon icon="igloo" />
-      </footer>
+      <Footer />
     </div>
     )
   }
