@@ -38,36 +38,39 @@ class SearchBar extends Component {
 
   render() {
     return(
-    <form onSubmit={this.handleSubmit}>
-      <ReactGoogleMapLoader
-        params={{
-          key: keys.MAP_JS_API,
-          libraries: "places,geocode",
-        }}
-        render={googleMaps =>
-          googleMaps && (
-            <div>
-              <ReactGooglePlacesSuggest
-                autocompletionRequest={{input: this.state.search_destination, types: ['(regions)']}}
-                googleMaps={googleMaps}
-                onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
-              >
-                <input
-                  id="destination"
-                  type="text"
-                  value={this.state.destination}
-                  placeholder="Where item(s) you want is from?"
-                  onChange={this.handleDestinationChange.bind(this)}
-                  class="search-box"
-                />
-              </ReactGooglePlacesSuggest>
-              <p>Meetup to receive item(s) should happen in NY, Manhattan</p>
-              <button class="btn search">Search</button>
-            </div>
-          )
-        }
-      />
-    </form>
+      <div>
+        <h2>Find Traveler</h2>
+        <form onSubmit={this.handleSubmit}>
+          <ReactGoogleMapLoader
+            params={{
+              key: keys.MAP_JS_API,
+              libraries: "places,geocode",
+            }}
+            render={googleMaps =>
+              googleMaps && (
+                <div>
+                  <ReactGooglePlacesSuggest
+                    autocompletionRequest={{input: this.state.search_destination, types: ['(regions)']}}
+                    googleMaps={googleMaps}
+                    onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
+                  >
+                    <input
+                      id="destination"
+                      type="text"
+                      value={this.state.destination}
+                      placeholder="Where do you want your item(s) from?"
+                      onChange={this.handleDestinationChange.bind(this)}
+                      class="search-box"
+                    />
+                  </ReactGooglePlacesSuggest>
+                  <button class="btn search">Search</button>
+                  <p>Meetup to receive item(s) takes place in Manhattan, NY</p>
+                </div>
+              )
+            }
+          />
+        </form>
+    </div>
     )
   }
 }

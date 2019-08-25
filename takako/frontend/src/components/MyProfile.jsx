@@ -63,6 +63,7 @@ class MyProfile extends Component {
       <SideMenu />
 
       <div class="profile">
+      <h2>My Profile</h2>
         <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
             <div>
@@ -110,10 +111,10 @@ class MyProfile extends Component {
           <input class="btn savep" type="submit" value="Save Profile" />
         </form>
 
-        <h2 class="upcoming">Upcoming Trips</h2>
+        <h3 class="upcoming">Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
 
-        <h2>Past Transactions</h2>
+        <h3>Past Transactions</h3>
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>

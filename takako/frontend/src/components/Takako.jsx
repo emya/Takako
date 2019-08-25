@@ -102,7 +102,7 @@ class Takako extends Component {
             </div>
           </div>
           */}
-          <p class="how-intro">Torimo matches NY-based users who want to purchase item from abroad (“Requester”)<br/>with someone traveling to or from the destination where the items can be purchased (“Traveler”).
+          <p class="how-intro">Torimo matches NY-based users who want to purchase item from abroad (“Requester”)<br/>with someone traveling to the destination where the items can be purchased (“Traveler”).
 </p>
           <img class="lp-how" src={require('../img/how-steps.png')}/>
           <div class="how-container">

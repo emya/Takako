@@ -138,7 +138,7 @@ class UpcomingTrips extends Component {
              ))}
             <p class="object">Departure Date</p>
             <DatePicker selected={this.state.departure_date} onChange={this.handleDepartureDateChange.bind(this)}/>
-            <p class="object">Arrival Date</p>
+            <p class="object">Return Date</p>
             <DatePicker selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
 
             <p class="object">Trip Destination</p>
@@ -154,6 +154,7 @@ class UpcomingTrips extends Component {
                         autocompletionRequest={{input: this.state.search, types: ['(regions)']}}
                         googleMaps={googleMaps}
                         onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
+                        class="google-api"
                       >
                         <input
                           id="residence"

@@ -145,13 +145,13 @@ class RequestForm extends Component {
 
             <div class="form-section">
               <p class="form-heading">Item Price</p><br />
-              <p class="form-data">{this.state.proposed_price} </p><br />
+              <p class="form-data">${this.state.proposed_price} </p><br />
               <p class="form-heading">Commission to Traveler</p><br />
-              <p class="form-data">{this.state.commission_fee}</p><br />
+              <p class="form-data">${this.state.commission_fee}</p><br />
               <p class="form-heading">Transaction fee</p><br />
-              <p class="form-data">{this.state.transaction_fee}</p><br />
+              <p class="form-data">${this.state.transaction_fee}</p><br />
               <p class="form-heading">Your Total Payment</p><br />
-              <p class="form-data">{+this.state.proposed_price + +this.state.commission_fee + +this.state.transaction_fee}</p><br />
+              <p class="form-data">${+this.state.proposed_price + +this.state.commission_fee + +this.state.transaction_fee}</p><br />
             </div>
 
             <div class="form-section">
@@ -168,7 +168,7 @@ class RequestForm extends Component {
             </div>
 
             </div>
-          <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
+          <div class="meetup-rule">Important note: Your meetup/delivery will take place between 1/1/2019 - 1/30/2019.</div>
           <button class="form-send-btn btn" onClick={this.submitRequest.bind(this)}>Confirm and Send</button>
         </div>
         </div>
@@ -203,9 +203,9 @@ class RequestForm extends Component {
       <h2>Item Request</h2>
 
       {this.props.trip && (
-        <div>
-          <p>Trip summary</p>
-          <p>Destination: {this.props.trip.destination}</p>
+        <div class="form-section">
+          <h3 class="trip-summary">Trip summary</h3>
+          <p><strong>Destination:   </strong>{this.props.trip.destination}</p>
         </div>
       )}
       <div class="form-wrapper">
@@ -218,10 +218,10 @@ class RequestForm extends Component {
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required /><br/>
 
         <p class="form-heading">Item URL</p><br/>
-        <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
+        <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
 
         <p class="form-heading">Item Image</p><br/>
-        <input value={this.state.item_url} placeholder="(Optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
+        <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
 
         <p class="form-heading">Number of Item(s)</p><br/>
         <input type="number" value={this.state.n_items} onChange={(e) => this.setState({n_items: e.target.value})} /><br/>
@@ -229,28 +229,28 @@ class RequestForm extends Component {
 
       <div class="form-section">
         <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
-        <input type="number" min="0" value={this.state.proposed_price}
+        $<input type="number" min="0" value={this.state.proposed_price}
          onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.round(e.target.value*0.05)})}
          required /><br/>
 
-        <p class="form-heading">Transaction Fee (5%)</p><br/>
-        <input placeholder="" value={this.state.transaction_fee} /><br/>
+         <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
+         $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
 
-        <p class="form-heading">Commission to Traveler (Min. $10)</p><br/>
-        <input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
+        <p class="form-heading">Transaction Fee (automatically calculated as 5% of item price)</p><br/>
+        $<p class="number-calculated">{this.state.transaction_fee}</p><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
-        <input type="number" value={+this.state.proposed_price + +this.state.transaction_fee + +this.state.commission_fee} /><br/>
+        $<p class="number-calculated">{+this.state.proposed_price + +this.state.transaction_fee + +this.state.commission_fee}</p><br/>
 
       </div>
 
       <div class="form-section">
-        We highly recommend you fill up the following fields if you have some restriction on meetup location or date/time
-        <p class="form-heading">Preferred meetup location (optional)</p><br/>
-        <input type="text" value={this.state.preferred_meetup_location} onChange={(e) => this.setState({preferred_meetup_location: e.target.value})}  maxLength="300"/><br/>
+        <p class="optional-item">We highly recommend you to fill out the following if you have strong preferences on meetup location or date/time.</p>
+        <p class="form-heading">Preferred meetup location</p><br/>
+        <input type="text" placeholder="(optional)" value={this.state.preferred_meetup_location} onChange={(e) => this.setState({preferred_meetup_location: e.target.value})}  maxLength="300"/><br/>
 
-        <p class="form-heading">Preferred meetup date/time (optional)</p><br/>
-        <input type="text" value={this.state.preferred_meetup_date} onChange={(e) => this.setState({preferred_meetup_date: e.target.value})}  maxLength="300"/><br/>
+        <p class="form-heading">Preferred meetup date/time</p><br/>
+        <input type="text" placeholder="(optional)" value={this.state.preferred_meetup_date} onChange={(e) => this.setState({preferred_meetup_date: e.target.value})}  maxLength="300"/><br/>
       </div>
 
 
@@ -263,8 +263,9 @@ class RequestForm extends Component {
       </div>
 
       {this.props.trip && (
-        <div class="meetup-rule">Meetup will take place between {this.props.trip.departure_date} - {this.props.trip.arrival_date}</div>
+        <div class="meetup-rule">Important note: Your meetup will take place between {this.props.trip.departure_date} - {this.props.trip.arrival_date}.</div>
       )}
+
         <button class="form-send-btn btn" onClick={this.proceedRequest}>Next</button>
       </form>
 

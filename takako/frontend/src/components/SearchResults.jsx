@@ -22,26 +22,29 @@ class SearchResults extends Component {
 const SearchResults = ({travelers}) => {
     console.log("searchResults", {travelers});
     return(
-      <div class="search-user-wrapper">
-        {travelers.map((traveler, key) => (
-          <a href={`/profile/${traveler.id}`} style={{color: "black"}}>
-          <div class="profile-card">
-            <img class="profile-card-img" src="./img/woman3.jpg"/>
-            <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-            <div class="profile-card-contents">
-              <p class="profile-card-name">{traveler.first_name} {traveler.last_name}</p>
-              {traveler.trip && traveler.trip.length > 0 && (
-                <div>
-                  <div class="profile-card-data subject">Next Trip:</div>
-                  <div class="profile-card-data">{traveler.trip[0].departure_date} - {traveler.trip[0].arrival_date} {traveler.trip[0].destination}</div>
-                </div>
-              )}
+      <div>
+        <div class="search-user-wrapper">
+          {travelers.map((traveler, key) => (
+            <a href={`/profile/${traveler.id}`} style={{color: "black"}}>
+            <div class="profile-card">
+              <img class="profile-card-img" src="./img/woman3.jpg"/>
+              <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+              <div class="profile-card-contents">
+                <p class="profile-card-name">{traveler.first_name} {traveler.last_name}</p>
+                {traveler.trip && traveler.trip.length > 0 && (
+                  <div>
+                    <div class="profile-card-data subject">Next Trip:</div>
+                    <div class="profile-card-data">{traveler.trip[0].departure_date} - {traveler.trip[0].arrival_date} {traveler.trip[0].destination}</div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          </a>
+            </a>
         ))}
       </div>
+      </div>
+
     )
 };
 
