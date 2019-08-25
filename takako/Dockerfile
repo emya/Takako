@@ -13,4 +13,6 @@ ADD . /opt
 WORKDIR /opt
 RUN pip install -r requirements.txt
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+ENTRYPOINT ["gunicorn", "--config", "gunicorn_config.py", "takako.wsgi:application"]
