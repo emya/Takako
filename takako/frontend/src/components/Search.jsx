@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 import Header from './Header'
 import SideMenu from './SideMenu'
+import Footer from './Footer'
 
 class Search extends Component {
   state = {
@@ -72,10 +73,7 @@ class Search extends Component {
       </ul>
       </div>
 
-    <footer>
-    FOOTER CONTENTS TO BE DETERMINED
-    <FontAwesomeIcon icon="igloo" />
-    </footer>
+  <Footer />
   </div>
     )
   }
@@ -88,5 +86,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, null)(Search);
-
-

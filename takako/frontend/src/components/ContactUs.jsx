@@ -11,6 +11,7 @@ import {Provider, connect} from 'react-redux';
 import Header from './Header';
 import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer'
 
 import {contact} from "../actions";
 
@@ -62,10 +63,8 @@ class ContactUs extends Component {
 
         <MobileSideMenu />
 
-        <footer>
-          FOOTER CONTENTS TO BE DETERMINED
-          <FontAwesomeIcon icon="igloo" />
-        </footer>
+        <Footer />
+
       </div>
       )
     }
@@ -82,9 +81,9 @@ class ContactUs extends Component {
 
           <h2>Contact Us</h2>
           <div class="form-wrapper">
-            <h3>How can we Help you?</h3>
-            <p>If you have a question, request, and feedback, we would love to hear it!</p>
-
+            <div class="introduction">
+              <p>Couldn't find answers <a href="http://torimo.io/how-it-works">here</a>?<br/> Reach out to us for your question, request, and feedback, we'd love to hear it!</p>
+            </div>
             <div class="form-section">
               {errors.map(error => (
                 <p key={error}>Error: {error}</p>
@@ -96,17 +95,14 @@ class ContactUs extends Component {
               <input type="email" maxLength="200" value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} required /><br/>
 
               <p class="form-heading">Message<span class="asterisk">*</span></p><br/>
-              <input type="text" maxLength="300" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}  required /><br/>
+              <input type="text" class="contact-message" maxLength="300" value={this.state.message} onChange={(e) => this.setState({message: e.target.value})}  required /><br/>
             </div>
             <button class="form-send-btn btn" onClick={this.sendContactUs}>Submit</button>
           </div>
         </form>
       </div>
 
-      <footer>
-        FOOTER CONTENTS TO BE DETERMINED
-        <FontAwesomeIcon icon="igloo" />
-      </footer>
+      <Footer />
     </div>
     )
   }

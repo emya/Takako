@@ -105,7 +105,7 @@ class TravelerProfile extends Component {
           <input type="submit" value="Save Profile" />
         </form>
 
-        <h2>Upcoming Trips</h2>
+        <h3>Upcoming Trips</h3>
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>
@@ -119,7 +119,7 @@ class TravelerProfile extends Component {
           </tr>
         </table>
 
-        <h2>Past Transactions</h2>
+        <h3>Past Transactions</h3>
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>

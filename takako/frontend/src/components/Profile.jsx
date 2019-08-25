@@ -51,10 +51,10 @@ class Profile extends Component {
           </div>
         ))}
 
-        <h2>Upcoming Trips</h2>
+        <h3>Upcoming Trips</h3>
         <UpcomingTrips is_other="true" userId={`${userId}`}/>
 
-        <h2>Past Transactions</h2>
+        <h3>Past Transactions</h3>
         <table class="table-data">
           <tr class="table-heading">
             <td>Date</td>

@@ -57,9 +57,7 @@ class HowItWorks extends Component {
      <div class="how-detail">
       <h3 id="whatsmeetupperiod">Meetup Period</h3>
       <ul>
-        <li>It is pre-determined based on Traveler's residence and trip schedule.</li>
-        <li>If Traveler lives in NYC and is traveling overseas, the meetup takes place within <strong>1 week</strong> after returning to NYC.</li>
-        <li>If Traveler lives overseas and is traveling to NYC, the meetup takes place during their stay in NYC.</li>
+        <li>The meetup period is pre-determined and takes place within <strong>1 week</strong> after Traveler returning to NYC.</li>
       </ul>
       <h3 id="whatscommision">Commission to Traveler</h3>
       <ul>
