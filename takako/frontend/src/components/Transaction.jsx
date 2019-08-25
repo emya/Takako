@@ -69,10 +69,10 @@ class Transaction extends Component {
             <tr class="table-heading">
               <td>Date Received</td>
               <td>User</td>
+              <td>Travel Date</td>
               <td>Item</td>
               <td>Destination</td>
               <td>Status</td>
-              <td>Earning</td>
             </tr>
 
             {this.props.requests.received_item_requests && this.props.requests.received_item_requests.map((received_item_request) => (

@@ -11,7 +11,7 @@ render() {
           <li><a href={'/myprofile'}>My Profile</a></li>
           <li><a href={'/transaction/status'}>My Transactions</a></li>
           <li><a href={'/how-it-works'}>How It Works</a></li>
-          <li><a href={'/contact/us'}>Contact Us</a></li>
+          <li><a href={'/contact-us'}>Contact Us</a></li>
         </ul>
       </div>
   )}
