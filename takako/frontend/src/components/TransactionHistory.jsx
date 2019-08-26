@@ -202,7 +202,7 @@ class TransactionHistory extends Component {
              <p>Request you sent</p>
              <p>Item Name:  {requestHistory.item_name}</p>
              <p>Number of Item(s):  {requestHistory.n_items}</p>
-             <p>Price    :  {requestHistory.proposed_price}</p>
+             <p>Price    :  {requestHistory.proposed_price.toLocaleString()}</p>
            </div>
          )}
          {
@@ -460,6 +460,14 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
+         {/* the traveler accepted */
+         is_requester && item_request_status === 2 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>Your request was accepted by {requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+         )}
          {/*the request was cancelled*/
          is_requester && item_request_status === 1 && (
            <div class="history-box">
@@ -653,11 +661,6 @@ class TransactionHistory extends Component {
                <p>Payment completed by {requestHistory.respondent.first_name}</p>
              </div>
            </div>
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p>You accepted the request </p>
-             </div>
-           </div>
          </div>
          )}
 
@@ -666,6 +669,15 @@ class TransactionHistory extends Component {
            <div class="history-box">
              <div class="history-wrapper">
                <p>You rejected the request</p>
+             </div>
+           </div>
+         )}
+
+         {/*the traveler rejected the request*/
+         is_traveler && item_request_status === 2 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p>You accepted the request</p>
              </div>
            </div>
          )}
@@ -697,12 +709,12 @@ class TransactionHistory extends Component {
              <li>Item Name:  {requestHistory.item_name}</li>
              <li>Item URL (Optional):   {requestHistory.item_url}</li>
              <li>Number of Item(s):   {requestHistory.n_items}</li>
-             <li>Proposed Price:   {requestHistory.proposed_price}</li>
-             <li>Commission Fee:   {requestHistory.commission_fee}</li>
-             {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee}</li>)}
+             <li>Proposed Price:   {requestHistory.proposed_price.toLocaleString()}</li>
+             <li>Commission Fee:   {requestHistory.commission_fee.toLocaleString()}</li>
+             {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee.toLocaleString()}</li>)}
              {is_requester && (
                <li>
-                 Total Payment: {requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
+                 Total Payment: {(requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price).toLocaleString()}
                </li>
              )}
              <li>Delivery Method:   Meetup</li>

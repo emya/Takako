@@ -145,13 +145,13 @@ class RequestForm extends Component {
 
             <div class="form-section">
               <p class="form-heading">Item Price</p><br />
-              <p class="form-data">${this.state.proposed_price} </p><br />
+              <p class="form-data">${(+this.state.proposed_price).toLocaleString()} </p><br />
               <p class="form-heading">Commission to Traveler</p><br />
-              <p class="form-data">${this.state.commission_fee}</p><br />
+              <p class="form-data">${(+this.state.commission_fee).toLocaleString()}</p><br />
               <p class="form-heading">Transaction fee</p><br />
-              <p class="form-data">${this.state.transaction_fee}</p><br />
+              <p class="form-data">${(+this.state.transaction_fee).toLocaleString()}</p><br />
               <p class="form-heading">Your Total Payment</p><br />
-              <p class="form-data">${+this.state.proposed_price + +this.state.commission_fee + +this.state.transaction_fee}</p><br />
+              <p class="form-data">${(+this.state.proposed_price + +this.state.commission_fee + +this.state.transaction_fee).toLocaleString()}</p><br />
             </div>
 
             <div class="form-section">
@@ -167,8 +167,13 @@ class RequestForm extends Component {
               </div>
             </div>
 
+          </div>
+
+          {this.props.trip && (
+            <div class="meetup-rule">
+              Important note: Your meetup will take place within one week from {this.props.trip.arrival_date}.
             </div>
-          <div class="meetup-rule">Important note: Your meetup/delivery will take place between 1/1/2019 - 1/30/2019.</div>
+          )}
           <button class="form-send-btn btn" onClick={this.submitRequest.bind(this)}>Confirm and Send</button>
         </div>
         </div>
@@ -237,10 +242,10 @@ class RequestForm extends Component {
          $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
 
         <p class="form-heading">Transaction Fee (automatically calculated as 5% of item price)</p><br/>
-        $<p class="number-calculated">{this.state.transaction_fee}</p><br/>
+        $<p class="number-calculated">{(+this.state.transaction_fee).toLocaleString()}</p><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
-        $<p class="number-calculated">{+this.state.proposed_price + +this.state.transaction_fee + +this.state.commission_fee}</p><br/>
+        $<p class="number-calculated">{(+this.state.proposed_price + +this.state.transaction_fee + +this.state.commission_fee).toLocaleString()}</p><br/>
 
       </div>
 
@@ -263,7 +268,9 @@ class RequestForm extends Component {
       </div>
 
       {this.props.trip && (
-        <div class="meetup-rule">Important note: Your meetup will take place between {this.props.trip.departure_date} - {this.props.trip.arrival_date}.</div>
+        <div class="meetup-rule">
+          Important note: Your meetup will take place within one week from {this.props.trip.arrival_date}.
+        </div>
       )}
 
         <button class="form-send-btn btn" onClick={this.proceedRequest}>Next</button>
