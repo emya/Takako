@@ -143,7 +143,7 @@ class ItemRequest(models.Model):
     # 4: The item is hard to get
     decline_reason = models.IntegerField(default=-1)
     decline_reason_comment = models.CharField(max_length=200, blank=True)
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class Charge(models.Model):
     #amount in dollar

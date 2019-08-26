@@ -167,8 +167,13 @@ class RequestForm extends Component {
               </div>
             </div>
 
+          </div>
+
+          {this.props.trip && (
+            <div class="meetup-rule">
+              Important note: Your meetup will take place within one week from {this.props.trip.arrival_date}.
             </div>
-          <div class="meetup-rule">Important note: Your meetup/delivery will take place between 1/1/2019 - 1/30/2019.</div>
+          )}
           <button class="form-send-btn btn" onClick={this.submitRequest.bind(this)}>Confirm and Send</button>
         </div>
         </div>

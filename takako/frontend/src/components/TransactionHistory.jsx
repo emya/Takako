@@ -202,7 +202,7 @@ class TransactionHistory extends Component {
              <p>Request you sent</p>
              <p>Item Name:  {requestHistory.item_name}</p>
              <p>Number of Item(s):  {requestHistory.n_items}</p>
-             <p>Price    :  {requestHistory.proposed_price}</p>
+             <p>Price    :  {requestHistory.proposed_price.toLocaleString()}</p>
            </div>
          )}
          {
