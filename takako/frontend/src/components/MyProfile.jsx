@@ -26,7 +26,7 @@ class MyProfile extends Component {
   state = {
     bio: "",
     residence: "",
-    search: "",
+    residence_search: "",
   }
 
   resetForm = () => {
@@ -45,13 +45,14 @@ class MyProfile extends Component {
     this.setState({bio: profile.bio, residence: profile.residence, occupation: profile.occupation, gender: profile.gender});
   }
 
-  handleResidenceChange(e) {
-    this.setState({search: e.target.value, residence: e.target.value})
+  handleResidenceChange(propertyName, profile, event) {
+    profile[propertyName] = event.target.value;
+    this.setState({residence_search: event.target.value, residence: event.target.value})
   }
 
   handleSelectResidenceSuggest(suggest) {
     console.log(suggest.formatted_address);
-    this.setState({search: "", residence: suggest.formatted_address})
+    this.setState({residence_search: "", residence: suggest.formatted_address})
   }
 
   render() {
@@ -83,7 +84,7 @@ class MyProfile extends Component {
                   googleMaps && (
                     <div>
                       <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.search}}
+                        autocompletionRequest={{input: this.state.residence_search, types: ['(regions)']}}
                         googleMaps={googleMaps}
                         onSelectSuggest={this.handleSelectResidenceSuggest.bind(this)}
                       >
@@ -92,7 +93,7 @@ class MyProfile extends Component {
                           class="user-data"
                           type="text"
                           value={profile.residence}
-                          onChange={this.handleResidenceChange.bind(this)}
+                          onChange={this.handleResidenceChange.bind(this, 'residence', profile)}
                         />
                       </ReactGooglePlacesSuggest>
                     </div>
@@ -114,19 +115,6 @@ class MyProfile extends Component {
         <h3 class="upcoming">Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
 
-        <h3>Past Transactions</h3>
-        <table class="table-data">
-          <tr class="table-heading">
-            <td>Date</td>
-            <td>residence</td>
-            <td>Item</td>
-          </tr>
-          <tr>
-            <td>4/5/2018</td>
-            <td>Tokyo, Japan</td>
-            <td>Tokyo Banana</td>
-          </tr>
-        </table>
       </div>
     </div>
 
