@@ -38,7 +38,6 @@ class TransactionHistory extends Component {
   }
 
   acceptItemRequest = () => {
-    console.log(moment().format());
     this.props.updateItemRequest(
       this.props.match.params.requestId,
       {
