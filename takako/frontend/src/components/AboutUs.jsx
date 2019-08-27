@@ -39,13 +39,13 @@ class Test extends Component {
   <p><strong>Chiaki Ikuyama</strong></p>
   <p class="member-title">Cofounder & CEO</p>
   <p>Chiaki is originally from Japan and studied in Minnesota, the United States. Prior to Torimo, she worked as a USCPA at Deloitte as well as an investment banker at Citigroup. She is passionate about web design and digital art, fashion and traveling.
-  <br/><br/>She is responsible for finance, UXUI design, and strategies/overall operations of Torimo.</p>
+  <br/></p>
 </div>
 
 <div class="member">
   <p><strong>Emi Ayada</strong></p>
   <p class="member-title">Cofounder & CTO</p>
-  <p>She is responsible for product development and strategies/overall operations of Torimo. (MORE TO COME)</p>
+  <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>
   </div>
 </div>
 
