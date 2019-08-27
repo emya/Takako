@@ -61,7 +61,10 @@ class TransactionHistory extends Component {
   }
 
   cancelItemRequest = () => {
-    this.props.updateItemRequest(this.props.match.params.requestId, {"status": 1, "process_status": "request_cancelled"});
+    this.props.updateItemRequest(
+      this.props.match.params.requestId,
+      {"status": 1, "process_status": "request_cancelled", "responded_at": moment().format()}
+    );
   }
 
   onToken = (token, addresses) => {
@@ -514,6 +517,9 @@ class TransactionHistory extends Component {
          is_requester && item_request_status === 1 && (
            <div class="history-box">
              <div class="history-wrapper">
+               <h4>
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </h4>
                <p>You cancelled the request</p>
              </div>
            </div>
@@ -802,6 +808,9 @@ class TransactionHistory extends Component {
          is_traveler && item_request_status === 1 && (
            <div class="history-box">
              <div class="history-wrapper">
+               <h4>
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </h4>
                <p>The request was cancelled</p>
              </div>
            </div>
