@@ -144,6 +144,11 @@ class ItemRequest(models.Model):
     decline_reason = models.IntegerField(default=-1)
     decline_reason_comment = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
+    responded_at = models.DateTimeField(null=True)
+    paid_at = models.DateTimeField(null=True)
+    purchase_notified_at = models.DateTimeField(null=True)
+    meetup_suggested_at = models.DateTimeField(null=True)
+    meetup_decided_at = models.DateTimeField(null=True)
 
 class Charge(models.Model):
     #amount in dollar

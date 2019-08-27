@@ -66,10 +66,11 @@ class SharedContactViewSet(viewsets.ModelViewSet):
         purchase_notification_id = request.data.pop("purchase_notification_id")
         purchase_notification = PurchaseNotification.objects.get(pk=purchase_notification_id)
 
-
         process_status = request.data.pop("process_status")
 
         purchase_notification.item_request.process_status = process_status
+        now = timezone.now()
+        purchase_notification.item_request.meetup_decided_at = now
         purchase_notification.item_request.save()
 
         accepted_meetup_id = request.data.pop("accepted_meetup_id")
@@ -95,6 +96,8 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         request_id = request.data.pop("request_id")
         item_request = ItemRequest.objects.get(pk=request_id)
         item_request.process_status = "purchase_notified"
+        now = timezone.now()
+        item_request.purchase_notified_at = now
         item_request.save()
 
         meetup_option1 = request.data.pop("meetup_option1")
@@ -144,6 +147,8 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
         purchase_notification.save()
 
         purchase_notification.item_request.process_status = process_status
+        now = timezone.now()
+        purchase_notification.item_request.meetup_suggested_at = now
         purchase_notification.item_request.save()
 
         serializer = self.serializer_class(purchase_notification)
@@ -230,6 +235,8 @@ class ChargeViewSet(viewsets.ModelViewSet):
 
         if status == "succeeded":
             item_request.process_status = "payment_made"
+            now = timezone.now()
+            item_request.paid_at = now
             item_request.save()
 
         charge = Charge.objects.create(
