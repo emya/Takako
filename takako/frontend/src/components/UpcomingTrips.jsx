@@ -168,7 +168,7 @@ class UpcomingTrips extends Component {
                   )
                 }
               />
-            <input class="btn savep" type="submit" value="Save Trip" />
+            <input class="btn savet" type="submit" value="Save Trip" />
           </form>
         </div>
       }

@@ -27,7 +27,7 @@ class Transaction extends Component {
 
         <div class="profile">
 
-          <h2>Transaction Status</h2>
+          <h2>My Transactions</h2>
 
           <h3 class="request">Sent Request</h3>
           <table class="table-data">
@@ -38,6 +38,7 @@ class Transaction extends Component {
               <td>Item</td>
               <td>Destination</td>
               <td>Status</td>
+              <td class="detail-heading"></td>
             </tr>
 
             {this.props.requests.sent_item_requests && this.props.requests.sent_item_requests.map((sent_item_request) => (
@@ -47,7 +48,7 @@ class Transaction extends Component {
                 <td>{sent_item_request.trip.departure_date} - {sent_item_request.trip.arrival_date}</td>
                 <td>{sent_item_request.item_name}</td>
                 <td>{sent_item_request.trip.destination}</td>
-                <td>
+                <td class="transaction-status">
                   {sent_item_request.status === 0 && ("Pending")}
                   {sent_item_request.status === 1 && ("Cancelled")}
                   {sent_item_request.status === 3 && ("Rejected")}
@@ -57,7 +58,9 @@ class Transaction extends Component {
                   {sent_item_request.status === 2 && sent_item_request.process_status == "purchase_notified" && ("Purchased [Action Required]")}
                   {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
                   {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
-                  <a href={`/transaction/history/${sent_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
+                </td>
+                <td>
+                  <a class="btn detail" href={`/transaction/history/${sent_item_request.id}`}>Details</a>
                 </td>
               </tr>
             ))}
@@ -73,6 +76,7 @@ class Transaction extends Component {
               <td>Item</td>
               <td>Destination</td>
               <td>Status</td>
+              <td class="detail-heading"></td>
             </tr>
 
             {this.props.requests.received_item_requests && this.props.requests.received_item_requests.map((received_item_request) => (
@@ -82,7 +86,7 @@ class Transaction extends Component {
                 <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
-                <td>
+                <td class="transaction-status">
                   {received_item_request.status === 0 && ("Pending [Action Required]")}
                   {received_item_request.status === 1 && ("Cancelled")}
                   {received_item_request.status === 3 && ("Rejected")}
@@ -93,7 +97,9 @@ class Transaction extends Component {
                   {received_item_request.status === 2 && received_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
                   {received_item_request.status === 2 && received_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
                   {received_item_request.status === 2 && ("Accepted")}
-                  <a href={`/transaction/history/${received_item_request.id}`} style={{color: "#78BBE6"}}>details</a>
+                  </td>
+                <td>
+                  <a class="btn detail" href={`/transaction/history/${received_item_request.id}`}>Details</a>
                 </td>
               </tr>
             ))}

@@ -37,7 +37,7 @@ class HowItWorks extends Component {
         <div class="triangle"></div>
         <div class="arrow-box"><p>3 days</p></div>
         <div class="triangle"></div>
-        <div class="arrow-box meetup"><p>Meetup Period<a href="/how-it-works#whatsmeetupperiod"><span class='suptext'>(?)</span></a></p></div>
+        <div class="arrow-box meetup"><a href="/how-it-works#whatsmeetupperiod"><p>Meetup Period</p></a></div>
         <div class="triangle meetup"></div>
         <div class="arrow-box"><p>1 day</p></div>
         <div class="triangle"></div>

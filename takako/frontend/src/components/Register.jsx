@@ -25,45 +25,45 @@ class Login extends Component {
     }
     return (
       <form onSubmit={this.onSubmit}>
-        <fieldset>
+        <fieldset class="signin-box">
           <legend>Register</legend>
           {this.props.errors.length > 0 && (
-            <ul>
+            <div>
               {this.props.errors.map(error => (
-                <li key={error.field}>{error.message}</li>
+                <p class="start-error" key={error.field}>{error.message}</p>
               ))}
-            </ul>
+            </div>
           )}
           <p>
-            <label htmlFor="first_name">First Name</label>
+            <label class="start" htmlFor="first_name">First Name</label>
             <input
               type="text" id="first_name"
               onChange={e => this.setState({first_name: e.target.value})} required/>
           </p>
           <p>
-            <label htmlFor="first_name">Last Name</label>
+            <label class="start" htmlFor="first_name">Last Name</label>
             <input
               type="text" id="last_name"
               onChange={e => this.setState({last_name: e.target.value})} required/>
           </p>
           <p>
-            <label htmlFor="email">Email</label>
+            <label class="start" htmlFor="email">Email</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} required/>
           </p>
           <p>
-            <label htmlFor="password">Password</label>
+            <label class="start" htmlFor="password">Password</label>
             <input
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
           <p>
-            <button type="submit">Register</button>
+            <button class="btn start-page" type="submit">Register</button>
           </p>
 
           <p>
-            Already have an account? <Link to="/login" style={{color: "black"}}>Login</Link>
+            Already have an account? <a class="start-link" to="/login" style={{color: "black"}}>Login</a>
           </p>
         </fieldset>
       </form>

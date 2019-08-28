@@ -22,37 +22,37 @@ class Login extends Component {
     }
     return (
       <form onSubmit={this.onSubmit}>
-        <fieldset>
+        <fieldset class="signin-box">
           <legend>Login</legend>
           {this.props.errors.length > 0 && (
-            <ul>
+            <div>
               {this.props.errors.map(error => (
-                <li key={error.field}>{error.message}</li>
+                <p class="start-error" key={error.field}>{error.message}</p>
               ))}
-            </ul>
+            </div>
           )}
           <p>
-            <label htmlFor="email">Email</label>
+            <label class="start" htmlFor="email">Email</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} />
           </p>
           <p>
-            <label htmlFor="password">Password</label>
+            <label class="start" htmlFor="password">Password</label>
             <input
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} />
           </p>
           <p>
-            <button type="submit">Login</button>
+            <button class="btn start-page" type="submit">Login</button>
           </p>
 
           <p>
-            <Link to="/reset/password" style={{color: "black"}}> Forgot Password? </Link>
+            <a class="start-link" to="/reset/password" style={{color: "black"}}> Forgot Password? </a>
           </p>
 
           <p>
-            Don't have an account? <Link to="/register" style={{color: "black"}}>Register</Link>
+            Don't have an account? <a class="start-link" to="/register" style={{color: "black"}}>Register</a>
           </p>
         </fieldset>
       </form>
