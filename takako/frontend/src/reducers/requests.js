@@ -1,6 +1,7 @@
 const initialState = {
   isSubmissionSucceeded: null,
   isForbidden: null,
+  isPaymentCompleted: null,
   isResponded: null,
 };
 
@@ -10,7 +11,7 @@ export default function requests(state=initialState, action) {
         return {...state, ...action.data, isSubmissionSucceeded: true};
 
     case 'REQUEST_ITEM_CHARGE_SUCCESSFUL':
-        return {...state, ...action.data};
+        return {...state, ...action.data, isPaymentCompleted: true};
 
     case 'SHARE_CONTACT_SUCCESSFUL':
         return {...state, ...action.data, isSubmissionSucceeded: true};

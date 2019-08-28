@@ -107,22 +107,29 @@ class TransactionHistory extends Component {
           </div>
         </div>
 
-        <div class="sidemenu-mobile">
-          <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-          </ul>
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
+    }
+
+    if (this.props.isPaymentCompleted) {
+     return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <p>Your payment was successfully completed</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+              Back to the conversation
+            </a></p>
+          </div>
         </div>
 
-        <footer>
-          FOOTER CONTENTS TO BE DETERMINED
-          <FontAwesomeIcon icon="igloo" />
-        </footer>
+        <MobileSideMenu />
+        <Footer />
       </div>
       )
     }
@@ -151,22 +158,8 @@ class TransactionHistory extends Component {
       </div>
     </div>
 
-    <div class="sidemenu-mobile">
-      <ul>
-        <li><a href="#">My Profile<span>></span></a></li>
-        <li><a href="#">Transaction Status<span>></span></a></li>
-        <li><a href="#">Message Box<span>></span></a></li>
-        <li><a href="#">Edit Profile<span>></span></a></li>
-        <li><a href="#">Edit Account<span>></span></a></li>
-        <li><a href="#">Logout<span>></span></a></li>
-        <li><a href="#">Help<span>></span></a></li>
-      </ul>
-    </div>
-
-    <footer>
-      FOOTER CONTENTS TO BE DETERMINED
-      <FontAwesomeIcon icon="igloo" />
-    </footer>
+    <MobileSideMenu />
+    <Footer />
   </div>
     )}
 
@@ -874,6 +867,7 @@ const mapStateToProps = state => {
   return {
     isForbidden: state.requests.isForbidden,
     isResponded: state.requests.isResponded,
+    isPaymentCompleted: state.requests.isPaymentCompleted,
     requests: state.requests,
     user: state.auth.user,
   }
