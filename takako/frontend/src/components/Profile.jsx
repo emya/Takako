@@ -54,19 +54,6 @@ class Profile extends Component {
         <h3>Upcoming Trips</h3>
         <UpcomingTrips is_other="true" userId={`${userId}`}/>
 
-        <h3>Past Transactions</h3>
-        <table class="table-data">
-          <tr class="table-heading">
-            <td>Date</td>
-            <td>residence</td>
-            <td>Item</td>
-          </tr>
-          <tr>
-            <td>4/5/2018</td>
-            <td>Tokyo, Japan</td>
-            <td>Tokyo Banana</td>
-          </tr>
-        </table>
       </div>
     </div>
 

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requests, auth} from "../actions";
 import '../css/style.scss';
-import Header from './Header'
-import SideMenu from './SideMenu'
-import MobileSideMenu from './MobileSideMenu'
-import Footer from './Footer'
+import Header from './Header';
+import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer';
+import moment from 'moment';
 
 class Transaction extends Component {
   componentDidMount() {
@@ -43,7 +44,7 @@ class Transaction extends Component {
 
             {this.props.requests.sent_item_requests && this.props.requests.sent_item_requests.map((sent_item_request) => (
               <tr class="transaction-data">
-                <td>{sent_item_request.created_at}</td>
+                <td>{sent_item_request.created_at && moment(sent_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}</td>
                 <td>{sent_item_request.respondent.first_name} {sent_item_request.respondent.last_name}</td>
                 <td>{sent_item_request.trip.departure_date} - {sent_item_request.trip.arrival_date}</td>
                 <td>{sent_item_request.item_name}</td>
@@ -81,7 +82,7 @@ class Transaction extends Component {
 
             {this.props.requests.received_item_requests && this.props.requests.received_item_requests.map((received_item_request) => (
               <tr class="transaction-data">
-                <td>{received_item_request.created_at}</td>
+                <td>{received_item_request.created_at && moment(received_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}</td>
                 <td>{received_item_request.requester.first_name} {received_item_request.requester.last_name}</td>
                 <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
                 <td>{received_item_request.item_name}</td>

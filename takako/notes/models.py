@@ -100,7 +100,7 @@ class Trip(models.Model):
     status = models.IntegerField(default=0)
     # Status
     # 0: just create the trip
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class ItemRequest(models.Model):
     requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_requests_created')
@@ -143,7 +143,12 @@ class ItemRequest(models.Model):
     # 4: The item is hard to get
     decline_reason = models.IntegerField(default=-1)
     decline_reason_comment = models.CharField(max_length=200, blank=True)
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
+    responded_at = models.DateTimeField(null=True)
+    paid_at = models.DateTimeField(null=True)
+    purchase_notified_at = models.DateTimeField(null=True)
+    meetup_suggested_at = models.DateTimeField(null=True)
+    meetup_decided_at = models.DateTimeField(null=True)
 
 class Charge(models.Model):
     #amount in dollar
@@ -158,7 +163,7 @@ class Charge(models.Model):
     token_id = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class Meetup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -166,7 +171,7 @@ class Meetup(models.Model):
     dtime = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=300, blank=True)
     comment = models.CharField(max_length=300, blank=True)
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class PurchaseNotification(models.Model):
     item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="purchase_notification")
@@ -180,14 +185,14 @@ class PurchaseNotification(models.Model):
     # 1: requester
     action_taken_by = models.IntegerField(default=0)
     final_meetup = models.ForeignKey(Meetup, null=True, on_delete=models.CASCADE, related_name="purchase_notification_finalmeetup")
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class SharedContact(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     preferred_phone = models.CharField(max_length=100, blank=True)
     preferred_email = models.CharField(max_length=200, blank=True)
     purchase_notification = models.ForeignKey(PurchaseNotification, on_delete=models.CASCADE, related_name="shared_contact")
-    created_at = models.DateField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
 class ContactUs(models.Model):
     user = models.ForeignKey(User, blank=True, on_delete=models.CASCADE)
