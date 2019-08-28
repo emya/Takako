@@ -8,7 +8,7 @@ render() {
 <div>
     <header class="header">
       <div class="topbar-contents">
-        <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
+        <a href="/"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
         <div class="login">
           <a class="register" href="/register">Get Started</a>
           <a class="signin" href="/login">Sign in</a>
