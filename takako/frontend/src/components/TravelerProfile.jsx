@@ -95,7 +95,7 @@ class TravelerProfile extends Component {
           {this.props.traveler_profile.map((profile) => (
             <div>
               <img src="./img/woman3.jpg"/>
-              <p class="user-data"> {this.props.user.username} </p>
+              <p class="user-name"> {this.props.user.username} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
               <p class="object">Bio</p>

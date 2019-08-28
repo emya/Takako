@@ -69,7 +69,7 @@ class MyProfile extends Component {
           {this.props.profile.map((profile) => (
             <div>
               <img src={require('../img/default.png')} />
-              <p class="user-data"> {profile.user.first_name} {profile.user.last_name} </p>
+              <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
 
@@ -90,7 +90,7 @@ class MyProfile extends Component {
                       >
                         <input
                           id="residence"
-                          class="user-data"
+                          class="user-data resi"
                           type="text"
                           value={profile.residence}
                           onChange={this.handleResidenceChange.bind(this, 'residence', profile)}
@@ -114,6 +114,7 @@ class MyProfile extends Component {
 
         <h3 class="upcoming">Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
+
 
       </div>
     </div>
