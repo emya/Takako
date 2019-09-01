@@ -63,7 +63,7 @@ class Login extends Component {
           </p>
 
           <p>
-            Already have an account? <a class="start-link" to="/login" style={{color: "black"}}>Login</a>
+            Already have an account? <a class="start-link" href="/login" style={{color: "black"}}>Login</a>
           </p>
         </fieldset>
       </form>

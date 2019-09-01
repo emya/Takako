@@ -48,11 +48,11 @@ class Login extends Component {
           </p>
 
           <p>
-            <a class="start-link" to="/reset/password" style={{color: "black"}}> Forgot Password? </a>
+            <a class="start-link" href="/reset/password" style={{color: "black"}}> Forgot Password? </a>
           </p>
 
           <p>
-            Don't have an account? <a class="start-link" to="/register" style={{color: "black"}}>Register</a>
+            Don't have an account? <a class="start-link" href="/register" style={{color: "black"}}>Register</a>
           </p>
         </fieldset>
       </form>

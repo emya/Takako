@@ -18,6 +18,7 @@ from django_rest_passwordreset.views import get_password_reset_token_expiry_time
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.utils import timezone
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 from datetime import timedelta
 
@@ -172,8 +173,14 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         item_request = ItemRequest.objects.create(requester=request.user, respondent=respondent, trip=trip, **request.data)
         serializer = self.serializer_class(item_request)
 
+        site_url = "http://localhost:8000"
+        site_name = "Torimo"
+        link = f"{site_url}/transaction/history/{item_request.id}",
+        html_message = render_to_string('email-request-received.html', {'user': respondent, 'link': link})
+
         # Notify respondent
-        send_email.delay("You got new Request!", "You got new Request! Check at Torimo!", respondent.email)
+        send_email.delay("You got new Request!", "You got new Request! Check at Torimo!", html_message, respondent.email)
+
         return Response(serializer.data)
 
     def list(self, request):
@@ -202,9 +209,11 @@ class ContactUsViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(contactus)
 
         # Notify user
-        send_email.delay("Thank you for your message", "We will be in touch as soon as possible", request.data['email'])
+        html_message = render_to_string('email-contactus.html', {'user': user})
+        send_email.delay("Thank you for your message", "Thank you for joining us!", html_message, request.data['email'])
+
         # Notify us
-        send_email.delay("New message from our user", request.data['message'], settings.EMAIL_HOST_USER)
+        send_email.delay("New message from our user", request.data['message'], None, settings.EMAIL_HOST_USER)
         return Response(serializer.data)
 
 import stripe
@@ -361,7 +370,8 @@ class RegistrationAPI(generics.GenericAPIView):
         user = serializer.save()
         Profile.objects.create(user=user)
 
-        send_email.delay("Welcome to Torimo!", "Thank you for joining us!", user.email)
+        html_message = render_to_string('email-signup.html', {'user': user})
+        send_email.delay("Welcome to Torimo!", "Thank you for joining us!", html_message, user.email)
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
@@ -401,26 +411,14 @@ class CustomPasswordResetView:
         context = {
             'current_user': reset_password_token.user,
             'email': reset_password_token.user.email,
-            'reset_password_url': "{}/password-reset/{}".format(site_url, reset_password_token.key),
+            'reset_password_url': f"{site_url}/reset/password/{reset_password_token.key}",
             'site_name': site_name,
             'site_domain': site_url
         }
 
         # render email text
-        #email_html_message = render_to_string('email/user_reset_password.html', context)
+        html_message = render_to_string('email-forgotpswd.html', context)
         #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
-        email_plaintext_message = f"Hey let's change passward at {site_url}/reset/password/{reset_password_token.key}"
 
-        msg = EmailMultiAlternatives(
-            # title:
-            "Password Reset for {}".format(site_name),
-            # message:
-            email_plaintext_message,
-            # from:
-            "noreply@{}".format(site_url),
-            # to:
-            [reset_password_token.user.email]
-        )
-        #msg.attach_alternative(email_html_message, "text/html")
-        msg.send()
+        send_email.delay("Forgot Password?", "Forgot Password?", html_message, reset_password_token.user.email)
 
