@@ -123,7 +123,7 @@ class NewMeetupRequest extends Component {
             <SideMenu />
             <div class="request-conf">
               <h3>Your request was successfully submitted</h3>
-              <p><a href="/transaction/status" style={{color: "black"}}>
+              <p><a href="/transaction/status" style={{color: "#F17816"}}>
                 Back to the conversation
               </a></p>
             </div>
@@ -153,7 +153,7 @@ class NewMeetupRequest extends Component {
           <h2>Request New Meetup Options</h2>
 
           <div class="form-wrapper">
-            <div class="form-section">
+            <div class="form-section first">
               <p class="form-heading">{requestHistory.respondent.first_name} Contact Info</p><br/>
               <p class="form-data">{requestHistory.purchase_notification[0].preferred_phone} </p><br />
               <p class="form-data">{requestHistory.purchase_notification[0].preferred_email} </p><br />
