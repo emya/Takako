@@ -70,7 +70,7 @@ class ShareContact extends Component {
             <SideMenu />
             <div class="request-conf">
               <h3>Your request was successfully submitted</h3>
-              <p><a href="/transaction/status" style={{color: "black"}}>
+              <p><a href="/transaction/status" style={{color: "#F17816"}}>
                 Back to the conversation
               </a></p>
             </div>

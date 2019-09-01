@@ -58,8 +58,7 @@ class Takako extends Component {
           </div>
 
           <div class="mobile-topbar-contents">
-            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-            <a href="#"><img class="logo" src={require('../img/Souvenir_logo.png')} /></a>
+            <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
             <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
           </div>
 

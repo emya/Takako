@@ -51,7 +51,7 @@ a:link, a:visited, a:hover, a:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #78BBE6;
+  background-color: #FFB23B;
   height: 80px;
   width: 100%;
   padding: 60px 100px;
@@ -85,7 +85,7 @@ a:link, a:visited, a:hover, a:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #78BBE6;
+  background-color: #FFB23B;
   height: 80px;
   width: 100%;
   padding: 1% 5%;
@@ -131,6 +131,11 @@ a:link, a:visited, a:hover, a:active {
   height: 580px;
 }
 
+.catchcopy.clearfix {
+  @media (max-width: 767px) {
+    height: 300px;
+  }}
+
 .catch {
   // font-family: baskerville;
   position: absolute;
@@ -165,6 +170,22 @@ a:link, a:visited, a:hover, a:active {
   line-height: 100%;
   margin-bottom: 30px;
 }
+
+.catch, .catch2 {
+  @media (max-width: 767px) {
+    margin: auto;
+    position: none;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    top:  0;
+    right: 0;
+  }}
+
+  .catch h1, .catch2 h1 {
+    @media (max-width: 767px) {
+      font-size: 2rem;
+    }}
 
 .site-desc {
   font-size: 2rem;
@@ -203,7 +224,7 @@ a:link, a:visited, a:hover, a:active {
 
 .lpimage {
   @media (max-width: 767px) {
-    display: none;
+    padding-top: 0;
   }}
 
 /* How It Works */
@@ -253,7 +274,7 @@ a:link, a:visited, a:hover, a:active {
     }}
 
 .how .heading {
-  color: #78BBE6;
+  color: #FFB23B;
 }
 
 // .how-title {
@@ -299,7 +320,7 @@ a:link, a:visited, a:hover, a:active {
 /* Use Case */
 
 .use {
-  background-color: #78BBE6;
+  background-color: #FFB23B;
   width: 100%;
   height: 550px;
   padding: 80px 30px;

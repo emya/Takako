@@ -113,7 +113,7 @@ class PurchaseNotification extends Component {
           <SideMenu />
           <div class="request-conf">
             <h3>Your notification was successfully submitted</h3>
-            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#F17816"}}>
               Back to the conversation
             </a></p>
           </div>

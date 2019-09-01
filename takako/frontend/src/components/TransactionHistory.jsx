@@ -102,7 +102,7 @@ class TransactionHistory extends Component {
           <div class="request-conf">
             <h3>Thank you!</h3>
             <p>Your notification was successfully submitted</p>
-            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
               Back to the conversation
             </a></p>
           </div>
@@ -122,8 +122,9 @@ class TransactionHistory extends Component {
         <div class="wrapper clearfix">
           <SideMenu />
           <div class="request-conf">
+          <h3>Thank you!</h3>
             <p>Your payment was successfully completed</p>
-            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
               Back to the conversation
             </a></p>
           </div>
@@ -460,7 +461,8 @@ class TransactionHistory extends Component {
          is_requester && item_request_status === 2 && process_status === "request_responded" && (
            <div class="history-box initial">
              <div class="history-wrapper">
-               <p>Payment Detail</p>
+             <p class="history-date new-update">NEW!</p>
+               <p class="history-update">Payment Detail</p>
                <ul class="request-data">
                  <li>Proposed Price:   {requestHistory.proposed_price}</li>
                  <li>Commission Fee:   {requestHistory.commission_fee}</li>
@@ -484,7 +486,8 @@ class TransactionHistory extends Component {
          is_requester && process_status === "request_sent" && (
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Waiting response by {requestHistory.respondent.first_name}</p>
+             <p class="history-date new-update">NEW!</p>
+               <p class="history-update">Waiting response from {requestHistory.respondent.first_name}</p>
              </div>
            </div>
          )}
@@ -748,7 +751,8 @@ class TransactionHistory extends Component {
          <div>
            <div class="history-box">
              <div class="history-wrapper">
-               <p>Waiting payment by {requestHistory.respondent.first_name}</p>
+              <p class="history-date new-update">NEW!</p>
+               <p class="history-update">Waiting payment by {requestHistory.respondent.first_name}</p>
              </div>
            </div>
          </div>
@@ -759,6 +763,7 @@ class TransactionHistory extends Component {
          <div>
            <div class="history-box">
              <div class="history-wrapper">
+             <p class="history-date new-update">NEW!</p>
                <p class="notify-heading">Notify that you purchased the item</p>
                  <Link to={{
                    pathname: `/notification/purchase/form/${this.props.match.params.requestId}`,
