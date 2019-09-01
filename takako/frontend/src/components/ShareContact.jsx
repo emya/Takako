@@ -69,7 +69,7 @@ class ShareContact extends Component {
           <div class="wrapper clearfix">
             <SideMenu />
             <div class="request-conf">
-              <p>Your request was successfully submitted</p>
+              <h3>Your request was successfully submitted</h3>
               <p><a href="/transaction/status" style={{color: "black"}}>
                 Back to the conversation
               </a></p>
@@ -102,7 +102,7 @@ class ShareContact extends Component {
           <h2>Accept Meetup Request</h2>
           <div class="form-wrapper">
 
-            <div class="form-section">
+            <div class="form-section first">
               <p class="form-heading">Meetup Option you accepted</p><br />
               <p class="form-data meetup">{meetup.date}</p>
               <p class="form-data meetup">{meetup.dtime}</p>
