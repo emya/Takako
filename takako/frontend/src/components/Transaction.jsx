@@ -45,9 +45,9 @@ class Transaction extends Component {
 
             {this.props.requests.sent_item_requests && this.props.requests.sent_item_requests.map((sent_item_request) => (
               <tr class="transaction-data">
-                <td>{sent_item_request.created_at && moment(sent_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}</td>
+                <td>{sent_item_request.created_at && moment(sent_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YY")}</td>
                 <td>{sent_item_request.respondent.first_name} {sent_item_request.respondent.last_name}</td>
-                <td>{sent_item_request.trip.departure_date} - {sent_item_request.trip.arrival_date}</td>
+                <td>{moment(sent_item_request.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")} - {moment(sent_item_request.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}</td>
                 <td>{sent_item_request.item_name}</td>
                 <td>{sent_item_request.trip.destination}</td>
                 <td class="transaction-status">
@@ -93,9 +93,9 @@ class Transaction extends Component {
 
             {this.props.requests.received_item_requests && this.props.requests.received_item_requests.map((received_item_request) => (
               <tr class="transaction-data">
-                <td>{received_item_request.created_at && moment(received_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}</td>
+                <td>{received_item_request.created_at && moment(received_item_request.created_at, "YYYY-MM-DD HH:mm:ss").format("MM/DD/YY")}</td>
                 <td>{received_item_request.requester.first_name} {received_item_request.requester.last_name}</td>
-                <td>{received_item_request.trip.departure_date} - {received_item_request.trip.arrival_date}</td>
+                <td>{moment(received_item_request.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")} - {moment(received_item_request.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}</td>
                 <td>{received_item_request.item_name}</td>
                 <td>{received_item_request.trip.destination}</td>
                 <td class="transaction-status">
