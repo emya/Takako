@@ -97,7 +97,6 @@ class Transaction extends Component {
                   {received_item_request.status === 2 && received_item_request.process_status == "purchase_notified" && ("Purchased")}
                   {received_item_request.status === 2 && received_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
                   {received_item_request.status === 2 && received_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
-                  {received_item_request.status === 2 && ("Accepted")}
                   </td>
                 <td>
                   <a class="btn detail" href={`/transaction/history/${received_item_request.id}`}>Details</a>

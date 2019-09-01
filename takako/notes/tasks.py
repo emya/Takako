@@ -1,7 +1,7 @@
 from .celery import app
 
 @app.task
-def send_email(subject, message, to_email):
+def send_email(subject, message, html_message, to_email):
     from django.core.mail import send_mail
     from django.conf import settings
 
@@ -11,4 +11,5 @@ def send_email(subject, message, to_email):
         settings.EMAIL_HOST_USER,
         [to_email],
         fail_silently=False,
+        html_message=html_message
     )
