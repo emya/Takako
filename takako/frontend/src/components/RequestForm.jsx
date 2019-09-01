@@ -96,7 +96,7 @@ class RequestForm extends Component {
         <div class="wrapper clearfix">
           <SideMenu />
           <div class="request-conf">
-            <p>Your request was successfully submitted</p>
+            <h3>Your request was successfully submitted</h3>
             <p><a href="/transaction/status" style={{color: "black"}}>
               Back to the conversation
             </a></p>
@@ -208,8 +208,8 @@ class RequestForm extends Component {
       <h2>Item Request</h2>
 
       {this.props.trip && (
-        <div class="form-section">
-          <h3 class="trip-summary">Trip summary</h3>
+        <div class="history-summary">
+          <h3>Trip summary</h3>
           <p><strong>Destination:   </strong>{this.props.trip.destination}</p>
         </div>
       )}

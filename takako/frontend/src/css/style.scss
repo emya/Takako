@@ -40,8 +40,8 @@ h2 {
   margin-top: 70px;
   margin-bottom: 30px;
   letter-spacing: 2px;
-  font-family: 'DM Serif Text';
-  font-size: 2.2em;
+  font-family: 'Abril Fatface';
+  font-size: 4rem;
   font-weight: normal;
 }
 
@@ -55,11 +55,17 @@ h3 {
 }
 
 input {
-  border-radius: 7px;
+  border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #EEEEEE;
   height: 30px;
   padding: 10px;
+  font-family: 'Lexend Deca', sans-serif;
+  // display: block;
+}
+
+select {
+  display: block;
   font-family: 'Lexend Deca', sans-serif;
 }
 
@@ -101,6 +107,11 @@ color: #4A4A4A;
 
 li {
   margin: 7px;
+}
+
+.form-section input {
+  width: 97%;
+  margin: 10px 0 30px 5px;
 }
 
 /* topbar */
@@ -353,7 +364,7 @@ li {
   white-space: nowrap;
 }
 
-// .table-data .transaction-data td:nth-child(6) {
+// .table-data .-data td:nth-child(6) {
 //   font-weight: bold;
 // }
 
@@ -448,6 +459,13 @@ li {
     margin: 70px 0 25px 0;
 }
 
+.decline-reason {
+  width: 75%;
+  float: right;
+  background-color: #EEEEEE;
+  min-height: 800px;
+}
+
 .status {
   display: inline-box;
   text-align: left;
@@ -468,29 +486,80 @@ li {
 
 .history-box {
   display: inline-box;
-  width: 70%;
-  height: 50px;
-  border: 1px solid grey;
-  margin: 0 auto 10px auto;
+  width: 80%;
+  border: 1px solid #BBBBBB;
+  margin: 20px auto 0px;
+  padding: 10px 15px 10px;
+  border-radius: 10px;
+  text-align: left;
 }
 
-.history-box.initial {
-  height: 400px;
-}
-
-.history-box.meetups {
-  height: 700px;
-}
-
-.history-wrapper {
-  display: flex;
-  justify-content: space-between;
+.history-box ul, .history-summary ul {
+  list-style: none;
+  margin: 3%;
+  padding: 0;
 }
 
 .history-box p {
-  display: inline;
-  line-height: 50px;
-  margin: auto 50px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.history-summary {
+  margin: 70px 0 50px 0;
+  border: none;
+}
+
+.transaction-summary {
+  text-align: left;
+  margin: 0 30% 0 15%;
+  padding: 10px;
+  width: 50%;
+}
+
+.decline-comment {
+  width: 100%;
+  margin: 40px 0 60px!important;
+}
+
+.StripeCheckout {
+  background-color: #16C4FD!important;
+  font-family: 'Lexend Deca', sans-serif!important;
+  display: block!important;
+  width: 300px!important;
+  height: 40px!important;
+  margin: 30px auto!important;
+  line-height: 40px!important;
+  border-radius: 7px!important;
+  box: none!important;
+  color: white!important;
+  border-style: none!important;
+}
+
+.btn.notify {
+  display: inline-block;
+  text-align: center;
+  float: right;
+  margin: 10px 2% 10px 0;
+  width: 30%;
+}
+
+.notify-heading {
+  display: inline-block;
+  margin: 20px 0 20px 10px!important;
+}
+
+.history-date {
+  color: white;
+  font-weight: normal!important;
+  background-color: #FFBF5D;
+  display: inline-block;
+  padding: 5px 10px;
+  // border-radius: 6px;
+}
+
+.history-update {
+  display: inline-block;
 }
 
 .request-data {
@@ -504,28 +573,31 @@ li {
 
 .bread-crumb {
   text-align: left;
-  margin-left: 30px;
+  margin: 20px 40px;
 }
 
 .bread-crumb a:link, .bread-crumb a:visited{
-  color: #78BBE6;
+  color: #F17816;
 }
 
-.action-btn {
-  height: 30px;
-  width: 100px;
-  margin: 10px 10px 0 0;
-  background-color: #F99F48;
-  box-shadow: none;
-  color: white;
+.btn.accept {
+  display: inline-block;
+  // background-color: #78BBE6;
+  width: 30%;
+  margin: 0 10px;
 }
 
-.action-btn.decline {
-  background-color: #78BBE6;
+.btn.decline {
+  display: inline-block;
+  background-color: grey;
+  width: 30%;
+  margin: 0 10px;
+  text-align: center;
 }
 
-.status > .action-btn {
-  float: right;
+.action-area {
+  text-align: center;
+  margin: 50px auto 10px;
 }
 
 
@@ -886,6 +958,28 @@ li {
   font-weight: bold;
 }
 
+.meetup-option-select {
+  display: inline-block;
+  background-color: #EEEEEE;
+  border-radius: 10px;
+  margin: 10px 5px 5px 5px;
+  padding: 8px;
+  width: 32%;
+  height: 300px;
+  vertical-align: top;
+}
+
+.meetup-option-select .btn.accept {
+  display: inline-block;
+  margin: 20px 10% 0;
+  width: 80%;
+  vertical-align: bottom;
+}
+
+.btn.suggest {
+  text-align: center;
+}
+
 .form-section {
   background-color: white;
   width: 80%;
@@ -893,6 +987,14 @@ li {
   margin: 30px auto 0px;
   padding: 50px;
   text-align: left;
+}
+
+.form-section.first {
+  margin-top: 70px;
+}
+
+.request-summary {
+  margin-top: 70px;
 }
 
 .trip-summary {
@@ -905,19 +1007,36 @@ li {
   font-weight: bold;
 }
 
-.form-section input {
-  width: 97%;
-  margin: 10px 0 30px 5px;
-}
 
 .meetup-option {
-  width: 21%!important;
-  margin-left: 15px!important;
+  width: 81%!important;
+  margin-right: 15px!important;
+}
+
+.meetup-option.time {
+  width: 40%!important;
+  margin-left: 5px!important;
+}
+
+.meetup-option-wrapper input {
+  margin: 10px 5px 5px 0!important;
+}
+
+.meetup-option-wrapper {
+  margin: 30px 0 30px 5px;
+}
+
+.contact-info {
+  color: #F17816;
+  margin-left:4%!important;
+  margin-bottom:0!important;
+  margin-top:20px!important;
+  font-weight:normal!important;
 }
 
 .contact-option {
-  width: 30%!important;
-  margin-left: 15px!important;
+  width: 40%!important;
+  margin-right: 0!important;
 }
 
 .form-data {

@@ -112,7 +112,7 @@ class PurchaseNotification extends Component {
         <div class="wrapper clearfix">
           <SideMenu />
           <div class="request-conf">
-            <p>Your notification was successfully submitted</p>
+            <h3>Your notification was successfully submitted</h3>
             <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "black"}}>
               Back to the conversation
             </a></p>
@@ -145,12 +145,10 @@ class PurchaseNotification extends Component {
       <div class="wrapper clearfix">
         <SideMenu />
         <form class="form">
-          <h2>Notify Purchase and Arrange Meetup</h2>
-          <div class="meetup-rule">Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</div>
-          <div class="form-wrapper">
+          <h2>Arrange Meetup</h2>
 
-            <div class="form-section">
-              <p>Good job! You completed the following task!</p>
+            <div class="request-summary">
+              <h3>Great job! You completed the following request!</h3>
               <p class="form-heading">Requester</p><br/>
               {this.props.requests.requestHistory && (
                 <div>
@@ -164,6 +162,7 @@ class PurchaseNotification extends Component {
                 </div>
               )}
             </div>
+            <div class="form-wrapper">
 
             <div class="form-section">
               {errors.map(error => (
@@ -175,27 +174,34 @@ class PurchaseNotification extends Component {
             </div>
 
             <div class="form-section">
+            <p class="optional-item">Note: Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</p>
+            <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 1</p>
               <br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
-              <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option1_dtime} onChange={(e) => this.setState({meetup_option1_dtime: e.target.value})}/>
+              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option1_dtime} onChange={(e) => this.setState({meetup_option1_dtime: e.target.value})}/><br/>
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option1_address} onChange={(e) => this.setState({meetup_option1_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option1_comment} onChange={(e) => this.setState({meetup_option1_comment: e.target.value})} />
               <br />
+            </div>
 
+            <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 2</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
-              <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option2_dtime} onChange={(e) => this.setState({meetup_option2_dtime: e.target.value})}/>
+              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option2_dtime} onChange={(e) => this.setState({meetup_option2_dtime: e.target.value})}/><br />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option2_address} onChange={(e) => this.setState({meetup_option2_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option2_comment} onChange={(e) => this.setState({meetup_option2_comment: e.target.value})} />
               <br />
+            </div>
 
+            <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 3</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
-              <input class="meetup-option" placeholder="Choose Time" value={this.state.meetup_option3_dtime} onChange={(e) => this.setState({meetup_option3_dtime: e.target.value})}/>
+              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option3_dtime} onChange={(e) => this.setState({meetup_option3_dtime: e.target.value})}/><br />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option3_address} onChange={(e) => this.setState({meetup_option3_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option3_comment} onChange={(e) => this.setState({meetup_option3_comment: e.target.value})} />
               <br />
+              </div>
             </div>
           </div>
           <button class="form-send-btn btn" onClick={this.notifyPurchase}>Notify and Request</button>
