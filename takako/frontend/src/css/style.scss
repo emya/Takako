@@ -45,6 +45,11 @@ h2 {
   font-weight: normal;
 }
 
+h2 {
+  @media (max-width: 767px) {
+    font-size: 3rem;
+      }}
+
 
 h3 {
   margin-top: 50px;
@@ -183,6 +188,13 @@ li {
   background-color: #FCF5EB;
 }
 
+.menu {
+  @media (max-width: 767px) {
+    padding: 3px 7%;
+    height: auto;
+  }
+}
+
 .menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
   display: inline-block;
   color: #4A4A4A;
@@ -192,9 +204,10 @@ li {
   letter-spacing: 3px;
 }
 
-.menu, .menu a {
+.menu a:link, .menu a:visited, .menu a:hover, .menu a:active {
   @media (max-width: 767px) {
-    display: none;
+    margin: 10px;
+    display: block;
   }
 }
 

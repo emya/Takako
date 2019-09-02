@@ -39,7 +39,7 @@ a:link, a:visited, a:hover, a:active {
 
 .heading {
   @media (max-width: 767px) {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }}
 
 
@@ -81,6 +81,23 @@ a:link, a:visited, a:hover, a:active {
   }
 }
 
+.logo-mobile {
+  width: 70%;
+  height: 70%;
+  float: left;
+}
+
+.mobile-menu-icon {
+  width: 60%;
+  height: 60%;
+  // float: right;
+}
+
+.mobile-signin {
+  justify-content: flex-end;
+  height: 100%;
+}
+
 .mobile-topbar-contents {
   display: flex;
   justify-content: space-between;
@@ -88,12 +105,14 @@ a:link, a:visited, a:hover, a:active {
   background-color: #FFB23B;
   height: 80px;
   width: 100%;
-  padding: 1% 5%;
+  padding: 10px 7% 10px 0;
 }
 
-.mobile-menu-icon {
-  font-size: 5rem;
-  color: black;
+.sign-in-mobile {
+  margin: 0;
+  display: block;
+  // background-color: pink;
+  // float: right;
 }
 
 .mobile-topbar-contents {
@@ -118,11 +137,11 @@ a:link, a:visited, a:hover, a:active {
   letter-spacing: 3px;
 }
 
-.menu, .menu a {
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
+// .menu, .menu a {
+//   @media (max-width: 767px) {
+//     display: none;
+//   }
+// }
 
 /* catchcopy */
 
@@ -133,7 +152,7 @@ a:link, a:visited, a:hover, a:active {
 
 .catchcopy.clearfix {
   @media (max-width: 767px) {
-    height: 300px;
+    height: 400px;
   }}
 
 .catch {
@@ -171,20 +190,27 @@ a:link, a:visited, a:hover, a:active {
   margin-bottom: 30px;
 }
 
-.catch, .catch2 {
+.catch {
   @media (max-width: 767px) {
     margin: auto;
-    position: none;
+    padding: 0 10px;
     width: 100%;
-    bottom: 0;
-    left: 0;
-    top:  0;
+    top:  30px;
     right: 0;
+  }}
+
+.catch2 {
+  @media (max-width: 767px) {
+    margin: auto;
+    width: 100%;
+    padding: 0 10px;
+    bottom:  30px;
+    left: 0;
   }}
 
   .catch h1, .catch2 h1 {
     @media (max-width: 767px) {
-      font-size: 2rem;
+      font-size: 3rem;
     }}
 
 .site-desc {
@@ -224,7 +250,12 @@ a:link, a:visited, a:hover, a:active {
 
 .lpimage {
   @media (max-width: 767px) {
-    padding-top: 0;
+    display: none;
+  }}
+
+.lpimage-mobile {
+  @media (min-width: 767px) {
+    display: none;
   }}
 
 /* How It Works */
@@ -238,14 +269,15 @@ a:link, a:visited, a:hover, a:active {
 
 .how {
   @media (max-width: 767px) {
-    height: 1000px;
+    height: 800px;
+    padding: 30px 7%;
   }}
 
 .heading-h {
   color: #FFBF5D;
   font-family: 'Abril Fatface';
   font-weight: normal;
-  font-size: 4rem;
+  // font-size: 4rem;
   margin-top: 20px;
   margin-bottom: 60px;
   letter-spacing: 2px;
@@ -298,11 +330,46 @@ a:link, a:visited, a:hover, a:active {
   // margin: 50px 0 0;
 }
 
+.lp-how {
+  @media (max-width: 767px) {
+    display: none;
+  }}
+
 .how-container {
   display: flex;
   width: 70%;
   margin: 0 auto;
   // background-color: yellow;
+}
+
+.how-container {
+  @media (max-width: 767px) {
+    display: none;
+  }}
+
+.how-container-mobile {
+  @media (min-width: 767px) {
+    display: none;
+  }}
+
+.how-container-mobile {
+
+}
+
+.lp-how-mobile {
+  width: 30%;
+  height: 300px;
+  background-color: black;
+  float: left;
+}
+
+.how-description {
+  float: right;
+  height: 300px;
+  width: 70%;
+  display: flex;
+  flex-flow: column;
+  text-align: left;
 }
 
 .how-1, .how-2, .how-3, .how-4 {
@@ -328,7 +395,7 @@ a:link, a:visited, a:hover, a:active {
 
 .use {
   @media (max-width: 767px) {
-    height: 1200px;
+    height: 800px;
   }}
 
 .use .heading {
@@ -427,6 +494,12 @@ a:link, a:visited, a:hover, a:active {
   letter-spacing: 2px;
 }
 
+.button {
+  @media (max-width: 767px) {
+    margin: 30px 0 0;
+  }}
+
+
 .button:hover {
   opacity: 0.8;
 }
@@ -442,7 +515,8 @@ a:link, a:visited, a:hover, a:active {
 
 .service {
   @media (max-width: 767px) {
-    height: 1600px;
+    height: 1500px;
+    padding: 30px 7%;
   }}
 
 .wrapper-service {
@@ -463,6 +537,7 @@ a:link, a:visited, a:hover, a:active {
 .wrapper-service, .service-box {
   @media (max-width: 767px) {
     display: block;
+    margin: 40px 0;
   }}
 
 .service-icon {
@@ -488,6 +563,7 @@ a:link, a:visited, a:hover, a:active {
   margin: 0 10px;
   line-height: 2;
   color: white;
+  font-weight: normal;
 }
 
 // Why Use
@@ -498,6 +574,12 @@ a:link, a:visited, a:hover, a:active {
   height: 900px;
   padding: 60px 100px;
 }
+
+.why-use {
+  @media (max-width: 767px) {
+    padding: 30px 7%;
+    height: 1400px;
+  }}
 
 .heading.w {
   color: #FFBF5D;
@@ -514,6 +596,12 @@ a:link, a:visited, a:hover, a:active {
   border-radius: 3%;
   // height: 300px;
 }
+
+.use-case {
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 0 0 20px 0;
+  }}
 
 .item-title {
   position: absolute;
@@ -545,6 +633,11 @@ a:link, a:visited, a:hover, a:active {
   // background-color: pink;
 }
 
+.saving-container {
+  @media (max-width: 767px) {
+    height: 250px;
+  }}
+
 .saving {
   display: inline-block;
   width: 43%;
@@ -552,14 +645,20 @@ a:link, a:visited, a:hover, a:active {
   height: 280px;
   // background-color: green;
   margin: 10px;
+  vertical-align: top;
 }
+
+.saving {
+  @media (max-width: 767px) {
+    width: 40%;
+    height: 200px;
+  }}
 
 .amount {
   font-size: 1.7rem;
   font-weight: bold;
   color: #F17816;
   margin: auto 0 10px 0;
-  // vertical-align: baseline;
   line-height: 30px;
 }
 
@@ -570,8 +669,7 @@ a:link, a:visited, a:hover, a:active {
 .amount.s {
   // display: inline;
   font-size: 1.5rem;
-  // vertical-align: center;
-  line-height: 30px;
+  line-height: 20px;
 }
 
 .user-pic img {
@@ -652,6 +750,12 @@ footer {
   color: white;
 }
 
+footer {
+  @media (max-width: 767px) {
+    padding: 10px 7%;
+    height: 150px;
+  }}
+
 footer ul {
   list-style: none;
   margin: 0 20px 0 0;
@@ -661,6 +765,11 @@ footer ul {
 footer li {
   margin-bottom: 20px;
 }
+
+footer li {
+  @media (max-width: 767px) {
+    margin-bottom: 5px;
+  }}
 
 .footer-item {
   display: inline-block;

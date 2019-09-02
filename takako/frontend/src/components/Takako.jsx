@@ -58,12 +58,16 @@ class Takako extends Component {
           </div>
 
           <div class="mobile-topbar-contents">
-            <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
-            <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
+            <a href="#"><img class="logo-mobile" src={require('../img/torimo-logo.png')} /></a>
+            <a href="/login" class="mobile-signin">
+              <img class="mobile-menu-icon" src={require('../img/signin.png')} />
+              <p class="sign-in-mobile">Sign in</p>
+            </a>
           </div>
 
           <div class="catchcopy clearfix">
             <img class="lpimage" src={require('../img/top4.png')}/>
+            <img class="lpimage-mobile" src={require('../img/lp-mobile.png')}/>
               <div class="catch">
                 <h1 class="site-title">Use the extra space in your suitcase to earn money.</h1>
               </div>
@@ -109,6 +113,15 @@ class Takako extends Component {
             <p class="how-2">Traveler purchases item</p>
             <p class="how-3">Requester meets Traveler<br/> & receives item</p>
             <p class="how-4">Traveler gets paid!</p>
+          </div>
+          <div class="how-container-mobile">
+          <div class="lp-how-mobile"></div>
+          <div class="how-description">
+            <p class="how-1">Requester requests item<br/> & pays</p>
+            <p class="how-2">Traveler purchases item</p>
+            <p class="how-3">Requester meets Traveler<br/> & receives item</p>
+            <p class="how-4">Traveler gets paid!</p>
+          </div>
           </div>
           <a class="button" href="#">Get Started</a>
         </section>
@@ -169,7 +182,7 @@ class Takako extends Component {
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount s">Item Unavailable</p>
+            <p class="amount s">Item not available<br/> in NY</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
