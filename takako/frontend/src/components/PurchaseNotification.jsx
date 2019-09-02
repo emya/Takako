@@ -9,8 +9,8 @@ import DatePicker from "react-datepicker";
 
 import {connect} from 'react-redux';
 
-import Header from './Header'
-import SideMenu from './SideMenu'
+import Header from './Header';
+import SideMenu from './SideMenu';
 
 class PurchaseNotification extends Component {
 
@@ -96,9 +96,12 @@ class PurchaseNotification extends Component {
 
     this.props.sendPurchaseNotification(
       this.props.match.params.requestId, this.state.preferred_phone, this.state.preferred_email,
-      this.state.meetup_option1_date, this.state.meetup_option1_dtime, this.state.meetup_option1_address, this.state.meetup_option1_comment,
-      this.state.meetup_option2_date, this.state.meetup_option2_dtime, this.state.meetup_option2_address, this.state.meetup_option2_comment,
-      this.state.meetup_option3_date, this.state.meetup_option3_dtime, this.state.meetup_option3_address, this.state.meetup_option3_comment,
+      this.state.meetup_option1_date, moment(this.state.meetup_option1_dtime).format("h:mm a"),
+      this.state.meetup_option1_address, this.state.meetup_option1_comment,
+      this.state.meetup_option2_date, moment(this.state.meetup_option2_dtime).format("h:mm a"),
+      this.state.meetup_option2_address, this.state.meetup_option2_comment,
+      this.state.meetup_option3_date, moment(this.state.meetup_option3_dtime).format("h:mm a"),
+      this.state.meetup_option3_address, this.state.meetup_option3_comment,
     );
   }
 
@@ -174,12 +177,24 @@ class PurchaseNotification extends Component {
             </div>
 
             <div class="form-section">
-            <p class="optional-item">Note: Meetup/Delivery will take place between 1/1/2019 - 1/30/2019</p>
+            {this.props.requests.requestHistory && this.props.requests.requestHistory.trip && (
+              <p class="optional-item">Note: Meetup/Delivery will take place within one week from {moment(this.props.requests.requestHistory.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}</p>
+            )}
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 1</p>
               <br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option1_dtime} onChange={(e) => this.setState({meetup_option1_dtime: e.target.value})}/><br/>
+              <DatePicker
+                  selected={this.state.meetup_option1_dtime}
+                  //onChange={date => setStartDate(date)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option1_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option1_address} onChange={(e) => this.setState({meetup_option1_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option1_comment} onChange={(e) => this.setState({meetup_option1_comment: e.target.value})} />
               <br />
@@ -188,7 +203,17 @@ class PurchaseNotification extends Component {
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 2</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option2_dtime} onChange={(e) => this.setState({meetup_option2_dtime: e.target.value})}/><br />
+              <DatePicker
+                  selected={this.state.meetup_option2_dtime}
+                  //onChange={date => setStartDate(date)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option2_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option2_address} onChange={(e) => this.setState({meetup_option2_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option2_comment} onChange={(e) => this.setState({meetup_option2_comment: e.target.value})} />
               <br />
@@ -197,7 +222,17 @@ class PurchaseNotification extends Component {
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 3</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option3_dtime} onChange={(e) => this.setState({meetup_option3_dtime: e.target.value})}/><br />
+              <DatePicker
+                  selected={this.state.meetup_option3_dtime}
+                  //onChange={date => setStartDate(date)}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option3_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option3_address} onChange={(e) => this.setState({meetup_option3_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option3_comment} onChange={(e) => this.setState({meetup_option3_comment: e.target.value})} />
               <br />
@@ -230,6 +265,7 @@ class PurchaseNotification extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     requests: state.requests,
     user: state.auth.user,
