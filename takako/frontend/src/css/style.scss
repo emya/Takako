@@ -1228,6 +1228,11 @@ li {
   padding: 20px 10px;
 }
 
+.signin-box {
+  @media (max-width: 767px) {
+    width: 70%;
+  }}
+
 .signin-box input {
   width: 50%;
 }
