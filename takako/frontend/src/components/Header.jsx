@@ -12,7 +12,6 @@ render() {
         <div class="login">
           <a class="register" href="/register">Get Started</a>
           <a class="signin" href="/login">Sign in</a>
-          <a class="signin" onClick={this.props.logout}>logout</a>
         </div>
       </div>
 
