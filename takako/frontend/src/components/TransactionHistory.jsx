@@ -4,7 +4,6 @@ import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
 
 import '../css/style.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Header from './Header';
 import SideMenu from './SideMenu';
@@ -244,7 +243,7 @@ class TransactionHistory extends Component {
          {
          /* meetup option suggested by this requester */
          is_requester && item_request_status === 2 &&
-         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by === 1 && (
            <div class="history-box meetups">
              <div class="history-wrapper">
                <p class="history-date">
@@ -287,7 +286,7 @@ class TransactionHistory extends Component {
          {
          /* meetup option suggested by traveler */
          is_requester && item_request_status === 2 &&
-         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by === 0 && (
            <div class="history-box meetups">
              <div class="history-wrapper">
                <p class="history-date">
@@ -445,6 +444,18 @@ class TransactionHistory extends Component {
            </div>
          )}
 
+         {/* the requester made payment so the traveler notify the purchase */
+         is_requester && process_status === "payment_made" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+             <p class="history-date new-update">NEW!</p>
+               <p class="notify-heading">Waiting purchase notification from {requestHistory.respondent.first_name}</p>
+             </div>
+           </div>
+         </div>
+         )}
+
          {/* the requester made payment */
          is_requester && requestHistory.paid_at && (
            <div class="history-box">
@@ -576,7 +587,7 @@ class TransactionHistory extends Component {
          {
          /* meetup option suggested by this traveler */
          is_traveler && item_request_status === 2 &&
-         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 0 && (
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by === 0 && (
            <div class="history-box meetups">
              <p class="history-date">
                {requestHistory.meetup_suggested_at && moment(requestHistory.meetup_suggested_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
@@ -666,7 +677,7 @@ class TransactionHistory extends Component {
          {
          /* meetup option suggested by requester */
          is_traveler && item_request_status === 2 &&
-         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by == 1 && (
+         process_status === "meetup_suggested" && requestHistory.purchase_notification[0].action_taken_by === 1 && (
            <div class="history-box meetups">
              <p class="history-date">
                {requestHistory.meetup_suggested_at && moment(requestHistory.meetup_suggested_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
