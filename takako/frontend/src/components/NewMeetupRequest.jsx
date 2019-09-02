@@ -87,6 +87,7 @@ class NewMeetupRequest extends Component {
 
   suggestNewMeetup = (e) => {
     e.preventDefault();
+
     const errors = this.validateForm(
       this.state.preferred_phone, this.state.preferred_email,
       this.state.meetup_option1_date, this.state.meetup_option1_dtime, this.state.meetup_option1_address,
@@ -103,9 +104,12 @@ class NewMeetupRequest extends Component {
     let action_taken_by = this.props.location.state.action_taken_by;
     this.props.suggestNewMeetup(
       purchase_notification_id,
-      this.state.meetup_option1_date, this.state.meetup_option1_dtime, this.state.meetup_option1_address, this.state.meetup_option1_comment,
-      this.state.meetup_option2_date, this.state.meetup_option2_dtime, this.state.meetup_option2_address, this.state.meetup_option2_comment,
-      this.state.meetup_option3_date, this.state.meetup_option3_dtime, this.state.meetup_option3_address, this.state.meetup_option3_comment,
+      this.state.meetup_option1_date, moment(this.state.meetup_option1_dtime).format("h:mm a"),
+      this.state.meetup_option1_address, this.state.meetup_option1_comment,
+      this.state.meetup_option2_date, moment(this.state.meetup_option2_dtime).format("h:mm a"),
+      this.state.meetup_option2_address, this.state.meetup_option2_comment,
+      this.state.meetup_option3_date, moment(this.state.meetup_option3_dtime).format("h:mm a"),
+      this.state.meetup_option3_address, this.state.meetup_option3_comment,
       this.state.preferred_phone, this.state.preferred_email, action_taken_by,
     );
 
@@ -176,7 +180,16 @@ class NewMeetupRequest extends Component {
               <p class="form-heading">Meetup Option 1</p>
               <br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option1_dtime} onChange={(e) => this.setState({meetup_option1_dtime: e.target.value})}/><br/>
+              <DatePicker
+                  selected={this.state.meetup_option1_dtime}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option1_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option1_address} onChange={(e) => this.setState({meetup_option1_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option1_comment} onChange={(e) => this.setState({meetup_option1_comment: e.target.value})} />
               <br />
@@ -185,7 +198,16 @@ class NewMeetupRequest extends Component {
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 2</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option2_dtime} onChange={(e) => this.setState({meetup_option2_dtime: e.target.value})}/><br/>
+              <DatePicker
+                  selected={this.state.meetup_option2_dtime}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option2_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option2_address} onChange={(e) => this.setState({meetup_option2_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option2_comment} onChange={(e) => this.setState({meetup_option2_comment: e.target.value})} />
               <br />
@@ -194,7 +216,16 @@ class NewMeetupRequest extends Component {
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 3</p><br />
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
-              <input class="meetup-option time" placeholder="Choose Time" value={this.state.meetup_option3_dtime} onChange={(e) => this.setState({meetup_option3_dtime: e.target.value})}/><br/>
+              <DatePicker
+                  selected={this.state.meetup_option3_dtime}
+                  showTimeSelect
+                  showTimeSelectOnly
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="h:mm aa"
+                  placeholderText="Choose Time"
+                  onChange={(t) => this.setState({meetup_option3_dtime: t})}
+              />
               <input class="meetup-option" placeholder="Enter Address" value={this.state.meetup_option3_address} onChange={(e) => this.setState({meetup_option3_address: e.target.value})} />
               <input class="meetup-option" placeholder="Note (e.g. front door)" value={this.state.meetup_option3_comment} onChange={(e) => this.setState({meetup_option3_comment: e.target.value})} />
             </div>
