@@ -186,7 +186,6 @@ class PurchaseNotification extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option1_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
@@ -205,7 +204,6 @@ class PurchaseNotification extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option2_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
@@ -224,7 +222,6 @@ class PurchaseNotification extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option3_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
@@ -265,7 +262,6 @@ class PurchaseNotification extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     requests: state.requests,
     user: state.auth.user,

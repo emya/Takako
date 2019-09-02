@@ -116,7 +116,6 @@ class NewMeetupRequest extends Component {
   }
 
   render() {
-    console.log(this.state.meetup_option1_dtime);
     const errors = this.state.errors;
 
     if (this.state.isSubmissionSucceeded) {
@@ -183,7 +182,6 @@ class NewMeetupRequest extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option1_date} onChange={this.handleMeetup1DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option1_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
@@ -202,7 +200,6 @@ class NewMeetupRequest extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option2_date} onChange={this.handleMeetup2DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option2_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
@@ -221,7 +218,6 @@ class NewMeetupRequest extends Component {
               <DatePicker minDate={moment().toDate()} selected={this.state.meetup_option3_date} onChange={this.handleMeetup3DateChange.bind(this)}/>
               <DatePicker
                   selected={this.state.meetup_option3_dtime}
-                  //onChange={date => setStartDate(date)}
                   showTimeSelect
                   showTimeSelectOnly
                   timeIntervals={15}
