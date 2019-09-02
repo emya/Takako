@@ -181,7 +181,7 @@ class Takako extends Component {
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount s">Item not available<br/> in NY</p>
+            <p class="amount s">Item unavailable<br/> in NY</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
