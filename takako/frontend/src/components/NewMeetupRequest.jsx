@@ -157,6 +157,9 @@ class NewMeetupRequest extends Component {
           <h2>Request New Meetup Options</h2>
 
           <div class="form-wrapper">
+            {errors.map(error => (
+              <p key={error}>Error: {error}</p>
+            ))}
             <div class="form-section first">
               <p class="form-heading">{requestHistory.respondent.first_name} Contact Info</p><br/>
               <p class="form-data">{requestHistory.purchase_notification[0].preferred_phone} </p><br />
@@ -164,9 +167,6 @@ class NewMeetupRequest extends Component {
             </div>
 
             <div class="form-section">
-              {errors.map(error => (
-                <p key={error}>Error: {error}</p>
-              ))}
               <p class="form-heading">Your Preferred Contact</p><br />
                <input class="contact-option" placeholder="Phone Number" value={this.state.preferred_phone} onChange={(e) => this.setState({preferred_phone: e.target.value})}/>
               <input class="contact-option" placeholder="e-mail" value={this.state.preferred_email} onChange={(e) => this.setState({preferred_email: e.target.value})} />
@@ -174,7 +174,7 @@ class NewMeetupRequest extends Component {
 
             <div class="form-section">
             <div class="optional-item">
-            Meetup/Delivery will take place between {requestHistory.trip.departure_date} - {requestHistory.trip.arrival_date}
+            Meetup/Delivery will take place within one week from {requestHistory.trip.arrival_date}
             </div>
             <div class="meetup-option-wrapper">
               <p class="form-heading">Meetup Option 1</p>
