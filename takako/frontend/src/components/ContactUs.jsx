@@ -55,7 +55,9 @@ class ContactUs extends Component {
         <Header />
 
         <div class="wrapper clearfix">
-          <SideMenu />
+          { this.props.user && (
+            <SideMenu />
+          )}
           <div class="request-conf">
             <p>Your message was successfully submitted</p>
           </div>
@@ -75,7 +77,9 @@ class ContactUs extends Component {
       <Header />
 
       <div class="wrapper clearfix">
-        <SideMenu />
+        { this.props.user && (
+          <SideMenu />
+        )}
 
         <form class="form">
 
@@ -111,6 +115,7 @@ class ContactUs extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
+    user: state.auth.user,
     isSubmissionSucceeded: state.contact.isSubmissionSucceeded,
   }
 }
