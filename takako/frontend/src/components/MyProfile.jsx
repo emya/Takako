@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {profile, auth} from "../actions";
 
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
-import SideMenu from './SideMenu'
-import MobileSideMenu from './MobileSideMenu'
-import Footer from './Footer'
-import UpcomingTrips from './UpcomingTrips'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
+import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer';
+import UpcomingTrips from './UpcomingTrips';
 
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
