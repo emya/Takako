@@ -174,7 +174,7 @@ class UpcomingTrips extends Component {
                   )
                 }
               />
-            <input class="btn savet" type="submit" value="Save Trip" onkeypress="return event.keyCode!=13" />
+            <input class="btn savet" type="submit" value="Save Trip" />
           </form>
         </div>
       }
