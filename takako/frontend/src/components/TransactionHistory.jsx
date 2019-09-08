@@ -318,6 +318,7 @@ class TransactionHistory extends Component {
            </div>
          </div>
          )}
+
          {
          /* meetup option suggested by this requester */
          is_requester && item_request_status === 2 &&
@@ -442,6 +443,7 @@ class TransactionHistory extends Component {
              </Link>
            </div>
          )}
+
          {
          /* the traveler already notified */
          is_requester && item_request_status === 2 && process_status === "purchase_notified" && (
@@ -525,6 +527,13 @@ class TransactionHistory extends Component {
          {/* the requester made payment so the traveler notify the purchase */
          is_requester && process_status === "payment_made" && (
          <div>
+           Please let us know if no purchase notification made by {requestHistory.trip.arrival_date}
+           <Link to={{
+               pathname: "/contact-us",
+             }}>
+             <button class="btn accept">Report</button>
+           </Link>
+
            <div class="history-box">
              <div class="history-wrapper">
              <p class="history-date new-update">NEW!</p>
