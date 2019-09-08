@@ -65,6 +65,13 @@ class TransactionHistory extends Component {
     );
   }
 
+  cancelItemRequestbyTraveler = () => {
+    this.props.updateItemRequest(
+      this.props.match.params.requestId,
+      {"status": 4, "process_status": "request_cancelled_by_traveler", "responded_at": moment().format()}
+    );
+  }
+
   receiveItem = () => {
     this.props.updateItemRequest(
       this.props.match.params.requestId,
@@ -633,6 +640,17 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
+         {/*the request was cancelled*/
+         is_requester && item_request_status === 4 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">{requestHistory.respondent.first_name} cancelled the request</p>
+             </div>
+           </div>
+         )}
 
          {/* This use is traveler */
          is_traveler && (
@@ -942,7 +960,7 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         {/*the traveler rejected the request*/
+         {/*the traveler accepted the request*/
          is_traveler && item_request_status === 2 && (
            <div class="history-box">
              <div class="history-wrapper">
@@ -966,16 +984,27 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         <div class="history-box">
+         {/*the request was cancelled*/
+         is_traveler && item_request_status === 4 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">You cancelled the request</p>
+             </div>
+           </div>
+         )}
 
-             <p class="history-date">
-               {requestHistory.created_at && moment(requestHistory.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
-             </p>
-             {is_requester ? (
-               <p class="history-update">Request sent by You</p>
-             ) : (
-               <p class="history-update">Request sent by {requestHistory.requester.first_name}</p>
-             )}
+         <div class="history-box">
+           <p class="history-date">
+             {requestHistory.created_at && moment(requestHistory.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+           </p>
+           {is_requester ? (
+             <p class="history-update">Request sent by You</p>
+           ) : (
+             <p class="history-update">Request sent by {requestHistory.requester.first_name}</p>
+           )}
 
            <ul class="request-data">
              {is_traveler ? (
@@ -998,18 +1027,25 @@ class TransactionHistory extends Component {
              <li>Delivery Method:   Meetup</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
-             {is_traveler  && requestHistory.status === 0 && (
-               <div class="action-area">
-                 <button class="btn accept" onClick={this.acceptItemRequest}>Accept</button>
-                 <button class="btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
-               </div>
-             )}
-             {is_requester  && requestHistory.status === 0 && (
-               <div class="action-area">
-                 <button class="btn decline" onClick={this.cancelItemRequest}>Cancel Request</button>
-               </div>
-             )}
+           {is_traveler  && requestHistory.status === 0 && (
+             <div class="action-area">
+               <button class="btn accept" onClick={this.acceptItemRequest}>Accept</button>
+               <button class="btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
+             </div>
+           )}
+           {is_requester  && requestHistory.status === 0 && (
+             <div class="action-area">
+               <button class="btn decline" onClick={this.cancelItemRequest}>Cancel Request</button>
+             </div>
+           )}
          </div>
+
+         {is_traveler && requestHistory.status === 2 &&
+           (process_status === "request_responded" || process_status === "payment_made") && (
+             <div class="action-area">
+               <button class="btn decline" onClick={this.cancelItemRequestbyTraveler}>Cancel Request</button>
+             </div>
+         )}
        </div>
      </div>
 

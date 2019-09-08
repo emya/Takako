@@ -54,6 +54,7 @@ class Transaction extends Component {
                   {sent_item_request.status === 0 && ("Pending")}
                   {sent_item_request.status === 1 && ("Cancelled")}
                   {sent_item_request.status === 3 && ("Rejected")}
+                  {sent_item_request.status === 4 && ("Cancelled")}
 
                   {sent_item_request.status === 2 && sent_item_request.process_status == "request_responded" && (
                     <div>
@@ -113,6 +114,7 @@ class Transaction extends Component {
                   )}
                   {received_item_request.status === 1 && ("Cancelled")}
                   {received_item_request.status === 3 && ("Rejected")}
+                  {received_item_request.status === 4 && ("Cancelled")}
 
                   {received_item_request.status === 2 && received_item_request.process_status == "request_responded" && ("Accepted")}
                   {received_item_request.status === 2 && received_item_request.process_status == "payment_made" && (

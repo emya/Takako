@@ -125,6 +125,7 @@ class ItemRequest(models.Model):
     # 1: canceled request
     # 2: accepted request
     # 3: rejected request
+    # 4: canceled request by traveler
     status = models.IntegerField(default=0)
     # Process Status
     # 0. request_sent
