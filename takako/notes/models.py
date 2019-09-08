@@ -133,7 +133,9 @@ class ItemRequest(models.Model):
     # 3. purchase_notified
     # 4. meetup_suggested
     # 5. meetup_decided
-    # 6. request_cancelled
+    # 6. item_received
+    # 7. request_cancelled
+    # 8. request_cancelled_by_traveler
     process_status = models.CharField(max_length=100, default="request_sent")
     # Decline Reason
     # 0: Other
@@ -149,6 +151,7 @@ class ItemRequest(models.Model):
     purchase_notified_at = models.DateTimeField(null=True)
     meetup_suggested_at = models.DateTimeField(null=True)
     meetup_decided_at = models.DateTimeField(null=True)
+    item_received_at = models.DateTimeField(null=True)
 
 class Charge(models.Model):
     #amount in dollar
