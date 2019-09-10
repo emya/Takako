@@ -141,7 +141,7 @@ export const fetchRequestHistory = (requestId) => {
   }
 }
 
-export const updateItemRequest = (requestId, item_request) => {
+export const updateItemRequest = (requestId, item_request, action_type = null) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -165,7 +165,7 @@ export const updateItemRequest = (requestId, item_request) => {
       })
       .then(res => {
         if (res.status === 200) {
-          return dispatch({type: 'UPDATE_ITEM_REQUEST', data: res.data});
+          return dispatch({type: 'UPDATE_ITEM_REQUEST', data: res.data, action_type: action_type});
         } else if (res.status === 401 || res.status === 403) {
           dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
           throw res.data;

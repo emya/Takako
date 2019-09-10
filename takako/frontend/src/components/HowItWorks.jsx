@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
-import Footer from './Footer'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import {connect} from 'react-redux';
+import Header from './Header';
+import SideMenu from './SideMenu';
+import Footer from './Footer';
 
 library.add(faIgloo)
 
@@ -11,10 +13,25 @@ class HowItWorks extends Component {
 
   render() {
     return (
-<div>
+  <div>
    <Header />
-   <h2>How It Works</h2>
+
+   { !this.props.user && (
+     <div class="menu">
+       <a href="/how-it-works">How It Works</a>
+       <a href="#">Find Traveler</a>
+       <a href="#">About Us</a>
+       <a href="#">Contact Us</a>
+     </div>
+   )}
+
+   <div class="wrapper clearfix">
+     { this.props.user && (
+       <SideMenu />
+     )}
+
      <div class="wrapper-clearfix howto">
+       <h2>How It Works</h2>
        <div class="how-to-requester">
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> searches for Traveler by trip destinations, and sends the item request</p></div>
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> pays for the item(s) + a negotiated commission to Traveler, and transaction fee<a href="/how-it-works#whatscommision"><span class='suptext'>(?)</span></a></p><p>Torimo will release Requester's payment only when the item is received.</p></div>
@@ -74,4 +91,10 @@ class HowItWorks extends Component {
   }
 }
 
-export default HowItWorks;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(HowItWorks);

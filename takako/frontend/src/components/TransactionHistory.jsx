@@ -65,6 +65,24 @@ class TransactionHistory extends Component {
     );
   }
 
+  cancelItemRequestbyTraveler = () => {
+    this.props.updateItemRequest(
+      this.props.match.params.requestId,
+      {"status": 4, "process_status": "request_cancelled_by_traveler", "responded_at": moment().format()}
+    );
+  }
+
+  receiveItem = () => {
+    this.props.updateItemRequest(
+      this.props.match.params.requestId,
+      {
+        "process_status": "item_received",
+        "item_received_at": moment().format()
+      },
+      "item_received"
+    );
+  }
+
   onToken = (token, addresses) => {
     // TODO: Send the token information and any other
     /*
@@ -91,6 +109,29 @@ class TransactionHistory extends Component {
     if (this.props.isForbidden) {
       return <Redirect to='/transaction/status' />
     }
+
+    if (this.props.isItemReceived) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <h3>Congratulations!</h3>
+            <p>Your request was completed!</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
+              Back to the conversation
+            </a></p>
+          </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
+    }
+
     if (this.props.isResponded) {
      return (
       <div>
@@ -217,9 +258,52 @@ class TransactionHistory extends Component {
            </div>
            </div>
          )}
+
+         {
+         /* meetup option decided */
+         is_requester && item_request_status === 2 && process_status === "item_received" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.item_received_at && moment(requestHistory.item_received_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="notify-heading">You received the item</p>
+             </div>
+           </div>
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.meetup_decided_at && moment(requestHistory.meetup_decided_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">Meetup place/time was set</p>
+             </div>
+             <p class="contact-info">Meetup Details</p>
+             <ul class="request-data">
+               <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
+               <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
+               <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+             </ul>
+             <p class="contact-info">Contact Info of {requestHistory.respondent.first_name}</p>
+             <ul>
+              <li>PHONE: {requestHistory.purchase_notification[0].preferred_phone} </li>
+              <li>E-MAIL: {requestHistory.purchase_notification[0].preferred_email} </li>
+            </ul>
+           </div>
+         </div>
+         )}
+
          {
          /* meetup option decided */
          is_requester && item_request_status === 2 && process_status === "meetup_decided" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date new-update">NEW!</p>
+               <p class="notify-heading">Notify that you received the item</p>
+               <button class="btn notify" onClick={this.receiveItem}>Notify</button>
+             </div>
+           </div>
            <div class="history-box initial">
              <div class="history-wrapper">
                <p class="history-date">
@@ -239,7 +323,9 @@ class TransactionHistory extends Component {
               <li>E-MAIL: {requestHistory.purchase_notification[0].preferred_email} </li>
             </ul>
            </div>
+         </div>
          )}
+
          {
          /* meetup option suggested by this requester */
          is_requester && item_request_status === 2 &&
@@ -364,6 +450,7 @@ class TransactionHistory extends Component {
              </Link>
            </div>
          )}
+
          {
          /* the traveler already notified */
          is_requester && item_request_status === 2 && process_status === "purchase_notified" && (
@@ -447,6 +534,13 @@ class TransactionHistory extends Component {
          {/* the requester made payment so the traveler notify the purchase */
          is_requester && process_status === "payment_made" && (
          <div>
+           Please let us know if no purchase notification made by {requestHistory.trip.arrival_date}
+           <Link to={{
+               pathname: "/contact-us",
+             }}>
+             <button class="btn accept">Report</button>
+           </Link>
+
            <div class="history-box">
              <div class="history-wrapper">
              <p class="history-date new-update">NEW!</p>
@@ -472,7 +566,7 @@ class TransactionHistory extends Component {
          is_requester && item_request_status === 2 && process_status === "request_responded" && (
            <div class="history-box initial">
              <div class="history-wrapper">
-             <p class="history-date new-update">NEW!</p>
+               <p class="history-date new-update">NEW!</p>
                <p class="history-update">Payment Detail</p>
                <ul class="request-data">
                  <li>Proposed Price:   {requestHistory.proposed_price}</li>
@@ -497,7 +591,7 @@ class TransactionHistory extends Component {
          is_requester && process_status === "request_sent" && (
            <div class="history-box">
              <div class="history-wrapper">
-             <p class="history-date new-update">NEW!</p>
+               <p class="history-date new-update">NEW!</p>
                <p class="history-update">Waiting response from {requestHistory.respondent.first_name}</p>
              </div>
            </div>
@@ -546,6 +640,17 @@ class TransactionHistory extends Component {
              </div>
            </div>
          )}
+         {/*the request was cancelled*/
+         is_requester && item_request_status === 4 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">{requestHistory.respondent.first_name} cancelled the request</p>
+             </div>
+           </div>
+         )}
 
          {/* This use is traveler */
          is_traveler && (
@@ -560,6 +665,38 @@ class TransactionHistory extends Component {
               </ul>
            </div>
            </div>
+         )}
+
+         {
+         /* meetup option decided */
+         is_traveler && item_request_status === 2 && process_status === "item_received" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.item_received_at && moment(requestHistory.item_received_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="notify-heading">{requestHistory.requester.first_name} received the item</p>
+             </div>
+           </div>
+           <div class="history-box initial">
+             <p class="history-date">
+               {requestHistory.meetup_decided_at && moment(requestHistory.meetup_decided_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+             </p>
+               <p class="history-update">Meetup place/time was set</p>
+                <p class="contact-info">Meetup Details</p>
+             <ul class="request-data">
+               <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
+               <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
+               <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+             </ul>
+             <p class="contact-info">Contact Info of {requestHistory.requester.first_name}</p>
+             <ul>
+               <li>PHONE: {requestHistory.purchase_notification[0].shared_contact[0].preferred_phone} </li>
+               <li>E-MAIL: {requestHistory.purchase_notification[0].shared_contact[0].preferred_email} </li>
+             </ul>
+           </div>
+         </div>
          )}
 
          {
@@ -776,13 +913,13 @@ class TransactionHistory extends Component {
              <div class="history-wrapper">
              <p class="history-date new-update">NEW!</p>
                <p class="notify-heading">Notify that you purchased the item</p>
-                 <Link to={{
-                   pathname: `/notification/purchase/form/${this.props.match.params.requestId}`,
-                   state: {
-                     requests: this.state.requests,
-                   }
-                 }} class="btn notify">Notify
-                 </Link>
+               <Link to={{
+                 pathname: `/notification/purchase/form/${this.props.match.params.requestId}`,
+                 state: {
+                   requests: this.state.requests,
+                 }
+               }} class="btn notify">Notify
+               </Link>
              </div>
            </div>
          </div>
@@ -823,7 +960,7 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         {/*the traveler rejected the request*/
+         {/*the traveler accepted the request*/
          is_traveler && item_request_status === 2 && (
            <div class="history-box">
              <div class="history-wrapper">
@@ -847,16 +984,27 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         <div class="history-box">
+         {/*the request was cancelled*/
+         is_traveler && item_request_status === 4 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">You cancelled the request</p>
+             </div>
+           </div>
+         )}
 
-             <p class="history-date">
-               {requestHistory.created_at && moment(requestHistory.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
-             </p>
-             {is_requester ? (
-               <p class="history-update">Request sent by You</p>
-             ) : (
-               <p class="history-update">Request sent by {requestHistory.requester.first_name}</p>
-             )}
+         <div class="history-box">
+           <p class="history-date">
+             {requestHistory.created_at && moment(requestHistory.created_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+           </p>
+           {is_requester ? (
+             <p class="history-update">Request sent by You</p>
+           ) : (
+             <p class="history-update">Request sent by {requestHistory.requester.first_name}</p>
+           )}
 
            <ul class="request-data">
              {is_traveler ? (
@@ -879,18 +1027,25 @@ class TransactionHistory extends Component {
              <li>Delivery Method:   Meetup</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
-             {is_traveler  && requestHistory.status === 0 && (
-               <div class="action-area">
-                 <button class="btn accept" onClick={this.acceptItemRequest}>Accept</button>
-                 <button class="btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
-               </div>
-             )}
-             {is_requester  && requestHistory.status === 0 && (
-               <div class="action-area">
-                 <button class="btn decline" onClick={this.cancelItemRequest}>Cancel Request</button>
-               </div>
-             )}
+           {is_traveler  && requestHistory.status === 0 && (
+             <div class="action-area">
+               <button class="btn accept" onClick={this.acceptItemRequest}>Accept</button>
+               <button class="btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
+             </div>
+           )}
+           {is_requester  && requestHistory.status === 0 && (
+             <div class="action-area">
+               <button class="btn decline" onClick={this.cancelItemRequest}>Cancel Request</button>
+             </div>
+           )}
          </div>
+
+         {is_traveler && requestHistory.status === 2 &&
+           (process_status === "request_responded" || process_status === "payment_made") && (
+             <div class="action-area">
+               <button class="btn decline" onClick={this.cancelItemRequestbyTraveler}>Cancel Request</button>
+             </div>
+         )}
        </div>
      </div>
 
@@ -907,6 +1062,7 @@ const mapStateToProps = state => {
     isForbidden: state.requests.isForbidden,
     isResponded: state.requests.isResponded,
     isPaymentCompleted: state.requests.isPaymentCompleted,
+    isItemReceived: state.requests.isItemReceived,
     requests: state.requests,
     user: state.auth.user,
   }
@@ -918,8 +1074,8 @@ const mapDispatchToProps = dispatch => {
     fetchRequestHistory: (requestId) => {
       dispatch(requests.fetchRequestHistory(requestId));
     },
-    updateItemRequest: (requestId, item_request) => {
-      return dispatch(requests.updateItemRequest(requestId, item_request));
+     updateItemRequest: (requestId, item_request, action_type = null) => {
+      return dispatch(requests.updateItemRequest(requestId, item_request, action_type));
     },
     chargeItemRequest: (itemRequestId, userId, body, addresses, amount) => {
       return dispatch(requests.chargeItemRequest(itemRequestId, userId, body, addresses, amount));
