@@ -114,7 +114,7 @@ class Takako extends Component {
             <p class="how-4">Traveler gets paid!</p>
           </div>
           <div class="how-container-mobile">
-          <div class="lp-how-mobile"></div>
+          <img class="lp-how-mobile" src={require('../img/how-mobile.png')}/>
           <div class="how-description">
             <p class="how-1">Requester requests item<br/> & pays</p>
             <p class="how-2">Traveler purchases item</p>

@@ -111,7 +111,7 @@ class UpcomingTrips extends Component {
         <tr class="table-heading">
           <td>Date</td>
           <td>Destination</td>
-          <td></td>
+          <td>s</td>
         </tr>
         {this.props.trips.map((trip) => (
           <tr>

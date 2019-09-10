@@ -18,9 +18,13 @@ render() {
       </div>
 
       <div class="mobile-topbar-contents">
-        <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">三</i></a>
-        <a href="#"><p>APP<br/>LOGO</p></a>
-        <a href="#" class="mobile-menu-icon"><i class="fa fa-bars">★</i></a>
+
+        <a href="#"><img class="logo-mobile" src={require('../img/torimo-logo.png')} /></a>
+        <a href="/login" class="mobile-signin">
+          <img class="mobile-menu-icon" src={require('../img/signin.png')} />
+          <p class="sign-in-mobile">Sign in</p>
+        </a>
+
       </div>
 
       <div class="menu">
