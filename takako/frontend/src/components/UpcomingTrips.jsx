@@ -111,7 +111,7 @@ class UpcomingTrips extends Component {
         <tr class="table-heading">
           <td>Date</td>
           <td>Destination</td>
-          <td></td>
+          <td>s</td>
         </tr>
         {this.props.trips.map((trip) => (
           <tr>
@@ -132,7 +132,13 @@ class UpcomingTrips extends Component {
       {!is_other &&
         <div class="add-new-trip">
           <h3>Add New Trip</h3>
-          <form onSubmit={this.submitTrip}>
+          <form onSubmit={this.submitTrip}
+                onKeyPress={event => {
+                  if (event.which === 13 /* Enter */) {
+                    event.preventDefault();
+                  }
+                }}
+          >
              {errors.map(error => (
                <p key={error}>Error: {error}</p>
              ))}

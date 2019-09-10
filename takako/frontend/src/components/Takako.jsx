@@ -41,7 +41,7 @@ class Takako extends Component {
   render() {
     return (
       <body>
-      <header class="header">
+        <header class="header">
           <div class="topbar-contents">
             {/*
               <form class="search">
@@ -74,14 +74,14 @@ class Takako extends Component {
                 <h1 class="site-title2">Shop abroad without leaving your couch.</h1>
               </div>
           </div>
-          </header>
+        </header>
 
-          <div class="menu">
+        <div class="menu">
           <a href="/how-it-works">How It Works</a>
             <a href="#">Find Traveler</a>
             <a href="#">About Us</a>
             <a href="#">Contact Us</a>
-          </div>
+        </div>
 
         <section class="how">
           <h2 class="heading-h">How It Works</h2>
@@ -114,7 +114,7 @@ class Takako extends Component {
             <p class="how-4">Traveler gets paid!</p>
           </div>
           <div class="how-container-mobile">
-          <div class="lp-how-mobile"></div>
+          <img class="lp-how-mobile" src={require('../img/how-mobile.png')}/>
           <div class="how-description">
             <p class="how-1">Requester requests item<br/> & pays</p>
             <p class="how-2">Traveler purchases item</p>

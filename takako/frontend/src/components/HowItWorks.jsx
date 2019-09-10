@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
-import Footer from './Footer'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import {connect} from 'react-redux';
+import Header from './Header';
+import SideMenu from './SideMenu';
+import Footer from './Footer';
 
 library.add(faIgloo)
 
@@ -11,37 +13,33 @@ class HowItWorks extends Component {
 
   render() {
     return (
-<div>
+  <div>
    <Header />
-   <div class="menu">
-   <a href="/how-it-works">How It Works</a>
-     <a href="#">Find Traveler</a>
-     <a href="#">About Us</a>
-     <a href="#">Contact Us</a>
-   </div>
-   <h2>How It Works</h2>
-   <div class="wrapper-clearfix">
+
+   { !this.props.user && (
+     <div class="menu">
+       <a href="/how-it-works">How It Works</a>
+       <a href="#">Find Traveler</a>
+       <a href="#">About Us</a>
+       <a href="#">Contact Us</a>
+     </div>
+   )}
+
+   <div class="wrapper clearfix">
+     { this.props.user && (
+       <SideMenu />
+     )}
+
      <div class="wrapper-clearfix howto">
+       <h2>How It Works</h2>
        <div class="how-to-requester">
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> searches for Traveler by trip destinations, and sends the item request</p></div>
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> pays for the item(s) + a negotiated commission to Traveler, and transaction fee<a href="/how-it-works#whatscommision"><span class='suptext'>(?)</span></a></p><p>Torimo will release Requester's payment only when the item is received.</p></div>
         <div class="how-box third"><p class="how-heading"><span class="requester">Requester</span> accepts the meetup request or suggests other meetup options</p><p>If Requester & Traveler cannot agree on the meetup location/time within 3 days, please notify Torimo.</p></div>
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> confirms the item receipt</p><p>If the item is not as requested or damaged, report Torimo for a full refund.</p></div>
        </div>
-       <div class="how-to-arrow">
-        <div class="arrow-box"><p>2 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"><p>2 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"><p>3 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box meetup"><a href="/how-it-works#whatsmeetupperiod"><p>Meetup Period</p></a></div>
-        <div class="triangle meetup"></div>
-        <div class="arrow-box"><p>1 day</p></div>
-        <div class="triangle"></div>
-       </div>
+       <img class="how-to-arrow" src={require('../img/arrow-desktop.png')}/>
+       <img class="how-to-arrow-mobile" src={require('../img/arrow-mobile.png')}/>
        <div class="how-to-traveler">
         <div class="how-box traveler">
           <p class="how-heading"><span class="traveler-name">Traveler</span> accepts, declines, or clarifies the request</p>
@@ -52,8 +50,8 @@ class HowItWorks extends Component {
        </div>
        </div>
 
-       <h2>Important Notes</h2>
 
+       <h2>Important Notes</h2>
      <div class="how-detail">
       <h3 id="whatsmeetupperiod">Meetup Period</h3>
       <ul>
@@ -85,12 +83,18 @@ class HowItWorks extends Component {
     </div>
 
 
+
     <Footer />
-  </div>
 </div>
 
     )
   }
 }
 
-export default HowItWorks;
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+  }
+}
+
+export default connect(mapStateToProps, null)(HowItWorks);

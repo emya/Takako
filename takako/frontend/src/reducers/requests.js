@@ -2,6 +2,7 @@ const initialState = {
   isSubmissionSucceeded: null,
   isForbidden: null,
   isPaymentCompleted: null,
+  isItemReceived: null,
   isResponded: null,
 };
 
@@ -29,7 +30,12 @@ export default function requests(state=initialState, action) {
         return {...state, requestHistory: action.data};
 
     case 'UPDATE_ITEM_REQUEST':
-        return {...state, requestHistory: action.data, isResponded: true};
+        switch (action.action_type) {
+          case null:
+              return {...state, requestHistory: action.data, isResponded: true};
+          case "item_received":
+              return {...state, requestHistory: action.data, isItemReceived: true};
+        }
 
     case 'FORBIDDEN_ERROR':
         return {...state, ...action.data, isForbidden: true};

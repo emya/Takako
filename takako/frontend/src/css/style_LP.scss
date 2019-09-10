@@ -352,15 +352,11 @@ a:link, a:visited, a:hover, a:active {
     display: none;
   }}
 
-.how-container-mobile {
-
-}
-
 .lp-how-mobile {
   width: 30%;
   height: 300px;
-  background-color: black;
   float: left;
+  margin-bottom: 20px;
 }
 
 .how-description {
@@ -370,6 +366,7 @@ a:link, a:visited, a:hover, a:active {
   display: flex;
   flex-flow: column;
   text-align: left;
+  // display: inline;
 }
 
 .how-1, .how-2, .how-3, .how-4 {
@@ -378,11 +375,25 @@ a:link, a:visited, a:hover, a:active {
   // background-color: pink;
 }
 
+.how-1, .how-2, .how-3, .how-4 {
+  @media (max-width: 767px) {
+    margin: 10px 0 0 0;
+    display: inline;
+    vertical-align: middle;
+    height: 25%;
+  }}
+
 .how-intro {
   display: inline-block;
   width: 70%;
   margin: auto auto 50px;
 }
+
+.how-intro {
+  @media (max-width: 767px) {
+    width: 80%;
+  }}
+
 
 /* Use Case */
 
