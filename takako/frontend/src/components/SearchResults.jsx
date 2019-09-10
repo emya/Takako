@@ -27,7 +27,7 @@ const SearchResults = ({travelers}) => {
           {travelers.map((traveler, key) => (
             <a href={`/profile/${traveler.id}`} style={{color: "black"}}>
             <div class="profile-card">
-              <img class="profile-card-img" src="./img/woman3.jpg"/>
+              <img class="profile-card-img" src={require('../img/default.png')}/>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
               <div class="profile-card-contents">

@@ -249,7 +249,7 @@ class TransactionHistory extends Component {
                <p class="history-date">
                  {requestHistory.meetup_suggested_at && moment(requestHistory.meetup_suggested_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>
-               <p class="history-update">You suggested following meetup options</p>
+               <p class="history-update"><span class="suggested-option">You suggested following meetup options</span></p>
              </div>
              <ul class="request-data">
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
@@ -312,7 +312,7 @@ class TransactionHistory extends Component {
                        meetup: requestHistory.purchase_notification[0].meetup_option1,
                      }
                    }}>
-                   <button class="btn accept">Accept</button>
+                   <button class="btn accept-meetup">Accept</button>
                  </Link>
                </div>
 
@@ -330,7 +330,7 @@ class TransactionHistory extends Component {
                        meetup: requestHistory.purchase_notification[0].meetup_option2,
                      }
                    }}>
-                   <button class="btn accept">Accept</button>
+                   <button class="btn accept-meetup">Accept</button>
                  </Link>
                  </div>
 
@@ -349,7 +349,7 @@ class TransactionHistory extends Component {
                        meetup: requestHistory.purchase_notification[0].meetup_option3,
                      }
                    }}>
-                   <button class="btn accept">Accept</button>
+                   <button class="btn accept-meetup">Accept</button>
                  </Link>
                  </div>
 
@@ -392,7 +392,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
 
@@ -410,7 +410,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option2,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
 
@@ -428,7 +428,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option3,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
             <div class="btn suggest">
@@ -593,7 +593,7 @@ class TransactionHistory extends Component {
                {requestHistory.meetup_suggested_at && moment(requestHistory.meetup_suggested_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
              </p>
              <div class="history-wrapper">
-               <p class="history-update">You suggested following meetup options</p>
+               <p class="history-update"><span class="suggested-option">You suggested following meetup options</span></p>
              </div>
              <ul class="request-data">
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
@@ -639,11 +639,11 @@ class TransactionHistory extends Component {
                <p class="history-update">You purchased the requested item </p>
              </div>
              <ul class="request-data">
-               <li>You shared the following information</li>
+               <li><span class="suggested-option">You shared the following information</span></li>
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
 
-               <li>You suggested following meetup options</li>
+               <li><span class="suggested-option">You suggested following meetup options</span></li>
                <li>Meetup option1:</li>
                <li>
                  <ul class="request-data">
@@ -704,7 +704,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
 
@@ -722,7 +722,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option2,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
 
@@ -740,7 +740,7 @@ class TransactionHistory extends Component {
                      meetup: requestHistory.purchase_notification[0].meetup_option3,
                    }
                  }}>
-                 <button class="btn accept">Accept</button>
+                 <button class="btn accept-meetup">Accept</button>
                </Link>
                </div>
 

@@ -13,14 +13,7 @@ class HowItWorks extends Component {
     return (
 <div>
    <Header />
-   <div class="menu">
-   <a href="/how-it-works">How It Works</a>
-     <a href="#">Find Traveler</a>
-     <a href="#">About Us</a>
-     <a href="#">Contact Us</a>
-   </div>
    <h2>How It Works</h2>
-   <div class="wrapper-clearfix">
      <div class="wrapper-clearfix howto">
        <div class="how-to-requester">
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> searches for Traveler by trip destinations, and sends the item request</p></div>
@@ -28,20 +21,8 @@ class HowItWorks extends Component {
         <div class="how-box third"><p class="how-heading"><span class="requester">Requester</span> accepts the meetup request or suggests other meetup options</p><p>If Requester & Traveler cannot agree on the meetup location/time within 3 days, please notify Torimo.</p></div>
         <div class="how-box"><p class="how-heading"><span class="requester">Requester</span> confirms the item receipt</p><p>If the item is not as requested or damaged, report Torimo for a full refund.</p></div>
        </div>
-       <div class="how-to-arrow">
-        <div class="arrow-box"><p>2 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"><p>2 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"></div>
-        <div class="triangle"></div>
-        <div class="arrow-box"><p>3 days</p></div>
-        <div class="triangle"></div>
-        <div class="arrow-box meetup"><a href="/how-it-works#whatsmeetupperiod"><p>Meetup Period</p></a></div>
-        <div class="triangle meetup"></div>
-        <div class="arrow-box"><p>1 day</p></div>
-        <div class="triangle"></div>
-       </div>
+       <img class="how-to-arrow" src={require('../img/arrow-desktop.png')}/>
+       <img class="how-to-arrow-mobile" src={require('../img/arrow-mobile.png')}/>
        <div class="how-to-traveler">
         <div class="how-box traveler">
           <p class="how-heading"><span class="traveler-name">Traveler</span> accepts, declines, or clarifies the request</p>
@@ -52,8 +33,8 @@ class HowItWorks extends Component {
        </div>
        </div>
 
-       <h2>Important Notes</h2>
 
+       <h2>Important Notes</h2>
      <div class="how-detail">
       <h3 id="whatsmeetupperiod">Meetup Period</h3>
       <ul>
@@ -85,8 +66,8 @@ class HowItWorks extends Component {
     </div>
 
 
+
     <Footer />
-  </div>
 </div>
 
     )

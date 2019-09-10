@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import Header from './Header'
 import SideMenu from './SideMenu'
 import Footer from './Footer'
+import MobileSideMenu from './MobileSideMenu'
 
 class Search extends Component {
   state = {
@@ -53,25 +54,16 @@ class Search extends Component {
     return (
    <div>
       <Header />
-
+    <div class="search">
       <div class="wrapper clearfix">
         <SideMenu />
 
         <SearchBar handleFormSubmit={this.handleFormSubmit}/>
         <SearchResults travelers={this.state.profiles}/>
       </div>
+    </div>
 
-      <div class="sidemenu-mobile">
-      <ul>
-      <li><a href="#">My Profile<span>></span></a></li>
-      <li><a href="#">Transaction Status<span>></span></a></li>
-      <li><a href="#">Message Box<span>></span></a></li>
-      <li><a href="#">Edit Profile<span>></span></a></li>
-      <li><a href="#">Edit Account<span>></span></a></li>
-      <li><a href="#">Logout<span>></span></a></li>
-      <li><a href="#">Help<span>></span></a></li>
-      </ul>
-      </div>
+  <MobileSideMenu />
 
   <Footer />
   </div>

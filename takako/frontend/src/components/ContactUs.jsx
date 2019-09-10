@@ -101,6 +101,7 @@ class ContactUs extends Component {
           </div>
         </form>
       </div>
+        <MobileSideMenu />
 
       <Footer />
     </div>
