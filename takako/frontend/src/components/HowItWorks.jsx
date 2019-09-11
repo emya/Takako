@@ -81,10 +81,8 @@ class HowItWorks extends Component {
         <li>Any personal reasons such as an item being different from a picture, or a size issue, payments are not refundable.</li>
       </ul>
     </div>
-
-
-
     <Footer />
+    </div>
 </div>
 
     )
