@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from .api import (
     NoteViewSet,
+    StripeAuthorizeCallbackAPI,
     SharedContactViewSet,
     MeetupSuggestionViewSet,
     PurchaseNotificationViewSet,
@@ -10,6 +11,7 @@ from .api import (
     TripViewSet,
     ItemRequestViewSet,
     ContactUsViewSet,
+    TransferViewSet,
     ChargeViewSet,
     ItemRequestHistoryViewSet,
     TravelerProfileViewSet,
@@ -31,6 +33,7 @@ router.register('trips', TripViewSet, 'trips')
 #router.register('requests/item/?P<id>\d+)$', ItemRequestViewSet, 'request_item')
 router.register('requests/item', ItemRequestViewSet, 'request_item')
 router.register('requests/charge', ChargeViewSet, 'request_charge')
+router.register('requests/transfer', TransferViewSet, 'request_transfer')
 router.register('requests/history', ItemRequestHistoryViewSet, 'request_item_history')
 router.register('travelers/profiles', TravelerProfileViewSet, 'traveler_profiles')
 #router.register('notes', NoteViewSet, 'notes')
@@ -41,6 +44,7 @@ urlpatterns = [
     url("^auth/login/$", LoginAPI.as_view()),
     url("^auth/user/$", UserAPI.as_view()),
     url(r"^stripe/", include("djstripe.urls", namespace="djstripe")),
+    url(r"^users/stripe/oauth/callback", StripeAuthorizeCallbackAPI.as_view()),
 
     # NEW: The django-rest-passwordreset urls to request a token and confirm pw-reset
     url(r"^reset/password/", include('django_rest_passwordreset.urls', namespace='password_reset')),
