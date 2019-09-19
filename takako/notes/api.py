@@ -78,7 +78,6 @@ class StripeAuthorizeCallbackAPI(views.APIView):
             }
             url = 'https://connect.stripe.com/oauth/token'
             resp = requests.post(url, params=data)
-            print(resp.json())
 
             stripe_user_id = resp.json()['stripe_user_id']
             stripe_access_token = resp.json()['access_token']
@@ -90,16 +89,6 @@ class StripeAuthorizeCallbackAPI(views.APIView):
             user.stripe_user_id = stripe_user_id
             user.save()
 
-            # If no error, transfer to the user's account
-            """
-            transfer = stripe.Transfer.create(
-                amount=400,
-                currency="usd",
-                destination=stripe_user_id,
-            )
-
-            print(transfer)
-            """
             return Response(data="User updated")
 
         return Response(data="User not updated")
