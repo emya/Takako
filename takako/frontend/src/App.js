@@ -21,6 +21,8 @@ import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
 import RequestForm from "./components/RequestForm";
+import ConnectStripe from "./components/ConnectStripe";
+import ReceivePayment from "./components/ReceivePayment";
 
 import {auth} from "./actions";
 import { Provider, connect } from "react-redux";
@@ -78,6 +80,9 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/profile/:userId" component={Profile} />
                     <PrivateRoute exact path="/message" component={MessageBox} />
                     <PrivateRoute exact path="/traveler/profile" component={TravelerProfile} />
+                    <PrivateRoute exact path="/connect/stripe/:requestId" component={ConnectStripe} />
+                    <PrivateRoute exact path="/receive/payment" component={ReceivePayment} />
+
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/register" component={Register} />

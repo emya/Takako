@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import (
-    User, Note, Profile,
+    User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
     SharedContact, ContactUs
@@ -87,6 +87,13 @@ class PurchaseNotificationSerializer(serializers.ModelSerializer):
     def get_shared_contact(self, obj):
         qs = obj.shared_contact.all()
         return SharedContactSerializer(qs, many=True, read_only=True).data
+
+
+class TransferSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Transfer
 
 
 class ChargeSerializer(serializers.ModelSerializer):
