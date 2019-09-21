@@ -673,6 +673,19 @@ class TransactionHistory extends Component {
          <div>
            <div class="history-box">
              <div class="history-wrapper">
+               <p class="history-date new-update">NEW!</p>
+               <p class="history-update">Let's get paid!</p>
+               <Link to={{
+                 pathname: `/connect/stripe/${this.props.match.params.requestId}`,
+                 state: {
+                   requests: this.state.requests,
+                 }
+               }} class="btn notify">Proceed
+               </Link>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
                <p class="history-date">
                  {requestHistory.item_received_at && moment(requestHistory.item_received_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>

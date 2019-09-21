@@ -61,6 +61,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
+    stripe_user_id = models.CharField(max_length=100, null=True, blank=True)
+    stripe_access_token = models.CharField(max_length=100, null=True, blank=True)
+    stripe_refresh_token = models.CharField(max_length=100, null=True, blank=True)
+    stripe_connect_created_at = models.DateTimeField(null=True)
+
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -135,8 +140,9 @@ class ItemRequest(models.Model):
     # 4. meetup_suggested
     # 5. meetup_decided
     # 6. item_received
-    # 7. request_cancelled
-    # 8. request_cancelled_by_traveler
+    # 7. payment_transferred
+    # 8. request_cancelled
+    # 9. request_cancelled_by_traveler
     process_status = models.CharField(max_length=100, default="request_sent")
     # Decline Reason
     # 0: Other
@@ -153,6 +159,7 @@ class ItemRequest(models.Model):
     meetup_suggested_at = models.DateTimeField(null=True)
     meetup_decided_at = models.DateTimeField(null=True)
     item_received_at = models.DateTimeField(null=True)
+    payment_transferred_at = models.DateTimeField(null=True)
 
 class Charge(models.Model):
     #amount in dollar
@@ -167,6 +174,29 @@ class Charge(models.Model):
     token_id = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
+    created_at = models.DateTimeField(default=timezone.now)
+
+class Transfer(models.Model):
+    #amount in dollar
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE, related_name="transfers")
+    amount = models.IntegerField()
+    #amount_reversed = models.IntegerField()
+    #balance_transaction = models.CharField(max_length=100)
+    currency = models.CharField(max_length=100)
+    description = models.CharField(max_length=200, null=True)
+    destination = models.CharField(max_length=100)
+    #destination_payment = models.CharField(max_length=100)
+    stripe_id = models.CharField(max_length=100)
+    livemode = models.BooleanField()
+    metadata = JSONField()
+    object = models.CharField(max_length=100)
+    #reversals = JSONField()
+    #reversed = models.BooleanField()
+    #source_transaction = models.CharField(max_length=100, null=True)
+    #source_type = models.CharField(max_length=100, null=True)
+    #transfer_group = models.CharField(max_length=100, null=True)
+
     created_at = models.DateTimeField(default=timezone.now)
 
 class Meetup(models.Model):
@@ -203,4 +233,5 @@ class ContactUs(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
     message = models.CharField(max_length=300)
+
 

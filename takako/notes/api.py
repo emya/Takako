@@ -1,7 +1,7 @@
 import json
 from rest_framework import (
     status, viewsets, permissions, generics,
-    parsers, renderers
+    parsers, renderers, views
 )
 
 from rest_framework.response import Response
@@ -25,9 +25,13 @@ from datetime import timedelta
 from knox.models import AuthToken
 
 from celery import Celery
+import stripe
+
+import requests
+
 
 from .models import (
-    User, Note, Profile,
+    User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     PurchaseNotification, Meetup,
     SharedContact, ContactUs
@@ -40,6 +44,7 @@ from .serializers import (
     ItemRequestSerializer,
     ItemRequestHistorySerializer,
     ContactUsSerializer,
+    TransferSerializer,
     ChargeSerializer,
     ProfileSerializer,
     TripSerializer,
@@ -58,6 +63,35 @@ from .permissions import BaseUserPermissions, BaseTransactionPermissions
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+class StripeAuthorizeCallbackAPI(views.APIView):
+
+    def post(self, request):
+        code = request.data.get('code')
+        request_id = request.data.get('state')
+        if code:
+            data = {
+                'client_secret': settings.STRIPE_SECRET_KEY,
+                'grant_type': 'authorization_code',
+                'client_id': settings.STRIPE_CLIENT_ID,
+                'code': code
+            }
+            url = 'https://connect.stripe.com/oauth/token'
+            resp = requests.post(url, params=data)
+
+            stripe_user_id = resp.json()['stripe_user_id']
+            stripe_access_token = resp.json()['access_token']
+            stripe_refresh_token = resp.json()['refresh_token']
+            user = User.objects.get(pk=self.request.user.id)
+            #user = User.objects.get(pk=self.request.user.id)
+            user.stripe_access_token = stripe_access_token
+            user.stripe_refresh_token = stripe_refresh_token
+            user.stripe_user_id = stripe_user_id
+            user.save()
+
+            return Response(data="User updated")
+
+        return Response(data="User not updated")
 
 class SharedContactViewSet(viewsets.ModelViewSet):
     queryset = SharedContact.objects.all()
@@ -216,7 +250,48 @@ class ContactUsViewSet(viewsets.ModelViewSet):
         send_email.delay("New message from our user", request.data['message'], None, settings.EMAIL_HOST_USER)
         return Response(serializer.data)
 
-import stripe
+class TransferViewSet(viewsets.ModelViewSet):
+    stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
+
+    queryset = Transfer.objects.all()
+    serializer_class = TransferSerializer
+
+    def create(self, request):
+        item_request_id = request.data.pop("requestId")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        if item_request.payment_transferred_at:
+            return Response(data="Already Paid")
+
+        user = User.objects.get(pk=self.request.user.id)
+        amount = item_request.proposed_price + item_request.commission_fee
+
+        stripe_transfer = stripe.Transfer.create(
+            amount=amount,
+            currency="usd",
+            destination=user.stripe_user_id,
+        )
+
+        transfer = Transfer.objects.create(
+            user=request.user,
+            item_request=item_request,
+            amount=amount,
+            currency='usd',
+            description=stripe_transfer.description,
+            destination=stripe_transfer.destination,
+            stripe_id=stripe_transfer.id,
+            livemode=stripe_transfer.livemode,
+            metadata=stripe_transfer.metadata,
+            object=stripe_transfer.object,
+        )
+        serializer = self.serializer_class(transfer)
+        now = timezone.now()
+        item_request.payment_transferred_at = now
+        item_request.process_status = "payment_transferred"
+        item_request.save()
+        return Response(data="Transferred")
+
+
+
 class ChargeViewSet(viewsets.ModelViewSet):
     stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 

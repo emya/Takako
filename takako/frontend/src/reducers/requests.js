@@ -4,6 +4,9 @@ const initialState = {
   isPaymentCompleted: null,
   isItemReceived: null,
   isResponded: null,
+  isStripeConnected: null,
+  isStripeTransferred: null,
+  isAlreadyStripeTransferred: null,
 };
 
 export default function requests(state=initialState, action) {
@@ -39,6 +42,18 @@ export default function requests(state=initialState, action) {
 
     case 'FORBIDDEN_ERROR':
         return {...state, ...action.data, isForbidden: true};
+
+    case 'STRIPE_CONNECT_SUCCESSFUL':
+        return {...state, isStripeConnected: true};
+
+    case 'STRIPE_TRANSFER_SUCCESSFUL':
+        switch (action.data) {
+          case "Transferred":
+              return {...state, isStripeTransferred: true};
+          case "Already Paid":
+              return {...state, isAlreadyStripeTransferred: true};
+
+        }
 
     default:
       return state;
