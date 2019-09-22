@@ -167,7 +167,7 @@ class PurchaseNotification extends Component {
           </div>
           <div class="form-wrapper">
             {errors.map(error => (
-              <p key={error}>Error: {error}</p>
+              <p class="error-heading" key={error}>Error: {error}</p>
             ))}
 
             <div class="form-section">

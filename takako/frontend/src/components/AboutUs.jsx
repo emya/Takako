@@ -36,6 +36,7 @@ class Test extends Component {
 
 
 <div class="member">
+  <img class="us-picture" src={require('../img/Chiaki.png')}/>
   <p><strong>Chiaki Ikuyama</strong></p>
   <p class="member-title">Cofounder & CEO</p>
   <p>Chiaki is originally from Japan and studied in Minnesota, the United States. Prior to Torimo, she worked as a USCPA at Deloitte as well as an investment banker at Citigroup. She is passionate about web design and digital art, fashion and traveling.
@@ -43,6 +44,7 @@ class Test extends Component {
 </div>
 
 <div class="member">
+  <img class="us-picture" src={require('../img/Emi.png')}/>
   <p><strong>Emi Ayada</strong></p>
   <p class="member-title">Cofounder & CTO</p>
   <p>Emi completed her MSc degree in Computer Science at the University of Tokyo. She loves bridging machine learning engineering and data science to solve challenging problems. When she is not working, Emi enjoys playing tennis, joins coding competitions, and travels!</p>

@@ -1233,6 +1233,12 @@ li {
   background-color: #FFB23B;
 }
 
+.error-heading {
+  // display: inline-block;
+  color: red;
+  text-align: center;
+}
+
 
 .meetup-option-select .btn.accept {
   display: inline-block;
@@ -1433,15 +1439,29 @@ li {
   width: 40%;
   background: #fcf5eb;
   margin: 30px 2%;
-  padding: 20px 5%;
+  padding: 3% 5%;
   border-radius: 10px;
-  height: 400px;
+  height: 450px;
   vertical-align: top;
 }
+
+.member {
+  @media (max-width: 767px) {
+    display: block;
+    width: 100%;
+    margin: 40px auto;
+  }}
+
 
 .member-title {
   font-style: italic;
   color: #F17816;
+}
+
+.us-picture {
+  width: 30%;
+  max-width: 30%;
+  height: auto;
 }
 
 // other
