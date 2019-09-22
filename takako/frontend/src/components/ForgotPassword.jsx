@@ -30,16 +30,16 @@ class ForgotPassword extends Component {
     }
     return (
       <form onSubmit={this.onSubmit}>
-        <fieldset>
+        <fieldset class="signin-box">
           <legend>Forgot Password?</legend>
           <p>
-            <label htmlFor="email">Email</label>
+            <label class="start" htmlFor="email">Email</label>
             <input
               type="email" id="email"
               onChange={e => this.setState({email: e.target.value})} />
           </p>
           <p>
-            <button type="submit">Send email</button>
+            <button class="btn start-page" type="submit">Send email</button>
           </p>
         </fieldset>
       </form>
