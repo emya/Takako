@@ -217,7 +217,7 @@ class RequestForm extends Component {
 
       <div class="form-section">
         {errors.map(error => (
-          <p key={error}>Error: {error}</p>
+          <p class="error-heading" key={error}>Error: {error}</p>
         ))}
         <p class="form-heading">Item Name<span class="asterisk">*</span></p><br/>
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required /><br/>

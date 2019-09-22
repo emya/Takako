@@ -112,7 +112,7 @@ class ShareContact extends Component {
 
             <div class="form-section">
               {errors.map(error => (
-                <p key={error}>Error: {error}</p>
+                <p class="error-heading" key={error}>Error: {error}</p>
               ))}
               <p class="form-heading">Your Preferred Contact</p><br />
               <input class="contact-option" placeholder="Phone Number" value={this.state.preferred_phone} onChange={(e) => this.setState({preferred_phone: e.target.value})}/>
