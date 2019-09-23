@@ -35,14 +35,12 @@ class MyProfile extends Component {
   }
 
   handleImageChange = (e) => {
-    console.log("handle Image Change", e.target.files[0]);
     this.setState({
       image: e.target.files[0]
     })
   }
 
   submitProfile = (e) => {
-    console.log(this.state.image);
     e.preventDefault();
     this.props.updateProfile(
       this.props.profile[0].id, this.state.bio, this.state.residence,
