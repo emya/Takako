@@ -1028,6 +1028,9 @@ class TransactionHistory extends Component {
              <li>Location:   {requestHistory.trip.destination}</li>
              <li>Item Name:  {requestHistory.item_name}</li>
              <li>Item URL (Optional):   {requestHistory.item_url}</li>
+             {requestHistory.item_image && (
+               <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
+             )}
              <li>Number of Item(s):   {requestHistory.n_items}</li>
              <li>Proposed Price:   {requestHistory.proposed_price.toLocaleString()}</li>
              <li>Commission Fee:   {requestHistory.commission_fee.toLocaleString()}</li>

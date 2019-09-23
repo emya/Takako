@@ -85,12 +85,13 @@ class Note(models.Model):
         return self.text
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     bio = models.TextField(max_length=500, blank=True)
     residence = models.CharField(max_length=100, blank=True)
     occupation = models.CharField(max_length=100, blank=True)
     gender = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    image = models.CharField(max_length=200, null=True)
 
 class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
@@ -114,6 +115,7 @@ class ItemRequest(models.Model):
     item_name = models.CharField(max_length=200, blank=True)
     item_id = models.CharField(max_length=200, blank=True)
     item_url = models.CharField(max_length=300, blank=True)
+    item_image = models.CharField(max_length=200, null=True, blank=True)
     n_items = models.IntegerField(default=1)
     proposed_price = models.IntegerField()
     commission_fee = models.IntegerField()
