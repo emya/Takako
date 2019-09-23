@@ -1,4 +1,5 @@
 import React from 'react';
+import { keys } from '../keys.js';
 
 /*
 class SearchResults extends Component {
@@ -27,7 +28,11 @@ const SearchResults = ({travelers}) => {
           {travelers.map((traveler, key) => (
             <a href={`/profile/${traveler.id}`} style={{color: "black"}}>
             <div class="profile-card">
-              <img class="profile-card-img" src={require('../img/default.png')}/>
+              {traveler.profile.image && (
+                <img class="profile-card-img"
+                     src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${traveler.id}/${traveler.profile.image}`} />
+              )}
+              {!traveler.profile.image && ( <img class="profile-card-img" src={require('../img/default.png')} /> )}
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
               <div class="profile-card-contents">

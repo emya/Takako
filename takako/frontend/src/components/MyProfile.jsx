@@ -27,16 +27,26 @@ class MyProfile extends Component {
     bio: "",
     residence: "",
     residence_search: "",
+    image: null,
   }
 
   resetForm = () => {
     this.setState({bio: "", residence: ""});
   }
 
+  handleImageChange = (e) => {
+    console.log("handle Image Change", e.target.files[0]);
+    this.setState({
+      image: e.target.files[0]
+    })
+  }
+
   submitProfile = (e) => {
+    console.log(this.state.image);
     e.preventDefault();
     this.props.updateProfile(
-      this.props.profile[0].id, this.state.bio, this.state.residence, this.state.occupation, this.state.gender
+      this.props.profile[0].id, this.state.bio, this.state.residence,
+      this.state.occupation, this.state.gender, this.state.image
     ).then(this.resetForm);
   }
 
@@ -68,7 +78,12 @@ class MyProfile extends Component {
         <form onSubmit={this.submitProfile}>
           {this.props.profile.map((profile) => (
             <div>
-              <img src={require('../img/default.png')} />
+              {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
+              {!this.state.image && profile.image && (
+                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
+               )}
+              {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
+              <input type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
               <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
@@ -129,6 +144,7 @@ class MyProfile extends Component {
 
 
 const mapStateToProps = state => {
+  console.log(state.profile);
   return {
     profile: state.profile,
     user: state.auth.user,
@@ -152,8 +168,8 @@ const mapDispatchToProps = dispatch => {
     fetchProfile: (userId) => {
       dispatch(profile.fetchProfile(userId));
     },
-    updateProfile: (id, bio, residence, occupation, gender) => {
-      return dispatch(profile.updateProfile(id, bio, residence, occupation, gender));
+    updateProfile: (id, bio, residence, occupation, gender, image) => {
+      return dispatch(profile.updateProfile(id, bio, residence, occupation, gender, image));
       //dispatch(notes.updateNote(id, text));
     },
     logout: () => dispatch(auth.logout()),

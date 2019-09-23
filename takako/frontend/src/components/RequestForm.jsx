@@ -14,6 +14,7 @@ class RequestForm extends Component {
   state = {
     item_name: "",
     item_id: "",
+    item_image: null,
     item_url: "",
     n_items: 1,
     proposed_price: 0,
@@ -35,11 +36,17 @@ class RequestForm extends Component {
     }
   }
 
+  handleImageChange = (e) => {
+    this.setState({
+      item_image: e.target.files[0]
+    })
+  }
+
   submitRequest = (e) => {
     e.preventDefault();
     this.props.sendRequest(
       this.props.match.params.userId, this.props.match.params.tripId, this.state.item_name,
-      this.state.item_id, this.state.item_url, this.state.n_items, this.state.proposed_price,
+      this.state.item_id, this.state.item_url, this.state.item_image, this.state.n_items, this.state.proposed_price,
       this.state.commission_fee, this.state.transaction_fee, this.state.delivery_method,
       this.state.preferred_meetup_location, this.state.preferred_meetup_date, this.state.comment
     );
@@ -139,6 +146,8 @@ class RequestForm extends Component {
               <p class="form-data">{this.state.item_name}</p><br />
               <p class="form-heading">Item URL</p><br />
               <p class="form-data">{this.state.item_url} </p><br />
+              <p class="form-heading">Item Image</p><br />
+              <p class="form-data"> {this.state.item_image && (<img src={URL.createObjectURL(this.state.item_image)} />)} </p><br />
               <p class="form-heading">Number of Item(s)</p><br />
               <p class="form-data">{this.state.n_items} </p><br />
             </div>
@@ -225,8 +234,9 @@ class RequestForm extends Component {
         <p class="form-heading">Item URL</p><br/>
         <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
 
-        <p class="form-heading">Item Image</p><br/>
-        <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})} /><br/>
+        <p class="form-heading">Item Image (optional)</p><br/>
+        {this.state.item_image && (<img src={URL.createObjectURL(this.state.item_image)} />)}
+        <input type="file" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
         <p class="form-heading">Number of Item(s)</p><br/>
         <input type="number" value={this.state.n_items} onChange={(e) => this.setState({n_items: e.target.value})} /><br/>
@@ -313,13 +323,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     sendRequest: (
-      respondent_id, trip_id, item_name, item_id, item_url, n_items,
-      proposed_price, commission_fee, transaction_fee, delivery_method,
+      respondent_id, trip_id, item_name, item_id, item_url, item_image,
+      n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
       preferred_meetup_location, preferred_meetup_date, comment)  => {
       return dispatch(
         requests.sendItemRequest(
-          respondent_id, trip_id, item_name, item_id, item_url, n_items,
-          proposed_price, commission_fee, transaction_fee, delivery_method,
+          respondent_id, trip_id, item_name, item_id, item_url, item_image,
+          n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
           preferred_meetup_location, preferred_meetup_date, comment
         )
       );

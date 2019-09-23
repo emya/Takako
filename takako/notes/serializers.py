@@ -24,10 +24,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 class TravelerProfileSerializer(serializers.ModelSerializer):
     trip = serializers.SerializerMethodField()
+    profile = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'trip')
+        fields = ('id', 'first_name', 'last_name', 'profile', 'trip')
+
+    def get_profile(self, obj):
+        qs = obj.profile
+        return ProfileSerializer(qs, read_only=True).data
 
     def get_trip(self, obj):
         qs = obj.trips.all()
@@ -46,7 +51,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'user')
+        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'image', 'user')
 
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,8 +67,8 @@ class ItemRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemRequest
         fields = (
-            'id', 'requester', 'respondent', 'trip',
-            'item_name', 'item_id', 'item_url', 'n_items', 'proposed_price',
+            'id', 'requester', 'respondent', 'trip', 'item_name', 'item_id',
+            'item_url', 'item_image', 'n_items', 'proposed_price',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status', 'process_status', 'created_at', 'responded_at',
             'paid_at', 'purchase_notified_at', 'meetup_suggested_at', 'meetup_decided_at',
@@ -117,7 +122,7 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
         model = ItemRequest
         fields = (
             'id', 'requester', 'respondent', 'trip',
-            'item_name', 'item_id', 'item_url', 'n_items',
+            'item_name', 'item_id', 'item_url', 'item_image', 'n_items',
             'proposed_price', 'commission_fee', 'transaction_fee',
             'delivery_method', 'comment', 'status', 'charge',
             'process_status', 'decline_reason', 'created_at', 'responded_at',
