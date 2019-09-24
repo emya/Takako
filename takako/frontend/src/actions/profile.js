@@ -1,18 +1,21 @@
-export const updateProfile = (id, bio, residence, occupation, gender) => {
+export const updateProfile = (id, bio, residence, occupation, gender, img) => {
   return (dispatch, getState) => {
+    const formData = new FormData();
 
-    let headers = {"Content-Type": "application/json"};
+    let headers = {};
     let {token} = getState().auth;
 
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    console.log(`id: ${id}, bio: ${bio}, residence: ${residence}`)
+    formData.append('bio', bio);
+    formData.append('residence', residence);
+    formData.append('occupation', occupation);
+    formData.append('gender', gender);
+    formData.append('image', img);
 
-    let body = JSON.stringify({bio, residence, occupation, gender});
-
-    return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body})
+    return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body: formData})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

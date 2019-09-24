@@ -34,24 +34,34 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body, address
 }
 
 export const sendItemRequest = (
-  respondent_id, trip_id, item_name, item_id, item_url, n_items,
-  proposed_price, commission_fee, transaction_fee, delivery_method,
+  respondent_id, trip_id, item_name, item_id, item_url, item_image,
+  n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
   preferred_meetup_location, preferred_meetup_date, comment) => {
   return (dispatch, getState) => {
-    let headers = {"Content-Type": "application/json"};
+    let headers = {};
     let {token} = getState().auth;
 
     if (token) {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    let body = JSON.stringify({
-      respondent_id, trip_id, item_name, item_id, item_url, n_items,
-      proposed_price: parseInt(proposed_price), commission_fee: parseInt(commission_fee),
-      transaction_fee: parseInt(transaction_fee), delivery_method,
-      preferred_meetup_location, preferred_meetup_date, comment, });
+    const formData = new FormData();
+    formData.append('respondent_id', respondent_id);
+    formData.append('trip_id', trip_id);
+    formData.append('item_name', item_name);
+    formData.append('item_id', item_id);
+    formData.append('item_url', item_url);
+    formData.append('item_image', item_image);
+    formData.append('n_items', n_items);
+    formData.append('proposed_price', parseInt(proposed_price));
+    formData.append('commission_fee', parseInt(commission_fee));
+    formData.append('transaction_fee', parseInt(transaction_fee));
+    formData.append('delivery_method', delivery_method);
+    formData.append('preferred_meetup_location', preferred_meetup_location);
+    formData.append('preferred_meetup_date', preferred_meetup_date);
+    formData.append('comment', comment);
 
-    return fetch("/api/requests/item/", {headers, method: "POST", body})
+    return fetch("/api/requests/item/", {headers, method: "POST", body: formData})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {

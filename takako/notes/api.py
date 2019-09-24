@@ -19,6 +19,10 @@ from django_rest_passwordreset.signals import reset_password_token_created
 from django.utils import timezone
 from django.urls import reverse
 from django.template.loader import render_to_string
+from rest_framework.parsers import (
+    MultiPartParser, FormParser, FileUploadParser, FormParser
+)
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from datetime import timedelta
 
@@ -26,6 +30,7 @@ from knox.models import AuthToken
 
 from celery import Celery
 import stripe
+import boto3
 
 import requests
 
@@ -200,12 +205,27 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
     queryset = ItemRequest.objects.all()
 
     def create(self, request):
-        respondent_id = request.data.pop("respondent_id")
-        trip_id = request.data.pop("trip_id")
+        data = request.data.copy()
+        respondent_id = data.pop("respondent_id")[0]
+        trip_id = data.pop("trip_id")[0]
+        item_image = data.pop("item_image")
+
+        is_upload_image = False
+
+        if item_image:
+            image = item_image[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['item_image'] = image.name
+                is_upload_image = True
+
         respondent = User.objects.get(pk=respondent_id)
         trip = Trip.objects.get(pk=trip_id)
-        item_request = ItemRequest.objects.create(requester=request.user, respondent=respondent, trip=trip, **request.data)
+
+        item_request = ItemRequest.objects.create(requester=request.user, respondent=respondent, trip=trip, **data.dict())
         serializer = self.serializer_class(item_request)
+
+        if is_upload_image:
+            upload_to_s3(image, f"requests/{serializer.data['id']}/{image.name}")
 
         site_url = "http://localhost:8000"
         site_name = "Torimo"
@@ -374,13 +394,26 @@ class TripViewSet(viewsets.ModelViewSet):
 
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
+    parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = ProfileSerializer
 
     def update(self, request, pk):
         instance = self.get_object()
-        serializer = self.serializer_class(instance, data=request.data)
+        data = request.data.copy()
+        img = data.pop('image')
+        is_upload_image = False
+
+        if img:
+            image = img[0]
+            if isinstance(image, InMemoryUploadedFile):
+                data['image'] = image.name
+                is_upload_image = True
+
+        serializer = self.serializer_class(instance, data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        if is_upload_image:
+            upload_to_s3(image, f'profiles/{request.user.id}/{image.name}')
         return Response(serializer.data)
 
     def get_queryset(self):
@@ -496,4 +529,15 @@ class CustomPasswordResetView:
         #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
 
         send_email.delay("Forgot Password?", "Forgot Password?", html_message, reset_password_token.user.email)
+
+def upload_to_s3(image, key):
+
+    client = boto3.client(
+        "s3",
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        region_name=settings.AWS_REGION
+    )
+
+    client.put_object(Bucket=settings.AWS_BUCKET_NAME, Key=key, Body=image)
 
