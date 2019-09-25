@@ -6,8 +6,6 @@ WORKDIR /usr/src/app
 # Bundle app source
 COPY frontend /usr/src/app
 
-RUN echo $(ls -la)
-
 RUN npm install
 RUN npm rebuild node-sass
 
