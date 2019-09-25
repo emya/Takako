@@ -100,7 +100,7 @@ export const updatePassword = (password, token) => {
         if (res.status === 200) {
           dispatch({type: 'UPDATE_PASSWORD_SUCCESSFUL', data: res.data});
           return res.data;
-        } else if (res.status == 400) {
+        } else if (res.status === 400) {
           dispatch({type: 'UPDATE_PASSWORD_ERROR', data: res.data});
           return res.data;
         } else {
