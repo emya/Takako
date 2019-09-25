@@ -72,7 +72,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status', 'process_status', 'created_at', 'responded_at',
             'paid_at', 'purchase_notified_at', 'meetup_suggested_at', 'meetup_decided_at',
-            'decline_reason', 'decline_reason_comment',)
+            'item_received_at', 'payment_transferred_at', 'decline_reason', 'decline_reason_comment',)
 
 class PurchaseNotificationSerializer(serializers.ModelSerializer):
     item_request = ItemRequestSerializer(read_only=True)
@@ -124,10 +124,10 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
             'id', 'requester', 'respondent', 'trip',
             'item_name', 'item_id', 'item_url', 'item_image', 'n_items',
             'proposed_price', 'commission_fee', 'transaction_fee',
-            'delivery_method', 'comment', 'status', 'charge',
-            'process_status', 'decline_reason', 'created_at', 'responded_at',
-            'paid_at', 'purchase_notified_at', 'meetup_suggested_at', 'meetup_decided_at',
-            'decline_reason_comment', 'purchase_notification')
+            'delivery_method', 'comment', 'status', 'charge', 'process_status',
+            'decline_reason', 'created_at', 'responded_at', 'paid_at', 'purchase_notified_at',
+            'meetup_suggested_at', 'meetup_decided_at', 'item_received_at',
+            'payment_transferred_at', 'decline_reason_comment', 'purchase_notification')
 
     def get_charge(self, obj):
         qs = obj.charges.all()
