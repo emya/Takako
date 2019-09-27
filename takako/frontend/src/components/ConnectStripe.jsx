@@ -19,21 +19,20 @@ class ConnectStripe extends Component {
 
    <div class="wrapper clearfix">
      <SideMenu />
-     <div>
+     <div class="main">
+       <h3>Hooray! You completed the request!</h3>
        <p>
-         Hooray! Your job is completed
          Please connect your stripe account to get paid
        </p>
        <a href={
          `https://connect.stripe.com/oauth/authorize` +
          `?response_type=code&client_id=${keys.STRIPE_CLIENT_ID}&scope=read_write&redirect_uri=${keys.STRIPE_REDIRECT_URI}&state=${this.props.match.params.requestId}`
-        }>
-       }
-         <img src={require('../img/blue-on-light.png')} />
+       }>
+        <button class="btn">Connect with Stripe</button>
        </a>
      </div>
-     <Footer />
    </div>
+   <Footer />
 </div>
 
     )
