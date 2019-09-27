@@ -51,8 +51,8 @@ class HowItWorks extends Component {
        </div>
 
 
-       <h2>Important Notes</h2>
      <div class="how-detail">
+     <h2>Important Notes</h2>
       <h3 id="whatsmeetupperiod">Meetup Period</h3>
       <ul>
         <li>The meetup period is pre-determined and takes place within <strong>1 week</strong> after Traveler returning to NYC.</li>
@@ -81,8 +81,8 @@ class HowItWorks extends Component {
         <li>Any personal reasons such as an item being different from a picture, or a size issue, payments are not refundable.</li>
       </ul>
     </div>
-    <Footer />
     </div>
+    <Footer />
 </div>
 
     )

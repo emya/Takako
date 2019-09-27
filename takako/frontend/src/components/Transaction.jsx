@@ -7,7 +7,6 @@ import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
 import Footer from './Footer';
 import moment from 'moment';
-import { faDollarSign, faLightbulb, faGift } from '@fortawesome/free-solid-svg-icons'
 
 class Transaction extends Component {
   componentDidMount() {
@@ -56,27 +55,27 @@ class Transaction extends Component {
                   {sent_item_request.status === 3 && ("Rejected")}
                   {sent_item_request.status === 4 && ("Cancelled")}
 
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "request_responded" && (
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "request_responded" && (
                     <div>
                       <div class="action-required">!</div>
                       <p class="action-required-text">Action Required</p>
                     </div>
                   )}
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "payment_made" && ("Paid")}
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "purchase_notified" && (
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "payment_made" && ("Paid")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "purchase_notified" && (
                     <div>
                     <div class="action-required">!</div>
                     <p class="action-required-text">Action Required</p>
                     </div>
                   )}
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "meetup_decided" && (
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "meetup_suggested" && ("Deciding Meetup")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "meetup_decided" && (
                     <div>
                       <div class="action-required">!</div>
                       <p class="action-required-text">Action Required</p>
                     </div>
                   )}
-                  {sent_item_request.status === 2 && sent_item_request.process_status == "item_received" && ("Item Received")}
+                  {sent_item_request.status === 2 && sent_item_request.process_status === "item_received" && ("Item Received")}
                 </td>
                 <td>
                   <a class="btn detail" href={`/transaction/history/${sent_item_request.id}`}>Details</a>
@@ -116,17 +115,17 @@ class Transaction extends Component {
                   {received_item_request.status === 3 && ("Rejected")}
                   {received_item_request.status === 4 && ("Cancelled")}
 
-                  {received_item_request.status === 2 && received_item_request.process_status == "request_responded" && ("Accepted")}
-                  {received_item_request.status === 2 && received_item_request.process_status == "payment_made" && (
+                  {received_item_request.status === 2 && received_item_request.process_status === "request_responded" && ("Accepted")}
+                  {received_item_request.status === 2 && received_item_request.process_status === "payment_made" && (
                     <div>
                     <div class="action-required">!</div>
                     <p class="action-required-text">Action Required</p>
                     </div>
                   )}
-                  {received_item_request.status === 2 && received_item_request.process_status == "purchase_notified" && ("Purchased")}
-                  {received_item_request.status === 2 && received_item_request.process_status == "meetup_suggested" && ("Deciding Meetup")}
-                  {received_item_request.status === 2 && received_item_request.process_status == "meetup_decided" && ("Decided Meetup")}
-                  {received_item_request.status === 2 && received_item_request.process_status == "item_received" && (
+                  {received_item_request.status === 2 && received_item_request.process_status === "purchase_notified" && ("Purchased")}
+                  {received_item_request.status === 2 && received_item_request.process_status === "meetup_suggested" && ("Deciding Meetup")}
+                  {received_item_request.status === 2 && received_item_request.process_status === "meetup_decided" && ("Decided Meetup")}
+                  {received_item_request.status === 2 && received_item_request.process_status === "item_received" && (
                     <div>
                     <div class="action-required">!</div>
                     <p class="action-required-text">Action Required</p>

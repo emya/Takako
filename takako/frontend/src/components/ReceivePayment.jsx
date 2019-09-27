@@ -51,14 +51,14 @@ class ReceivePayment extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div>
+      <div class="main">
+        <h3>You got paid!</h3>
         <p>
-          You got paid!
           You will receive payment in your stripe account in a few days
         </p>
       </div>
-      <Footer />
     </div>
+    <Footer />
   </div>
       )
     }
@@ -70,14 +70,14 @@ class ReceivePayment extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div>
+      <div class="main">
+        <h3>You already got paid!</h3>
         <p>
-          You already got paid!
           Please check your stripe account
         </p>
       </div>
-      <Footer />
     </div>
+    <Footer />
   </div>
       )
     }
@@ -89,15 +89,15 @@ class ReceivePayment extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div>
+      <div class="main">
+        <h3>Awesome, Your stripe account is connected!</h3>
         <p>
-          Awesome! Your stripe account is connected.
-          Please get paid by clicking the below button
+          Please get paid by clicking the below button.
         </p>
-        <button class="btn notify" onClick={this.getPaid}>Get Paid</button>
+        <button class="btn" onClick={this.getPaid}>Get Paid</button>
       </div>
-      <Footer />
     </div>
+    <Footer />
   </div>
       )
     }
@@ -108,9 +108,9 @@ class ReceivePayment extends Component {
 
     <div class="wrapper clearfix">
       <SideMenu />
-      <div>
+      <div class="main">
+        <h3>Hooray! Your job is completed</h3>
         <p>
-          Hooray! Your job is completed
           Please connect your stripe account to get paid
         </p>
         <a href={
@@ -121,8 +121,8 @@ class ReceivePayment extends Component {
           <img src={require('../img/blue-on-light.png')} />
         </a>
       </div>
-      <Footer />
     </div>
+    <Footer />
   </div>
 
     )
