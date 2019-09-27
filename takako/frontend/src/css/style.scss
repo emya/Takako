@@ -141,6 +141,12 @@ li {
     width: 93%;
   }}
 
+  .main {
+    width: 75%;
+    float: right;
+    min-height: 500px;
+  }
+
 
 
 /* topbar */
@@ -214,7 +220,7 @@ li {
 
 .menu {
   @media (max-width: 767px) {
-    padding: 3px 7%;
+    padding: 3px 3%;
     height: auto;
   }
 }
@@ -331,13 +337,14 @@ li {
   // height: 1000px;
   width: 75%;
   background-color: white;
-  padding: 0 7% 10px 7%;
+  padding: 0 1% 10px 1%;
 }
 
 .profile {
   @media (max-width: 767px) {
     width: 100%;
     height: auto;
+    padding: 0 3% 10px 3%;
   }
 }
 
@@ -568,7 +575,7 @@ li {
 .transaction-history {
   @media (max-width: 767px) {
     width: 100%;
-    padding: 10px 7%;
+    padding: 10px 3%;
   }}
 
 .history-box {
@@ -762,7 +769,7 @@ li {
 
 .search {
   @media (max-width: 767px) {
-    padding: 10px 7%;
+    padding: 10px 3%;
   }
 }
 
@@ -1046,15 +1053,16 @@ li {
 
 
 .wrapper-clearfix.howto {
-  width: 80%;
+  width: 75%;
   margin: 0 auto;
-  height: 1300px;
+  height: 1200px;
+  float: right;
 }
 
 .wrapper-clearfix.howto {
   @media (max-width: 767px) {
     width: 100%;
-    height: 1100px;
+    height: 1200px;
     padding: 10px 2%;
   }}
 
@@ -1164,13 +1172,15 @@ li {
 
 .how-detail {
   text-align: left;
-  width: 80%;
+  width: 75%;
   margin: 100px auto 100px;
+  float: right;
+  padding: 10px 1%;
 }
 
 .how-detail {
   @media (max-width: 767px) {
-    padding: 10px 7% 30px;
+    padding: 10px 3% 30px;
     margin: 0;
     width: 100%;
   }}
@@ -1189,7 +1199,7 @@ li {
 .form {
   @media (max-width: 767px) {
     width: 100%;
-    padding: 10px 7%;
+    padding: 10px 3%;
   }}
 
 
