@@ -81,7 +81,8 @@ class MyProfile extends Component {
                 <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
                )}
               {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
-              <input type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+
+              <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
               <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
