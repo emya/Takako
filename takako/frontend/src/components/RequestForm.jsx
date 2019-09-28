@@ -235,8 +235,8 @@ class RequestForm extends Component {
         <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
 
         <p class="form-heading">Item Image (optional)</p><br/>
-        {this.state.item_image && (<img src={URL.createObjectURL(this.state.item_image)} />)}
-        <input type="file" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+        {this.state.item_image && (<img class="request-image" src={URL.createObjectURL(this.state.item_image)} />)}
+        <input class="item-upload" type="file" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
         <p class="form-heading">Number of Item(s)</p><br/>
         <input type="number" value={this.state.n_items} onChange={(e) => this.setState({n_items: e.target.value})} /><br/>
