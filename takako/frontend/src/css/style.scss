@@ -349,10 +349,20 @@ li {
 }
 
 .profile img {
+  display: block;
   height: 200px;
   width: 200px;
-  margin: 60px 0 30px 0;
+  margin: 60px auto 0;
   border: 1px solid grey;
+}
+
+.picture-upload {
+  display: block;
+  margin: 5px auto 30px;
+  padding: 1px;
+  width: 200px!important;
+  background-color: transparent!important;
+  border: none!important;
 }
 
 .profile p {
@@ -370,8 +380,10 @@ li {
 
 .user-name {
   font-size: 2rem;
+  margin: 40px 0 50px!important;
   // color: #1B435D;
   // width: 30%;
+  font-weight: bold;
 }
 
 .user-data {
@@ -852,10 +864,11 @@ li {
 .profile-card-img {
   display: inline-block;
   width: 30%;
-  // max-width: 30%;
+  max-width: 30%;
   height: auto;
   background-color: grey;
   margin-right: 20px;
+  vertical-align: top;
 }
 
 .profile-card-contents {
@@ -1280,6 +1293,17 @@ li {
 
 .form-section.first {
   margin-top: 70px;
+}
+
+.item-upload {
+  padding: 1px;
+}
+
+.request-image {
+  width: 20%;
+  max-width: 20%;
+  height: auto;
+  margin: 10px 0 0 5px;
 }
 
 .request-summary {
