@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   server:
     build:
@@ -12,10 +12,14 @@ services:
       dockerfile: Dockerfile.nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./takako:/usr/share/nginx
+      - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+      - /docker-volumes/etc/letsencrypt/live/torimo.io/fullchain.pem:/etc/letsencrypt/live/torimo.io/fullchain.pem
+      - /docker-volumes/etc/letsencrypt/live/torimo.io/privkey.pem:/etc/letsencrypt/live/torimo.io/privkey.pem
     depends_on:
       - server
+
   redis:
     image: redis:3.2
   frontend:
