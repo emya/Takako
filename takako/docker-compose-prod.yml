@@ -19,17 +19,8 @@ services:
       - /docker-volumes/etc/letsencrypt/live/torimo.io/privkey.pem:/etc/letsencrypt/live/torimo.io/privkey.pem
     depends_on:
       - server
-
   redis:
     image: redis:3.2
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile.react
-    depends_on:
-      - redis
-    ports:
-      - "3000:3000"
   celery-worker:
     build:
       context: .
