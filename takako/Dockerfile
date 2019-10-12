@@ -4,7 +4,6 @@ RUN mkdir -p /opt
 #RUN mkdir -p /opt/takako
 COPY takako /opt/takako
 COPY notes /opt/notes
-COPY assets /opt/assets
 COPY templates /opt/templates
 COPY requirements.txt /opt/
 COPY manage.py /opt/
