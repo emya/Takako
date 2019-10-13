@@ -8,3 +8,8 @@
 ## Celery Worker
 
 ### `celery worker -A notes --loglevel=debug` under `takako` which has `manage.py`
+
+## Server
+
+### `npm run build`
+### `python manage.py collectstatic`
