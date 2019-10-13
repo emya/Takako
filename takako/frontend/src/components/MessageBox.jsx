@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import MediaQuery from 'react-responsive';
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
 import { AddMessage } from '../containers/AddMessage'
 import { MessagesList } from '../containers/MessagesList'
 
