@@ -183,6 +183,19 @@ li {
   width: 40%;
 }
 
+#terms, .agree {
+  display: inline-block;
+  text-align: left;
+  width: auto;
+}
+
+#terms {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
 .topbar-contents {
   @media (max-width: 767px) {
     display: none;

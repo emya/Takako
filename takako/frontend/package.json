@@ -31,7 +31,7 @@
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "form-data": "^2.4.0",
     "fs-extra": "7.0.0",
-    "html-webpack-plugin": "4.0.0-alpha.2",
+    "html-webpack-plugin": "^4.0.0-beta.8",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
@@ -68,7 +68,6 @@
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
     "webpack-dev-server": "^3.2.1",
-    "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
@@ -132,6 +131,11 @@
     ]
   },
   "devDependencies": {
-    "webpack-bundle-tracker": "^0.4.2-beta"
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "uglifyjs-3-webpack-plugin": "^1.2.4",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-manifest-plugin": "^2.2.0"
   }
 }

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {auth} from "../actions";
 import '../css/style_LP.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDollarSign, faLightbulb, faGift } from '@fortawesome/free-solid-svg-icons'
-
 
 class Takako extends Component {
   /*

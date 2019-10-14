@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {auth, actions} from '../actions'
-import {connect} from 'react-redux';
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
 
