@@ -58,6 +58,7 @@ class Login extends Component {
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
+          <input type="checkbox" id="terms"></input><p class="agree">I have read and agree to <a href="#" class="start-link">the Terms</a></p>
           <p>
             <button class="btn start-page" type="submit">Register</button>
           </p>
