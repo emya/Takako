@@ -34,7 +34,7 @@ class MyProfile extends Component {
   }
 
   resetForm = () => {
-    this.setState({bio: "", residence: ""});
+    this.setState({bio: "", residence: "", occupation: "", gender: ""});
   }
 
   handleImageChange = (e) => {
@@ -69,8 +69,8 @@ class MyProfile extends Component {
     this.setState({residence_search: event.target.value, residence: event.target.value})
   }
 
-  handleSelectResidenceSuggest(suggest) {
-    console.log(suggest.formatted_address);
+  handleSelectResidenceSuggest(profile, suggest) {
+    profile["residence"] = suggest.formatted_address;
     this.setState({residence_search: "", residence: suggest.formatted_address})
   }
 
@@ -126,7 +126,7 @@ class MyProfile extends Component {
                       <ReactGooglePlacesSuggest
                         autocompletionRequest={{input: this.state.residence_search, types: ['(regions)']}}
                         googleMaps={googleMaps}
-                        onSelectSuggest={this.handleSelectResidenceSuggest.bind(this)}
+                        onSelectSuggest={this.handleSelectResidenceSuggest.bind(this, profile)}
                       >
                         <input
                           id="residence"
