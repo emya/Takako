@@ -27,7 +27,10 @@ class MyProfile extends Component {
     bio: "",
     residence: "",
     residence_search: "",
+    occupation: "",
+    gender: "",
     image: null,
+    errors: []
   }
 
   resetForm = () => {
@@ -42,6 +45,14 @@ class MyProfile extends Component {
 
   submitProfile = (e) => {
     e.preventDefault();
+
+    const errors = this.validateForm(this.state.image);
+
+    if (errors.length > 0) {
+      this.setState({ errors });
+      return;
+    }
+
     this.props.updateProfile(
       this.props.profile[0].id, this.state.bio, this.state.residence,
       this.state.occupation, this.state.gender, this.state.image
@@ -63,7 +74,19 @@ class MyProfile extends Component {
     this.setState({residence_search: "", residence: suggest.formatted_address})
   }
 
+  validateForm = (image) => {
+    // we are going to store errors for all fields
+    // in a signle array
+    const errors = [];
+
+    if (image && image.size > 3145728) {
+      errors.push("Please Select an image smaller than 3 MB");
+    }
+    return errors;
+  }
+
   render() {
+    const errors = this.state.errors;
     return (
   <div>
     <Header />
@@ -74,6 +97,9 @@ class MyProfile extends Component {
       <div class="profile">
       <h2>My Profile</h2>
         <form onSubmit={this.submitProfile}>
+          {errors.map(error => (
+             <p class="error-heading" key={error}>Error: {error}</p>
+          ))}
           {this.props.profile.map((profile) => (
             <div>
               {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
