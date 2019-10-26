@@ -10,6 +10,8 @@ import MobileSideMenu from './MobileSideMenu'
 import Footer from './Footer'
 import UpcomingTrips from './UpcomingTrips'
 
+import { keys } from '../keys.js';
+
 library.add(faIgloo)
 
 class Profile extends Component {
@@ -35,7 +37,11 @@ class Profile extends Component {
       <div class="profile">
         {this.props.profile.map((profile) => (
           <div class="profile-info">
-            <img src={require('../img/default.png')} />
+            {profile.image && (
+              <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
+            )}
+            {!profile.image && (<img src={require('../img/default.png')} />)}
+
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
