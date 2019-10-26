@@ -350,7 +350,7 @@ li {
   // height: 1000px;
   width: 75%;
   background-color: white;
-  padding: 0 1% 10px 1%;
+  padding: 0 1% 100px 1%;
 }
 
 .profile {
@@ -632,8 +632,9 @@ li {
 }
 
 .history-summary {
-  margin: 70px 0 50px 0;
+  margin: 70px auto 50px auto;
   border: none;
+  width: 70%;
 }
 
 .transaction-summary {
@@ -767,14 +768,14 @@ li {
   display: inline-block;
   // background-color: #78BBE6;
   width: 30%;
-  margin: 0 10px;
+  margin: 0 30px;
 }
 
 .btn.decline {
   display: inline-block;
   background-color: grey;
   width: 30%;
-  margin: 0 10px;
+  margin: 0 30px;
   text-align: center;
 }
 
@@ -889,6 +890,10 @@ li {
   width: 60%;
   height: 100%;
   vertical-align: top;
+}
+
+.profile-info {
+  margin-bottom: 100px;
 }
 
 .subject {
@@ -1385,7 +1390,8 @@ li {
 .form-data {
   display: inline-block;
   margin: 10px 0 30px 0;
-  text-align: right;
+  text-align: left;
+  word-wrap: break-word;
 }
 
 .number-calculated {
@@ -1585,4 +1591,19 @@ li {
 
 .start-link {
   color: #f17816!important;
+}
+
+.report {
+  // display: inline-block;
+  margin-bottom: 100px;
+  width: 20%;
+}
+
+.report-content {
+  // font-size: 0.8em;
+  color: red;
+}
+
+.received {
+  margin: 30px auto;
 }

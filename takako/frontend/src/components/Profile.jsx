@@ -34,7 +34,7 @@ class Profile extends Component {
 
       <div class="profile">
         {this.props.profile.map((profile) => (
-          <div>
+          <div class="profile-info">
             <img src={require('../img/default.png')} />
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
