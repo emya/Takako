@@ -36,7 +36,7 @@ class Profile extends Component {
 
       <div class="profile">
         {this.props.profile.map((profile) => (
-          <div>
+          <div class="profile-info">
             {profile.image && (
               <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
             )}
