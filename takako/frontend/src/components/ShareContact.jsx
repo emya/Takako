@@ -120,7 +120,7 @@ class ShareContact extends Component {
             </div>
           </div>
 
-          <button class="form-send-btn btn" onClick={this.shareContact}>Share your contact</button>
+          <button class="form-send-btn btn" onClick={this.shareContact}>Accept meetup & share your contact</button>
 
         </form>
       </div>

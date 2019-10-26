@@ -253,7 +253,7 @@ class TransactionHistory extends Component {
                <li>Request you sent</li>
                <li> Item Name:  {requestHistory.item_name}</li>
                <li>Number of Item(s):  {requestHistory.n_items}</li>
-               <li>Price    :  {requestHistory.proposed_price.toLocaleString()}</li>
+               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
              </ul>
            </div>
            </div>
@@ -300,8 +300,18 @@ class TransactionHistory extends Component {
            <div class="history-box">
              <div class="history-wrapper">
                <p class="history-date new-update">NEW!</p>
-               <p class="notify-heading">Notify that you received the item</p>
-               <button class="btn notify" onClick={this.receiveItem}>Notify</button>
+               <p class="notify-heading">Confirm your item receipt</p>
+               <ul>
+                <li>Report Torimo if there were any problems. You cannot undo once item receipt is confirmed! </li>
+              </ul>
+               <div class="action-area received">
+                 <button class="btn accept" onClick={this.receiveItem}>Confirm</button>
+                 <Link to={{
+                   pathname: "/contact-us",
+                 }}>
+                 <button class="btn decline">Report Torimo</button>
+                 </Link>
+               </div>
              </div>
            </div>
            <div class="history-box initial">
@@ -378,7 +388,7 @@ class TransactionHistory extends Component {
                <p class="history-date">
                  {requestHistory.purchase_notified_at && moment(requestHistory.purchase_notified_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>
-               <p class="history-update">{requestHistory.respondent.first_name} purchased the item you requested </p>
+               <p class="history-update">{requestHistory.respondent.first_name} purchased the item you requested! Let's decide on meetup details</p>
              </div>
              <ul class="request-data">
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
@@ -459,7 +469,7 @@ class TransactionHistory extends Component {
                <p class="history-date">
                  {requestHistory.purchase_notified_at && moment(requestHistory.purchase_notified_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>
-               <p class="history-update">{requestHistory.respondent.first_name} purchased the item you requested </p>
+               <p class="history-update">{requestHistory.respondent.first_name} purchased the item you requested! Let's decide on meetup details</p>
              </div>
              <ul class="request-data">
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
@@ -534,11 +544,13 @@ class TransactionHistory extends Component {
          {/* the requester made payment so the traveler notify the purchase */
          is_requester && process_status === "payment_made" && (
          <div>
-           Please let us know if no purchase notification made by {requestHistory.trip.arrival_date}
+          <p class="report-content">
+           Let us know if no purchase notification is made by {requestHistory.trip.arrival_date}
+           </p>
            <Link to={{
                pathname: "/contact-us",
              }}>
-             <button class="btn accept">Report</button>
+             <button class="btn report">Report Torimo</button>
            </Link>
 
            <div class="history-box">
@@ -569,11 +581,12 @@ class TransactionHistory extends Component {
                <p class="history-date new-update">NEW!</p>
                <p class="history-update">Payment Detail</p>
                <ul class="request-data">
-                 <li>Proposed Price:   {requestHistory.proposed_price}</li>
-                 <li>Commission Fee:   {requestHistory.commission_fee}</li>
-                 <li>Transaction Fee (3% of the proposed price):   {requestHistory.transaction_fee}</li>
+                 <li>Item Price:   ${requestHistory.proposed_price}</li>
+                 <li>Commission Fee:   ${requestHistory.commission_fee}</li>
+                 <li>Transaction Fee (3% of the proposed price):   ${requestHistory.transaction_fee}</li>
+                 <br/>
                  <li>
-                 Total Payment: {requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
+                 Your Total Payment: ${requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
                  </li>
                </ul>
 
@@ -661,7 +674,7 @@ class TransactionHistory extends Component {
              <ul>
                <li>Request {requestHistory.requester.first_name} sent</li>
                <li>Item Name:  {requestHistory.item_name}</li>
-               <li>Price    :  {requestHistory.proposed_price.toLocaleString()}</li>
+               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
               </ul>
            </div>
            </div>
@@ -792,6 +805,7 @@ class TransactionHistory extends Component {
                <li><span class="suggested-option">You shared the following information</span></li>
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
                <li>Email address: {requestHistory.purchase_notification[0].preferred_email} </li>
+               <br/>
 
                <li><span class="suggested-option">You suggested following meetup options</span></li>
                <li>Meetup option1:</li>
@@ -833,8 +847,8 @@ class TransactionHistory extends Component {
                {requestHistory.meetup_suggested_at && moment(requestHistory.meetup_suggested_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
              </p>
 
+             <p class="history-update">{requestHistory.requester.first_name} proposed new meetup options </p>
              <div class="history-wrapper">
-               <p class="history-update">{requestHistory.requester.first_name} suggested following meetup options </p>
              </div>
              <ul class="request-data">
                <li>Phone number: {requestHistory.purchase_notification[0].preferred_phone} </li>
@@ -1032,8 +1046,8 @@ class TransactionHistory extends Component {
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
              )}
              <li>Number of Item(s):   {requestHistory.n_items}</li>
-             <li>Proposed Price:   {requestHistory.proposed_price.toLocaleString()}</li>
-             <li>Commission Fee:   {requestHistory.commission_fee.toLocaleString()}</li>
+             <li>Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
+             <li>Your Commission Fee:   ${requestHistory.commission_fee.toLocaleString()}</li>
              {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee.toLocaleString()}</li>)}
              {is_requester && (
                <li>
