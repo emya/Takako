@@ -261,7 +261,7 @@ class TransactionHistory extends Component {
 
          {
          /* meetup option decided */
-         is_requester && item_request_status === 2 && process_status === "item_received" && (
+         is_requester && item_request_status === 2 && ( process_status === "item_received" || process_status == "payment_transferred" ) && (
          <div>
            <div class="history-box">
              <div class="history-wrapper">
@@ -681,6 +681,47 @@ class TransactionHistory extends Component {
               </ul>
            </div>
            </div>
+         )}
+
+         {
+         /* meetup option decided */
+         is_traveler && item_request_status === 2 && process_status === "payment_transferred" && (
+         <div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.payment_transferred_at && moment(requestHistory.payment_transferred_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="notify-heading">The payment was transferred to your Stripe account</p>
+             </div>
+           </div>
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.item_received_at && moment(requestHistory.item_received_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="notify-heading">{requestHistory.requester.first_name} received the item</p>
+             </div>
+           </div>
+           <div class="history-box initial">
+             <p class="history-date">
+               {requestHistory.meetup_decided_at && moment(requestHistory.meetup_decided_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+             </p>
+               <p class="history-update">Meetup place/time was set</p>
+                <p class="contact-info">Meetup Details</p>
+             <ul class="request-data">
+               <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
+               <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
+               <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+               <li>NOTE   : {requestHistory.purchase_notification[0].final_meetup.comment}</li>
+             </ul>
+             <p class="contact-info">Contact Info of {requestHistory.requester.first_name}</p>
+             <ul>
+               <li>PHONE: {requestHistory.purchase_notification[0].shared_contact[0].preferred_phone} </li>
+               <li>E-MAIL: {requestHistory.purchase_notification[0].shared_contact[0].preferred_email} </li>
+             </ul>
+           </div>
+         </div>
          )}
 
          {
