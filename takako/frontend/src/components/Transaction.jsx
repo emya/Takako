@@ -75,7 +75,7 @@ class Transaction extends Component {
                       <p class="action-required-text">Action Required</p>
                     </div>
                   )}
-                  {sent_item_request.status === 2 && sent_item_request.process_status === "item_received" && ("Item Received")}
+                  {sent_item_request.status === 2 && (sent_item_request.process_status === "item_received" || sent_item_request.process_status === "payment_transferred") && ("Item Received")}
                 </td>
                 <td>
                   <a class="btn detail" href={`/transaction/history/${sent_item_request.id}`}>Details</a>
@@ -131,6 +131,7 @@ class Transaction extends Component {
                     <p class="action-required-text">Action Required</p>
                     </div>
                   )}
+                  {received_item_request.status === 2 && received_item_request.process_status === "payment_transferred" && ("Got paid")}
                   </td>
                 <td>
                   <a class="btn detail" href={`/transaction/history/${received_item_request.id}`}>Details</a>
