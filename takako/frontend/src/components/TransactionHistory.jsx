@@ -283,6 +283,7 @@ class TransactionHistory extends Component {
                <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+               <li>NOTE   : {requestHistory.purchase_notification[0].final_meetup.comment}</li>
              </ul>
              <p class="contact-info">Contact Info of {requestHistory.respondent.first_name}</p>
              <ul>
@@ -297,12 +298,20 @@ class TransactionHistory extends Component {
          /* meetup option decided */
          is_requester && item_request_status === 2 && process_status === "meetup_decided" && (
          <div>
+           Please let us know if the traveler did not show up to the decided meetup or you have a trouble receiving the item.
+           <Link to={{
+             pathname: "/contact-us",
+           }}>
+             <button class="btn accept">Report</button>
+           </Link>
+
            <div class="history-box">
              <div class="history-wrapper">
                <p class="history-date new-update">NEW!</p>
                <p class="notify-heading">Notify that you received the item</p>
                <button class="btn notify" onClick={this.receiveItem}>Notify</button>
              </div>
+
            </div>
            <div class="history-box initial">
              <div class="history-wrapper">
@@ -316,6 +325,7 @@ class TransactionHistory extends Component {
                <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+               <li>NOTE   : {requestHistory.purchase_notification[0].final_meetup.comment}</li>
              </ul>
              <p class="contact-info">Contact Info of {requestHistory.respondent.first_name}</p>
              <ul>
@@ -396,6 +406,7 @@ class TransactionHistory extends Component {
                      state: {
                        purchase_notification: requestHistory.purchase_notification[0],
                        meetup: requestHistory.purchase_notification[0].meetup_option1,
+                       action_taken_by: 1,
                      }
                    }}>
                    <button class="btn accept-meetup">Accept</button>
@@ -414,6 +425,7 @@ class TransactionHistory extends Component {
                      state: {
                        purchase_notification: requestHistory.purchase_notification[0],
                        meetup: requestHistory.purchase_notification[0].meetup_option2,
+                       action_taken_by: 1,
                      }
                    }}>
                    <button class="btn accept-meetup">Accept</button>
@@ -433,6 +445,7 @@ class TransactionHistory extends Component {
                      state: {
                        purchase_notification: requestHistory.purchase_notification[0],
                        meetup: requestHistory.purchase_notification[0].meetup_option3,
+                       action_taken_by: 1,
                      }
                    }}>
                    <button class="btn accept-meetup">Accept</button>
@@ -477,6 +490,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
+                     action_taken_by: 1,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -495,6 +509,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option2,
+                     action_taken_by: 1,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -513,6 +528,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option3,
+                     action_taken_by: 1,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -702,6 +718,7 @@ class TransactionHistory extends Component {
                <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+               <li>NOTE   : {requestHistory.purchase_notification[0].final_meetup.comment}</li>
              </ul>
              <p class="contact-info">Contact Info of {requestHistory.requester.first_name}</p>
              <ul>
@@ -725,6 +742,7 @@ class TransactionHistory extends Component {
                <li>DATE   : {requestHistory.purchase_notification[0].final_meetup.date}</li>
                <li>TIME   : {requestHistory.purchase_notification[0].final_meetup.dtime}</li>
                <li>ADDRESS: {requestHistory.purchase_notification[0].final_meetup.address}</li>
+               <li>NOTE   : {requestHistory.purchase_notification[0].final_meetup.comment}</li>
              </ul>
              <p class="contact-info">Contact Info of {requestHistory.requester.first_name}</p>
              <ul>
@@ -852,6 +870,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option1,
+                     action_taken_by: 0,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -870,6 +889,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option2,
+                     action_taken_by: 0,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -888,6 +908,7 @@ class TransactionHistory extends Component {
                    state: {
                      purchase_notification: requestHistory.purchase_notification[0],
                      meetup: requestHistory.purchase_notification[0].meetup_option3,
+                     action_taken_by: 0,
                    }
                  }}>
                  <button class="btn accept-meetup">Accept</button>
@@ -1041,6 +1062,8 @@ class TransactionHistory extends Component {
                </li>
              )}
              <li>Delivery Method:   Meetup</li>
+             <li>Preferred meetup location: {requestHistory.preferred_meetup_location}</li>
+             <li>Preferred meetup date/time: {requestHistory.preferred_meetup_date}</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
            {is_traveler  && requestHistory.status === 0 && (

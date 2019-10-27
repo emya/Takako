@@ -57,6 +57,7 @@ class ShareContact extends Component {
       this.state.preferred_phone,
       this.state.preferred_email,
       this.props.location.state.meetup.id,
+      this.props.location.state.action_taken_by
     );
   }
 
@@ -85,9 +86,11 @@ class ShareContact extends Component {
     const errors = this.state.errors;
     let meetup;
     let purchase_notification;
+    let action_taken_by;
     if (this.props.location.state.meetup) {
       meetup = this.props.location.state.meetup;
       purchase_notification = this.props.location.state.purchase_notification;
+      action_taken_by = this.props.location.state.action_taken_by;
     } else {
       return null
     }
@@ -139,10 +142,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    shareContact: (purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id) => {
+    shareContact: (purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id, action_taken_by) => {
       dispatch(
         requests.shareContact(
-          purchase_notification_id, preferred_phone, preferred_email, accepted_meetup_id, "meetup_decided"
+          purchase_notification_id, preferred_phone, preferred_email,
+          accepted_meetup_id, action_taken_by, "meetup_decided"
         )
       );
     },

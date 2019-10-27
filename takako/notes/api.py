@@ -64,6 +64,7 @@ from .tasks import send_email
 from .permissions import BaseUserPermissions, BaseTransactionPermissions
 
 #from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+site_url = settings.SITE_URL
 
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
@@ -117,7 +118,8 @@ class SharedContactViewSet(viewsets.ModelViewSet):
         accepted_meetup = Meetup.objects.get(pk=accepted_meetup_id)
         purchase_notification.final_meetup = accepted_meetup
 
-        purchase_notification.action_taken_by = 1
+        action_taken_by = int(request.data.pop("action_taken_by"))
+        purchase_notification.action_taken_by = action_taken_by
         purchase_notification.save()
 
         shared_contact = SharedContact.objects.create(
@@ -126,6 +128,20 @@ class SharedContactViewSet(viewsets.ModelViewSet):
             **request.data
         )
         serializer = self.serializer_class(shared_contact)
+        if action_taken_by == 0:
+            # Notify requester
+            user = purchase_notification.item_request.requester
+        elif action_taken_by == 1:
+            # Notify traveler
+            user = purchase_notification.item_request.respondent
+
+        link = f"{site_url}/transaction/history/{purchase_notification.item_request.id}"
+        html_message = render_to_string('email-meetup-accepted.html',
+                                            {'user': user, 'link': link})
+        send_email.delay(
+                "Your meetup option has been accepted!",
+                "Your meetup option has been accepted! Check at Torimo!",
+                html_message, user.email)
         return Response(serializer.data)
 
 class PurchaseNotificationViewSet(viewsets.ModelViewSet):
@@ -141,18 +157,12 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         item_request.save()
 
         meetup_option1 = request.data.pop("meetup_option1")
-        meetup_option2 = request.data.pop("meetup_option2", None)
-        meetup_option3 = request.data.pop("meetup_option3", None)
+        meetup_option2 = request.data.pop("meetup_option2")
+        meetup_option3 = request.data.pop("meetup_option3")
 
         meetup1 = Meetup.objects.create(user=self.request.user, **meetup_option1)
-        meetup2 = None
-        meetup3 = None
-
-        if meetup_option2:
-            meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
-
-        if meetup_option3:
-            meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
+        meetup2 = Meetup.objects.create(user=self.request.user, **meetup_option2)
+        meetup3 = Meetup.objects.create(user=self.request.user, **meetup_option3)
 
         purchase_notification = PurchaseNotification.objects.create(
             item_request=item_request, meetup_option1=meetup1,
@@ -160,6 +170,16 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
             final_meetup=None, **request.data
         )
         serializer = self.serializer_class(purchase_notification)
+
+        link = f"{site_url}/transaction/history/{item_request.id}"
+        html_message = render_to_string('email-purchase-notification.html', {'user': item_request.requester, 'link': link})
+
+        # Notify respondent
+        send_email.delay(
+            "Your requested item has been purchased!",
+            "Your requested item has been purchased! Check at Torimo!",
+            html_message, item_request.requester.email)
+
         return Response(serializer.data)
 
 class MeetupSuggestionViewSet(viewsets.ModelViewSet):
@@ -190,8 +210,18 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
         now = timezone.now()
         purchase_notification.item_request.meetup_suggested_at = now
         purchase_notification.item_request.save()
-
         serializer = self.serializer_class(purchase_notification)
+
+        link = f"{site_url}/transaction/history/{purchase_notification.item_request.id}"
+        if action_taken_by == 0:
+            # Notify requester
+            user = purchase_notification.item_request.requester
+        elif action_taken_by == 1:
+            # Notify traveler
+            user = purchase_notification.item_request.respondent
+
+        html_message = render_to_string('email-meetup-suggested.html', {'user': user, 'link': link})
+        send_email.delay("You got new meetup suggestion!", "You got new meetup suggestion! Check at Torimo!", html_message, user.email)
         return Response(serializer.data)
 
 
@@ -227,14 +257,45 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         if is_upload_image:
             upload_to_s3(image, f"requests/{serializer.data['id']}/{image.name}")
 
-        site_url = "http://localhost:8000"
-        site_name = "Torimo"
-        link = f"{site_url}/transaction/history/{item_request.id}",
+        link = f"{site_url}/transaction/history/{item_request.id}"
         html_message = render_to_string('email-request-received.html', {'user': respondent, 'link': link})
 
         # Notify respondent
         send_email.delay("You got new Request!", "You got new Request! Check at Torimo!", html_message, respondent.email)
 
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        status = request.data.get("status")
+        process_status = request.data.get("process_status")
+        instance = self.get_object()
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        if status and process_status:
+            link = f"{site_url}/transaction/history/{instance.id}"
+
+            if status == 2 and process_status == "request_responded":
+                # Request was accepted
+                html_message = render_to_string('email-request-accepted.html', {'user': instance.requester, 'link': link})
+                send_email.delay(
+                    "Your request has been responded!",
+                    "Your request has been responded! Check at Torimo!",
+                    html_message, instance.requester.email)
+            elif status == 3 and process_status == "request_responded":
+                # Request was rejected
+                html_message = render_to_string('email-request-declined.html', {'user': instance.requester, 'link': link})
+                send_email.delay(
+                    "Your request has been responded!",
+                    "Your request has been responded! Check at Torimo!",
+                    html_message, instance.requester.email)
+            elif status == 3 and process_status == "item_received":
+                # Item received
+                html_message = render_to_string('email-item-received.html', {'user': instance.respondent, 'link': link})
+                send_email.delay(
+                    "The requested item has been delivered!",
+                    "The requested item has been delivered! Check at Torimo!",
+                    html_message, instance.respondent.email)
         return Response(serializer.data)
 
     def list(self, request):
@@ -308,6 +369,9 @@ class TransferViewSet(viewsets.ModelViewSet):
         item_request.payment_transferred_at = now
         item_request.process_status = "payment_transferred"
         item_request.save()
+
+        # TODO: send a confirmation email
+
         return Response(data="Transferred")
 
 
@@ -342,6 +406,21 @@ class ChargeViewSet(viewsets.ModelViewSet):
             now = timezone.now()
             item_request.paid_at = now
             item_request.save()
+            # Notify requester/traveler
+            link = f"{site_url}/transaction/history/{item_request.id}"
+            html_message_requester = render_to_string(
+                'email-payment-completed-requester.html', {'user': item_request.requester, 'link': link})
+            send_email.delay(
+                "Your payment has been successfully completed!",
+                "Your payment has been successfully completed! Check at Torimo!",
+                html_message_requester, item_request.requester.email)
+
+            html_message_traveler = render_to_string(
+                'email-payment-completed-traveler.html', {'user': item_request.respondent, 'link': link})
+            send_email.delay(
+                "A payment has been successfully completed!",
+                "A payment has been successfully completed! Check at Torimo!",
+                html_message_traveler, item_request.respondent.email)
 
         charge = Charge.objects.create(
             user=request.user,
@@ -512,7 +591,6 @@ class CustomPasswordResetView:
           Handles password reset tokens
           When a token is created, an e-mail needs to be sent to the user
         """
-        site_url = "http://localhost:8000"
         site_name = "Torimo"
 
         # send an e-mail to the user
