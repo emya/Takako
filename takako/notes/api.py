@@ -370,7 +370,13 @@ class TransferViewSet(viewsets.ModelViewSet):
         item_request.process_status = "payment_transferred"
         item_request.save()
 
-        # TODO: send a confirmation email
+        link = f"{site_url}/transaction/history/{item_request.id}"
+        html_message = render_to_string(
+            'email-payment-transferred.html', {'user': item_request.respondent, 'link': link})
+        send_email.delay(
+            "The payment has been transferred!",
+            "The payment has been transferred! Check at Torimo!",
+            html_message, item_request.respondent.email)
 
         return Response(data="Transferred")
 
