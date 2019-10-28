@@ -135,7 +135,7 @@ class SharedContactViewSet(viewsets.ModelViewSet):
             # Notify traveler
             user = purchase_notification.item_request.respondent
 
-        link = f"{site_url}/transaction/history/{purchase_notification.item_request.id}"
+        link = f"{site_url}/login?next=/transaction/history/{purchase_notification.item_request.id}"
         html_message = render_to_string('email-meetup-accepted.html',
                                             {'user': user, 'link': link})
         send_email.delay(
@@ -171,7 +171,7 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         )
         serializer = self.serializer_class(purchase_notification)
 
-        link = f"{site_url}/transaction/history/{item_request.id}"
+        link = f"{site_url}/login?next=/transaction/history/{item_request.id}"
         html_message = render_to_string('email-purchase-notification.html', {'user': item_request.requester, 'link': link})
 
         # Notify respondent
@@ -212,7 +212,7 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
         purchase_notification.item_request.save()
         serializer = self.serializer_class(purchase_notification)
 
-        link = f"{site_url}/transaction/history/{purchase_notification.item_request.id}"
+        link = f"{site_url}/login?next=/transaction/history/{purchase_notification.item_request.id}"
         if action_taken_by == 0:
             # Notify requester
             user = purchase_notification.item_request.requester
@@ -257,7 +257,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         if is_upload_image:
             upload_to_s3(image, f"requests/{serializer.data['id']}/{image.name}")
 
-        link = f"{site_url}/transaction/history/{item_request.id}"
+        link = f"{site_url}/login?next=/transaction/history/{item_request.id}"
         html_message = render_to_string('email-request-received.html', {'user': respondent, 'link': link})
 
         # Notify respondent
@@ -273,7 +273,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         if status and process_status:
-            link = f"{site_url}/transaction/history/{instance.id}"
+            link = f"{site_url}/login?next=/transaction/history/{instance.id}"
 
             if status == 2 and process_status == "request_responded":
                 # Request was accepted
@@ -370,7 +370,7 @@ class TransferViewSet(viewsets.ModelViewSet):
         item_request.process_status = "payment_transferred"
         item_request.save()
 
-        link = f"{site_url}/transaction/history/{item_request.id}"
+        link = f"{site_url}/login?next=/transaction/history/{item_request.id}"
         html_message = render_to_string(
             'email-payment-transferred.html', {'user': item_request.respondent, 'link': link})
         send_email.delay(
@@ -413,7 +413,7 @@ class ChargeViewSet(viewsets.ModelViewSet):
             item_request.paid_at = now
             item_request.save()
             # Notify requester/traveler
-            link = f"{site_url}/transaction/history/{item_request.id}"
+            link = f"{site_url}/login?next=/transaction/history/{item_request.id}"
             html_message_requester = render_to_string(
                 'email-payment-completed-requester.html', {'user': item_request.requester, 'link': link})
             send_email.delay(

@@ -36,7 +36,6 @@ import Register from "./components/Register";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 
-
 let store = createStore(takakoApp, applyMiddleware(thunk));
 
 
@@ -48,11 +47,9 @@ class RootContainerComponent extends Component {
 
     PrivateRoute = ({component: ChildComponent, ...rest}) => {
         return <Route {...rest} render={props => {
-            console.log("this.props", this.props)
             if (this.props.auth.isLoading) {
                 return <em>Loading...</em>;
             } else if (!this.props.auth.isAuthenticated) {
-                console.log("redirect to home")
                 return <Redirect to="/" />;
             } else {
                 return <ChildComponent {...props} />
