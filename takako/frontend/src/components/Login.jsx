@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-
 import {Link, Redirect} from "react-router-dom";
+
+import queryString from 'query-string';
 
 import {auth} from "../actions";
 
@@ -18,6 +19,12 @@ class Login extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
+      if (this.props.location && this.props.location.search) {
+        let params = queryString.parse(this.props.location.search);
+        console.log("params", params);
+        let next=params.next;
+        return <Redirect to={next} />
+      }
       return <Redirect to='/myprofile' />
     }
     return (
