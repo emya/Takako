@@ -2,6 +2,7 @@ const initialState = {
   isSubmissionSucceeded: null,
   isForbidden: null,
   isPaymentCompleted: null,
+  isCancelled: null,
   isItemReceived: null,
   isResponded: null,
   isStripeConnected: null,
@@ -36,6 +37,8 @@ export default function requests(state=initialState, action) {
         switch (action.action_type) {
           case null:
               return {...state, requestHistory: action.data, isResponded: true};
+          case "cancel_request":
+              return {...state, requestHistory: action.data, isCancelled: true, isResponded: true};
           case "item_received":
               return {...state, requestHistory: action.data, isItemReceived: true};
         }

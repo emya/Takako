@@ -61,14 +61,24 @@ class TransactionHistory extends Component {
   cancelItemRequest = () => {
     this.props.updateItemRequest(
       this.props.match.params.requestId,
-      {"status": 1, "process_status": "request_cancelled", "responded_at": moment().format()}
+      {
+        "status": 1,
+        "process_status": "request_cancelled",
+        "responded_at": moment().format()
+      },
+      "cancel_request"
     );
   }
 
   cancelItemRequestbyTraveler = () => {
     this.props.updateItemRequest(
       this.props.match.params.requestId,
-      {"status": 4, "process_status": "request_cancelled_by_traveler", "responded_at": moment().format()}
+      {
+        "status": 4,
+        "process_status": "request_cancelled_by_traveler",
+        "responded_at": moment().format()
+      },
+      "cancel_request"
     );
   }
 
@@ -108,6 +118,28 @@ class TransactionHistory extends Component {
   render() {
     if (this.props.isForbidden) {
       return <Redirect to='/transaction/status' />
+    }
+
+    if (this.props.isCancelled) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <h3>Cancellation</h3>
+            <p>You cancelled the request</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
+              Back to the conversation
+            </a></p>
+          </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
     }
 
     if (this.props.isItemReceived) {
@@ -696,6 +728,53 @@ class TransactionHistory extends Component {
            </div>
          )}
 
+          {/*the traveler rejected the request*/
+         is_traveler && item_request_status === 3 && (
+           <div class="history-box initial">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">You rejected the request</p>
+               <ul>
+               <li>
+                  {requestHistory.decline_reason === 1 && ("Reason: The proposed price is not enough")}
+                  {requestHistory.decline_reason === 2 && ("Reason: The commission fee is not enough")}
+                  {requestHistory.decline_reason === 3 && ("Reason: The item is too big/heavy")}
+                  {requestHistory.decline_reason === 4 && ("Reason: The item is hard to get")}
+               </li>
+               <li>
+                  {requestHistory.decline_reason_comment !== "" && (requestHistory.decline_reason_comment)}
+               </li>
+               </ul>
+             </div>
+           </div>
+         )}
+
+         {/*the request was cancelled*/
+         is_traveler && item_request_status === 1 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">The request was cancelled</p>
+             </div>
+           </div>
+         )}
+
+         {/*the request was cancelled*/
+         is_traveler && item_request_status === 4 && (
+           <div class="history-box">
+             <div class="history-wrapper">
+               <p class="history-date">
+                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+               </p>
+               <p class="history-update">You cancelled the request</p>
+             </div>
+           </div>
+         )}
+
          {
          /* meetup option decided */
          is_traveler && item_request_status === 2 && process_status === "payment_transferred" && (
@@ -1026,28 +1105,6 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         {/*the traveler rejected the request*/
-         is_traveler && item_request_status === 3 && (
-           <div class="history-box initial">
-             <div class="history-wrapper">
-               <p class="history-date">
-                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
-               </p>
-               <p class="history-update">You rejected the request</p>
-               <ul>
-               <li>
-                  {requestHistory.decline_reason === 1 && ("Reason: The proposed price is not enough")}
-                  {requestHistory.decline_reason === 2 && ("Reason: The commission fee is not enough")}
-                  {requestHistory.decline_reason === 3 && ("Reason: The item is too big/heavy")}
-                  {requestHistory.decline_reason === 4 && ("Reason: The item is hard to get")}
-               </li>
-               <li>
-                  {requestHistory.decline_reason_comment !== "" && (requestHistory.decline_reason_comment)}
-               </li>
-               </ul>
-             </div>
-           </div>
-         )}
 
          {/*the traveler accepted the request*/
          is_traveler && item_request_status === 2 && (
@@ -1061,29 +1118,6 @@ class TransactionHistory extends Component {
            </div>
          )}
 
-         {/*the request was cancelled*/
-         is_traveler && item_request_status === 1 && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p class="history-date">
-                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
-               </p>
-               <p class="history-update">The request was cancelled</p>
-             </div>
-           </div>
-         )}
-
-         {/*the request was cancelled*/
-         is_traveler && item_request_status === 4 && (
-           <div class="history-box">
-             <div class="history-wrapper">
-               <p class="history-date">
-                 {requestHistory.responded_at && moment(requestHistory.responded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
-               </p>
-               <p class="history-update">You cancelled the request</p>
-             </div>
-           </div>
-         )}
 
          <div class="history-box">
            <p class="history-date">
@@ -1157,6 +1191,7 @@ const mapStateToProps = state => {
     isResponded: state.requests.isResponded,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
+    isCancelled: state.requests.isCancelled,
     requests: state.requests,
     user: state.auth.user,
   }
