@@ -61,14 +61,24 @@ class TransactionHistory extends Component {
   cancelItemRequest = () => {
     this.props.updateItemRequest(
       this.props.match.params.requestId,
-      {"status": 1, "process_status": "request_cancelled", "responded_at": moment().format()}
+      {
+        "status": 1,
+        "process_status": "request_cancelled",
+        "responded_at": moment().format()
+      },
+      "cancel_request"
     );
   }
 
   cancelItemRequestbyTraveler = () => {
     this.props.updateItemRequest(
       this.props.match.params.requestId,
-      {"status": 4, "process_status": "request_cancelled_by_traveler", "responded_at": moment().format()}
+      {
+        "status": 4,
+        "process_status": "request_cancelled_by_traveler",
+        "responded_at": moment().format()
+      },
+      "cancel_request"
     );
   }
 
@@ -108,6 +118,28 @@ class TransactionHistory extends Component {
   render() {
     if (this.props.isForbidden) {
       return <Redirect to='/transaction/status' />
+    }
+
+    if (this.props.isCancelled) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <h3>Cancellation</h3>
+            <p>You cancelled the request</p>
+            <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
+              Back to the conversation
+            </a></p>
+          </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
     }
 
     if (this.props.isItemReceived) {
@@ -1157,6 +1189,7 @@ const mapStateToProps = state => {
     isResponded: state.requests.isResponded,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
+    isCancelled: state.requests.isCancelled,
     requests: state.requests,
     user: state.auth.user,
   }
