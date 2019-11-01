@@ -75,9 +75,8 @@ class Takako extends Component {
 
         <div class="menu">
           <a href="/how-it-works">How It Works</a>
-            <a href="#">Find Traveler</a>
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
+            <a href="/about">About Us</a>
+            <a href="/contact-us">Contact Us</a>
         </div>
 
         <section class="how">

@@ -11,6 +11,8 @@ import {connect} from 'react-redux';
 
 import Header from './Header';
 import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer';
 
 class PurchaseNotification extends Component {
 
@@ -122,22 +124,8 @@ class PurchaseNotification extends Component {
           </div>
         </div>
 
-        <div class="sidemenu-mobile">
-          <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-          </ul>
-        </div>
-
-        <footer>
-          FOOTER CONTENTS TO BE DETERMINED
-          <FontAwesomeIcon icon="igloo" />
-        </footer>
+        <MobileSideMenu />
+        <Footer />
       </div>
       )
     }
@@ -240,22 +228,8 @@ class PurchaseNotification extends Component {
         </form>
       </div>
 
-      <div class="sidemenu-mobile">
-        <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-        </ul>
-      </div>
-
-    <footer>
-      FOOTER CONTENTS TO BE DETERMINED
-      <FontAwesomeIcon icon="igloo" />
-    </footer>
+      <MobileSideMenu />
+      <Footer />
   </div>
     )
   }
