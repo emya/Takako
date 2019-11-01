@@ -5,6 +5,7 @@ import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
 import Header from './Header';
 import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
 import Footer from './Footer';
 
 import { keys } from '../keys.js';
@@ -32,6 +33,7 @@ class ConnectStripe extends Component {
        </a>
      </div>
    </div>
+   <MobileSideMenu />
    <Footer />
 </div>
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requests} from "../actions";
+import moment from 'moment';
+
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -193,7 +195,18 @@ class RequestForm extends Component {
       {this.props.trip && (
         <div class="history-summary">
           <h3>Trip summary</h3>
-          <p><strong>Destination:   </strong>{this.props.trip.destination}</p>
+          <p>
+            <strong>Destination:   </strong>
+            {this.props.trip.destination}
+          </p>
+          <p>
+            <strong>Departure date:   </strong>
+            {moment(this.props.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
+          <p>
+            <strong>Arrival date:   </strong>
+            {moment(this.props.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
         </div>
       )}
       <div class="form-wrapper">
