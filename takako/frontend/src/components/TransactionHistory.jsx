@@ -116,11 +116,7 @@ class TransactionHistory extends Component {
   };
 
   render() {
-    if (this.props.isForbidden) {
-      return <Redirect to='/transaction/status' />
-    }
-
-    if (this.props.isNotFound) {
+    if (this.props.isForbidden || this.props.isNotFound)) {
       return <Redirect to='/transaction/status' />
     }
 
