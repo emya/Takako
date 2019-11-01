@@ -347,7 +347,7 @@ class TransferViewSet(viewsets.ModelViewSet):
         amount = item_request.proposed_price + item_request.commission_fee
 
         stripe_transfer = stripe.Transfer.create(
-            amount=amount,
+            amount=amount*100,
             currency="usd",
             destination=user.stripe_user_id,
         )
