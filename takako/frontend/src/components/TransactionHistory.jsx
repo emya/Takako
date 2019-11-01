@@ -120,6 +120,10 @@ class TransactionHistory extends Component {
       return <Redirect to='/transaction/status' />
     }
 
+    if (this.props.isNotFound) {
+      return <Redirect to='/transaction/status' />
+    }
+
     if (this.props.isCancelled) {
       return (
       <div>
@@ -1188,6 +1192,7 @@ class TransactionHistory extends Component {
 const mapStateToProps = state => {
   return {
     isForbidden: state.requests.isForbidden,
+    isNotFound: state.requests.isNotFound,
     isResponded: state.requests.isResponded,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
