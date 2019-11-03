@@ -147,6 +147,12 @@ li {
     min-height: 500px;
   }
 
+  .main {
+    @media (max-width: 767px) {
+      padding: 10px 2%;
+      width: 100%;
+    }}
+
 
 
 /* topbar */
@@ -428,7 +434,7 @@ li {
   color: #999999;
 }
 
-.table-heading {
+.table-heading, .table-heading-upcoming{
   color: #999999;
   // font-weight: bold;
 }
@@ -637,6 +643,10 @@ li {
   width: 70%;
 }
 
+.history-summary li {
+  word-break: break-all;
+}
+
 .transaction-summary {
   text-align: left;
   margin: 0 30% 0 15%;
@@ -748,6 +758,13 @@ li {
 
 .request-data li {
   margin: 10px;
+  word-break: break-all;
+}
+
+.request-data img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .bread-crumb {
@@ -782,6 +799,7 @@ li {
 .btn.decline, .btn.accept {
   @media (max-width: 767px) {
   width: 90%!important;
+  margin: 10px auto;
   }}
 
 
@@ -1251,13 +1269,13 @@ li {
   margin: 10px 5px 5px 5px;
   padding: 8px;
   width: 32%;
-  height: 280px;
+  // height: 280px;
   vertical-align: top;
 }
 
 .meetup-option-select {
   @media (max-width: 767px) {
-    height: 250px;
+    // height: 250px;
     width: 100%;
     margin: 5px auto;
   }}
@@ -1290,9 +1308,11 @@ li {
 
 .btn.suggest {
   text-align: center;
+  // width: 90%;
 }
 
 .form-section {
+  display: block;
   background-color: white;
   width: 80%;
   border-radius: 7px;
@@ -1304,7 +1324,7 @@ li {
 .form-section {
   @media (max-width: 767px) {
     width: 100%;
-    margin: 0;
+    margin: 10px auto 0px;
     padding: 20px;
   }}
 
@@ -1391,7 +1411,14 @@ li {
   display: inline-block;
   margin: 10px 0 30px 0;
   text-align: left;
-  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.form-data img{
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+
 }
 
 .number-calculated {
@@ -1599,6 +1626,13 @@ li {
   width: 20%;
 }
 
+.report {
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 10px auto 50px;
+  }}
+
+
 .report-content {
   // font-size: 0.8em;
   color: red;
@@ -1606,4 +1640,13 @@ li {
 
 .received {
   margin: 30px auto;
+}
+
+.request-action {
+  margin-top: 50px;
+}
+
+.warning {
+  margin-bottom: 5px;
+  color: red;
 }

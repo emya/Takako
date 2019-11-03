@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requests} from "../actions";
+import moment from 'moment';
+
 import '../css/style.scss';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
-import Header from './Header'
-import SideMenu from './SideMenu'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIgloo } from '@fortawesome/free-solid-svg-icons';
+import Header from './Header';
+import SideMenu from './SideMenu';
+import MobileSideMenu from './MobileSideMenu';
+import Footer from './Footer';
 
 library.add(faIgloo)
 
@@ -110,22 +114,8 @@ class RequestForm extends Component {
           </div>
         </div>
 
-        <div class="sidemenu-mobile">
-          <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-          </ul>
-        </div>
-
-        <footer>
-          FOOTER CONTENTS TO BE DETERMINED
-          <FontAwesomeIcon icon="igloo" />
-        </footer>
+        <MobileSideMenu />
+        <Footer />
       </div>
       )
     }
@@ -187,22 +177,8 @@ class RequestForm extends Component {
         </div>
         </div>
 
-        <div class="sidemenu-mobile">
-          <ul>
-          <li><a href="#">My Profile<span>></span></a></li>
-          <li><a href="#">Transaction Status<span>></span></a></li>
-          <li><a href="#">Message Box<span>></span></a></li>
-          <li><a href="#">Edit Profile<span>></span></a></li>
-          <li><a href="#">Edit Account<span>></span></a></li>
-          <li><a href="#">Logout<span>></span></a></li>
-          <li><a href="#">Help<span>></span></a></li>
-          </ul>
-        </div>
-
-        <footer>
-          FOOTER CONTENTS TO BE DETERMINED
-          <FontAwesomeIcon icon="igloo" />
-        </footer>
+        <MobileSideMenu />
+        <Footer />
       </div>
       )
     }
@@ -219,7 +195,18 @@ class RequestForm extends Component {
       {this.props.trip && (
         <div class="history-summary">
           <h3>Trip summary</h3>
-          <p><strong>Destination:   </strong>{this.props.trip.destination}</p>
+          <p>
+            <strong>Destination:   </strong>
+            {this.props.trip.destination}
+          </p>
+          <p>
+            <strong>Departure date:   </strong>
+            {moment(this.props.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
+          <p>
+            <strong>Arrival date:   </strong>
+            {moment(this.props.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
         </div>
       )}
       <div class="form-wrapper">
@@ -288,22 +275,8 @@ class RequestForm extends Component {
 
     </div>
 
-    <div class="sidemenu-mobile">
-      <ul>
-      <li><a href="#">My Profile<span>></span></a></li>
-      <li><a href="#">Transaction Status<span>></span></a></li>
-      <li><a href="#">Message Box<span>></span></a></li>
-      <li><a href="#">Edit Profile<span>></span></a></li>
-      <li><a href="#">Edit Account<span>></span></a></li>
-      <li><a href="#">Logout<span>></span></a></li>
-      <li><a href="#">Help<span>></span></a></li>
-      </ul>
-    </div>
-
-    <footer>
-      FOOTER CONTENTS TO BE DETERMINED
-      <FontAwesomeIcon icon="igloo" />
-    </footer>
+    <MobileSideMenu />
+    <Footer />
   </div>
     )
   }

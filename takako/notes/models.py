@@ -60,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    terms_version = models.IntegerField(default=0)
 
     stripe_user_id = models.CharField(max_length=100, null=True, blank=True)
     stripe_access_token = models.CharField(max_length=100, null=True, blank=True)
