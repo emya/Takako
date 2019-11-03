@@ -146,7 +146,11 @@ export const fetchRequestHistory = (requestId) => {
         } else if (res.status === 403) {
           dispatch({type: "FORBIDDEN_ERROR", data: res.data});
           throw res.data;
+        } else if (res.status === 404) {
+          dispatch({type: "NOT_FOUND", data: res.data});
+          throw res.data;
         }
+
       })
   }
 }
