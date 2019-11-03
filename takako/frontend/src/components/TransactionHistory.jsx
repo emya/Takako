@@ -305,7 +305,7 @@ class TransactionHistory extends Component {
                 <li>Report Torimo if there were any problems. You cannot undo once item receipt is confirmed! </li>
               </ul>
                <div class="action-area received">
-                 <button class="btn accept" onClick={this.receiveItem}>Confirm</button>
+                 <button class="btn accept" onClick={this.receiveItem}>Confirm Receipt</button>
                  <Link to={{
                    pathname: "/contact-us",
                  }}>
@@ -1058,9 +1058,16 @@ class TransactionHistory extends Component {
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
            {is_traveler  && requestHistory.status === 0 && (
-             <div class="action-area">
+             <div class="request-action">
+              <ul class="warning">
+                <li>Important notes:</li>
+                <li>As Traveler, you are responsible for the items you bring with you.</li>
+                <li>DO NOT buy at locations that are contrary to the instruction of Requester, and only buy in reputable stores.</li>
+              </ul>
+              <div class="action-area">
                <button class="btn accept" onClick={this.acceptItemRequest}>Accept</button>
                <button class="btn decline" onClick={this.selectDeclineItemRequest}>Decline</button>
+              </div>
              </div>
            )}
            {is_requester  && requestHistory.status === 0 && (
