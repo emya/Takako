@@ -289,7 +289,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
                     html_message, instance.requester.email)
-            elif status == 3 and process_status == "item_received":
+            elif status == 2 and process_status == "item_received":
                 # Item received
                 html_message = render_to_string('email-item-received.html', {'user': instance.respondent, 'link': link})
                 send_email.delay(

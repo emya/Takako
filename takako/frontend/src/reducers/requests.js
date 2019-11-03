@@ -1,6 +1,7 @@
 const initialState = {
   isSubmissionSucceeded: null,
   isForbidden: null,
+  isNotFound: null,
   isPaymentCompleted: null,
   isCancelled: null,
   isItemReceived: null,
@@ -45,6 +46,9 @@ export default function requests(state=initialState, action) {
 
     case 'FORBIDDEN_ERROR':
         return {...state, ...action.data, isForbidden: true};
+
+    case 'NOT_FOUND':
+        return {...state, ...action.data, isNotFound: true};
 
     case 'STRIPE_CONNECT_SUCCESSFUL':
         return {...state, isStripeConnected: true};

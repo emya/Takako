@@ -116,7 +116,7 @@ class TransactionHistory extends Component {
   };
 
   render() {
-    if (this.props.isForbidden) {
+    if (this.props.isForbidden || this.props.isNotFound)) {
       return <Redirect to='/transaction/status' />
     }
 
@@ -1195,6 +1195,7 @@ class TransactionHistory extends Component {
 const mapStateToProps = state => {
   return {
     isForbidden: state.requests.isForbidden,
+    isNotFound: state.requests.isNotFound,
     isResponded: state.requests.isResponded,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
