@@ -68,8 +68,8 @@ class HowItWorks extends Component {
       </ul>
       <h3>Deadline/Cutoff</h3>
       <ul>
-        <li>Item request cancels automatically if no action was taken by Traveler sooner of 1) <strong>2 days</strong> after it was made or 2) trip begin date.</li>
-        <li>Payment needs to be made within <strong>2 days</strong> after the request was accepted, or the item request automatically cancels.</li>
+        <li>Item request will be canceled if no action was taken by Traveler sooner of 1) <strong>2 days</strong> after it was made or 2) trip begin date.</li>
+        <li>Payment needs to be made within <strong>2 days</strong> after the request was accepted, or the item request will be canceled.</li>
         <li>Notification of the purchase and meetup request needs to be made <strong>3 days</strong> before the meetup period begins. If you cannot agree on the meetup location/time before the meetup period, please notify Torimo.</li>
         <li>Confirmation of the item receipt needs to be made during the meetup where Traveler is present.</li>
       </ul>
