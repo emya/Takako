@@ -398,6 +398,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                  </ul>
                </li>
 
@@ -407,6 +408,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                  </ul>
                </li>
 
@@ -416,6 +418,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                  </ul>
                </li>
              </ul>
@@ -442,6 +445,7 @@ class TransactionHistory extends Component {
                      <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                      <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                      <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                     <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                    </ul>
                  <Link to={{
                      pathname: "/share/contact",
@@ -461,6 +465,7 @@ class TransactionHistory extends Component {
                      <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                      <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                      <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                     <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                    </ul>
                  <Link to={{
                      pathname: "/share/contact",
@@ -480,6 +485,7 @@ class TransactionHistory extends Component {
                      <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                      <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                      <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                     <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                    </ul>
 
                  <Link to={{
@@ -526,6 +532,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
@@ -545,6 +552,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
@@ -564,6 +572,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
@@ -905,6 +914,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                  </ul>
                </li>
 
@@ -914,6 +924,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                  </ul>
                </li>
 
@@ -923,6 +934,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                  </ul>
                </li>
              </ul>
@@ -952,6 +964,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                  </ul>
                </li>
 
@@ -961,6 +974,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                  </ul>
                </li>
 
@@ -970,6 +984,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                  </ul>
                </li>
              </ul>
@@ -998,6 +1013,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option1.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option1.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option1.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option1.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
@@ -1017,6 +1033,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option2.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option2.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option2.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option2.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
@@ -1036,6 +1053,7 @@ class TransactionHistory extends Component {
                    <li>Date   :{requestHistory.purchase_notification[0].meetup_option3.date}</li>
                    <li>Time   :{requestHistory.purchase_notification[0].meetup_option3.dtime}</li>
                    <li>Address:{requestHistory.purchase_notification[0].meetup_option3.address}</li>
+                   <li>Comment:{requestHistory.purchase_notification[0].meetup_option3.comment}</li>
                  </ul>
                <Link to={{
                    pathname: "/share/contact",
