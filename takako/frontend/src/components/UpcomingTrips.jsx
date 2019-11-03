@@ -108,7 +108,7 @@ class UpcomingTrips extends Component {
     return (
     <div>
       <table class="table-data">
-        <tr class="table-heading">
+        <tr class="table-heading-upcoming">
           <td>Date</td>
           <td>Destination</td>
           <td></td>
