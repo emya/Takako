@@ -282,6 +282,20 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
                     html_message, instance.requester.email)
+            elif status == 1 and process_status == "request_cancelled":
+                # Request was cancelled by requester
+                html_message = render_to_string('email-request-cancelled-by-requester.html', {'user': instance.respondent, 'link': link})
+                send_email.delay(
+                    "The request has been cancelled",
+                    "The request has been cancelled. Check at Torimo!",
+                    html_message, instance.respondent.email)
+            elif status == 4 and process_status == "request_cancelled_by_traveler":
+                # Request was cancelled by traveler
+                html_message = render_to_string('email-request-cancelled-by-traveler.html', {'user': instance.requester, 'link': link})
+                send_email.delay(
+                    "Your request has been cancelled",
+                    "Your request has been cancelled. Check at Torimo!",
+                    html_message, instance.requester.email)
             elif status == 3 and process_status == "request_responded":
                 # Request was rejected
                 html_message = render_to_string('email-request-declined.html', {'user': instance.requester, 'link': link})
@@ -289,7 +303,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
                     html_message, instance.requester.email)
-            elif status == 2 and process_status == "item_received":
+            elif process_status == "item_received":
                 # Item received
                 html_message = render_to_string('email-item-received.html', {'user': instance.respondent, 'link': link})
                 send_email.delay(
