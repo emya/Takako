@@ -17,7 +17,6 @@ class Login extends Component {
   }
 
   handleAgreementCheck = (e) => {
-    console.log("handleAgreementCheck");
     this.setState({
       isAgreed: e.target.checked
     })
@@ -28,7 +27,6 @@ class Login extends Component {
     // in a signle array
     const errors = [];
 
-    console.log(isAgreed)
     if (!isAgreed) {
       errors.push("Please read and agree to the Terms");
     }
