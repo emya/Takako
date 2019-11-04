@@ -10,6 +10,12 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
+    numPages: null,
+    pageNumber: 1,
+  }
+
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
   }
 
   onSubmit = e => {
@@ -26,6 +32,7 @@ class Login extends Component {
       }
       return <Redirect to='/myprofile' />
     }
+    const { pageNumber, numPages } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
@@ -62,6 +69,7 @@ class Login extends Component {
           </p>
         </fieldset>
       </form>
+
     )
   }
 }

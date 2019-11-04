@@ -12,10 +12,39 @@ class Login extends Component {
     last_name: "",
     email: "",
     password: "",
+    isAgreed: false,
+    errors: [],
+  }
+
+  handleAgreementCheck = (e) => {
+    console.log("handleAgreementCheck");
+    this.setState({
+      isAgreed: e.target.checked
+    })
+  }
+
+  validateForm = (isAgreed) => {
+    // we are going to store errors for all fields
+    // in a signle array
+    const errors = [];
+
+    console.log(isAgreed)
+    if (!isAgreed) {
+      errors.push("Please read and agree to the Terms");
+    }
+    return errors;
   }
 
   onSubmit = e => {
     e.preventDefault();
+    const errors = this.validateForm(this.state.isAgreed);
+
+    this.setState({ errors });
+
+    if (errors.length > 0) {
+      return;
+    }
+
     this.props.register(this.state.first_name, this.state.last_name, this.state.email, this.state.password);
   }
 
@@ -23,6 +52,8 @@ class Login extends Component {
     if (this.props.isAuthenticated) {
       return <Redirect to='/myprofile' />
     }
+    const errors = this.state.errors;
+
     return (
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
@@ -34,6 +65,9 @@ class Login extends Component {
               ))}
             </div>
           )}
+          {errors.map(error => (
+             <p class="error-heading" key={error}>Error: {error}</p>
+          ))}
           <p>
             <label class="start" htmlFor="first_name">First Name</label>
             <input
@@ -58,7 +92,8 @@ class Login extends Component {
               type="password" id="password"
               onChange={e => this.setState({password: e.target.value})} required/>
           </p>
-          <input type="checkbox" id="terms"></input><p class="agree">I have read and agree to <a href="#" class="start-link">the Terms</a></p>
+          <input type="checkbox" id="terms" checked={this.state.isAgreed} onChange={this.handleAgreementCheck} />
+          <p class="agree">I have read and agree to <a href="/terms-conditions" class="start-link">the Terms</a></p>
           <p>
             <button class="btn start-page" type="submit">Register</button>
           </p>

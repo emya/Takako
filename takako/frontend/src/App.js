@@ -33,6 +33,7 @@ import thunk from "redux-thunk";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
+import TermsUse from "./components/TermsUse";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 
@@ -83,6 +84,7 @@ class RootContainerComponent extends Component {
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/contact-us" component={ContactUs} />
                     <Route exact path="/register" component={Register} />
+                    <Route exact path="/terms-conditions" component={TermsUse} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/reset/password" component={ForgotPassword} />
                     <Route exact path="/reset/password/:token" component={ResetPassword} />
