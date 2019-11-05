@@ -41,11 +41,11 @@ class HowItWorks extends Component {
        <img class="how-to-arrow-mobile" src={require('../img/arrow-mobile.png')}/>
        <div class="how-to-traveler">
         <div class="how-box traveler">
-          <p class="how-heading"><span class="traveler-name">Traveler</span> accepts, declines, or clarifies the request</p>
-          <p>There is no limit to how many times Traveler can clarify.</p>
+          <p class="how-heading"><span class="traveler-name">Traveler</span> accepts or declines the request</p>
+          <p>If declined, Requester can check the reason and send a revised request!</p>
         </div>
         <div class="how-box traveler"><p class="how-heading">Upon purchase of the item, <span class="traveler-name">Traveler</span> notifies and sends Requester the meetup request</p><p>Traveler chooses 3 meetup options to take place during the pre-specified meetup period.<br />If Traveler cannot purchase for any reason, the offer would be cancelled and Torimo refunds Requester in full.</p></div>
-        <div class="how-box traveler last"><p class="how-heading"><span class="traveler-name">Traveler</span> gets paid!</p><p>Payment is released 1 day after the item receipt.</p></div>
+        <div class="how-box traveler last"><p class="how-heading"><span class="traveler-name">Traveler</span> gets paid!</p><p>Payment is released within a few days after completing the payment process.</p></div>
        </div>
        </div>
 
