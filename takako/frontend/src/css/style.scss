@@ -1635,7 +1635,7 @@ li {
 
 .report-content {
   // font-size: 0.8em;
-  color: red;
+  // color: red;
 }
 
 .received {
@@ -1649,4 +1649,13 @@ li {
 .warning {
   margin-bottom: 5px;
   color: red;
+}
+
+.report-content {
+  width: 70%;
+  margin: 0 auto 20px;
+}
+
+.report-area {
+  margin: 0 auto 50px;
 }

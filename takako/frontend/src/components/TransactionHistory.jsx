@@ -328,12 +328,14 @@ class TransactionHistory extends Component {
          /* meetup option decided */
          is_requester && item_request_status === 2 && process_status === "meetup_decided" && (
          <div>
-           Please let us know if the traveler did not show up to the decided meetup or you have a trouble receiving the item.
+         <div class="report-area">
+           <p class="report-content">Please let us know if the traveler did not show up to the decided meetup,<br/> or you have a trouble receiving the item.</p>
            <Link to={{
              pathname: "/contact-us",
            }}>
-             <button class="btn accept">Report</button>
+             <button class="btn decline">Report</button>
            </Link>
+           </div>
 
            <div class="history-box">
              <div class="history-wrapper">
@@ -638,7 +640,7 @@ class TransactionHistory extends Component {
                <ul class="request-data">
                  <li>Item Price:   ${requestHistory.proposed_price}</li>
                  <li>Commission Fee:   ${requestHistory.commission_fee}</li>
-                 <li>Transaction Fee (3% of the proposed price):   ${requestHistory.transaction_fee}</li>
+                 <li>Transaction Fee (5% of the proposed price):   ${requestHistory.transaction_fee}</li>
                  <br/>
                  <li>
                  Your Total Payment: ${requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
@@ -1160,10 +1162,10 @@ class TransactionHistory extends Component {
              <li>Number of Item(s):   {requestHistory.n_items}</li>
              <li>Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
              <li>Your Commission Fee:   ${requestHistory.commission_fee.toLocaleString()}</li>
-             {is_requester && ( <li>Transaction Fee:   {requestHistory.transaction_fee.toLocaleString()}</li>)}
+             {is_requester && ( <li>Transaction Fee:   ${requestHistory.transaction_fee.toLocaleString()}</li>)}
              {is_requester && (
                <li>
-                 Total Payment: {(requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price).toLocaleString()}
+                 Total Payment: ${(requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price).toLocaleString()}
                </li>
              )}
              <li>Delivery Method:   Meetup</li>
