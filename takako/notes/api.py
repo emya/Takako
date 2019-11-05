@@ -413,7 +413,7 @@ class ChargeViewSet(viewsets.ModelViewSet):
         stripe_charge = stripe.Charge.create(
             amount=amount*100,
             currency='usd',
-            description='A Django charge',
+            description=f'A charge for request {item_request_id}',
             source=stripe_token
         )
         charge_id = stripe_charge["id"]
