@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {auth} from "../actions";
 import '../css/style_LP.scss';
 
+import Footer from './Footer';
+
 class Takako extends Component {
   /*
   componentDidMount() {
@@ -118,7 +120,7 @@ class Takako extends Component {
             <p class="how-4">Traveler gets paid!</p>
           </div>
           </div>
-          <a class="button" href="#">Get Started</a>
+          <a class="button" href="/register">Get Started</a>
         </section>
 
         <section class="service">
@@ -187,25 +189,10 @@ class Takako extends Component {
         </div>
         <p class="use-disclaimer">*Simulated data</p>
         </div>
-        <a class="button" href="#">Get Started</a>
+        <a class="button" href="/register">Get Started</a>
        </section>
 
-      <footer>
-        <div class="footer-item">
-          <ul>
-            <li>About Us</li>
-            <li>Terms of Services</li>
-            <li>Privacy Policy</li>
-          </ul>
-        </div>
-        <div class="footer-item">
-          <ul>
-            <li>How It Works</li>
-            <li>FAQ</li>
-            <li>Contact Us</li>
-          </ul>
-        </div>
-      </footer>
+      <Footer />
 
       </body>
     )
