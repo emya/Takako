@@ -283,7 +283,6 @@ class RequestForm extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
