@@ -272,9 +272,9 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        if status and process_status:
-            link = f"{site_url}/login?next=/transaction/history/{instance.id}"
+        link = f"{site_url}/login?next=/transaction/history/{instance.id}"
 
+        if status and process_status:
             if status == 2 and process_status == "request_responded":
                 # Request was accepted
                 html_message = render_to_string('email-request-accepted.html', {'user': instance.requester, 'link': link})
@@ -303,7 +303,8 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
                     html_message, instance.requester.email)
-            elif process_status == "item_received":
+        elif process_status:
+            if process_status == "item_received":
                 # Item received
                 html_message = render_to_string('email-item-received.html', {'user': instance.respondent, 'link': link})
                 send_email.delay(
