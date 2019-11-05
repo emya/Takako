@@ -21,7 +21,6 @@ class SearchResults extends Component {
 */
 
 const SearchResults = ({travelers}) => {
-    console.log("searchResults", {travelers});
     return(
       <div>
         <div class="search-user-wrapper">

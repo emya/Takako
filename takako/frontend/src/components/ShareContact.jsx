@@ -82,7 +82,6 @@ class ShareContact extends Component {
       )
     }
 
-    console.log(this.props.location.state.meetup);
     const errors = this.state.errors;
     let meetup;
     let purchase_notification;
