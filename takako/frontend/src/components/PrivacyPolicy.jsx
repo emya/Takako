@@ -14,8 +14,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 class PrivacyPolicy extends Component {
   state = {
-    email: "",
-    password: "",
     numPages: null,
     pageNumber: 1,
   }

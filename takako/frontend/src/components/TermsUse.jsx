@@ -14,8 +14,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 class TermsUse extends Component {
   state = {
-    email: "",
-    password: "",
     numPages: null,
     pageNumber: 1,
   }
