@@ -8,11 +8,11 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import {auth} from "../actions";
 import { keys } from '../keys.js';
 
-import term from '../img/Terms_Conditions_v0.pdf'
+import policy from '../img/Privacy_Policy_v0.pdf'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-class TermsUse extends Component {
+class PrivacyPolicy extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
@@ -26,7 +26,7 @@ class TermsUse extends Component {
     const { pageNumber, numPages } = this.state;
     return (
         <Document
-          file={term}
+          file={policy}
           onLoadSuccess={this.onDocumentLoadSuccess}
           onLoadError={console.error}
         >
@@ -62,4 +62,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, null)(TermsUse);
+export default connect(mapStateToProps, null)(PrivacyPolicy);
