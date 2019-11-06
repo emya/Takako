@@ -113,7 +113,7 @@ class MyProfile extends Component {
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
 
-              <p class="object">Residence</p>
+              <p class="object">City</p>
 
               <ReactGoogleMapLoader
                 params={{
@@ -145,7 +145,7 @@ class MyProfile extends Component {
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
               <p class="object">Gender</p>
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'gender', profile)} value={profile.gender}/>
-              <p class="object">Bio</p>
+              <p class="object">About Me</p>
               <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
             </div>
           ))}

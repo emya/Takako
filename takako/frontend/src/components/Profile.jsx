@@ -46,13 +46,13 @@ class Profile extends Component {
 
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
             <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
-            <p class="object">Residence</p>
+            <p class="object">Location</p>
              {profile.residence}
             <p class="object">Occupation</p>
              {profile.occupation}
             <p class="object">Gender</p>
              {profile.gender}
-            <p class="object">Bio</p>
+            <p class="object">About Me</p>
              {profile.bio}
           </div>
         ))}

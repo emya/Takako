@@ -238,7 +238,7 @@ class RequestForm extends Component {
          <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
          $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
 
-        <p class="form-heading">Transaction Fee (automatically calculated as 5% of item price)</p><br/>
+        <p class="form-heading">Transaction Fee (5% of item price, minimum of $1)</p><br/>
         $<p class="number-calculated">{(+this.state.transaction_fee).toLocaleString()}</p><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
