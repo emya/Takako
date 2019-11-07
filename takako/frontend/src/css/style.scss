@@ -168,8 +168,13 @@ li {
 }
 
 .logo {
-  width: 197.6px;
-  height: 45.5px;
+  width: 100%;
+  height: auto;
+}
+
+.logo-link {
+  width: 15%;
+  height: auto;
 }
 
 .login {

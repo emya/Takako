@@ -80,7 +80,7 @@ class ContactUs extends Component {
           <h2>Contact Us</h2>
           <div class="form-wrapper">
             <div class="introduction">
-              <p>Couldn't find answers <a href="http://torimo.io/how-it-works">here</a>?<br/> Reach out to us for your question, request, and feedback, we'd love to hear it!</p>
+              <p>Couldn't find answers <a href="http://torimo.io/how-it-works">here</a>?<br/> Reach out to us for your question, request, and feedback. We'd love to hear from you!</p>
             </div>
             <div class="form-section">
               {errors.map(error => (
