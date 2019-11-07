@@ -8,7 +8,7 @@ render() {
   <div>
     <header class="header">
       <div class="topbar-contents">
-        <a href="/"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
+        <a href="/" class="logo-link"><img class="logo" src={require('../img/Torimo_new.png')} /></a>
         { !this.props.user && (
           <div class="login">
             <a class="register" href="/register">Get Started</a>
@@ -19,7 +19,7 @@ render() {
 
       <div class="mobile-topbar-contents">
 
-        <a href="#"><img class="logo-mobile" src={require('../img/torimo-logo.png')} /></a>
+        <a href="#"><img class="logo-mobile" src={require('../img/Torimo_new.png')} /></a>
         <a href="/login" class="mobile-signin">
           <img class="mobile-menu-icon" src={require('../img/signin.png')} />
           <p class="sign-in-mobile">Sign in</p>
