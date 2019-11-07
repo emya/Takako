@@ -497,7 +497,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = ProfileSerializer
 
-    def update(self, request, pk):
+    def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
         data = request.data.copy()
         img = data.pop('image')
@@ -509,7 +509,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
                 data['image'] = image.name
                 is_upload_image = True
 
-        serializer = self.serializer_class(instance, data=data)
+        serializer = self.serializer_class(instance, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         if is_upload_image:
