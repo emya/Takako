@@ -82,20 +82,24 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .logo-mobile {
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: auto;
   float: left;
 }
 
 .mobile-menu-icon {
-  width: 60%;
-  height: 60%;
+  width: 90%;
+  height: 80%;
   // float: right;
 }
 
 .mobile-signin {
   justify-content: flex-end;
   height: 100%;
+  width: 150px;
+  position: relative;
+
+  // font-size: 0.8rem;
 }
 
 .mobile-topbar-contents {
@@ -105,12 +109,15 @@ a:link, a:visited, a:hover, a:active {
   background-color: #FFB23B;
   height: 80px;
   width: 100%;
-  padding: 10px 7% 10px 0;
+  padding: 10px 2% 10px 0;
 }
 
 .sign-in-mobile {
   margin: 0;
   display: block;
+  position: absolute;
+  left:8px;
+  top: 40px;
   // background-color: pink;
   // float: right;
 }

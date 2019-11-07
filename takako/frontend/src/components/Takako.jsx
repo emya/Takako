@@ -48,7 +48,7 @@ class Takako extends Component {
               <input class="search-button" type="submit" value="Search"/>
             </form>
             */}
-            <a href="#"><img class="logo" src={require('../img/torimo-logo.png')} /></a>
+            <a href="#" class="logo-link"><img class="logo" src={require('../img/Torimo_new.png')} /></a>
             <div class="login">
               <a class="register" href="/register">Get Started</a>
               <a class="signin" href="/login">Sign in</a>
@@ -56,7 +56,7 @@ class Takako extends Component {
           </div>
 
           <div class="mobile-topbar-contents">
-            <a href="#"><img class="logo-mobile" src={require('../img/torimo-logo.png')} /></a>
+            <a href="#"><img class="logo-mobile" src={require('../img/Torimo_new.png')} /></a>
             <a href="/login" class="mobile-signin">
               <img class="mobile-menu-icon" src={require('../img/signin.png')} />
               <p class="sign-in-mobile">Sign in</p>
@@ -129,7 +129,7 @@ class Takako extends Component {
         <div class="service-box">
         <img class="service-icon" src={require('../img/shopping-cart.png')} />
         <div class="service-title">Propose<br/>Price of Item</div>
-        <p class="service-text">Requester proposes item(s) price. If Traveler agrees to the price, Requester pays for the item(s) + a negotiated commission to Traveler.</p>
+        <p class="service-text">Requester proposes price of item(s). If Traveler agrees to the price, Requester pays for the item(s) + a negotiated commission to Traveler.</p>
         </div>
         <div class="service-box">
         <img class="service-icon" src={require('../img/globe.png')} />
@@ -144,7 +144,7 @@ class Takako extends Component {
         <div class="service-box">
         <img class="service-icon" src={require('../img/pay.png')} />
         <div class="service-title">Easy and Safe<br/>Transaction</div>
-        <p class="service-text">No cumbersome negotiation. Torimo will release the payment when the item is delivered.</p>
+        <p class="service-text">No cumbersome negotiation. Torimo will release the payment upon the delivery of the item(s).</p>
         </div>
         </div>
         </section>
