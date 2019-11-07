@@ -232,7 +232,10 @@ class RequestForm extends Component {
       <div class="form-section">
         <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
         $<input type="number" min="0" value={this.state.proposed_price}
-         onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.round(e.target.value*0.05)})}
+         onChange={(e) => this.setState({
+           proposed_price: e.target.value,
+           transaction_fee: Math.max(Math.round(e.target.value*0.05), 1)
+         })}
          required /><br/>
 
          <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
