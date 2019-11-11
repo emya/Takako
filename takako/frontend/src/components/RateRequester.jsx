@@ -18,8 +18,6 @@ class RateRequester extends Component {
   }
 
   changeRating = (newRating, name) => {
-    console.log("newRating", newRating);
-    console.log("name", name);
     this.setState({
       rating: newRating
     });
@@ -50,7 +48,6 @@ class RateRequester extends Component {
       return;
     }
 
-    console.log("rateRequester");
     this.props.rateRequester(
       this.props.requestId, this.state.rating, this.state.torimo_feedback
     )

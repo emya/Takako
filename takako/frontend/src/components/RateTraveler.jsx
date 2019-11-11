@@ -18,8 +18,6 @@ class RateTraveler extends Component {
   }
 
   changeRating = (newRating, name) => {
-    console.log("newRating", newRating);
-    console.log("name", name);
     this.setState({
       rating: newRating
     });
@@ -50,7 +48,6 @@ class RateTraveler extends Component {
       return;
     }
 
-    console.log("rateTraveler");
     this.props.rateTraveler(
       this.props.requestId, this.props.travelerId, this.state.rating, this.state.torimo_feedback
     )
