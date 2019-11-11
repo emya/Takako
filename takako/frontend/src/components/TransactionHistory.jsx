@@ -9,6 +9,8 @@ import Header from './Header';
 import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
 import Footer from './Footer';
+import RateTraveler from './RateTraveler';
+
 import StripeCheckout from 'react-stripe-checkout';
 import { keys } from '../keys.js';
 
@@ -120,6 +122,28 @@ class TransactionHistory extends Component {
       return <Redirect to='/transaction/status' />
     }
 
+    let has_history = false;
+    let is_requester = false;
+    let is_traveler = false;
+    let item_request_status = 0;
+    let process_status;
+    let requestHistory;
+    if (this.props.requests.requestHistory) {
+      has_history = true;
+      requestHistory = this.props.requests.requestHistory;
+
+      item_request_status = requestHistory.status;
+      process_status = requestHistory.process_status;
+
+      if (this.props.user.id === requestHistory.requester.id){
+        is_requester = true;
+      }
+
+      if (this.props.user.id === requestHistory.respondent.id){
+        is_traveler = true;
+      }
+    }
+
     if (this.props.isCancelled) {
       return (
       <div>
@@ -142,7 +166,7 @@ class TransactionHistory extends Component {
       )
     }
 
-    if (this.props.isItemReceived) {
+    if (this.props.isRated) {
       return (
       <div>
         <Header />
@@ -156,6 +180,26 @@ class TransactionHistory extends Component {
               Back to the conversation
             </a></p>
           </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
+    }
+
+    if (this.props.isItemReceived) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <RateTraveler requestId={`${this.props.match.params.requestId}`} travelerId={`${requestHistory.respondent.id}`} />
+
+          <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
+              Back to the conversation
+            </a></p>
         </div>
 
         <MobileSideMenu />
@@ -238,28 +282,6 @@ class TransactionHistory extends Component {
     <Footer />
   </div>
     )}
-
-    let has_history = false;
-    let is_requester = false;
-    let is_traveler = false;
-    let item_request_status = 0;
-    let process_status;
-    let requestHistory;
-    if (this.props.requests.requestHistory) {
-      has_history = true;
-      requestHistory = this.props.requests.requestHistory;
-
-      item_request_status = requestHistory.status;
-      process_status = requestHistory.process_status;
-
-      if (this.props.user.id === requestHistory.requester.id){
-        is_requester = true;
-      }
-
-      if (this.props.user.id === requestHistory.respondent.id){
-        is_traveler = true;
-      }
-    }
 
     if (!has_history) {
         return null;

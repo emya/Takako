@@ -5,6 +5,7 @@ const initialState = {
   isPaymentCompleted: null,
   isCancelled: null,
   isItemReceived: null,
+  isRated: null,
   isResponded: null,
   isStripeConnected: null,
   isStripeTransferred: null,
@@ -43,6 +44,10 @@ export default function requests(state=initialState, action) {
           case "item_received":
               return {...state, requestHistory: action.data, isItemReceived: true};
         }
+
+    case 'RATE_TRAVELER_SUCCESSFUL':
+    case 'RATE_REQUESTER_SUCCESSFUL':
+        return {...state, ...action.data, isRated: true};
 
     case 'FORBIDDEN_ERROR':
         return {...state, ...action.data, isForbidden: true};

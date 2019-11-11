@@ -4,10 +4,15 @@ import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faIgloo } from '@fortawesome/free-solid-svg-icons';
 import {connect} from 'react-redux';
+
 import Header from './Header';
 import SideMenu from './SideMenu';
 import Footer from './Footer';
+import MobileSideMenu from './MobileSideMenu';
+
 import {requests} from "../actions";
+
+import RateRequester from './RateRequester';
 
 import { keys } from '../keys.js';
 
@@ -28,6 +33,8 @@ class ReceivePayment extends Component {
   }
 
   render() {
+    const values = queryString.parse(this.props.location.search);
+    let requestId = values.state;
     if (this.props.error) {
       return (
   <div>
@@ -44,9 +51,30 @@ class ReceivePayment extends Component {
   </div>
     )}
 
+    if (this.props.isRated) {
+      return (
+      <div>
+        <Header />
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <div class="request-conf">
+            <h3>You got paid!</h3>
+            <p>
+              You will receive payment in your stripe account in a few days
+            </p>
+            <p>Thank you for your feedback!</p>
+          </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
+    }
+
     if (this.props.isStripeTransferred) {
       return (
-    <div>
+  <div>
     <Header />
 
     <div class="wrapper clearfix">
@@ -56,6 +84,7 @@ class ReceivePayment extends Component {
         <p>
           You will receive payment in your stripe account in a few days
         </p>
+        <RateRequester requestId={`${requestId}`} />
       </div>
     </div>
     <Footer />
@@ -134,6 +163,7 @@ const mapStateToProps = state => {
     isStripeConnected: state.requests.isStripeConnected,
     isStripeTransferred: state.requests.isStripeTransferred,
     isAlreadyStripeTransferred: state.requests.isAlreadyStripeTransferred,
+    isRated: state.requests.isRated,
   }
 }
 

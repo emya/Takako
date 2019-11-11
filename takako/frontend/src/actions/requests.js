@@ -426,6 +426,73 @@ export const getPaid = (requestId) => {
   }
 }
 
+export const rateTraveler = (requestId, travelerId, rating, torimo_feedback) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({requestId, travelerId, rating, torimo_feedback});
+
+    return fetch("/api/rate/traveler/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: 'RATE_TRAVELER_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+export const rateRequester = (requestId, rating, torimo_feedback) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({requestId, rating, torimo_feedback});
+
+    return fetch("/api/rate/requester/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: 'RATE_REQUESTER_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),

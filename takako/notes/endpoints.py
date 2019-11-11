@@ -15,6 +15,8 @@ from .api import (
     ChargeViewSet,
     ItemRequestHistoryViewSet,
     TravelerProfileViewSet,
+    RateTravelerViewSet,
+    RateRequesterViewSet,
     RegistrationAPI,
     LoginAPI,
     UserAPI,
@@ -36,6 +38,8 @@ router.register('requests/charge', ChargeViewSet, 'request_charge')
 router.register('requests/transfer', TransferViewSet, 'request_transfer')
 router.register('requests/history', ItemRequestHistoryViewSet, 'request_item_history')
 router.register('travelers/profiles', TravelerProfileViewSet, 'traveler_profiles')
+router.register('rate/traveler', RateTravelerViewSet, 'rate_traveler')
+router.register('rate/requester', RateRequesterViewSet, 'rate_requester')
 #router.register('notes', NoteViewSet, 'notes')
 
 urlpatterns = [

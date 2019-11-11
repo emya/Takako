@@ -4,7 +4,8 @@ from .models import (
     User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
-    SharedContact, ContactUs
+    SharedContact, ContactUs,
+    RateTraveler, RateRequester
 )
 
 from rest_framework import serializers
@@ -152,6 +153,19 @@ class ContactUsSerializer(serializers.ModelSerializer):
         model = ContactUs
         fields = ('id', 'user', 'name', 'email', 'message', )
 
+class RateTravelerSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = RateTraveler
+        fields = '__all__'
+
+class RateRequesterSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = RateRequester
+        fields = '__all__'
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

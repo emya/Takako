@@ -39,7 +39,8 @@ from .models import (
     User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     PurchaseNotification, Meetup,
-    SharedContact, ContactUs
+    SharedContact, ContactUs,
+    RateTraveler, RateRequester
 )
 #from django.contrib.auth.models import User
 from .serializers import (
@@ -54,6 +55,8 @@ from .serializers import (
     ProfileSerializer,
     TripSerializer,
     TravelerProfileSerializer,
+    RateTravelerSerializer,
+    RateRequesterSerializer,
     CreateUserSerializer,
     UserSerializer,
     LoginUserSerializer,
@@ -491,6 +494,39 @@ class TripViewSet(viewsets.ModelViewSet):
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
         return queryset
+
+class RateTravelerViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = RateTravelerSerializer
+
+    def create(self, request):
+        torimo_feedback = request.data.pop("torimo_feedback")
+        # Notify us
+        send_email.delay("New Feedback from our requester", torimo_feedback, None, settings.EMAIL_HOST_USER)
+
+        item_request_id = request.data.pop("requestId")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        traveler_id = request.data.pop("travelerId")
+        traveler = User.objects.get(pk=traveler_id)
+        rating = RateTraveler.objects.create(item_request=item_request, user=request.user, traveler=traveler, **request.data)
+        serializer = self.serializer_class(rating)
+        return Response(serializer.data)
+
+class RateRequesterViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = RateRequesterSerializer
+
+    def create(self, request):
+        torimo_feedback = request.data.pop("torimo_feedback")
+        # Notify us
+        send_email.delay("New Feedback from our traveler", torimo_feedback, None, settings.EMAIL_HOST_USER)
+
+        item_request_id = request.data.pop("requestId")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        requester = item_request.requester
+        rating = RateRequester.objects.create(item_request=item_request, user=request.user, requester=requester, **request.data)
+        serializer = self.serializer_class(rating)
+        return Response(serializer.data)
 
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
