@@ -237,4 +237,15 @@ class ContactUs(models.Model):
     email = models.CharField(max_length=200)
     message = models.CharField(max_length=300)
 
+class RateTraveler(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewer')
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
+    traveler = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
+    rating = models.IntegerField()
+
+class RateRequester(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewer')
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
+    rating = models.IntegerField()
 
