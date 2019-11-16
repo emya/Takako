@@ -78,7 +78,7 @@ class RequestForm extends Component {
     }
 
     if (price < 20 || price > 2499) {
-      errors.push("Total Item Price have be between $20 and $2499");
+      errors.push("Total Item Price has to be between $20 and $2499");
     }
 
     if (commission_fee < 10) {
