@@ -304,8 +304,9 @@ class TransactionHistory extends Component {
              <ul>
                <li>Request you sent</li>
                <li> Item Name:  {requestHistory.item_name}</li>
+               {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
                <li>Number of Item(s):  {requestHistory.n_items}</li>
-               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
+               <li>Total Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
              </ul>
            </div>
            </div>
@@ -660,7 +661,9 @@ class TransactionHistory extends Component {
                <p class="history-date new-update">NEW!</p>
                <p class="history-update">Payment Detail</p>
                <ul class="request-data">
-                 <li>Item Price:   ${requestHistory.proposed_price}</li>
+                 {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
+                 <li>Number of Item(s):   ${requestHistory.n_items}</li>
+                 <li>Total Item Price:   ${requestHistory.proposed_price}</li>
                  <li>Commission Fee:   ${requestHistory.commission_fee}</li>
                  <li>Transaction Fee (5% of the proposed price):   ${requestHistory.transaction_fee}</li>
                  <br/>
@@ -753,7 +756,9 @@ class TransactionHistory extends Component {
              <ul>
                <li>Request {requestHistory.requester.first_name} sent</li>
                <li>Item Name:  {requestHistory.item_name}</li>
-               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
+               {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
+               <li>Number of Item(s):   ${requestHistory.n_items}</li>
+               <li>Total Item Price :  ${requestHistory.proposed_price.toLocaleString()}</li>
               </ul>
            </div>
            </div>
@@ -1181,8 +1186,9 @@ class TransactionHistory extends Component {
              {requestHistory.item_image && (
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
              )}
+             {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
              <li>Number of Item(s):   {requestHistory.n_items}</li>
-             <li>Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
+             <li>Total Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
              <li>Your Commission Fee:   ${requestHistory.commission_fee.toLocaleString()}</li>
              {is_requester && ( <li>Transaction Fee:   ${requestHistory.transaction_fee.toLocaleString()}</li>)}
              {is_requester && (
