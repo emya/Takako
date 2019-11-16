@@ -74,7 +74,11 @@ class RequestForm extends Component {
     }
 
     if (price.length === 0) {
-      errors.push("Price can't be empty");
+      errors.push("Total Item Price can't be empty");
+    }
+
+    if (price < 20 || price > 2499) {
+      errors.push("Total Item Price has to be between $20 and $2499");
     }
 
     if (commission_fee < 10) {
@@ -143,7 +147,7 @@ class RequestForm extends Component {
             </div>
 
             <div class="form-section">
-              <p class="form-heading">Item Price</p><br />
+              <p class="form-heading">Total Item Price</p><br />
               <p class="form-data">${(+this.state.proposed_price).toLocaleString()} </p><br />
               <p class="form-heading">Commission to Traveler</p><br />
               <p class="form-data">${(+this.state.commission_fee).toLocaleString()}</p><br />
@@ -230,7 +234,7 @@ class RequestForm extends Component {
       </div>
 
       <div class="form-section">
-        <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
+        <p class="form-heading">Total Item Price (between $20 and $2499)<span class="asterisk">*</span></p><br/>
         $<input type="number" min="0" value={this.state.proposed_price}
          onChange={(e) => this.setState({
            proposed_price: e.target.value,
