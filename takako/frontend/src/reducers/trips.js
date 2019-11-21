@@ -22,7 +22,9 @@ export default function trips(state=initialState, action) {
       return tripList;
 
     case 'FETCH_TRIPS':
-      return [...state, ...action.trips];
+      //return [...state, ...action.trips];
+      //return {...state, trips: action.trips};
+      return [...state, action.trips];
 
     case 'FETCH_TRIP':
       return {...state, trip: action.trip};

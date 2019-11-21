@@ -113,7 +113,7 @@ class UpcomingTrips extends Component {
           <td>Destination</td>
           <td></td>
         </tr>
-        {this.props.trips.map((trip) => (
+        {this.props.trips[0] && this.props.trips[0].upcoming_trips && this.props.trips[0].upcoming_trips.map((trip) => (
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
@@ -178,6 +178,22 @@ class UpcomingTrips extends Component {
           </form>
         </div>
       }
+
+      <h3 class="upcoming">Past Trips</h3>
+      <table class="table-data">
+        <tr class="table-heading-upcoming">
+          <td>Date</td>
+          <td>Destination</td>
+          <td></td>
+        </tr>
+        {this.props.trips[0] && this.props.trips[0].past_trips && this.props.trips[0].past_trips.map((trip) => (
+          <tr>
+            <td>{trip.departure_date} - {trip.arrival_date}</td>
+            <td>{trip.destination}</td>
+          </tr>
+        ))}
+      </table>
+
     </div>
 
     )

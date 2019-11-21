@@ -24,7 +24,7 @@ from rest_framework.parsers import (
 )
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from knox.models import AuthToken
 
@@ -476,20 +476,28 @@ class TripViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
 
-    def get_queryset(self):
+    def list(self, request):
         pk = self.kwargs.get("pk")
         if pk:
             queryset = Trip.objects.filter(pk=int(pk))
             return queryset
 
-        userId = self.request.GET.get('userId')
+        userId = request.GET.get('userId')
 
         queryset = Trip.objects.all()
+
+        today = datetime.today()
 
         if userId:
             user = User.objects.get(pk=userId)
             queryset = queryset.filter(user=user)
-            return queryset
+            upcoming_trips = queryset.filter(arrival_date__gt=today).order_by('departure_date')
+            past_trips = queryset.filter(arrival_date__lte=today).order_by('departure_date')
+            custom_data = {
+                'upcoming_trips': self.serializer_class(upcoming_trips, many=True).data,
+                'past_trips': self.serializer_class(past_trips, many=True).data,
+            }
+            return Response(custom_data)
 
         # TODO: handle exception
         queryset = queryset.filter(user=self.request.user)
