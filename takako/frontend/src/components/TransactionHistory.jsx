@@ -1145,7 +1145,7 @@ class TransactionHistory extends Component {
                <p class="history-date">
                  {requestHistory.paid_at && moment(requestHistory.paid_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>
-               <p class="history-update">Payment completed by {requestHistory.respondent.first_name}</p>
+               <p class="history-update">Payment completed by {requestHistory.requester.first_name}</p>
              </div>
            </div>
          )}
