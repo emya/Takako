@@ -1243,6 +1243,7 @@ const mapStateToProps = state => {
     isForbidden: state.requests.isForbidden,
     isNotFound: state.requests.isNotFound,
     isResponded: state.requests.isResponded,
+    isRated: state.requests.isRated,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
     isCancelled: state.requests.isCancelled,
@@ -1257,7 +1258,7 @@ const mapDispatchToProps = dispatch => {
     fetchRequestHistory: (requestId) => {
       dispatch(requests.fetchRequestHistory(requestId));
     },
-     updateItemRequest: (requestId, item_request, action_type = null) => {
+    updateItemRequest: (requestId, item_request, action_type = null) => {
       return dispatch(requests.updateItemRequest(requestId, item_request, action_type));
     },
     chargeItemRequest: (itemRequestId, userId, body, addresses, amount) => {

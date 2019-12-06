@@ -510,7 +510,8 @@ class RateTravelerViewSet(viewsets.ModelViewSet):
     def create(self, request):
         torimo_feedback = request.data.pop("torimo_feedback")
         # Notify us
-        send_email.delay("New Feedback from our requester", torimo_feedback, None, settings.EMAIL_HOST_USER)
+        if torimo_feedback:
+            send_email.delay("New Feedback from our requester", torimo_feedback, None, settings.EMAIL_HOST_USER)
 
         item_request_id = request.data.pop("requestId")
         item_request = ItemRequest.objects.get(pk=item_request_id)
@@ -527,7 +528,8 @@ class RateRequesterViewSet(viewsets.ModelViewSet):
     def create(self, request):
         torimo_feedback = request.data.pop("torimo_feedback")
         # Notify us
-        send_email.delay("New Feedback from our traveler", torimo_feedback, None, settings.EMAIL_HOST_USER)
+        if torimo_feedback:
+            send_email.delay("New Feedback from our traveler", torimo_feedback, None, settings.EMAIL_HOST_USER)
 
         item_request_id = request.data.pop("requestId")
         item_request = ItemRequest.objects.get(pk=item_request_id)
