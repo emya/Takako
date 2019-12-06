@@ -13,7 +13,7 @@ import StarRatings from 'react-star-ratings';
 class RateTraveler extends Component {
   state = {
     rating: 0,
-    torimo_feebback: null,
+    torimo_feedback: null,
     errors: []
   }
 
