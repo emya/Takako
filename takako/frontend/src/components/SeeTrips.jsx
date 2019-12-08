@@ -55,10 +55,13 @@ class SeeTrips extends Component {
                   {!this.props.user && (
                     <td><a href="/register" class="btn request">Request Item</a></td>
                   )}
-                  {this.props.user && (
+                  {this.props.user && (this.props.user.id !== trip.user.id) && (
                     <td><a href={`/profile/${trip.user.id}`} class="user-link">{trip.user.first_name}</a></td>
                   )}
-                  {this.props.user && (
+                  {this.props.user && (this.props.user.id === trip.user.id) && (
+                    <td><a href={`/profile/${trip.user.id}`} class="user-link">{trip.user.first_name} (You)</a></td>
+                  )}
+                  {this.props.user && (this.props.user.id !== trip.user.id) && (
                     <td>
                     <Link to={{
                         pathname: `/request/form/${trip.user.id}/${trip.id}`,
