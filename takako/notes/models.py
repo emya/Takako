@@ -117,6 +117,7 @@ class ItemRequest(models.Model):
     item_id = models.CharField(max_length=200, blank=True)
     item_url = models.CharField(max_length=300, blank=True)
     item_image = models.CharField(max_length=200, null=True, blank=True)
+    price_per_item = models.IntegerField(null=True)
     n_items = models.IntegerField(default=1)
     proposed_price = models.IntegerField()
     commission_fee = models.IntegerField()
@@ -237,4 +238,15 @@ class ContactUs(models.Model):
     email = models.CharField(max_length=200)
     message = models.CharField(max_length=300)
 
+class RateTraveler(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewer')
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
+    traveler = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
+    rating = models.IntegerField()
+
+class RateRequester(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewer')
+    item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
+    rating = models.IntegerField()
 

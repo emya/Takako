@@ -4,7 +4,8 @@ from .models import (
     User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
-    SharedContact, ContactUs
+    SharedContact, ContactUs,
+    RateTraveler, RateRequester
 )
 
 from rest_framework import serializers
@@ -54,9 +55,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'image', 'user')
 
 class TripSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Trip
-        fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
+        fields = '__all__'
 
 
 class ItemRequestSerializer(serializers.ModelSerializer):
@@ -68,7 +71,7 @@ class ItemRequestSerializer(serializers.ModelSerializer):
         model = ItemRequest
         fields = (
             'id', 'requester', 'respondent', 'trip', 'item_name', 'item_id',
-            'item_url', 'item_image', 'n_items', 'proposed_price',
+            'item_url', 'item_image', 'price_per_item', 'n_items', 'proposed_price',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status', 'process_status', 'created_at', 'responded_at',
             'paid_at', 'purchase_notified_at', 'meetup_suggested_at', 'meetup_decided_at',
@@ -121,8 +124,8 @@ class ItemRequestHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemRequest
         fields = (
-            'id', 'requester', 'respondent', 'trip',
-            'item_name', 'item_id', 'item_url', 'item_image', 'n_items',
+            'id', 'requester', 'respondent', 'trip', 'item_name',
+            'item_id', 'item_url', 'item_image', 'price_per_item', 'n_items',
             'proposed_price', 'commission_fee', 'transaction_fee',
             'delivery_method', 'preferred_meetup_location', 'preferred_meetup_date',
             'comment', 'status', 'charge', 'process_status',
@@ -152,6 +155,19 @@ class ContactUsSerializer(serializers.ModelSerializer):
         model = ContactUs
         fields = ('id', 'user', 'name', 'email', 'message', )
 
+class RateTravelerSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = RateTraveler
+        fields = '__all__'
+
+class RateRequesterSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = RateRequester
+        fields = '__all__'
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

@@ -35,7 +35,7 @@ export const chargeItemRequest = (item_request_id, user_id, stripe_body, address
 
 export const sendItemRequest = (
   respondent_id, trip_id, item_name, item_id, item_url, item_image,
-  n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
+  price_per_item, n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
   preferred_meetup_location, preferred_meetup_date, comment) => {
   return (dispatch, getState) => {
     let headers = {};
@@ -52,6 +52,7 @@ export const sendItemRequest = (
     formData.append('item_id', item_id);
     formData.append('item_url', item_url);
     formData.append('item_image', item_image);
+    formData.append('price_per_item', price_per_item);
     formData.append('n_items', n_items);
     formData.append('proposed_price', parseInt(proposed_price));
     formData.append('commission_fee', parseInt(commission_fee));
@@ -425,6 +426,73 @@ export const getPaid = (requestId) => {
       })
   }
 }
+
+export const rateTraveler = (requestId, travelerId, rating, torimo_feedback) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({requestId, travelerId, rating, torimo_feedback});
+
+    return fetch("/api/rate/traveler/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: 'RATE_TRAVELER_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
+export const rateRequester = (requestId, rating, torimo_feedback) => {
+  return (dispatch, getState) => {
+    let headers = {"Content-Type": "application/json"};
+    let {token} = getState().auth;
+
+    if (token) {
+      headers["Authorization"] = `Token ${token}`;
+    }
+
+    let body = JSON.stringify({requestId, rating, torimo_feedback});
+
+    return fetch("/api/rate/requester/", {headers, method: "POST", body})
+      .then(res => {
+        if (res.status < 500) {
+          return res.json().then(data => {
+            return {status: res.status, data};
+          })
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({type: 'RATE_REQUESTER_SUCCESSFUL', data: res.data});
+        } else if (res.status === 401 || res.status === 403) {
+          dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
+          throw res.data;
+        }
+      })
+  }
+}
+
 
 function formatDate(date) {
     var d = new Date(date),

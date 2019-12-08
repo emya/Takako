@@ -24,7 +24,7 @@ from rest_framework.parsers import (
 )
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from knox.models import AuthToken
 
@@ -39,7 +39,8 @@ from .models import (
     User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
     PurchaseNotification, Meetup,
-    SharedContact, ContactUs
+    SharedContact, ContactUs,
+    RateTraveler, RateRequester
 )
 #from django.contrib.auth.models import User
 from .serializers import (
@@ -54,6 +55,8 @@ from .serializers import (
     ProfileSerializer,
     TripSerializer,
     TravelerProfileSerializer,
+    RateTravelerSerializer,
+    RateRequesterSerializer,
     CreateUserSerializer,
     UserSerializer,
     LoginUserSerializer,
@@ -458,7 +461,7 @@ class ChargeViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class TripViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated,]
+    #permission_classes = [permissions.IsAuthenticated,]
     serializer_class = TripSerializer
 
     def create(self, request):
@@ -473,31 +476,72 @@ class TripViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(serializer.data)
 
-    def get_queryset(self):
+    def list(self, request):
         pk = self.kwargs.get("pk")
         if pk:
             queryset = Trip.objects.filter(pk=int(pk))
             return queryset
 
-        userId = self.request.GET.get('userId')
+        userId = request.GET.get('userId')
 
         queryset = Trip.objects.all()
+
+        today = datetime.today()
 
         if userId:
             user = User.objects.get(pk=userId)
             queryset = queryset.filter(user=user)
-            return queryset
 
-        # TODO: handle exception
-        queryset = queryset.filter(user=self.request.user)
-        return queryset
+        upcoming_trips = queryset.filter(arrival_date__gt=today).order_by('departure_date')
+        past_trips = queryset.filter(arrival_date__lte=today).order_by('departure_date')
+        custom_data = {
+            'upcoming_trips': self.serializer_class(upcoming_trips, many=True).data,
+            'past_trips': self.serializer_class(past_trips, many=True).data,
+        }
+        return Response(custom_data)
+
+
+class RateTravelerViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = RateTravelerSerializer
+
+    def create(self, request):
+        torimo_feedback = request.data.pop("torimo_feedback")
+        # Notify us
+        if torimo_feedback:
+            send_email.delay("New Feedback from our requester", torimo_feedback, None, settings.EMAIL_HOST_USER)
+
+        item_request_id = request.data.pop("requestId")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        traveler_id = request.data.pop("travelerId")
+        traveler = User.objects.get(pk=traveler_id)
+        rating = RateTraveler.objects.create(item_request=item_request, user=request.user, traveler=traveler, **request.data)
+        serializer = self.serializer_class(rating)
+        return Response(serializer.data)
+
+class RateRequesterViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = RateRequesterSerializer
+
+    def create(self, request):
+        torimo_feedback = request.data.pop("torimo_feedback")
+        # Notify us
+        if torimo_feedback:
+            send_email.delay("New Feedback from our traveler", torimo_feedback, None, settings.EMAIL_HOST_USER)
+
+        item_request_id = request.data.pop("requestId")
+        item_request = ItemRequest.objects.get(pk=item_request_id)
+        requester = item_request.requester
+        rating = RateRequester.objects.create(item_request=item_request, user=request.user, requester=requester, **request.data)
+        serializer = self.serializer_class(rating)
+        return Response(serializer.data)
 
 class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [BaseUserPermissions, ]
     parser_classes = [MultiPartParser, FormParser, ]
     serializer_class = ProfileSerializer
 
-    def update(self, request, pk):
+    def partial_update(self, request, *args, **kwargs):
         instance = self.get_object()
         data = request.data.copy()
         img = data.pop('image')
@@ -509,7 +553,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
                 data['image'] = image.name
                 is_upload_image = True
 
-        serializer = self.serializer_class(instance, data=data)
+        serializer = self.serializer_class(instance, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         if is_upload_image:

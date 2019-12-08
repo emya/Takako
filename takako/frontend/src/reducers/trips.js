@@ -8,8 +8,23 @@ export default function trips(state=initialState, action) {
   switch (action.type) {
 
     case 'ADD_TRIP':
-      return [...state, action.trip];
-      //return [...state, {text: action.text}];
+      return [
+          {
+            upcoming_trips:[
+              ...state[0].upcoming_trips,
+              {
+                id: action.trip.id,
+                destination: action.trip.destination,
+                departure_date: action.trip.departure_date,
+                arrival_date: action.trip.arrival_date,
+                status: action.trip.status,
+              }
+            ],
+            past_trips: [
+              ...state[0].past_trips,
+            ]
+          }
+      ];
 
     case 'UPDATE_TRIP':
       let tripToUpdate = tripList[action.index]
@@ -22,7 +37,8 @@ export default function trips(state=initialState, action) {
       return tripList;
 
     case 'FETCH_TRIPS':
-      return [...state, ...action.trips];
+      //return [...state, ...action.trips];
+      return [...state, action.trips];
 
     case 'FETCH_TRIP':
       return {...state, trip: action.trip};

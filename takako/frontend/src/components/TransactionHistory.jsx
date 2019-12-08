@@ -9,6 +9,8 @@ import Header from './Header';
 import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
 import Footer from './Footer';
+import RateTraveler from './RateTraveler';
+
 import StripeCheckout from 'react-stripe-checkout';
 import { keys } from '../keys.js';
 
@@ -120,6 +122,28 @@ class TransactionHistory extends Component {
       return <Redirect to='/transaction/status' />
     }
 
+    let has_history = false;
+    let is_requester = false;
+    let is_traveler = false;
+    let item_request_status = 0;
+    let process_status;
+    let requestHistory;
+    if (this.props.requests.requestHistory) {
+      has_history = true;
+      requestHistory = this.props.requests.requestHistory;
+
+      item_request_status = requestHistory.status;
+      process_status = requestHistory.process_status;
+
+      if (this.props.user.id === requestHistory.requester.id){
+        is_requester = true;
+      }
+
+      if (this.props.user.id === requestHistory.respondent.id){
+        is_traveler = true;
+      }
+    }
+
     if (this.props.isCancelled) {
       return (
       <div>
@@ -142,7 +166,7 @@ class TransactionHistory extends Component {
       )
     }
 
-    if (this.props.isItemReceived) {
+    if (this.props.isRated) {
       return (
       <div>
         <Header />
@@ -156,6 +180,26 @@ class TransactionHistory extends Component {
               Back to the conversation
             </a></p>
           </div>
+        </div>
+
+        <MobileSideMenu />
+        <Footer />
+      </div>
+      )
+    }
+
+    if (this.props.isItemReceived) {
+      return (
+      <div>
+        <Header />
+
+        <div class="wrapper clearfix">
+          <SideMenu />
+          <RateTraveler requestId={`${this.props.match.params.requestId}`} travelerId={`${requestHistory.respondent.id}`} />
+
+          <p><a href={`/transaction/history/${this.props.match.params.requestId}`} style={{color: "#f17816"}}>
+              Back to the conversation
+            </a></p>
         </div>
 
         <MobileSideMenu />
@@ -239,28 +283,6 @@ class TransactionHistory extends Component {
   </div>
     )}
 
-    let has_history = false;
-    let is_requester = false;
-    let is_traveler = false;
-    let item_request_status = 0;
-    let process_status;
-    let requestHistory;
-    if (this.props.requests.requestHistory) {
-      has_history = true;
-      requestHistory = this.props.requests.requestHistory;
-
-      item_request_status = requestHistory.status;
-      process_status = requestHistory.process_status;
-
-      if (this.props.user.id === requestHistory.requester.id){
-        is_requester = true;
-      }
-
-      if (this.props.user.id === requestHistory.respondent.id){
-        is_traveler = true;
-      }
-    }
-
     if (!has_history) {
         return null;
     }
@@ -282,8 +304,9 @@ class TransactionHistory extends Component {
              <ul>
                <li>Request you sent</li>
                <li> Item Name:  {requestHistory.item_name}</li>
+               {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
                <li>Number of Item(s):  {requestHistory.n_items}</li>
-               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
+               <li>Total Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
              </ul>
            </div>
            </div>
@@ -638,9 +661,11 @@ class TransactionHistory extends Component {
                <p class="history-date new-update">NEW!</p>
                <p class="history-update">Payment Detail</p>
                <ul class="request-data">
-                 <li>Item Price:   ${requestHistory.proposed_price}</li>
+                 {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
+                 <li>Number of Item(s):   ${requestHistory.n_items}</li>
+                 <li>Total Item Price:   ${requestHistory.proposed_price}</li>
                  <li>Commission Fee:   ${requestHistory.commission_fee}</li>
-                 <li>Transaction Fee (5% of the proposed price):   ${requestHistory.transaction_fee}</li>
+                 <li>Transaction Fee (8% of the proposed price):   ${requestHistory.transaction_fee}</li>
                  <br/>
                  <li>
                  Your Total Payment: ${requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
@@ -731,7 +756,9 @@ class TransactionHistory extends Component {
              <ul>
                <li>Request {requestHistory.requester.first_name} sent</li>
                <li>Item Name:  {requestHistory.item_name}</li>
-               <li>Price    :  ${requestHistory.proposed_price.toLocaleString()}</li>
+               {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
+               <li>Number of Item(s):   ${requestHistory.n_items}</li>
+               <li>Total Item Price :  ${requestHistory.proposed_price.toLocaleString()}</li>
               </ul>
            </div>
            </div>
@@ -1118,7 +1145,7 @@ class TransactionHistory extends Component {
                <p class="history-date">
                  {requestHistory.paid_at && moment(requestHistory.paid_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
                </p>
-               <p class="history-update">Payment completed by {requestHistory.respondent.first_name}</p>
+               <p class="history-update">Payment completed by {requestHistory.requester.first_name}</p>
              </div>
            </div>
          )}
@@ -1159,8 +1186,9 @@ class TransactionHistory extends Component {
              {requestHistory.item_image && (
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
              )}
+             {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
              <li>Number of Item(s):   {requestHistory.n_items}</li>
-             <li>Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
+             <li>Total Item Price:  ${requestHistory.proposed_price.toLocaleString()}</li>
              <li>Your Commission Fee:   ${requestHistory.commission_fee.toLocaleString()}</li>
              {is_requester && ( <li>Transaction Fee:   ${requestHistory.transaction_fee.toLocaleString()}</li>)}
              {is_requester && (
@@ -1173,7 +1201,7 @@ class TransactionHistory extends Component {
              <li>Preferred meetup date/time: {requestHistory.preferred_meetup_date}</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
-           {is_traveler  && requestHistory.status === 0 && (
+           {is_traveler && requestHistory.status === 0 && (
              <div class="request-action">
               <ul class="warning">
                 <li>Important notes:</li>
@@ -1215,6 +1243,7 @@ const mapStateToProps = state => {
     isForbidden: state.requests.isForbidden,
     isNotFound: state.requests.isNotFound,
     isResponded: state.requests.isResponded,
+    isRated: state.requests.isRated,
     isPaymentCompleted: state.requests.isPaymentCompleted,
     isItemReceived: state.requests.isItemReceived,
     isCancelled: state.requests.isCancelled,
@@ -1229,7 +1258,7 @@ const mapDispatchToProps = dispatch => {
     fetchRequestHistory: (requestId) => {
       dispatch(requests.fetchRequestHistory(requestId));
     },
-     updateItemRequest: (requestId, item_request, action_type = null) => {
+    updateItemRequest: (requestId, item_request, action_type = null) => {
       return dispatch(requests.updateItemRequest(requestId, item_request, action_type));
     },
     chargeItemRequest: (itemRequestId, userId, body, addresses, amount) => {

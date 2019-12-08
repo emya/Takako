@@ -11,4 +11,4 @@ RUN set -ex; \
 WORKDIR /opt
 RUN pip install -r requirements.txt
 
-ENTRYPOINT celery worker -A notes --loglevel=debug
+ENTRYPOINT celery worker -A notes -B --loglevel=debug

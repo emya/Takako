@@ -24,22 +24,25 @@ class MyProfile extends Component {
   }
 
   state = {
-    bio: "",
-    residence: "",
+    bio: null,
+    residence: null,
     residence_search: "",
-    occupation: "",
-    gender: "",
+    occupation: null,
+    gender: null,
     image: null,
+    isChanged: false,
     errors: []
   }
 
   resetForm = () => {
-    this.setState({bio: "", residence: "", occupation: "", gender: ""});
+    //this.setState({bio: "", residence: "", occupation: "", gender: ""});
+    this.setState({isChanged:false})
   }
 
   handleImageChange = (e) => {
     this.setState({
-      image: e.target.files[0]
+      image: e.target.files[0],
+      isChanged: true
     })
   }
 
@@ -53,6 +56,10 @@ class MyProfile extends Component {
       return;
     }
 
+    if (this.state.isChanged === false) {
+      return;
+    }
+
     this.props.updateProfile(
       this.props.profile[0].id, this.state.bio, this.state.residence,
       this.state.occupation, this.state.gender, this.state.image
@@ -61,17 +68,25 @@ class MyProfile extends Component {
 
   handleChange = (propertyName, profile, event) => {
     profile[propertyName] = event.target.value;
-    this.setState({bio: profile.bio, residence: profile.residence, occupation: profile.occupation, gender: profile.gender});
+    this.setState({
+      bio: profile.bio, residence: profile.residence,
+      occupation: profile.occupation, gender: profile.gender,
+      isChanged: true
+    });
   }
 
   handleResidenceChange(propertyName, profile, event) {
     profile[propertyName] = event.target.value;
-    this.setState({residence_search: event.target.value, residence: event.target.value})
+    this.setState({
+      residence_search: event.target.value, residence: event.target.value, isChanged: true
+    })
   }
 
   handleSelectResidenceSuggest(profile, suggest) {
     profile["residence"] = suggest.formatted_address;
-    this.setState({residence_search: "", residence: suggest.formatted_address})
+    this.setState({
+      residence_search: "", residence: suggest.formatted_address, isChanged: true
+    })
   }
 
   validateForm = (image) => {

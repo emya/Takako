@@ -21,6 +21,7 @@ class RequestForm extends Component {
     item_image: null,
     item_url: "",
     n_items: 1,
+    price_per_item: 0,
     proposed_price: 0,
     transaction_fee: 0,
     commission_fee: 10,
@@ -50,7 +51,8 @@ class RequestForm extends Component {
     e.preventDefault();
     this.props.sendRequest(
       this.props.match.params.userId, this.props.match.params.tripId, this.state.item_name,
-      this.state.item_id, this.state.item_url, this.state.item_image, this.state.n_items, this.state.proposed_price,
+      this.state.item_id, this.state.item_url, this.state.item_image,
+      this.state.price_per_item, this.state.n_items, this.state.proposed_price,
       this.state.commission_fee, this.state.transaction_fee, this.state.delivery_method,
       this.state.preferred_meetup_location, this.state.preferred_meetup_date, this.state.comment
     );
@@ -60,7 +62,7 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
-  validateForm = (item_name, n_items, price, commission_fee) => {
+  validateForm = (item_name, n_items, price_per_item, price, commission_fee) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
@@ -70,11 +72,23 @@ class RequestForm extends Component {
     }
 
     if (n_items <= 0) {
-      errors.push("Minimum number of items is 1");
+      errors.push("Minimum Number of Item(s) is 1");
     }
 
-    if (price.length === 0) {
-      errors.push("Price can't be empty");
+    if (price_per_item.length === 0) {
+      errors.push("Price per Item can't be empty");
+    }
+
+    if (Number.isInteger(Number(n_items)) === false) {
+      errors.push("Number of Item(s) has to be integer");
+    }
+
+    if (Number.isInteger(Number(price_per_item)) === false) {
+      errors.push("Price per Item has to be integer");
+    }
+
+    if (price < 20 || price > 2499) {
+      errors.push("Total Item Price has to be between $20 and $2499");
     }
 
     if (commission_fee < 10) {
@@ -87,7 +101,8 @@ class RequestForm extends Component {
   proceedRequest = (e) => {
     e.preventDefault();
     const errors = this.validateForm(
-      this.state.item_name, this.state.n_items, this.state.proposed_price, this.state.commission_fee);
+      this.state.item_name, this.state.n_items, this.state.price_per_item,
+      this.state.proposed_price, this.state.commission_fee);
 
     if (errors.length > 0) {
       this.setState({ errors });
@@ -99,6 +114,12 @@ class RequestForm extends Component {
 
   render() {
     const errors = this.state.errors;
+
+    let trip;
+    if (this.props.location.state && this.props.location.state.trip) {
+      trip = this.props.location.state.trip;
+    }
+
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
       <div>
@@ -138,13 +159,16 @@ class RequestForm extends Component {
               <p class="form-data">{this.state.item_url} </p><br />
               <p class="form-heading">Item Image</p><br />
               <p class="form-data"> {this.state.item_image && (<img src={URL.createObjectURL(this.state.item_image)} />)} </p><br />
-              <p class="form-heading">Number of Item(s)</p><br />
-              <p class="form-data">{this.state.n_items} </p><br />
             </div>
 
             <div class="form-section">
-              <p class="form-heading">Item Price</p><br />
+              <p class="form-heading">Price per Item</p><br />
+              <p class="form-data">${(+this.state.price_per_item).toLocaleString()} </p><br />
+              <p class="form-heading">Number of Item(s)</p><br />
+              <p class="form-data">{this.state.n_items} </p><br />
+              <p class="form-heading">Total Item Price</p><br />
               <p class="form-data">${(+this.state.proposed_price).toLocaleString()} </p><br />
+
               <p class="form-heading">Commission to Traveler</p><br />
               <p class="form-data">${(+this.state.commission_fee).toLocaleString()}</p><br />
               <p class="form-heading">Transaction fee</p><br />
@@ -192,20 +216,25 @@ class RequestForm extends Component {
       <form class="form">
       <h2>Item Request</h2>
 
-      {this.props.trip && (
+      {trip && (
         <div class="history-summary">
           <h3>Trip summary</h3>
           <p>
             <strong>Destination:   </strong>
-            {this.props.trip.destination}
+            {trip.destination}
           </p>
           <p>
             <strong>Departure date:   </strong>
-            {moment(this.props.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
+            {moment(trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
           </p>
           <p>
             <strong>Arrival date:   </strong>
-            {moment(this.props.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+            {moment(trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
+          <h3>Traveler</h3>
+          <p class="form-heading"> {trip.user.first_name} {trip.user.last_name}</p>
+          <p>
+            <a href={`/profile/${trip.user.id}`} style={{color: "black"}}>Check Profile</a>
           </p>
         </div>
       )}
@@ -225,20 +254,34 @@ class RequestForm extends Component {
         {this.state.item_image && (<img class="request-image" src={URL.createObjectURL(this.state.item_image)} />)}
         <input class="item-upload" type="file" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
-        <p class="form-heading">Number of Item(s)</p><br/>
-        <input type="number" value={this.state.n_items} onChange={(e) => this.setState({n_items: e.target.value})} /><br/>
       </div>
 
       <div class="form-section">
-        <p class="form-heading">Item Price<span class="asterisk">*</span></p><br/>
-        $<input type="number" min="0" value={this.state.proposed_price}
-         onChange={(e) => this.setState({proposed_price: e.target.value, transaction_fee: Math.round(e.target.value*0.05)})}
+        <p class="form-heading">Price per Item<span class="asterisk">*</span></p><br/>
+        $<input type="number" min="0" value={this.state.price_per_item}
+         onChange={(e) => this.setState({
+           price_per_item: e.target.value,
+           proposed_price: e.target.value*this.state.n_items,
+           transaction_fee: Math.max(Math.round(e.target.value*this.state.n_items*0.08), 1)
+         })}
          required /><br/>
 
-         <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
-         $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
+        <p class="form-heading">Number of Item(s) <span class="asterisk">*</span></p><br/>
+        <input type="number" value={this.state.n_items}
+          onChange={(e) => this.setState({
+            n_items: e.target.value,
+            proposed_price: e.target.value*this.state.price_per_item,
+            transaction_fee: Math.max(Math.round(e.target.value*this.state.price_per_item*0.08), 1)
+          })}
+        required /><br/>
 
-        <p class="form-heading">Transaction Fee (5% of item price, minimum of $1)</p><br/>
+        <p class="form-heading">Total Item Price (between $20 and $2499)</p><br/>
+        $<p class="number-calculated">{(+this.state.proposed_price).toLocaleString()}</p><br/>
+
+        <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
+        $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
+
+        <p class="form-heading">Transaction Fee (8% of item price, minimum of $1)</p><br/>
         $<p class="number-calculated">{(+this.state.transaction_fee).toLocaleString()}</p><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
@@ -264,9 +307,9 @@ class RequestForm extends Component {
 
       </div>
 
-      {this.props.trip && (
+      {trip && (
         <div class="meetup-rule">
-          Important note: Your meetup will take place within one week from {this.props.trip.arrival_date}.
+          Important note: Your meetup will take place within one week from {trip.arrival_date}.
         </div>
       )}
 
@@ -288,7 +331,7 @@ const mapStateToProps = state => {
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
     isProceeded: state.requests.isProceeded,
     //TODO: Handle trip in reducer
-    trip: state.trips[0],
+    trip: state.trip,
   }
 }
 
@@ -296,13 +339,13 @@ const mapDispatchToProps = dispatch => {
   return {
     sendRequest: (
       respondent_id, trip_id, item_name, item_id, item_url, item_image,
-      n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
-      preferred_meetup_location, preferred_meetup_date, comment)  => {
+      price_per_item, n_items, proposed_price, commission_fee, transaction_fee,
+      delivery_method, preferred_meetup_location, preferred_meetup_date, comment)  => {
       return dispatch(
         requests.sendItemRequest(
           respondent_id, trip_id, item_name, item_id, item_url, item_image,
-          n_items, proposed_price, commission_fee, transaction_fee, delivery_method,
-          preferred_meetup_location, preferred_meetup_date, comment
+          price_per_item, n_items, proposed_price, commission_fee, transaction_fee,
+          delivery_method, preferred_meetup_location, preferred_meetup_date, comment
         )
       );
       //dispatch(notes.updateNote(id, text));

@@ -7,17 +7,18 @@ import MobileSideMenu from './MobileSideMenu'
 import Footer from './Footer'
 
 class Test extends Component {
+
   render() {
     return (
-    <div>
-      <Header />
-
-      testtesttest
-
-      <MobileSideMenu />
-
-      <Footer />
+  <div>
+    <Header />
+    <div class="wrapper clearfix">
+      <SideMenu />
     </div>
+
+    <MobileSideMenu />
+    <Footer />
+  </div>
     )
   }
 }

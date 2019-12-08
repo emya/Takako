@@ -9,13 +9,21 @@ export const updateProfile = (id, bio, residence, occupation, gender, img) => {
       headers["Authorization"] = `Token ${token}`;
     }
 
-    formData.append('bio', bio);
-    formData.append('residence', residence);
-    formData.append('occupation', occupation);
-    formData.append('gender', gender);
+    if (bio !== null) {
+      formData.append('bio', bio);
+    }
+    if (residence !== null) {
+      formData.append('residence', residence);
+    }
+    if (occupation !== null) {
+      formData.append('occupation', occupation);
+    }
+    if (gender !== null) {
+      formData.append('gender', gender);
+    }
     formData.append('image', img);
 
-    return fetch(`/api/profiles/${id}/`, {headers, method: "PUT", body: formData})
+    return fetch(`/api/profiles/${id}/`, {headers, method: "PATCH", body: formData})
       .then(res => {
         if (res.status < 500) {
           return res.json().then(data => {
