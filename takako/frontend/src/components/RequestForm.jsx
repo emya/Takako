@@ -113,14 +113,12 @@ class RequestForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     const errors = this.state.errors;
 
     let trip;
     if (this.props.location.state && this.props.location.state.trip) {
       trip = this.props.location.state.trip;
     }
-    console.log(trip);
 
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
@@ -328,7 +326,6 @@ class RequestForm extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
