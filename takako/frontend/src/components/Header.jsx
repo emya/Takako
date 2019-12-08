@@ -15,6 +15,11 @@ render() {
             <a class="signin" href="/login">Sign in</a>
           </div>
         )}
+        { this.props.user && (
+          <div class="login">
+            <a class="signin" href="/myprofile">My Page</a>
+          </div>
+        )}
       </div>
 
       <div class="mobile-topbar-contents">

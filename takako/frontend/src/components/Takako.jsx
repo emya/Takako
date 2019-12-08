@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {auth} from "../actions";
 import '../css/style_LP.scss';
 
+import Header from './Header';
 import Footer from './Footer';
 
 class Takako extends Component {
@@ -41,6 +42,7 @@ class Takako extends Component {
     return (
       <body>
         <header class="header">
+        { !this.props.user && (
           <div class="topbar-contents">
             {/*
               <form class="search">
@@ -54,6 +56,21 @@ class Takako extends Component {
               <a class="signin" href="/login">Sign in</a>
             </div>
           </div>
+        )}
+        { this.props.user && (
+          <div class="topbar-contents">
+            {/*
+              <form class="search">
+              <input type="search" name="search" placeholder="Search"/>
+              <input class="search-button" type="submit" value="Search"/>
+            </form>
+            */}
+            <a href="#" class="logo-link"><img class="logo" src={require('../img/Torimo_new.png')} /></a>
+            <div class="login">
+              <a class="signin" href="/myprofile">My Page</a>
+            </div>
+          </div>
+        )}
 
           <div class="mobile-topbar-contents">
             <a href="#"><img class="logo-mobile" src={require('../img/Torimo_new.png')} /></a>
@@ -77,8 +94,9 @@ class Takako extends Component {
 
         <div class="menu">
           <a href="/how-it-works">How It Works</a>
-            <a href="/about">About Us</a>
-            <a href="/contact-us">Contact Us</a>
+          <a href="/trips">See Trips</a>
+          <a href="/about">About Us</a>
+          <a href="/contact-us">Contact Us</a>
         </div>
 
         <section class="how">

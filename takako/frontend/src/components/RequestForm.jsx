@@ -113,7 +113,15 @@ class RequestForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     const errors = this.state.errors;
+
+    let trip;
+    if (this.props.location.state && this.props.location.state.trip) {
+      trip = this.props.location.state.trip;
+    }
+    console.log(trip);
+
     if (this.state.isSubmissionSucceeded && this.state.isProceeded) {
       return (
       <div>
@@ -210,20 +218,25 @@ class RequestForm extends Component {
       <form class="form">
       <h2>Item Request</h2>
 
-      {this.props.trip && (
+      {trip && (
         <div class="history-summary">
           <h3>Trip summary</h3>
           <p>
             <strong>Destination:   </strong>
-            {this.props.trip.destination}
+            {trip.destination}
           </p>
           <p>
             <strong>Departure date:   </strong>
-            {moment(this.props.trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
+            {moment(trip.departure_date, "YYYY-MM-DD").format("MM/DD/YY")}
           </p>
           <p>
             <strong>Arrival date:   </strong>
-            {moment(this.props.trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+            {moment(trip.arrival_date, "YYYY-MM-DD").format("MM/DD/YY")}
+          </p>
+          <h3>Traveler</h3>
+          <p class="form-heading"> {trip.user.first_name} {trip.user.last_name}</p>
+          <p>
+            <a href={`/profile/${trip.user.id}`} style={{color: "black"}}>Check Profile</a>
           </p>
         </div>
       )}
@@ -296,9 +309,9 @@ class RequestForm extends Component {
 
       </div>
 
-      {this.props.trip && (
+      {trip && (
         <div class="meetup-rule">
-          Important note: Your meetup will take place within one week from {this.props.trip.arrival_date}.
+          Important note: Your meetup will take place within one week from {trip.arrival_date}.
         </div>
       )}
 
@@ -315,12 +328,13 @@ class RequestForm extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     respondent_id: state.respondent_id,
     isSubmissionSucceeded: state.requests.isSubmissionSucceeded,
     isProceeded: state.requests.isProceeded,
     //TODO: Handle trip in reducer
-    trip: state.trips[0],
+    trip: state.trip,
   }
 }
 
