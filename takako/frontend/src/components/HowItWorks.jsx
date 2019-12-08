@@ -59,7 +59,7 @@ class HowItWorks extends Component {
       <h3 id="whatscommision">Commission to Traveler</h3>
       <ul>
         <li>Commission to Traveler is a minimum of <strong>$10</strong> and should vary depending on size, weight and difficulty to purchase the item.</li>
-        <li>Transaction fee is <strong>5%</strong> of the total transaction excluding Requester's commission, with a minimum value of $1.</li>
+        <li>Transaction fee is <strong>8%</strong> of the total transaction excluding Requester's commission, with a minimum value of $1.</li>
       </ul>
       <h3>Cancellation</h3>
       <ul>
