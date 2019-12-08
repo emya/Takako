@@ -461,7 +461,7 @@ class ChargeViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class TripViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated,]
+    #permission_classes = [permissions.IsAuthenticated,]
     serializer_class = TripSerializer
 
     def create(self, request):
@@ -491,17 +491,15 @@ class TripViewSet(viewsets.ModelViewSet):
         if userId:
             user = User.objects.get(pk=userId)
             queryset = queryset.filter(user=user)
-            upcoming_trips = queryset.filter(arrival_date__gt=today).order_by('departure_date')
-            past_trips = queryset.filter(arrival_date__lte=today).order_by('departure_date')
-            custom_data = {
-                'upcoming_trips': self.serializer_class(upcoming_trips, many=True).data,
-                'past_trips': self.serializer_class(past_trips, many=True).data,
-            }
-            return Response(custom_data)
 
-        # TODO: handle exception
-        queryset = queryset.filter(user=self.request.user)
-        return queryset
+        upcoming_trips = queryset.filter(arrival_date__gt=today).order_by('departure_date')
+        past_trips = queryset.filter(arrival_date__lte=today).order_by('departure_date')
+        custom_data = {
+            'upcoming_trips': self.serializer_class(upcoming_trips, many=True).data,
+            'past_trips': self.serializer_class(past_trips, many=True).data,
+        }
+        return Response(custom_data)
+
 
 class RateTravelerViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated,]

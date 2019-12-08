@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import {Link, Redirect} from "react-router-dom";
 
+import Header from './Header';
 import {auth} from "../actions";
 
 class Login extends Component {
@@ -53,6 +54,8 @@ class Login extends Component {
     const errors = this.state.errors;
 
     return (
+    <div>
+      <Header />
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
           <legend>Register</legend>
@@ -101,6 +104,7 @@ class Login extends Component {
           </p>
         </fieldset>
       </form>
+    </div>
     )
   }
 }

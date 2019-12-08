@@ -1201,7 +1201,7 @@ class TransactionHistory extends Component {
              <li>Preferred meetup date/time: {requestHistory.preferred_meetup_date}</li>
              <li>Comments (Optional): {requestHistory.comment}</li>
            </ul>
-           {is_traveler  && requestHistory.status === 0 && (
+           {is_traveler && requestHistory.status === 0 && (
              <div class="request-action">
               <ul class="warning">
                 <li>Important notes:</li>

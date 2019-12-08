@@ -4,6 +4,7 @@ import {Link, Redirect} from "react-router-dom";
 
 import queryString from 'query-string';
 
+import Header from './Header';
 import {auth} from "../actions";
 
 class Login extends Component {
@@ -27,6 +28,8 @@ class Login extends Component {
       return <Redirect to='/myprofile' />
     }
     return (
+    <div>
+      <Header />
       <form onSubmit={this.onSubmit}>
         <fieldset class="signin-box">
           <legend>Login</legend>
@@ -62,7 +65,7 @@ class Login extends Component {
           </p>
         </fieldset>
       </form>
-
+    </div>
     )
   }
 }

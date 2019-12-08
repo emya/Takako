@@ -265,6 +265,30 @@ li {
   }
 }
 
+/* sidemenu-logout */
+
+.sidemenu-logout {
+  float: left;
+  // height: 1300px;
+  width: 25%;
+  background-color: #FCF5EB;
+  // letter-spacing: 3px;
+  padding-bottom: 10000px;
+  margin-bottom: -10000px;
+}
+
+.sidemenu-logout {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.sidemenu-logout p {
+  padding: 0;
+  margin: 80px auto;
+  color: #999999;
+}
+
 /* sidemenu */
 
 .sidemenu {
@@ -479,6 +503,10 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.table-data a.user-link {
+  color: black;
 }
 
 // .table-data .-data td:nth-child(6) {

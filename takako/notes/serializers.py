@@ -55,9 +55,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'image', 'user')
 
 class TripSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Trip
-        fields = ('id', 'departure_date', 'arrival_date', 'destination', 'status')
+        fields = '__all__'
 
 
 class ItemRequestSerializer(serializers.ModelSerializer):

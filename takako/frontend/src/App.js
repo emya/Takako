@@ -20,6 +20,7 @@ import NotFound from "./components/NotFound";
 import HowItWorks from "./components/HowItWorks";
 import ContactUs from "./components/ContactUs";
 import AboutUs from "./components/AboutUs";
+import SeeTrips from "./components/SeeTrips";
 import RequestForm from "./components/RequestForm";
 import ConnectStripe from "./components/ConnectStripe";
 import ReceivePayment from "./components/ReceivePayment";
@@ -84,6 +85,7 @@ class RootContainerComponent extends Component {
 
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/contact-us" component={ContactUs} />
+                    <Route exact path="/trips" component={SeeTrips} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/terms-conditions" component={TermsUse} />
                     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
