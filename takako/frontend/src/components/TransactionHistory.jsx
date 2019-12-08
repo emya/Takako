@@ -665,7 +665,7 @@ class TransactionHistory extends Component {
                  <li>Number of Item(s):   ${requestHistory.n_items}</li>
                  <li>Total Item Price:   ${requestHistory.proposed_price}</li>
                  <li>Commission Fee:   ${requestHistory.commission_fee}</li>
-                 <li>Transaction Fee (5% of the proposed price):   ${requestHistory.transaction_fee}</li>
+                 <li>Transaction Fee (8% of the proposed price):   ${requestHistory.transaction_fee}</li>
                  <br/>
                  <li>
                  Your Total Payment: ${requestHistory.transaction_fee + requestHistory.commission_fee + requestHistory.proposed_price}
