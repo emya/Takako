@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
+import Linkify from 'react-linkify';
+
 
 import '../css/style.scss';
 
@@ -1182,7 +1184,9 @@ class TransactionHistory extends Component {
              )}
              <li>Location:   {requestHistory.trip.destination}</li>
              <li>Item Name:  {requestHistory.item_name}</li>
-             <li>Item URL (Optional):   {requestHistory.item_url}</li>
+             {requestHistory.item_url && (
+               <li>Item URL:   <Linkify style={{color: "#f17816"}}>{requestHistory.item_url}</Linkify></li>
+             )}
              {requestHistory.item_image && (
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
              )}
