@@ -1185,7 +1185,7 @@ class TransactionHistory extends Component {
              <li>Location:   {requestHistory.trip.destination}</li>
              <li>Item Name:  {requestHistory.item_name}</li>
              {requestHistory.item_url && (
-               <li>Item URL:   <Linkify style={{color: "#f17816"}}>{requestHistory.item_url}</Linkify></li>
+               <li>Item URL:   <Linkify>{requestHistory.item_url}</Linkify></li>
              )}
              {requestHistory.item_image && (
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
