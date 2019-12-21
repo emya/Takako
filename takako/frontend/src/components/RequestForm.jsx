@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {requests} from "../actions";
 import moment from 'moment';
+import isUrl from 'is-url';
 
 import '../css/style.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -62,13 +63,25 @@ class RequestForm extends Component {
     this.setState({delivery_method: e.target.value});
   }
 
-  validateForm = (item_name, n_items, price_per_item, price, commission_fee) => {
+  validateForm = (item_name, item_url, item_image, n_items, price_per_item, price, commission_fee) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
 
     if (item_name.length === 0) {
       errors.push("Item Name can't be empty");
+    }
+
+    if (item_url.length === 0) {
+      errors.push("Item URL can't be empty");
+    }
+
+    if (!isUrl(item_url)){
+      errors.push("Item URL is an invalid url");
+    }
+
+    if (item_image === null) {
+      errors.push("Item Image is required");
     }
 
     if (n_items <= 0) {
@@ -101,7 +114,8 @@ class RequestForm extends Component {
   proceedRequest = (e) => {
     e.preventDefault();
     const errors = this.validateForm(
-      this.state.item_name, this.state.n_items, this.state.price_per_item,
+      this.state.item_name, this.state.item_url, this.state.item_image,
+      this.state.n_items, this.state.price_per_item,
       this.state.proposed_price, this.state.commission_fee);
 
     if (errors.length > 0) {
@@ -247,10 +261,10 @@ class RequestForm extends Component {
         <p class="form-heading">Item Name<span class="asterisk">*</span></p><br/>
         <input value={this.state.item_name} onChange={(e) => this.setState({item_name: e.target.value})} maxLength="200" required /><br/>
 
-        <p class="form-heading">Item URL</p><br/>
-        <input value={this.state.item_url} placeholder="(optional)" onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
+        <p class="form-heading">Item URL<span class="asterisk">*</span></p><br/>
+        <input value={this.state.item_url} onChange={(e) => this.setState({item_url: e.target.value})}  maxLength="300"/><br/>
 
-        <p class="form-heading">Item Image (optional)</p><br/>
+        <p class="form-heading">Item Image<span class="asterisk">*</span></p><br/>
         {this.state.item_image && (<img class="request-image" src={URL.createObjectURL(this.state.item_image)} />)}
         <input class="item-upload" type="file" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
