@@ -276,7 +276,7 @@ class RequestForm extends Component {
          onChange={(e) => this.setState({
            price_per_item: e.target.value,
            proposed_price: e.target.value*this.state.n_items,
-           transaction_fee: Math.max(Math.round(e.target.value*this.state.n_items*0.08), 1)
+           transaction_fee: Math.max(Math.round(e.target.value*this.state.n_items*0.08), 2)
          })}
          required /><br/>
 
