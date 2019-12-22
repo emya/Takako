@@ -104,8 +104,8 @@ class RequestForm extends Component {
       errors.push("Total Item Price has to be between $20 and $2499");
     }
 
-    if (commission_fee < 10) {
-      errors.push("Minimum commission fee is 10$");
+    if (commission_fee < 5) {
+      errors.push("Minimum commission fee is $5");
     }
 
     return errors;
@@ -285,17 +285,17 @@ class RequestForm extends Component {
           onChange={(e) => this.setState({
             n_items: e.target.value,
             proposed_price: e.target.value*this.state.price_per_item,
-            transaction_fee: Math.max(Math.round(e.target.value*this.state.price_per_item*0.08), 1)
+            transaction_fee: Math.max(Math.round(e.target.value*this.state.price_per_item*0.08), 2)
           })}
         required /><br/>
 
         <p class="form-heading">Total Item Price (between $20 and $2499)</p><br/>
         $<p class="number-calculated">{(+this.state.proposed_price).toLocaleString()}</p><br/>
 
-        <p class="form-heading">Commission to Traveler (min. $10)</p><br/>
-        $<input type="number" placeholder="(Min. $10)" min="10" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
+        <p class="form-heading">Commission to Traveler (min. $5)</p><br/>
+        $<input type="number" placeholder="(Min. $5)" min="5" value={this.state.commission_fee}  onChange={(e) => this.setState({commission_fee: e.target.value})}/><br/>
 
-        <p class="form-heading">Transaction Fee (8% of item price, minimum of $1)</p><br/>
+        <p class="form-heading">Transaction Fee (8% of item price, minimum of $2)</p><br/>
         $<p class="number-calculated">{(+this.state.transaction_fee).toLocaleString()}</p><br/>
 
         <p class="form-heading">Your Total Payment</p><br/>
