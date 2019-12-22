@@ -138,7 +138,7 @@ class Takako extends Component {
             <p class="how-4">Traveler gets paid!</p>
           </div>
           </div>
-          <a class="button" href="/register">Get Started</a>
+          <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">Get Started</a>
         </section>
 
         <section class="service">
@@ -207,7 +207,8 @@ class Takako extends Component {
         </div>
         <p class="use-disclaimer">*Simulated data</p>
         </div>
-        <a class="button" href="/register">Get Started</a>
+        <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">Get Started</a>
+
        </section>
 
       <Footer />
