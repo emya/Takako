@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from "react-router-dom";
 import {requests, auth} from "../actions";
+import Linkify from 'react-linkify';
+
 
 import '../css/style.scss';
 
@@ -661,8 +663,8 @@ class TransactionHistory extends Component {
                <p class="history-date new-update">NEW!</p>
                <p class="history-update">Payment Detail</p>
                <ul class="request-data">
-                 {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
-                 <li>Number of Item(s):   ${requestHistory.n_items}</li>
+                 {requestHistory.price_per_item && (<li> Price per Item:  ${requestHistory.price_per_item}</li> )}
+                 <li>Number of Item(s):   {requestHistory.n_items}</li>
                  <li>Total Item Price:   ${requestHistory.proposed_price}</li>
                  <li>Commission Fee:   ${requestHistory.commission_fee}</li>
                  <li>Transaction Fee (8% of the proposed price):   ${requestHistory.transaction_fee}</li>
@@ -757,7 +759,7 @@ class TransactionHistory extends Component {
                <li>Request {requestHistory.requester.first_name} sent</li>
                <li>Item Name:  {requestHistory.item_name}</li>
                {requestHistory.price_per_item && (<li> Price per Item:  {requestHistory.price_per_item}</li> )}
-               <li>Number of Item(s):   ${requestHistory.n_items}</li>
+               <li>Number of Item(s):   {requestHistory.n_items}</li>
                <li>Total Item Price :  ${requestHistory.proposed_price.toLocaleString()}</li>
               </ul>
            </div>
@@ -1182,7 +1184,9 @@ class TransactionHistory extends Component {
              )}
              <li>Location:   {requestHistory.trip.destination}</li>
              <li>Item Name:  {requestHistory.item_name}</li>
-             <li>Item URL (Optional):   {requestHistory.item_url}</li>
+             {requestHistory.item_url && (
+               <li>Item URL:   <Linkify>{requestHistory.item_url}</Linkify></li>
+             )}
              {requestHistory.item_image && (
                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/requests/${requestHistory.id}/${requestHistory.item_image}`} />
              )}
