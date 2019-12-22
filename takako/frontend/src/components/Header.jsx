@@ -11,8 +11,8 @@ render() {
         <a href="/" class="logo-link"><img class="logo" src={require('../img/Torimo_new.png')} /></a>
         { !this.props.user && (
           <div class="login">
-            <a class="register" href="/register">Get Started</a>
-            <a class="signin" href="/login">Sign in</a>
+            <a class="register" href="/register" onClick="ga('send', 'event', 'link', 'click', 'register3')">Get Started</a>
+            <a class="signin" href="/login" onClick="ga('send', 'event', 'link', 'click', 'signin')">Sign in</a>
           </div>
         )}
         { this.props.user && (
@@ -25,7 +25,7 @@ render() {
       <div class="mobile-topbar-contents">
 
         <a href="#"><img class="logo-mobile" src={require('../img/Torimo_new.png')} /></a>
-        <a href="/login" class="mobile-signin">
+        <a href="/login" class="mobile-signin" onClick="ga('send', 'event', 'link', 'click', 'signin')">
           <img class="mobile-menu-icon" src={require('../img/signin.png')} />
           <p class="sign-in-mobile">Sign in</p>
         </a>

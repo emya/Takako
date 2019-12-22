@@ -53,7 +53,7 @@ class SeeTrips extends Component {
                   <td>{trip.departure_date} - {trip.arrival_date}</td>
                   <td>{trip.destination}</td>
                   {!this.props.user && (
-                    <td><a href="/register" class="btn request">Request Item</a></td>
+                    <td><a href="/register" class="btn request" onClick="ga('send', 'event', 'link', 'click', 'register1')">Request Item</a></td>
                   )}
                   {this.props.user && (this.props.user.id !== trip.user.id) && (
                     <td><a href={`/profile/${trip.user.id}`} class="user-link">{trip.user.first_name}</a></td>
