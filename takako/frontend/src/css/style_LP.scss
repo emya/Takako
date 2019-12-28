@@ -97,9 +97,13 @@ a:link, a:visited, a:hover, a:active {
   justify-content: flex-end;
   height: 100%;
   width: 150px;
-  position: relative;
+  vertical-align: middle;
+  margin-left: 10px;
+}
 
-  // font-size: 0.8rem;
+.mobile-header-link {
+  margin: 20px 0;
+  vertical-align: middle;
 }
 
 .mobile-topbar-contents {
