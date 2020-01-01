@@ -13,3 +13,7 @@
 
 ### `npm run build`
 ### `python manage.py collectstatic`
+
+## Nginx in Prod 
+### Exec into nginx container to enable wordpress
+### `service php7.3-fpm start`
