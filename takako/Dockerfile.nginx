@@ -1,4 +1,6 @@
-FROM nginx:1.17.2-alpine
+FROM nginx:latest
+RUN apt-get update && apt-get install -y nginx-full php7.3-fpm php7.3-mysql
 
 RUN rm /etc/nginx/conf.d/default.conf
+RUN service php7.3-fpm start
 COPY nginx.conf /etc/nginx/conf.d

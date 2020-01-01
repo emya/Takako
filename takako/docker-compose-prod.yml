@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=takako.settings_prod
     expose:
       - 8000
     volumes:
@@ -12,6 +14,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
+    environment:
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
     ports:
       - "80:80"
       - "443:443"
@@ -20,6 +25,8 @@ services:
       - /docker-volumes/etc/letsencrypt/live/torimo.io/fullchain.pem:/etc/letsencrypt/live/torimo.io/fullchain.pem
       - /docker-volumes/etc/letsencrypt/live/torimo.io/privkey.pem:/etc/letsencrypt/live/torimo.io/privkey.pem
       - ./static:/static
+      - /docker-volumes/data/letsencrypt:/data/letsencrypt
+      - /var/www/html/blog:/usr/share/nginx/html/blog
     depends_on:
       - server
   redis:
