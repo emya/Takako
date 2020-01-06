@@ -213,6 +213,16 @@ class Takako extends Component {
 
        </section>
 
+       <section>
+         <script src="https://snapwidget.com/js/snapwidget.js"></script>
+         <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
+         <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
+         <iframe src="https://snapwidget.com/embed/772909" class="snapwidget-widget"
+           allowtransparency="true" frameborder="0" scrolling="no" style={{border:'none', overflow:'hidden',  width:'900px', height:'300px'}}>
+         </iframe>
+
+       </section>
+
       <Footer />
 
       </body>
