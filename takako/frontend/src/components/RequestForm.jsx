@@ -104,6 +104,10 @@ class RequestForm extends Component {
       errors.push("Total Item Price has to be between $20 and $2499");
     }
 
+    if (price < commission_fee) {
+      errors.push("Total Item Price has to be greater than or equal to commission fee");
+    }
+
     if (commission_fee < 5) {
       errors.push("Minimum commission fee is $5");
     }
@@ -289,7 +293,7 @@ class RequestForm extends Component {
           })}
         required /><br/>
 
-        <p class="form-heading">Total Item Price (between $20 and $2499)</p><br/>
+        <p class="form-heading">Total Item Price (between $20 and $2499, and greater than or equal to Commission to Traveler)</p><br/>
         $<p class="number-calculated">{(+this.state.proposed_price).toLocaleString()}</p><br/>
 
         <p class="form-heading">Commission to Traveler (min. $5)</p><br/>
