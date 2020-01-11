@@ -17,6 +17,7 @@ render() {
       </div>
       <div class="footer-item">
         <ul>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/how-it-works">How It Works</a></li>
           <li><a href="/contact-us">Contact Us</a></li>
         </ul>
