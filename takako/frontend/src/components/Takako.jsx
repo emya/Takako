@@ -103,28 +103,8 @@ class Takako extends Component {
         </div>
 
         <section class="how">
+          <p class="how-intro">Torimo matches shoppers searching for <span class="bold">locally unavailable products</span> <br/> with travelers looking to earn some <span class="bold">cash while traveling.</span></p>
           <h2 class="heading-h">How It Works</h2>
-          {/*
-          <div class="how-wrapper">
-            <div class="how-box">
-              <div class="how-title">Request Item</div>
-              <div class="how-description">Find someone near you, who are traveling to where you want your item from.
-              </div>
-            </div>
-            <div class="how-box">
-              <div class="how-title">Let Traveler Get It</div>
-              <div class="how-description">The traveler can get your item at an agreed price.
-              </div>
-            </div>
-            <div class="how-box">
-              <div class="how-title">Receive It</div>
-              <div class="how-description">You can choose your item to be shipped domestically or handed to you to minimize cost.
-              </div>
-            </div>
-          </div>
-          */}
-          <p class="how-intro">Torimo matches NY-based users who want to purchase item from abroad (“Requester”)<br/>with someone traveling to the destination where the items can be purchased (“Traveler”).
-</p>
           <img class="lp-how" src={require('../img/how-steps.png')}/>
           <div class="how-container">
             <p class="how-1">Requester requests item<br/> & pays</p>
@@ -144,85 +124,86 @@ class Takako extends Component {
           <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">Get Started</a>
         </section>
 
-        <section class="service">
-        <h2 class="heading s">Our Services</h2>
-        <div class="wrapper-service">
-        <div class="service-box">
-        <img class="service-icon" src={require('../img/shopping-cart.png')} />
-        <div class="service-title">Propose<br/>Price of Item</div>
-        <p class="service-text">Requester proposes price of item(s). If Traveler agrees to the price, Requester pays for the item(s) + a negotiated commission to Traveler.</p>
-        </div>
-        <div class="service-box">
-        <img class="service-icon" src={require('../img/globe.png')} />
-        <div class="service-title">Access to<br/>Unique Item</div>
-        <p class="service-text">Requester can reach ANY items that are not available locally or online.</p>
-        </div>
-        <div class="service-box">
-        <img class="service-icon" src={require('../img/traveler.png')} />
-        <div class="service-title">Travel &<br/>Make Money</div>
-        <p class="service-text">Traveler can subsidize their costly international trips by sparing just a corner of their suitcase.</p>
-        </div>
-        <div class="service-box">
-        <img class="service-icon" src={require('../img/pay.png')} />
-        <div class="service-title">Easy and Safe<br/>Transaction</div>
-        <p class="service-text">No cumbersome negotiation. Torimo will release the payment upon the delivery of the item(s).</p>
-        </div>
-        </div>
-        </section>
-
        <section class="why-use">
-        <h2 class="heading w">Why Use Torimo?</h2>
+        <h2 class="heading w">Past Transactions</h2>
         <div class="use-case">
           <div class="item-image">
-            <p class="item-title">Cosmetics from Japan</p>
+            <p class="item-title">Skin Peel from Japan</p>
             <img src={require('../img/cosme.png')}/>
           </div>
           <div class="saving-container">
             <div class="saving">
               <div class="user-pic"><img src={require('../img/requester1.png')}/></div>
               <p>Requester</p>
-              <p class="amount">Save $50<span class="ast">*</span></p>
+              <p class="amount">Paid $50</p>
             </div>
             <div class="saving">
               <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
               <p>Traveler</p>
-              <p class="amount">Earn $30<span class="ast">*</span></p>
+              <p class="amount">Earned $15</p>
             </div>
           </div>
-          <p class="use-disclaimer">*Simulated data</p>
+          {/*<p class="use-disclaimer">*Simulated data</p>*/}
         </div>
         <div class="use-case">
         <div class="item-image">
-          <p class="item-title">Select Clothing from Italy</p>
+          <p class="item-title">Bento box from Japan</p>
           <img src={require('../img/clothes.png')}/>
         </div>
         <div class="saving-container">
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount s">Item unavailable<br/> in NY</p>
+            <p class="amount">Paid $30</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
             <p>Traveler</p>
-            <p class="amount">Earn $45<span class="ast">*</span></p>
+            <p class="amount">Earned $10</p>
           </div>
         </div>
-        <p class="use-disclaimer">*Simulated data</p>
+        {/*<p class="use-disclaimer">*Simulated data</p>*/}
         </div>
         <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">Get Started</a>
 
+
+        <section class="snapwidget">
+        <script src="https://snapwidget.com/js/snapwidget.js"></script>
+        <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
+        <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
+        <iframe src="https://snapwidget.com/embed/772909" class="snapwidget-widget"
+        allowtransparency="true" frameborder="0" scrolling="no" style={{border:'none', overflow:'hidden',  width:'100%', height:'300px'}}>
+        </iframe>
+        </section>
+
        </section>
 
-       <section>
-         <script src="https://snapwidget.com/js/snapwidget.js"></script>
-         <link rel="stylesheet" href="https://snapwidget.com/stylesheets/snapwidget-lightbox.css" />
-         <script src="https://snapwidget.com/js/snapwidget-lightbox.js"></script>
-         <iframe src="https://snapwidget.com/embed/772909" class="snapwidget-widget"
-           allowtransparency="true" frameborder="0" scrolling="no" style={{border:'none', overflow:'hidden',  width:'900px', height:'300px'}}>
-         </iframe>
-
+       <section class="service">
+       <h2 class="heading s">Our Services</h2>
+       <div class="wrapper-service">
+       <div class="service-box">
+       <img class="service-icon" src={require('../img/shopping-cart.png')} />
+       <div class="service-title">Propose<br/>Price of Item</div>
+       <p class="service-text">Requester proposes price of item(s). If Traveler agrees to the price, Requester pays for the item(s) + a negotiated commission to Traveler.</p>
+       </div>
+       <div class="service-box">
+       <img class="service-icon" src={require('../img/globe.png')} />
+       <div class="service-title">Access to<br/>Unique Item</div>
+       <p class="service-text">Requester can reach ANY items that are not available locally or online.</p>
+       </div>
+       <div class="service-box">
+       <img class="service-icon" src={require('../img/traveler.png')} />
+       <div class="service-title">Travel &<br/>Make Money</div>
+       <p class="service-text">Traveler can subsidize their costly international trips by sparing just a corner of their suitcase.</p>
+       </div>
+       <div class="service-box">
+       <img class="service-icon" src={require('../img/pay.png')} />
+       <div class="service-title">Easy and Safe<br/>Transaction</div>
+       <p class="service-text">No cumbersome negotiation. Torimo will release the payment upon the delivery of the item(s).</p>
+       </div>
+       </div>
        </section>
+
 
       <Footer />
 

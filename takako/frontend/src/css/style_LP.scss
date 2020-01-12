@@ -274,13 +274,13 @@ a:link, a:visited, a:hover, a:active {
 .how {
   background-color: #FFF;
   width: 100%;
-  height: 670px;
-  padding: 60px 0;
+  // height: 670px;
+  padding: 80px 0;
 }
 
 .how {
   @media (max-width: 767px) {
-    height: 800px;
+    // height: 800px;
     padding: 30px 7%;
   }}
 
@@ -397,7 +397,14 @@ a:link, a:visited, a:hover, a:active {
 .how-intro {
   display: inline-block;
   width: 70%;
-  margin: auto auto 50px;
+  margin: 30px auto 80px;
+  font-size: 1.4em;
+  line-height: 1.5;
+  color: #999999
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .how-intro {
@@ -591,16 +598,16 @@ a:link, a:visited, a:hover, a:active {
 // Why Use
 
 .why-use {
-  background-color: white;
+  background-color: #FCF5EB;
   width: 100%;
-  height: 900px;
+  // height: 900px;
   padding: 60px 100px;
 }
 
 .why-use {
   @media (max-width: 767px) {
     padding: 30px 7%;
-    height: 1400px;
+    height: 1500px;
   }}
 
 .heading.w {
@@ -612,7 +619,7 @@ a:link, a:visited, a:hover, a:active {
   // position: relative;
   width: 40%;
   // height: 530px;
-  background-color: #FCF5EB;
+  background-color: white;
   margin: 0 30px 0;
   padding: 30px 10px 20px;
   border-radius: 3%;
@@ -803,4 +810,16 @@ footer li {
 .how-title, .person-title, .service-title {
   @media (max-width: 767px) {
     font-size: 2.5rem;
+      }}
+
+
+.snapwidget {
+  width: 100%;
+  height: auto;
+  margin-top: 100px;
+}
+
+.snapwidget {
+  @media (max-width: 767px) {
+    margin-top:50px;
       }}
