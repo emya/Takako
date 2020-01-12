@@ -167,6 +167,8 @@ class MyProfile extends Component {
           <input class="btn savep" type="submit" value="Save Profile" />
         </form>
 
+        <h3 class="upcoming">Wish list</h3>
+
         <h3 class="upcoming">Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
 

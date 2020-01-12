@@ -40,7 +40,7 @@ from .models import (
     Trip, ItemRequest, Charge,
     PurchaseNotification, Meetup,
     SharedContact, ContactUs,
-    RateTraveler, RateRequester
+    RateTraveler, RateRequester, WishList
 )
 #from django.contrib.auth.models import User
 from .serializers import (
@@ -54,6 +54,7 @@ from .serializers import (
     ChargeSerializer,
     ProfileSerializer,
     TripSerializer,
+    WishListSerializer,
     TravelerProfileSerializer,
     RateTravelerSerializer,
     RateRequesterSerializer,
@@ -612,6 +613,11 @@ class TravelerProfileViewSet(viewsets.ModelViewSet):
 
         queryset = queryset.filter(id=self.request.user.id)
         return queryset
+
+class WishListViewSet(viewsets.ModelViewSet):
+    permission_classes = [BaseTransactionPermissions,]
+    queryset = WishList.objects.all()
+    serializer_class = WishListSerializer
 
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer

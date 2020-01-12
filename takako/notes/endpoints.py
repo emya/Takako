@@ -17,6 +17,7 @@ from .api import (
     TravelerProfileViewSet,
     RateTravelerViewSet,
     RateRequesterViewSet,
+    WishListViewSet,
     RegistrationAPI,
     LoginAPI,
     UserAPI,
@@ -32,6 +33,7 @@ router.register('share/contact', SharedContactViewSet, 'share_contact')
 router.register('contact/us', ContactUsViewSet, 'contact_us')
 router.register('profiles', ProfileViewSet, 'profiles')
 router.register('trips', TripViewSet, 'trips')
+router.register('wishlist', WishListViewSet, 'wishlist')
 #router.register('requests/item/?P<id>\d+)$', ItemRequestViewSet, 'request_item')
 router.register('requests/item', ItemRequestViewSet, 'request_item')
 router.register('requests/charge', ChargeViewSet, 'request_charge')

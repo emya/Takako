@@ -5,7 +5,7 @@ from .models import (
     Trip, ItemRequest, Charge,
     Meetup, PurchaseNotification,
     SharedContact, ContactUs,
-    RateTraveler, RateRequester
+    RateTraveler, RateRequester, WishList
 )
 
 from rest_framework import serializers
@@ -59,6 +59,13 @@ class TripSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trip
+        fields = '__all__'
+
+class WishListSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = WishList
         fields = '__all__'
 
 

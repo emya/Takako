@@ -250,3 +250,9 @@ class RateRequester(models.Model):
     requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
     rating = models.IntegerField()
 
+class WishList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlist')
+    destination1 = models.CharField(max_length=100, blank=True)
+    destination2 = models.CharField(max_length=100, blank=True)
+    destination3 = models.CharField(max_length=100, blank=True)
+
