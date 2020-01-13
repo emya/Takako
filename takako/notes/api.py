@@ -615,9 +615,44 @@ class TravelerProfileViewSet(viewsets.ModelViewSet):
         return queryset
 
 class WishListViewSet(viewsets.ModelViewSet):
-    permission_classes = [BaseTransactionPermissions,]
-    queryset = WishList.objects.all()
+    permission_classes = [BaseUserPermissions,]
     serializer_class = WishListSerializer
+
+    def create(self, request):
+        # Create or get
+        wishlist, is_created = WishList.objects.get_or_create(user=request.user)
+        area = request.data.pop("area")
+
+        if not wishlist.area1:
+            wishlist.area1 = area
+            wishlist.save()
+        elif not wishlist.area2:
+            wishlist.area2 = area
+            wishlist.save()
+        elif not wishlist.area3:
+            wishlist.area3 = area
+            wishlist.save()
+
+        serializer = self.serializer_class(wishlist)
+        return Response(serializer.data)
+
+    def partial_update(self, request, *args, **kwargs):
+        print("partial_update")
+        print("request.data", request)
+
+        instance = self.get_object()
+        #print("instance", instance)
+
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def get_queryset(self):
+        queryset = WishList.objects.all()
+        queryset = queryset.filter(user=self.request.user)
+
+        return queryset
 
 class RegistrationAPI(generics.GenericAPIView):
     serializer_class = CreateUserSerializer

@@ -14,182 +14,145 @@ import '../css/style_LP.scss';
 
 class WishList extends Component {
   componentDidMount() {
-    this.props.wishlist();
+    this.props.fetchWishlist();
   }
 
   state = {
-    departure_date: null,
-    arrival_date: null,
-    destination: "",
-    updateTripId: null,
+    area: "",
     search: "",
     errors: []
   }
 
-  handleDepartureDateChange(date) {
-    this.setState({departure_date: date});
-  }
-
-  handleArrivalDateChange(date) {
-    this.setState({arrival_date: date});
-  }
-
   resetForm = () => {
-    this.setState({departure_date: "", arrival_date: "",  destination: "", updateNoteId: null});
+    this.setState({area: "", updateNoteId: null});
   }
 
-  validateForm = (departure_date, arrival_date, destination) => {
+  validateForm = (area) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
 
-    if (!departure_date) {
-      errors.push("Departure Date can't be empty");
-    }
-
-    if (!arrival_date) {
-      errors.push("Arrival Date can't be empty");
-    }
-
-    if (destination.length === 0) {
-      errors.push("Trip Destination can't be empty");
+    if (area.length === 0) {
+      errors.push("Area can't be empty");
     }
 
     return errors;
   }
 
-  selectForEdit = (id) => {
-    let trip = this.props.trips[id];
-    this.setState({
-      departure_date: trip.departure_date,
-      arrival_date: trip.arrival_date,
-      destination: trip.destination,
-      updateTripId: id});
-  }
-
   handleSelectDestinationSuggest(suggest) {
-    this.setState({search: "", destination: suggest.formatted_address})
+    this.setState({search: "", area: suggest.formatted_address})
   }
 
   handleDestinationChange(e) {
-    this.setState({search: e.target.value, destination: e.target.value})
+    this.setState({search: e.target.value, area: e.target.value})
   }
 
-  submitTrip = (e) => {
+  removeArea = (id, area_key) => {
+    this.props.removeArea(id, area_key);
+  }
+
+  submitArea = (e) => {
     e.preventDefault();
-    const errors = this.validateForm(this.state.departure_date, this.state.arrival_date, this.state.destination);
+    const errors = this.validateForm(this.state.area);
 
     if (errors.length > 0) {
       this.setState({ errors });
       return;
     }
 
-    if (this.state.updateTripId === null) {
-      this.props.addTrip(this.state.departure_date, this.state.arrival_date, this.state.destination).then(this.resetForm)
-    } else {
-      this.props.updateTrip(this.state.updateTripId, this.state.departure_date).then(this.resetForm);
-    }
+    this.props.addArea(this.state.area).then(this.resetForm)
     //this.resetForm();
   }
 
   render() {
-    let userId;
-    let is_other = false;
-    if (this.props.is_other && this.props.is_other === "true") {
-      is_other = true;
-      userId = this.props.userId;
-    }
     const errors = this.state.errors;
+
+    let is_full = false;
+    if (this.props.wishlist && this.props.wishlist[0]){
+      this.props.wishlist[0].map((wish) => {
+        if (wish.area1 && wish.area2 && wish.area3) {
+          is_full = true;
+        }
+      });
+    }
 
     return (
     <div>
-      <table class="table-data">
-        <tr class="table-heading-upcoming">
-          <td>Date</td>
-          <td>Destination</td>
-          <td></td>
-        </tr>
-        {this.props.trips[0] && this.props.trips[0].upcoming_trips && this.props.trips[0].upcoming_trips.map((trip) => (
-          <tr>
-            <td>{trip.departure_date} - {trip.arrival_date}</td>
-            <td>{trip.destination}</td>
-            <td>{is_other &&
-                 <Link to={{
-                   pathname: `/request/form/${userId}/${trip.id}`,
-                   state: {
-                     trip: trip,
-                   }
-                 }} class="btn request" >Request Item</Link> }
-            </td>
+      <p>
+      Register areas (up to 3) where products you want to get are available. <br/>
+      We will let you know when we have traveler(s) going to the areas.
+      </p>
+      {this.props.wishlist && this.props.wishlist[0] && this.props.wishlist[0].map((wish) => (
+        <table class="table-data">
+          <tr class="table-heading-upcoming">
+            <td>Areas (up to 3)</td>
+            <td></td>
           </tr>
-        ))}
-      </table>
 
-      {!is_other &&
-        <div class="add-new-trip">
-          <h3>Add New Trip</h3>
-          <form onSubmit={this.submitTrip}
-                onKeyPress={event => {
-                  if (event.which === 13 /* Enter */) {
-                    event.preventDefault();
-                  }
-                }}
-          >
-             {errors.map(error => (
-               <p key={error}>Error: {error}</p>
-             ))}
-            <p class="object">Departure Date</p>
-            <DatePicker selected={this.state.departure_date} onChange={this.handleDepartureDateChange.bind(this)}/>
-            <p class="object">Return Date</p>
-            <DatePicker selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
-
-            <p class="object">Trip Destination</p>
-            <ReactGoogleMapLoader
-                params={{
-                  key: keys.MAP_JS_API,
-                  libraries: "places,geocode",
-                }}
-                render={googleMaps =>
-                  googleMaps && (
-                    <div>
-                      <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.search, types: ['(regions)']}}
-                        googleMaps={googleMaps}
-                        onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
-                        class="google-api"
-                      >
-                        <input
-                          id="residence"
-                          class="trip-entry"
-                          placeholder="Enter destination"
-                          value={this.state.destination}
-                          onChange={this.handleDestinationChange.bind(this)}
-                        />
-                      </ReactGooglePlacesSuggest>
-                    </div>
-                  )
-                }
-              />
-            <input class="btn savet" type="submit" value="Save Trip" />
-          </form>
-        </div>
-      }
-
-      <h3 class="upcoming">Past Trips</h3>
-      <table class="table-data">
-        <tr class="table-heading-upcoming">
-          <td>Date</td>
-          <td>Destination</td>
-          <td></td>
-        </tr>
-        {this.props.trips[0] && this.props.trips[0].past_trips && this.props.trips[0].past_trips.map((trip) => (
           <tr>
-            <td>{trip.departure_date} - {trip.arrival_date}</td>
-            <td>{trip.destination}</td>
+            {wish.area1 && (<td>{wish.area1}</td> )}
+            {wish.area1 && (<td><button class="btn decline" onClick={() => this.removeArea(wish.id, "area1")}>Remove</button></td>)}
           </tr>
-        ))}
-      </table>
 
+          <tr>
+            {wish.area2 && (<td>{wish.area2}</td> )}
+            {wish.area2 && (<td><button class="btn decline" onClick={() => this.removeArea(wish.id, "area2")}>Remove</button></td>)}
+          </tr>
+
+          <tr>
+            {wish.area3 && (<td>{wish.area3}</td> )}
+            {wish.area3 && (<td><button class="btn decline" onClick={() => this.removeArea(wish.id, "area3")}>Remove</button></td>)}
+          </tr>
+        </table>
+      ))}
+
+      <div class="add-new-trip">
+        <h3>Add New Area to Wish List</h3>
+        {is_full && (
+           <p>Please remove any of above areas to add new area to Wish List</p>
+        )}
+        {!is_full && (
+        <form onSubmit={this.submitArea}
+          onKeyPress={event => {
+            if (event.which === 13 /* Enter */) {
+              event.preventDefault();
+            }
+          }}
+        >
+          {errors.map(error => (
+            <p key={error}>Error: {error}</p>
+          ))}
+
+          <ReactGoogleMapLoader
+            params={{
+              key: keys.MAP_JS_API,
+              libraries: "places,geocode",
+            }}
+            render={googleMaps =>
+              googleMaps && (
+              <div>
+                <ReactGooglePlacesSuggest
+                  autocompletionRequest={{input: this.state.search, types: ['(regions)']}}
+                  googleMaps={googleMaps}
+                  onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
+                  class="google-api"
+                >
+                  <input
+                    id="residence"
+                    class="trip-entry"
+                    placeholder="Enter area"
+                    value={this.state.area}
+                    onChange={this.handleDestinationChange.bind(this)}
+                  />
+                </ReactGooglePlacesSuggest>
+              </div>
+              )
+            }
+          />
+          <input class="btn savet" type="submit" value="Save Trip" />
+        </form>
+        )}
+      </div>
     </div>
 
     )
@@ -206,8 +169,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    wishlist: () => {
+    fetchWishlist: () => {
       dispatch(wishlist.fetchWishlist());
+    },
+    addArea: (area) => {
+      return dispatch(wishlist.addArea(area));
+    },
+    removeArea: (id, area_key) => {
+      dispatch(wishlist.removeArea(id, area_key));
     },
     /*
     addTrip: (departure_date, arrival_date, destination) => {
