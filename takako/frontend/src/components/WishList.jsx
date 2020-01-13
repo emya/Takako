@@ -178,18 +178,6 @@ const mapDispatchToProps = dispatch => {
     removeArea: (id, area_key) => {
       dispatch(wishlist.removeArea(id, area_key));
     },
-    /*
-    addTrip: (departure_date, arrival_date, destination) => {
-      return dispatch(trips.addTrip(departure_date, arrival_date, destination));
-    },
-    updateTrip: (id, text) => {
-      return dispatch(trips.updateNote(id, text));
-      //dispatch(notes.updateNote(id, text));
-    },
-    deleteTrip: (id) => {
-      dispatch(trips.deleteTrip(id));
-    },
-    */
   }
 }
 

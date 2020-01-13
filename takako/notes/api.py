@@ -637,11 +637,7 @@ class WishListViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def partial_update(self, request, *args, **kwargs):
-        print("partial_update")
-        print("request.data", request)
-
         instance = self.get_object()
-        #print("instance", instance)
 
         serializer = self.serializer_class(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
