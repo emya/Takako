@@ -128,14 +128,14 @@ class Takako extends Component {
         <h2 class="heading w">Past Transactions</h2>
         <div class="use-case">
           <div class="item-image">
-            <p class="item-title">Skin Peel from Japan</p>
-            <img src={require('../img/cosme.png')}/>
+            <p class="item-title">Face serum from Japan</p>
+            <img src={require('../img/sk2.png')}/>
           </div>
           <div class="saving-container">
             <div class="saving">
               <div class="user-pic"><img src={require('../img/requester1.png')}/></div>
               <p>Requester</p>
-              <p class="amount">Paid $50</p>
+              <p class="amount">Saved $20</p>
             </div>
             <div class="saving">
               <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
@@ -148,13 +148,13 @@ class Takako extends Component {
         <div class="use-case">
         <div class="item-image">
           <p class="item-title">Bento box from Japan</p>
-          <img src={require('../img/clothes.png')}/>
+          <img src={require('../img/bento.png')}/>
         </div>
         <div class="saving-container">
           <div class="saving">
             <div class="user-pic"><img src={require('../img/requester2.png')}/></div>
             <p>Requester</p>
-            <p class="amount">Paid $30</p>
+            <p class="amount">Saved $15</p>
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
