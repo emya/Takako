@@ -10,6 +10,7 @@ import SideMenu from './SideMenu';
 import MobileSideMenu from './MobileSideMenu';
 import Footer from './Footer';
 import UpcomingTrips from './UpcomingTrips';
+import WishList from './WishList';
 
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
@@ -166,6 +167,9 @@ class MyProfile extends Component {
           ))}
           <input class="btn savep" type="submit" value="Save Profile" />
         </form>
+
+        <h3 class="upcoming">Wish List</h3>
+        <WishList />
 
         <h3 class="upcoming">Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
