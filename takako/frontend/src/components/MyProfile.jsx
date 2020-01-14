@@ -15,6 +15,8 @@ import WishList from './WishList';
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
 
+import StarRatings from 'react-star-ratings';
+
 import { keys } from '../keys.js';
 
 library.add(faIgloo)
@@ -125,6 +127,13 @@ class MyProfile extends Component {
               {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
 
               <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+
+              <StarRatings
+                rating={4.5}
+                starHoverColor="#16C4FD"
+                starRatedColor="#16C4FD"
+                numberOfStars={5}
+              />
               <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
               <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
