@@ -43,7 +43,7 @@ class Profile extends Component {
               <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
             )}
             {!profile.image && (<img src={require('../img/default.png')} />)}
-
+            <p>As a Traveler</p>
             <StarRatings
                 rating={4.5}
                 starHoverColor="#16C4FD"
@@ -51,6 +51,13 @@ class Profile extends Component {
                 numberOfStars={5}
             />
 
+            <p>As a Requester</p>
+            <StarRatings
+                rating={4}
+                starHoverColor="#16C4FD"
+                starRatedColor="#16C4FD"
+                numberOfStars={5}
+            />
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
