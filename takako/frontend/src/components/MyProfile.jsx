@@ -128,8 +128,17 @@ class MyProfile extends Component {
 
               <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
+              <p>As a Traveler</p>
               <StarRatings
                 rating={4.5}
+                starHoverColor="#16C4FD"
+                starRatedColor="#16C4FD"
+                numberOfStars={5}
+              />
+
+              <p>As a Requester</p>
+              <StarRatings
+                rating={4}
                 starHoverColor="#16C4FD"
                 starRatedColor="#16C4FD"
                 numberOfStars={5}
