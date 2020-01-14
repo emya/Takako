@@ -132,9 +132,7 @@ class MyProfile extends Component {
                 rating={4.5}
                 starHoverColor="#16C4FD"
                 starRatedColor="#16C4FD"
-                //changeRating={this.changeRating}
                 numberOfStars={5}
-                name='rating'
               />
               <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
               <a href="#" class="sns"><i class="fab fa-facebook"></i></a>

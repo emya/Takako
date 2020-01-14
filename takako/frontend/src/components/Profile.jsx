@@ -10,6 +10,8 @@ import MobileSideMenu from './MobileSideMenu'
 import Footer from './Footer'
 import UpcomingTrips from './UpcomingTrips'
 
+import StarRatings from 'react-star-ratings';
+
 import { keys } from '../keys.js';
 
 library.add(faIgloo)
@@ -41,6 +43,13 @@ class Profile extends Component {
               <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
             )}
             {!profile.image && (<img src={require('../img/default.png')} />)}
+
+            <StarRatings
+                rating={4.5}
+                starHoverColor="#16C4FD"
+                starRatedColor="#16C4FD"
+                numberOfStars={5}
+            />
 
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
