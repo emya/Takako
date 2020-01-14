@@ -623,6 +623,21 @@ class TransactionHistory extends Component {
            </div>
          )}
 
+         {/* Refunded to the requester */
+         is_requester && process_status === "refunded" && (
+         <div class="history-box">
+           <div class="history-wrapper">
+             <p class="history-date">
+                 {requestHistory.refunded_at && moment(requestHistory.refunded_at, "YYYY-MM-DD HH:mm:ss").format("YYYY-MM-DD")}
+             </p>
+             <p class="notify-heading">
+               We've processed your refund since {requestHistory.respondent.first_name} canceled the request,
+               and you should expect to see the amount re-appear in your credit card account in the next couple business days
+             </p>
+           </div>
+         </div>
+         )}
+
          {/* the requester made payment so the traveler notify the purchase */
          is_requester && process_status === "payment_made" && (
          <div>
