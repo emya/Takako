@@ -168,10 +168,10 @@ class MyProfile extends Component {
           <input class="btn savep" type="submit" value="Save Profile" />
         </form>
 
-        <h3 class="upcoming">Wish List</h3>
+        <h3 class="upcoming">My Wish List</h3>
         <WishList />
 
-        <h3 class="upcoming">Upcoming Trips</h3>
+        <h3 class="upcoming">My Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
 
 

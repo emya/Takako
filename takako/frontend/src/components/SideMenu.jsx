@@ -8,8 +8,8 @@ render() {
       <div class="sidemenu">
         <ul>
           <li><a href={'/search'}>Find Traveler</a></li>
+          <li><a href={'/trips'}>Browse Trips</a></li>
           <li><a href={'/transaction/status'}>My Transactions</a></li>
-          <li><a href={'/trips'}>See Trips</a></li>
           <li><a href={'/how-it-works'}>How It Works</a></li>
           <li><a href={'/contact-us'}>Contact Us</a></li>
           <li><a class="logout" onClick={this.props.logout}>Logout</a></li>

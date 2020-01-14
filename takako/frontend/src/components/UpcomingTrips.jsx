@@ -184,7 +184,6 @@ class UpcomingTrips extends Component {
         <tr class="table-heading-upcoming">
           <td>Date</td>
           <td>Destination</td>
-          <td></td>
         </tr>
         {this.props.trips[0] && this.props.trips[0].past_trips && this.props.trips[0].past_trips.map((trip) => (
           <tr>

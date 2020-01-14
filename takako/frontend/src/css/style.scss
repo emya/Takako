@@ -515,16 +515,22 @@ li {
 
 .add-new-trip {
   background: #fcf5eb;
-  margin: 90px auto 130px;
-  width: 100%;
+  margin: 60px auto 110px;
+  width: 90%;
   padding: 10px 20px 20px 20px;
   border-radius: 7px;
   text-align: center;
 }
 
+.add-new-trip {
+  @media (max-width: 767px) {
+    width: 100%;
+  }}
+
 
 .upcoming {
   margin-top: 100px;
+  margin-bottom: 40px;
 }
 
 .btn.savep {

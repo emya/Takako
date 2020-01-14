@@ -8,6 +8,7 @@ render() {
       <div class="sidemenu-mobile">
         <ul>
         <li><a href={'/search'}>Find Traveler</a><span>></span></li>
+        <li><a href={'/trips'}>Browse Trips</a><span>></span></li>
         <li><a href={'/myprofile'}>My Profile</a><span>></span></li>
         <li><a href={'/transaction/status'}>My Transactions</a><span>></span></li>
         <li><a href={'/how-it-works'}>How It Works</a><span>></span></li>

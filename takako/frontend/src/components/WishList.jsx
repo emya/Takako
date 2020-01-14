@@ -79,13 +79,13 @@ class WishList extends Component {
     return (
     <div>
       <p>
-      Register areas (up to 3) where products you want to get are available. <br/>
-      We will let you know when we have traveler(s) going to the areas.
+      Register up to 3 cities/countries where you wish to get products from!<br/>
+      Torimo will let you know once we have Traveler(s) going to the locations.
       </p>
       {this.props.wishlist && this.props.wishlist[0] && this.props.wishlist[0].map((wish) => (
         <table class="table-data">
           <tr class="table-heading-upcoming">
-            <td>Areas (up to 3)</td>
+            <td>Location (up to 3)</td>
             <td></td>
           </tr>
 
@@ -107,7 +107,7 @@ class WishList extends Component {
       ))}
 
       <div class="add-new-trip">
-        <h3>Add New Area to Wish List</h3>
+        <h3>Add New Location to Wish List</h3>
         {is_full && (
            <p>Please remove any of above areas to add new area to Wish List</p>
         )}
@@ -140,7 +140,7 @@ class WishList extends Component {
                   <input
                     id="residence"
                     class="trip-entry"
-                    placeholder="Enter area"
+                    placeholder="Enter city or country"
                     value={this.state.area}
                     onChange={this.handleDestinationChange.bind(this)}
                   />
