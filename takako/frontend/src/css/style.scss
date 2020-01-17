@@ -396,6 +396,21 @@ li {
   }
 }
 
+.profile-left {
+  @media (min-width: 767px) {
+    float: left;
+    width: 50%;
+  }
+}
+
+.profile-right {
+  @media (min-width: 767px) {
+    float: right;
+    width: 50%;
+  }
+}
+
+
 .profile img {
   display: block;
   height: 200px;
@@ -436,7 +451,7 @@ li {
 
 .user-data {
   // font-size: 2rem;
-  width: 30%;
+  width: 80%;
   // text-align: center;
 }
 
@@ -445,13 +460,25 @@ li {
     width: 100%;
   }}
 
+.sc-bZQynM.bpzdHV {
+  display: inline-block;
+  position: relative;
+}
+
 .user-data.resi {
-  width: 74%;
+  position: absolute;
+  right: -51%;
+  bottom: -100%;
+  display: block;
+  margin: 5px auto 5px;
+  text-align: left;
+  width: 201%;
 }
 
 .user-data.resi {
   @media (max-width: 767px) {
     width: 100%;
+    position: static;
   }}
 
 .active-info {
