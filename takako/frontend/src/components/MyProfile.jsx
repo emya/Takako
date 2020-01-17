@@ -114,77 +114,77 @@ class MyProfile extends Component {
 
       <div class="profile">
       <h2>My Profile</h2>
-        <form onSubmit={this.submitProfile}>
-          {errors.map(error => (
-             <p class="error-heading" key={error}>Error: {error}</p>
-          ))}
-          {this.props.profile.map((profile) => (
-            <div>
-              {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
-              {!this.state.image && profile.image && (
-                <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
-               )}
-              {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
+          <form onSubmit={this.submitProfile}>
+            {errors.map(error => (
+               <p class="error-heading" key={error}>Error: {error}</p>
+            ))}
+            {this.props.profile.map((profile) => (
 
-              <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
+              <div class="wrapper clearfix">
+              <div class="profile-left">
+                {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
+                {!this.state.image && profile.image && (
+                  <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
+                 )}
+                {!this.state.image && !profile.image && (<img src={require('../img/default.png')} />)}
 
-              <p>As a Traveler</p>
-              <StarRatings
-                rating={4.5}
-                starHoverColor="#16C4FD"
-                starRatedColor="#16C4FD"
-                numberOfStars={5}
-              />
 
-              <p>As a Requester</p>
-              <StarRatings
-                rating={4}
-                starHoverColor="#16C4FD"
-                starRatedColor="#16C4FD"
-                numberOfStars={5}
-              />
-              <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
-              <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
-              <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+                <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
-              <p class="object">City</p>
+                <p>User Rating</p>
+                <StarRatings
+                  rating={4.5}
+                  starHoverColor="#16C4FD"
+                  starRatedColor="#16C4FD"
+                  numberOfStars={5}
+                />
 
-              <ReactGoogleMapLoader
-                params={{
-                  key: keys.MAP_JS_API,
-                  libraries: "places,geocode",
-                }}
-                render={googleMaps =>
-                  googleMaps && (
-                    <div>
-                      <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.residence_search, types: ['(regions)']}}
-                        googleMaps={googleMaps}
-                        onSelectSuggest={this.handleSelectResidenceSuggest.bind(this, profile)}
-                      >
-                        <input
-                          id="residence"
-                          class="user-data resi"
-                          type="text"
-                          value={profile.residence}
-                          onChange={this.handleResidenceChange.bind(this, 'residence', profile)}
-                        />
-                      </ReactGooglePlacesSuggest>
-                    </div>
-                  )
-                }
-              />
+                </div>
+                <div class="profile-right">
 
-              <p class="object">Occupation</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
-              <p class="object">Gender</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'gender', profile)} value={profile.gender}/>
-              <p class="object">About Me</p>
-              <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
-            </div>
-          ))}
-          <input class="btn savep" type="submit" value="Save Profile" />
-        </form>
+                <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
+                <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
+
+                <p class="object">City</p>
+
+                <ReactGoogleMapLoader
+                  params={{
+                    key: keys.MAP_JS_API,
+                    libraries: "places,geocode",
+                  }}
+                  render={googleMaps =>
+                    googleMaps && (
+                      <div>
+                        <ReactGooglePlacesSuggest
+                          autocompletionRequest={{input: this.state.residence_search, types: ['(regions)']}}
+                          googleMaps={googleMaps}
+                          onSelectSuggest={this.handleSelectResidenceSuggest.bind(this, profile)}
+                        >
+                          <input
+                            id="residence"
+                            class="user-data resi"
+                            type="text"
+                            value={profile.residence}
+                            onChange={this.handleResidenceChange.bind(this, 'residence', profile)}
+                          />
+                        </ReactGooglePlacesSuggest>
+                      </div>
+                    )
+                  }
+                />
+
+                <p class="object">Occupation</p>
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'occupation', profile)} value={profile.occupation}/>
+                <p class="object">Gender</p>
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'gender', profile)} value={profile.gender}/>
+                <p class="object">About Me</p>
+                <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
+              </div>
+              </div>
+
+            ))}
+            <input class="btn savep" type="submit" value="Save Profile" />
 
         <h3 class="upcoming">My Wish List</h3>
         <WishList />
@@ -192,7 +192,7 @@ class MyProfile extends Component {
         <h3 class="upcoming">My Upcoming Trips</h3>
         <UpcomingTrips is_other="false"/>
 
-
+</form>
       </div>
     </div>
 
