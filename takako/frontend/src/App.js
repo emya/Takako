@@ -39,6 +39,8 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 
+import ReactGA from "react-ga";
+
 let store = createStore(takakoApp, applyMiddleware(thunk));
 
 
@@ -46,6 +48,7 @@ class RootContainerComponent extends Component {
 
     componentDidMount() {
         this.props.loadUser();
+        ReactGA.initialize('UA-114703031-5');
     }
 
     PrivateRoute = ({component: ChildComponent, ...rest}) => {
