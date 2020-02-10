@@ -28,6 +28,14 @@ a:link, a:visited, a:hover, a:active {
   cursor: pointer;
 }
 
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .heading {
   font-family: 'Abril Fatface';
   font-weight: normal;
@@ -607,11 +615,57 @@ a:link, a:visited, a:hover, a:active {
 .why-use {
   @media (max-width: 767px) {
     padding: 30px 7%;
-    height: 1500px;
+    // height: 1500px;
   }}
 
 .heading.w {
   color: #FFBF5D;
+}
+
+.case-one {
+  width: 85%;
+  margin: 35px auto 35px;
+  // background-color: white;
+  padding: 30px 10px 20px;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%,color-stop(.25, #F9F9F9), color-stop(.25, transparent),color-stop(.5, transparent), color-stop(.5, #F9F9F9),color-stop(.75, #F9F9F9), color-stop(.75, transparent),to(transparent));
+  -webkit-background-size: 14px 14px;
+}
+
+.case-one {
+  @media (max-width: 767px) {
+    margin: 5px auto 30px;
+    padding: none;
+    width: 100%;
+  }}
+
+.lisa-total {
+  display: inline-block;
+  vertical-align:top;
+  // font-weight: bold;
+  font-size: 2rem;
+  margin: auto auto;
+  line-height: 2;
+}
+
+.lisa-total {
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
+  }}
+
+.lisa-pic {
+  display: inline-block;
+  margin: 0 40px 0 0px;
+}
+
+.lisa-pic {
+  @media (max-width: 767px) {
+    margin: 0;
+  }}
+
+.lisa {
+  width: 80%;
+  height: 80%;
+  opacity: 70%;
 }
 
 .use-case {
