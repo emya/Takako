@@ -120,7 +120,7 @@ class MyProfile extends Component {
             ))}
             {this.props.profile.map((profile) => (
 
-              <div class="wrapper clearfix">
+            <div class="wrapper clearfix">
               <div class="profile-left">
                 {this.state.image && (<img src={URL.createObjectURL(this.state.image)} />)}
                 {!this.state.image && profile.image && (
@@ -131,17 +131,27 @@ class MyProfile extends Component {
 
                 <input class="picture-upload" type="file" id="image" accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
 
-                <p>User Rating</p>
-                <StarRatings
-                  rating={4.5}
-                  starHoverColor="#16C4FD"
-                  starRatedColor="#16C4FD"
-                  numberOfStars={5}
-                />
+                <p>User Rating {!profile.rating && (<small> (No Review) </small>)}</p>
+                {profile.rating && (
+                  <StarRatings
+                    rating={profile.rating}
+                    starHoverColor="#16C4FD"
+                    starRatedColor="#16C4FD"
+                    numberOfStars={5}
+                  />
+                )}
+                {!profile.rating && (
+                  <StarRatings
+                    rating={0}
+                    starHoverColor="#16C4FD"
+                    starRatedColor="#16C4FD"
+                    numberOfStars={5}
+                  />
+                )}
 
-                </div>
-                <div class="profile-right">
+              </div>
 
+              <div class="profile-right">
                 <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
                 <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="sns"><i class="fab fa-instagram"></i></a>
@@ -181,7 +191,7 @@ class MyProfile extends Component {
                 <p class="object">About Me</p>
                 <input type="text" class="user-data" onChange={this.handleChange.bind(this, 'bio', profile)} value={profile.bio}/>
               </div>
-              </div>
+            </div>
 
             ))}
             <input class="btn savep" type="submit" value="Save Profile" />

@@ -7,9 +7,11 @@ from rest_framework import (
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Avg
 
 from django.dispatch import receiver
+from django.shortcuts import get_object_or_404
+
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.core.mail import EmailMultiAlternatives
 
@@ -484,9 +486,7 @@ class TripViewSet(viewsets.ModelViewSet):
             return queryset
 
         userId = request.GET.get('userId')
-
         queryset = Trip.objects.all()
-
         today = datetime.today()
 
         if userId:

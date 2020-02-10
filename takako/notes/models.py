@@ -85,15 +85,6 @@ class Note(models.Model):
     def __str__(self):
         return self.text
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    bio = models.TextField(max_length=500, blank=True)
-    residence = models.CharField(max_length=100, blank=True)
-    occupation = models.CharField(max_length=100, blank=True)
-    gender = models.CharField(max_length=100, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-    image = models.CharField(max_length=200, null=True)
-
 class Showcase(models.Model):
     #photo = models.ImageField(upload_to=content_file_name, blank=True)
     photo = models.ImageField(blank=True)
@@ -251,6 +242,15 @@ class RateRequester(models.Model):
     item_request = models.ForeignKey(ItemRequest, on_delete=models.CASCADE)
     requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_reviewee')
     rating = models.IntegerField()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    bio = models.TextField(max_length=500, blank=True)
+    residence = models.CharField(max_length=100, blank=True)
+    occupation = models.CharField(max_length=100, blank=True)
+    gender = models.CharField(max_length=100, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    image = models.CharField(max_length=200, null=True)
 
 class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlist')
