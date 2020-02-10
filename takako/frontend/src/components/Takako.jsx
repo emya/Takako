@@ -126,6 +126,10 @@ class Takako extends Component {
 
        <section class="why-use">
         <h2 class="heading w">Past Transactions</h2>
+        <div class="case-one">
+          <div class="lisa-pic"><img class="lisa" src={require('../img/traveler1.png')}/></div>
+          <p class="lisa-total">Traveler Lisa <span class="italic bold">earned $30</span><br/>from her Japan Trip in 2 transactions:</p>
+        </div>
         <div class="use-case">
           <div class="item-image">
             <p class="item-title">Face serum from Japan</p>
@@ -140,7 +144,7 @@ class Takako extends Component {
             <div class="saving">
               <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
               <p>Traveler</p>
-              <p class="amount">Earned $15</p>
+              <p class="amount">Earned $20</p>
             </div>
           </div>
           {/*<p class="use-disclaimer">*Simulated data</p>*/}
@@ -157,7 +161,7 @@ class Takako extends Component {
             <p class="amount">Saved $15</p>
           </div>
           <div class="saving">
-            <div class="user-pic"><img src={require('../img/traveler2.png')}/></div>
+            <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
             <p>Traveler</p>
             <p class="amount">Earned $10</p>
           </div>

@@ -37,6 +37,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
+
         {this.props.profile.map((profile) => (
         <div class="wrapper clearfix">
           <div class="profile-left">
