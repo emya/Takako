@@ -486,9 +486,7 @@ class TripViewSet(viewsets.ModelViewSet):
             return queryset
 
         userId = request.GET.get('userId')
-
         queryset = Trip.objects.all()
-
         today = datetime.today()
 
         if userId:
