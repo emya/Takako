@@ -37,6 +37,7 @@ class Profile extends Component {
       <SideMenu />
 
       <div class="profile">
+
         {this.props.profile.map((profile) => (
           <div class="profile-info">
             {profile.image && (
@@ -58,6 +59,7 @@ class Profile extends Component {
                 starRatedColor="#16C4FD"
                 numberOfStars={5}
             />
+
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
