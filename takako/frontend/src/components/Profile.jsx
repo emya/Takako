@@ -38,26 +38,33 @@ class Profile extends Component {
 
       <div class="profile">
         {this.props.profile.map((profile) => (
-          <div class="profile-info">
+        <div class="wrapper clearfix">
+          <div class="profile-left">
             {profile.image && (
               <img src={`https://${keys.AWS_BUCKET}.s3-us-west-2.amazonaws.com/profiles/${profile.user.id}/${profile.image}`} />
             )}
             {!profile.image && (<img src={require('../img/default.png')} />)}
-            <p>As a Traveler</p>
-            <StarRatings
-                rating={4.5}
+            <p>User Rating {!profile.rating && (<small> (No Review) </small>)}</p>
+            {profile.rating && (
+              <StarRatings
+                rating={profile.rating}
                 starHoverColor="#16C4FD"
                 starRatedColor="#16C4FD"
                 numberOfStars={5}
-            />
+              />
+            )}
+            {!profile.rating && (
+              <StarRatings
+                rating={0}
+                starHoverColor="#16C4FD"
+                starRatedColor="#16C4FD"
+                numberOfStars={5}
+              />
+            )}
 
-            <p>As a Requester</p>
-            <StarRatings
-                rating={4}
-                starHoverColor="#16C4FD"
-                starRatedColor="#16C4FD"
-                numberOfStars={5}
-            />
+          </div>
+
+          <div class="profile-right">
             <p class="user-name"> {profile.user.first_name} {profile.user.last_name} </p>
 
             <a href="#" class="sns"><i class="fab fa-facebook"></i></a>
@@ -71,6 +78,7 @@ class Profile extends Component {
             <p class="object">About Me</p>
              {profile.bio}
           </div>
+        </div>
         ))}
 
         <h3>Upcoming Trips</h3>

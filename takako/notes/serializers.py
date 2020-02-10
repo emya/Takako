@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from django.db.models import Avg
+
 from .models import (
     User, Note, Profile, Transfer,
     Trip, ItemRequest, Charge,
@@ -47,12 +49,7 @@ class MeetupSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'date', 'dtime', 'address', 'comment')
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
 
-    class Meta:
-        model = Profile
-        fields = ('id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'image', 'user')
 
 class TripSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
@@ -175,6 +172,28 @@ class RateRequesterSerializer(serializers.ModelSerializer):
     class Meta:
         model = RateRequester
         fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    rating = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Profile
+        fields = (
+            'id', 'bio', 'residence', 'birth_date', 'occupation', 'gender', 'image', 'user', 'rating')
+
+    def get_rating(self, instance):
+        rate_requester = RateRequester.objects.filter(requester=instance.user).aggregate(Avg('rating'))['rating__avg']
+        rate_traveler = RateTraveler.objects.filter(traveler=instance.user).aggregate(Avg('rating'))['rating__avg']
+        if rate_requester and rate_traveler:
+            rating = (rate_requester + rate_traveler) / 2
+        elif rate_requester:
+            rating = rate_requester
+        elif rate_traveler:
+            rating = rate_traveler
+        else:
+            rating = None
+        return rating
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
