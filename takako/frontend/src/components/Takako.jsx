@@ -128,12 +128,12 @@ class Takako extends Component {
         <h2 class="heading w">Past Transactions</h2>
         <div class="case-one">
           <div class="lisa-pic"><img class="lisa" src={require('../img/traveler1.png')}/></div>
-          <p class="lisa-total">Traveler Lisa <span class="italic bold">earned $30</span><br/>from her Japan Trip in 2 transactions:</p>
+          <p class="lisa-total">Traveler Lisa <span class="italic bold">earned $60</span><br/>from her Japan Trip in 4 transactions:</p>
         </div>
         <div class="use-case">
           <div class="item-image">
-            <p class="item-title">Face serum from Japan</p>
-            <img src={require('../img/sk2.png')}/>
+            <p class="item-title">Face serum</p>
+            <img src={require('../img/serum.png')}/>
           </div>
           <div class="saving-container">
             <div class="saving">
@@ -143,7 +143,7 @@ class Takako extends Component {
             </div>
             <div class="saving">
               <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
-              <p>Traveler</p>
+              <p>Lisa</p>
               <p class="amount">Earned $20</p>
             </div>
           </div>
@@ -151,8 +151,8 @@ class Takako extends Component {
         </div>
         <div class="use-case">
         <div class="item-image">
-          <p class="item-title">Bento box from Japan</p>
-          <img src={require('../img/bento.png')}/>
+          <p class="item-title">Bento box</p>
+          <img src={require('../img/bento-new.png')}/>
         </div>
         <div class="saving-container">
           <div class="saving">
@@ -162,8 +162,46 @@ class Takako extends Component {
           </div>
           <div class="saving">
             <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
-            <p>Traveler</p>
+            <p>Lisa</p>
             <p class="amount">Earned $10</p>
+          </div>
+        </div>
+        {/*<p class="use-disclaimer">*Simulated data</p>*/}
+        </div>
+        <div class="use-case">
+        <div class="item-image">
+          <p class="item-title">Traditional candy</p>
+          <img src={require('../img/candy.png')}/>
+        </div>
+        <div class="saving-container">
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/requester3.png')}/></div>
+            <p>Requester</p>
+            <p class="amount s">Not available in NY</p>
+          </div>
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
+            <p>Lisa</p>
+            <p class="amount">Earned $10</p>
+          </div>
+        </div>
+        {/*<p class="use-disclaimer">*Simulated data</p>*/}
+        </div>
+        <div class="use-case">
+        <div class="item-image">
+          <p class="item-title">Books</p>
+          <img src={require('../img/book.png')}/>
+        </div>
+        <div class="saving-container">
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/requester4.png')}/></div>
+            <p>Requester</p>
+            <p class="amount s">Not available in NY</p>
+          </div>
+          <div class="saving">
+            <div class="user-pic"><img src={require('../img/traveler1.png')}/></div>
+            <p>Lisa</p>
+            <p class="amount">Earned $20</p>
           </div>
         </div>
         {/*<p class="use-disclaimer">*Simulated data</p>*/}
