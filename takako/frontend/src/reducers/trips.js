@@ -15,6 +15,7 @@ export default function trips(state=initialState, action) {
               {
                 id: action.trip.id,
                 destination: action.trip.destination,
+                origin: action.trip.origin,
                 departure_date: action.trip.departure_date,
                 arrival_date: action.trip.arrival_date,
                 status: action.trip.status,

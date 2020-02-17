@@ -131,7 +131,7 @@ export const fetchTrips = (userId) => {
   }
 }
 
-export const addTrip = (departure, arrival, destination) => {
+export const addTrip = (departure, arrival, destination, origin) => {
   return (dispatch, getState) => {
     let headers = {"Content-Type": "application/json"};
     let {token} = getState().auth;
@@ -143,7 +143,7 @@ export const addTrip = (departure, arrival, destination) => {
     let departure_date = formatDate(departure);
     let arrival_date = formatDate(arrival);
 
-    let body = JSON.stringify({departure_date, arrival_date, destination, });
+    let body = JSON.stringify({departure_date, arrival_date, destination, origin, });
     return fetch("/api/trips/", {headers, method: "POST", body})
       .then(res => {
         if (res.status < 500) {

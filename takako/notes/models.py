@@ -93,6 +93,7 @@ class Showcase(models.Model):
 class Trip(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="trips")
     destination = models.CharField(max_length=100, blank=True)
+    origin = models.CharField(max_length=100, blank=True)
     departure_date = models.DateField(null=True, blank=True)
     arrival_date = models.DateField(null=True, blank=True)
     status = models.IntegerField(default=0)
