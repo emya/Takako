@@ -1,23 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charsset="UTF-8">
-  <title>Transaction Status</title>
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="style.min.css">
-</head>
-<body>
-  <div class="email-background">
-    <img class="email-logo" src="../img/torimo-logo.png"><img>
-    <div class="email-header">{{user.first_name}} Thank you for signing up for Torimo!</div>
+  <head>
+    <meta charsset="UTF-8">
+    <title>Transaction Status</title>
+    <style>
+      .email-background {
+        border-radius: 7px;
+        margin:10px auto;
+        padding: 30px;
+        width: 90%;
+      }
 
-    <p>We are thrilled that you join us!</p>
+      .email-header {
+        background-color: #FED89E;
+      }
 
-    <p>If you received this email by mistake, please contact us at team.torimo@gmail.com so we can fix it for you.<br><br><br>
+      .email-logo {
+      }
 
-    Thank you,<br><br>
-    <span class="email-closing">Team Torimo</span></p>
-  </div>
+      .email-body {
+        padding: 20px;
+      }
 
-<body>
-<html>
+      .email-greeting {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 40px;
+      }
+
+      .email-closing {
+        font-weight: bold;
+      }
+
+      a {
+        text-decoration: none;
+        color: #16C4FD;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-background">
+      <div class="email-header">
+        <img class="email-logo" src="https://torimo-prod.s3-us-west-2.amazonaws.com/img/torimo-logo.png" />
+      </div>
+
+      <div class="email-body">
+        <div class="email-greeting">
+          {{user.first_name}}, <br>
+          Thank you for signing up for Torimo!
+        </div>
+
+        <p>We are thrilled that you join us!</p>
+
+        <p>If you received this email by mistake, please contact us at team.torimo@gmail.com so we can fix it for you.<br><br><br>
+
+        Thank you,<br><br>
+        <span class="email-closing">Team Torimo</span></p>
+      </div>
+    </div>
+  </body>
+</html>

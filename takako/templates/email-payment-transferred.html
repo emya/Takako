@@ -1,25 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charsset="UTF-8">
-  <title>Transaction Status</title>
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="style.min.css">
-</head>
-<body>
-  <div class="email-background">
-    <img class="email-logo" src="../img/torimo-logo.png"><img>
-  <div class="email-header">{{user.first_name}}, the payment has been transferred to your account!</div>
+  <head>
+    <meta charsset="UTF-8">
+    <title>Transaction Status</title>
+    <style>
+        .email-background {
+          border-radius: 7px;
+          margin:10px auto;
+          padding: 30px;
+          width: 90%;
+        }
 
-  <p>Please check out the status from the link below or from My Transactions:</p>
+        .email-header {
+          background-color: #FED89E;
+        }
 
-  <div>{{link}}</div>
-  <p> You will receive the payment in your Stripe account within a few business days.</p>
-  <p>If you have any questions, please refer to https://torimo.io/how-it-works, or contact us at team.torimo@gmail.com.<br><br><br>
+        .email-logo {
+        }
 
-  Thanks,<br><br>
-  <span class="email-closing">Team Torimo</span></p>
-  </div>
+        .email-body {
+          padding: 20px;
+        }
 
-<body>
-<html>
+        .email-greeting {
+          font-weight: bold;
+          font-size: 1.1em;
+          margin-bottom: 40px;
+        }
+
+        .email-closing {
+          font-weight: bold;
+        }
+
+        a {
+          text-decoration: none;
+          color: #16C4FD;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="email-background">
+      <div class="email-header">
+        <img class="email-logo" src="https://torimo-prod.s3-us-west-2.amazonaws.com/img/torimo-logo.png" />
+      </div>
+
+      <div class="email-body">
+        <div class="email-greeting">
+          {{user.first_name}}, the payment has been transferred to your account!
+        </div>
+
+        <p>Please check out the status from the link below or from My Transactions:</p>
+
+        <div><a>{{link}}</a></div>
+        <p> You will receive the payment in your Stripe account within a few business days.</p>
+        <p>If you have any questions, please refer to https://torimo.io/how-it-works, or contact us at team.torimo@gmail.com.<br><br><br>
+
+        Thanks,<br><br>
+        <span class="email-closing">Team Torimo</span></p>
+      </div>
+    </div>
+  </body>
+</html>
