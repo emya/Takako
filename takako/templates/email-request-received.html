@@ -31,8 +31,27 @@
         font-weight: bold;
       }
 
-      a {
+      .btn {
+        background-color: #16C4FD;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
         text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+      .simple-link {
         color: #16C4FD;
       }
     </style>
@@ -49,11 +68,10 @@
         </div>
 
         <p>Please check out and respond within 2 days from the link below or from My Transactions:</p>
-
-        <div><a>{{link}}</a></div>
+        <a class="btn" href={{link}}>Check Torimo</a>
 
         <p>
-          If you have any questions, please refer to <a>https://torimo.io/how-it-works</a>,
+          If you have any questions, please refer to <a class="simple-link" href="https://torimo.io/how-it-works">How It Works</a>,
           or contact us at team.torimo@gmail.com.<br><br><br>
 
           Thank you,<br><br>

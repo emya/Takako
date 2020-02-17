@@ -3,38 +3,57 @@
     <meta charsset="UTF-8">
     <title>Transaction Status</title>
     <style>
-        .email-background {
-          border-radius: 7px;
-          margin:10px auto;
-          padding: 30px;
-          width: 90%;
-        }
+      .email-background {
+        border-radius: 7px;
+        margin:10px auto;
+        padding: 30px;
+        width: 90%;
+      }
 
-        .email-header {
-          background-color: #FED89E;
-        }
+      .email-header {
+        background-color: #FED89E;
+      }
 
-        .email-logo {
-        }
+      .email-logo {
+      }
 
-        .email-body {
-          padding: 20px;
-        }
+      .email-body {
+        padding: 20px;
+      }
 
-        .email-greeting {
-          font-weight: bold;
-          font-size: 1.1em;
-          margin-bottom: 40px;
-        }
+      .email-greeting {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 40px;
+      }
 
-        .email-closing {
-          font-weight: bold;
-        }
+      .email-closing {
+        font-weight: bold;
+      }
 
-        a {
-          text-decoration: none;
-          color: #16C4FD;
-        }
+      .btn {
+        background-color: #16C4FD;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+      .simple-link {
+        color: #16C4FD;
+      }
     </style>
   </head>
   <body>
@@ -48,14 +67,16 @@
           {{user.first_name}}, the payment has been transferred to your account!
         </div>
 
-        <p>Please check out the status from the link below or from My Transactions:</p>
+        <p>Please check out the status from the link below.</p>
+        <a class="btn" href={{link}}>Check Torimo</a>
 
-        <div><a>{{link}}</a></div>
         <p> You will receive the payment in your Stripe account within a few business days.</p>
-        <p>If you have any questions, please refer to https://torimo.io/how-it-works, or contact us at team.torimo@gmail.com.<br><br><br>
+        <p>If you have any questions, please refer to <a class="simple-link" href="https://torimo.io/how-it-works">How It Works</a>,
+          or contact us at team.torimo@gmail.com.<br><br><br>
 
-        Thanks,<br><br>
-        <span class="email-closing">Team Torimo</span></p>
+          Thanks,<br><br>
+          <span class="email-closing">Team Torimo</span>
+        </p>
       </div>
     </div>
   </body>

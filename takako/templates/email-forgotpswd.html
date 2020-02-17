@@ -31,8 +31,27 @@
         font-weight: bold;
       }
 
-      a {
+      .btn {
+        background-color: #16C4FD;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
         text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+      .simple-link {
         color: #16C4FD;
       }
     </style>
@@ -48,7 +67,7 @@
         </div>
 
         <p>If you want to reset your Torimo password, click on the link below.<br><br></p>
-        <a>{{reset_password_url}}</a><br><br>
+        <a class="btn" href={{reset_password_url}}>Reset Password</a>
 
         <p>
           This link will lead you to the secure page for password request.<br><br>

@@ -31,8 +31,27 @@
         font-weight: bold;
       }
 
-      a {
+      .btn {
+        background-color: #16C4FD;
+        font-family: 'Lexend Deca', sans-serif;
+        display: inline-block;
+        width: 300px;
+        height: 40px;
+        margin: 30px auto;
+        line-height: 40px;
+        border-radius: 7px;
+        box: none;
+        text-align: center;
         text-decoration: none;
+        color: white;
+        border-style: none;
+      }
+
+      a, a:hover, a:active, a:visited, a:focus {
+        text-decoration:none;
+      }
+
+      .simple-link {
         color: #16C4FD;
       }
     </style>
@@ -49,13 +68,12 @@
 
         <p>Congratulation! You completed the request!</p>
 
-        <p>Please connect your back acount and receive your payment from the link below or from My Transactions:</p>
-
-        <div><a>{{link}}</a></div>
+        <p>Please connect your bank acount and receive your payment from the link below or from My Transactions:</p>
+        <a class="btn" href={{link}}>Check Torimo</a>
 
         <p>You will receive your payment within a few business days once you complete the process.</p>
 
-        <p>If you have any questions, please refer to https://torimo.io/how-it-works, or contact us at team.torimo@gmail.com.<br><br><br>
+        <p>If you have any questions, please refer to <a class="simple-link" href="https://torimo.io/how-it-works">How It Works</a>, or contact us at team.torimo@gmail.com.<br><br><br>
 
         Thanks,<br><br>
         <span class="email-closing">Team Torimo</span></p>
