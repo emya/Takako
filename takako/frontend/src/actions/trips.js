@@ -143,7 +143,7 @@ export const addTrip = (departure, arrival, destination, origin) => {
     let departure_date = formatDate(departure);
     let arrival_date = formatDate(arrival);
 
-    let body = JSON.stringify({departure_date, arrival_date, destination, origin });
+    let body = JSON.stringify({departure_date, arrival_date, destination, origin, });
     return fetch("/api/trips/", {headers, method: "POST", body})
       .then(res => {
         if (res.status < 500) {
