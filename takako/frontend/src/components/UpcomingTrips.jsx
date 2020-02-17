@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {trips} from "../actions";
 import {Link} from "react-router-dom";
 
+import moment from 'moment';
+
 import DatePicker from "react-datepicker";
 import ReactGoogleMapLoader from "react-google-maps-loader";
 import ReactGooglePlacesSuggest from "react-google-places-suggest";
@@ -25,8 +27,10 @@ class UpcomingTrips extends Component {
     departure_date: null,
     arrival_date: null,
     destination: "",
+    origin: "",
     updateTripId: null,
-    search: "",
+    search_destination: "",
+    search_origin: "",
     errors: []
   }
 
@@ -39,10 +43,10 @@ class UpcomingTrips extends Component {
   }
 
   resetForm = () => {
-    this.setState({departure_date: "", arrival_date: "",  destination: "", updateNoteId: null});
+    this.setState({departure_date: "", arrival_date: "",  destination: "", origin: "", updateNoteId: null});
   }
 
-  validateForm = (departure_date, arrival_date, destination) => {
+  validateForm = (departure_date, arrival_date, destination, origin) => {
     // we are going to store errors for all fields
     // in a signle array
     const errors = [];
@@ -59,6 +63,10 @@ class UpcomingTrips extends Component {
       errors.push("Trip Destination can't be empty");
     }
 
+    if (origin.length === 0) {
+      errors.push("Trip Origin can't be empty");
+    }
+
     return errors;
   }
 
@@ -68,20 +76,32 @@ class UpcomingTrips extends Component {
       departure_date: trip.departure_date,
       arrival_date: trip.arrival_date,
       destination: trip.destination,
+      origin: trip.origin,
       updateTripId: id});
   }
 
   handleSelectDestinationSuggest(suggest) {
-    this.setState({search: "", destination: suggest.formatted_address})
+    this.setState({search_destination: "", destination: suggest.formatted_address})
   }
 
   handleDestinationChange(e) {
-    this.setState({search: e.target.value, destination: e.target.value})
+    this.setState({search_destination: e.target.value, destination: e.target.value})
+  }
+
+  handleSelectOriginSuggest(suggest) {
+    this.setState({search_origin: "", origin: suggest.formatted_address})
+  }
+
+  handleOriginChange(e) {
+    this.setState({search_origin: e.target.value, origin: e.target.value})
   }
 
   submitTrip = (e) => {
     e.preventDefault();
-    const errors = this.validateForm(this.state.departure_date, this.state.arrival_date, this.state.destination);
+    const errors = this.validateForm(
+      this.state.departure_date, this.state.arrival_date,
+      this.state.destination, this.state.origin
+    );
 
     if (errors.length > 0) {
       this.setState({ errors });
@@ -89,7 +109,8 @@ class UpcomingTrips extends Component {
     }
 
     if (this.state.updateTripId === null) {
-      this.props.addTrip(this.state.departure_date, this.state.arrival_date, this.state.destination).then(this.resetForm)
+      this.props.addTrip(
+        this.state.departure_date, this.state.arrival_date, this.state.destination, this.state.origin).then(this.resetForm)
     } else {
       this.props.updateTrip(this.state.updateTripId, this.state.departure_date).then(this.resetForm);
     }
@@ -111,12 +132,14 @@ class UpcomingTrips extends Component {
         <tr class="table-heading-upcoming">
           <td>Date</td>
           <td>Destination</td>
+          <td>Origin</td>
           <td></td>
         </tr>
         {this.props.trips[0] && this.props.trips[0].upcoming_trips && this.props.trips[0].upcoming_trips.map((trip) => (
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
+            <td>{trip.origin}</td>
             <td>{is_other &&
                  <Link to={{
                    pathname: `/request/form/${userId}/${trip.id}`,
@@ -145,7 +168,7 @@ class UpcomingTrips extends Component {
             <p class="object">Departure Date</p>
             <DatePicker selected={this.state.departure_date} onChange={this.handleDepartureDateChange.bind(this)}/>
             <p class="object">Return Date</p>
-            <DatePicker selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
+            <DatePicker minDate={moment().toDate()} selected={this.state.arrival_date} onChange={this.handleArrivalDateChange.bind(this)}/>
 
             <p class="object">Trip Destination</p>
             <ReactGoogleMapLoader
@@ -157,7 +180,7 @@ class UpcomingTrips extends Component {
                   googleMaps && (
                     <div>
                       <ReactGooglePlacesSuggest
-                        autocompletionRequest={{input: this.state.search, types: ['(regions)']}}
+                        autocompletionRequest={{input: this.state.search_destination, types: ['(regions)']}}
                         googleMaps={googleMaps}
                         onSelectSuggest={this.handleSelectDestinationSuggest.bind(this)}
                         class="google-api"
@@ -168,6 +191,34 @@ class UpcomingTrips extends Component {
                           placeholder="Enter destination"
                           value={this.state.destination}
                           onChange={this.handleDestinationChange.bind(this)}
+                        />
+                      </ReactGooglePlacesSuggest>
+                    </div>
+                  )
+                }
+            />
+
+            <p class="object">Trip Origin (Where meetups take place)</p>
+            <ReactGoogleMapLoader
+                params={{
+                  key: keys.MAP_JS_API,
+                  libraries: "places,geocode",
+                }}
+                render={googleMaps =>
+                  googleMaps && (
+                    <div>
+                      <ReactGooglePlacesSuggest
+                        autocompletionRequest={{input: this.state.search_origin, types: ['(regions)']}}
+                        googleMaps={googleMaps}
+                        onSelectSuggest={this.handleSelectOriginSuggest.bind(this)}
+                        class="google-api"
+                      >
+                        <input
+                          id="residence"
+                          class="trip-entry"
+                          placeholder="Enter origin"
+                          value={this.state.origin}
+                          onChange={this.handleOriginChange.bind(this)}
                         />
                       </ReactGooglePlacesSuggest>
                     </div>
@@ -184,11 +235,13 @@ class UpcomingTrips extends Component {
         <tr class="table-heading-upcoming">
           <td>Date</td>
           <td>Destination</td>
+          <td>Origin</td>
         </tr>
         {this.props.trips[0] && this.props.trips[0].past_trips && this.props.trips[0].past_trips.map((trip) => (
           <tr>
             <td>{trip.departure_date} - {trip.arrival_date}</td>
             <td>{trip.destination}</td>
+            <td>{trip.origin}</td>
           </tr>
         ))}
       </table>
@@ -212,8 +265,8 @@ const mapDispatchToProps = dispatch => {
     fetchTrips: (userId) => {
       dispatch(trips.fetchTrips(userId));
     },
-    addTrip: (departure_date, arrival_date, destination) => {
-      return dispatch(trips.addTrip(departure_date, arrival_date, destination));
+    addTrip: (departure_date, arrival_date, destination, origin) => {
+      return dispatch(trips.addTrip(departure_date, arrival_date, destination, origin));
     },
     updateTrip: (id, text) => {
       return dispatch(trips.updateNote(id, text));
