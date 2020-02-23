@@ -1,7 +1,7 @@
 from .celery import app
 
 
-from .models import ItemRequest
+from .models import User, ItemRequest, Trip
 from datetime import datetime
 
 from django.template.loader import render_to_string
@@ -12,16 +12,33 @@ from django.conf import settings
 site_url = settings.SITE_URL
 
 @app.task
-def send_email(subject, message, html_message, to_email):
+def send_email(subject, message, html_message, to_emails):
     from django.core.mail import send_mail
     send_mail(
         subject,
         message,
         settings.EMAIL_HOST_USER,
-        [to_email],
+        to_emails,
         fail_silently=False,
         html_message=html_message
     )
+
+# Periodic task to let users know what features trips we have
+@app.task
+def notify_featured_trips():
+    today = datetime.today()
+    users = User.objects.all()
+    featured_trips = Trip.objects.filter(departure_date__gte=today)
+    if featured_trips:
+        link = f"{site_url}/trips"
+        html_message = render_to_string('email-featured-trips.html', {'trips': featured_trips, 'link': link})
+        # The function to send email defined above
+        send_email(
+            "Featured trips for you",
+            "Featured upcoming trips for you",
+            html_message,
+            [user.email for user in users],
+        )
 
 # Periodic task to remind users who forget Payment
 @app.task
@@ -38,5 +55,5 @@ def remind_payment():
             "We're waiting for your action",
             "We're waiting for your action to move your requet forward on Torimo",
             html_message,
-            item_request.requester.email,
+            [item_request.requester.email],
         )
