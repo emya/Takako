@@ -147,7 +147,7 @@ class SharedContactViewSet(viewsets.ModelViewSet):
         send_email.delay(
                 "Your meetup option has been accepted!",
                 "Your meetup option has been accepted! Check at Torimo!",
-                html_message, user.email)
+                html_message, [user.email])
         return Response(serializer.data)
 
 class PurchaseNotificationViewSet(viewsets.ModelViewSet):
@@ -184,7 +184,7 @@ class PurchaseNotificationViewSet(viewsets.ModelViewSet):
         send_email.delay(
             "Your requested item has been purchased!",
             "Your requested item has been purchased! Check at Torimo!",
-            html_message, item_request.requester.email)
+            html_message, [item_request.requester.email])
 
         return Response(serializer.data)
 
@@ -227,7 +227,10 @@ class MeetupSuggestionViewSet(viewsets.ModelViewSet):
             user = purchase_notification.item_request.respondent
 
         html_message = render_to_string('email-meetup-suggested.html', {'user': user, 'link': link})
-        send_email.delay("You got new meetup suggestion!", "You got new meetup suggestion! Check at Torimo!", html_message, user.email)
+        send_email.delay(
+            "You got new meetup suggestion!",
+            "You got new meetup suggestion! Check at Torimo!",
+            html_message, [user.email])
         return Response(serializer.data)
 
 
@@ -267,7 +270,10 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
         html_message = render_to_string('email-request-received.html', {'user': respondent, 'link': link})
 
         # Notify respondent
-        send_email.delay("You got new Request!", "You got new Request! Check at Torimo!", html_message, respondent.email)
+        send_email.delay(
+            "You got new Request!",
+            "You got new Request! Check at Torimo!",
+            html_message, [respondent.email])
 
         return Response(serializer.data)
 
@@ -287,28 +293,28 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                 send_email.delay(
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
-                    html_message, instance.requester.email)
+                    html_message, [instance.requester.email])
             elif status == 1 and process_status == "request_cancelled":
                 # Request was cancelled by requester
                 html_message = render_to_string('email-request-cancelled-by-requester.html', {'user': instance.respondent, 'link': link})
                 send_email.delay(
                     "The request has been cancelled",
                     "The request has been cancelled. Check at Torimo!",
-                    html_message, instance.respondent.email)
+                    html_message, [instance.respondent.email])
             elif status == 4 and process_status == "request_cancelled_by_traveler":
                 # Request was cancelled by traveler
                 html_message = render_to_string('email-request-cancelled-by-traveler.html', {'user': instance.requester, 'link': link})
                 send_email.delay(
                     "Your request has been cancelled",
                     "Your request has been cancelled. Check at Torimo!",
-                    html_message, instance.requester.email)
+                    html_message, [instance.requester.email])
             elif status == 3 and process_status == "request_responded":
                 # Request was rejected
                 html_message = render_to_string('email-request-declined.html', {'user': instance.requester, 'link': link})
                 send_email.delay(
                     "Your request has been responded!",
                     "Your request has been responded! Check at Torimo!",
-                    html_message, instance.requester.email)
+                    html_message, [instance.requester.email])
         elif process_status:
             if process_status == "item_received":
                 # Item received
@@ -316,7 +322,7 @@ class ItemRequestViewSet(viewsets.ModelViewSet):
                 send_email.delay(
                     "The requested item has been delivered!",
                     "The requested item has been delivered! Check at Torimo!",
-                    html_message, instance.respondent.email)
+                    html_message, [instance.respondent.email])
         return Response(serializer.data)
 
     def list(self, request):
@@ -346,10 +352,10 @@ class ContactUsViewSet(viewsets.ModelViewSet):
 
         # Notify user
         html_message = render_to_string('email-contactus.html', {'user': user})
-        send_email.delay("Thank you for your message", "Thank you for joining us!", html_message, request.data['email'])
+        send_email.delay("Thank you for your message", "Thank you for joining us!", html_message, [request.data['email']])
 
         # Notify us
-        send_email.delay("New message from our user", request.data['message'], None, settings.EMAIL_HOST_USER)
+        send_email.delay("New message from our user", request.data['message'], None, [settings.EMAIL_HOST_USER])
         return Response(serializer.data)
 
 class TransferViewSet(viewsets.ModelViewSet):
@@ -397,7 +403,7 @@ class TransferViewSet(viewsets.ModelViewSet):
         send_email.delay(
             "The payment has been transferred!",
             "The payment has been transferred! Check at Torimo!",
-            html_message, item_request.respondent.email)
+            html_message, [item_request.respondent.email])
 
         return Response(data="Transferred")
 
@@ -440,14 +446,14 @@ class ChargeViewSet(viewsets.ModelViewSet):
             send_email.delay(
                 "Your payment has been successfully completed!",
                 "Your payment has been successfully completed! Check at Torimo!",
-                html_message_requester, item_request.requester.email)
+                html_message_requester, [item_request.requester.email])
 
             html_message_traveler = render_to_string(
                 'email-payment-completed-traveler.html', {'user': item_request.respondent, 'link': link})
             send_email.delay(
                 "A payment has been successfully completed!",
                 "A payment has been successfully completed! Check at Torimo!",
-                html_message_traveler, item_request.respondent.email)
+                html_message_traveler, [item_request.respondent.email])
 
         charge = Charge.objects.create(
             user=request.user,
@@ -510,7 +516,7 @@ class RateTravelerViewSet(viewsets.ModelViewSet):
         torimo_feedback = request.data.pop("torimo_feedback")
         # Notify us
         if torimo_feedback:
-            send_email.delay("New Feedback from our requester", torimo_feedback, None, settings.EMAIL_HOST_USER)
+            send_email.delay("New Feedback from our requester", torimo_feedback, None, [settings.EMAIL_HOST_USER])
 
         item_request_id = request.data.pop("requestId")
         item_request = ItemRequest.objects.get(pk=item_request_id)
@@ -528,7 +534,7 @@ class RateRequesterViewSet(viewsets.ModelViewSet):
         torimo_feedback = request.data.pop("torimo_feedback")
         # Notify us
         if torimo_feedback:
-            send_email.delay("New Feedback from our traveler", torimo_feedback, None, settings.EMAIL_HOST_USER)
+            send_email.delay("New Feedback from our traveler", torimo_feedback, None, [settings.EMAIL_HOST_USER])
 
         item_request_id = request.data.pop("requestId")
         item_request = ItemRequest.objects.get(pk=item_request_id)
@@ -660,7 +666,7 @@ class RegistrationAPI(generics.GenericAPIView):
         Profile.objects.create(user=user)
 
         html_message = render_to_string('email-signup.html', {'user': user})
-        send_email.delay("Welcome to Torimo!", "Thank you for joining us!", html_message, user.email)
+        send_email.delay("Welcome to Torimo!", "Thank you for joining us!", html_message, [user.email])
 
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
@@ -708,7 +714,7 @@ class CustomPasswordResetView:
         html_message = render_to_string('email-forgotpswd.html', context)
         #email_plaintext_message = render_to_string('email/user_reset_password.txt', context)
 
-        send_email.delay("Forgot Password?", "Forgot Password?", html_message, reset_password_token.user.email)
+        send_email.delay("Forgot Password?", "Forgot Password?", html_message, [reset_password_token.user.email])
 
 def upload_to_s3(image, key):
 
