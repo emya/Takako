@@ -17,3 +17,10 @@ app.conf.CELERYBEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=17)
     },
 }
+
+app.conf.CELERYBEAT_SCHEDULE = {
+    'add-every-noon': {
+        'task': 'notes.tasks.notify_featured_trips',
+        'schedule': crontab(0, 0, day_of_month='1,10,20')
+    },
+}
