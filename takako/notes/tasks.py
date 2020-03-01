@@ -26,15 +26,6 @@ def send_email(subject, message, html_message, to_emails):
 @app.task
 def send_mass_email(subject, message, html_message, to_emails):
     from django.core.mail import EmailMultiAlternatives, get_connection
-    """
-       Given a datatuple of (subject, message, html_message, from_email,
-       recipient_list), send each message to each recipient list.
-       Return the number of emails sent.
-       If from_email is None, use the DEFAULT_FROM_EMAIL setting.
-       If auth_user and auth_password are set, use them to log in.
-       If auth_user is None, use the EMAIL_HOST_USER setting.
-       If auth_password is None, use the EMAIL_HOST_PASSWORD setting.
-       """
     connection = get_connection(
         username=settings.EMAIL_HOST_USER,
         password=settings.EMAIL_HOST_PASSWORD,
