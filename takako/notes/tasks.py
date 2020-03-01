@@ -23,6 +23,31 @@ def send_email(subject, message, html_message, to_emails):
         html_message=html_message
     )
 
+@app.task
+def send_mass_email(subject, message, html_message, to_emails):
+    from django.core.mail import EmailMultiAlternatives, get_connection
+    """
+       Given a datatuple of (subject, message, html_message, from_email,
+       recipient_list), send each message to each recipient list.
+       Return the number of emails sent.
+       If from_email is None, use the DEFAULT_FROM_EMAIL setting.
+       If auth_user and auth_password are set, use them to log in.
+       If auth_user is None, use the EMAIL_HOST_USER setting.
+       If auth_password is None, use the EMAIL_HOST_PASSWORD setting.
+       """
+    connection = get_connection(
+        username=settings.EMAIL_HOST_USER,
+        password=settings.EMAIL_HOST_PASSWORD,
+        fail_silently=False,
+    )
+    messages = [
+        EmailMultiAlternatives(subject, message, settings.EMAIL_HOST_USER, [to_email],
+                               alternatives=[(html_message, 'text/html')],
+                               connection=connection)
+        for to_email in to_emails
+    ]
+    return connection.send_messages(messages)
+
 # Periodic task to let users know what features trips we have
 @app.task
 def notify_featured_trips():
@@ -33,7 +58,7 @@ def notify_featured_trips():
         link = f"{site_url}/trips"
         html_message = render_to_string('email-featured-trips.html', {'trips': featured_trips, 'link': link})
         # The function to send email defined above
-        send_email(
+        send_mass_email(
             "Featured trips for you",
             "Featured upcoming trips for you",
             html_message,
