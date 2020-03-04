@@ -20,6 +20,10 @@ class TravelerProfile extends Component {
     updateProfileId: null,
   }
 
+  tripstate = {
+    destination: ""
+  }
+
   resetForm = () => {
     this.setState({bio: "", updateProfileId: null});
   }
@@ -37,6 +41,15 @@ class TravelerProfile extends Component {
   handleChange = (propertyName, traveler_profile, event) => {
     traveler_profile[propertyName] = event.target.value;
     this.setState({bio: traveler_profile.bio, updateProfileId: traveler_profile.id});
+  }
+
+  resetTripForm = () => {
+    this.setState({destination: "", updateNoteId: null});
+  }
+  submitTrip = (e) => {
+    e.preventDefault();
+    this.props.addTrip(this.state.destination).then(this.resetTripForm)
+    //this.resetForm();
   }
 
   render() {
@@ -182,10 +195,13 @@ const mapDispatchToProps = dispatch => {
       dispatch(notes.deleteNote(id));
     },
   */
+    addTrip: (id, destination) => {
+      return dispatch(traveler_profile.addTrip(id, destination));
+    },
     fetchTravelerProfiles: () => {
       dispatch(traveler_profile.fetchTravelerProfiles());
     },
-    updateProfile: (id, bio) => {
+    updateTravelerProfile: (id, bio) => {
       return dispatch(traveler_profile.updateTravelerProfile(id, bio));
       //dispatch(notes.updateNote(id, text));
     },
