@@ -124,6 +124,42 @@ class Takako extends Component {
           <a class="button" href="/register" onClick="ga(‘send’, ‘event’, ‘link’, ‘click’,'register2'">Get Started</a>
         </section>
 
+      <section class="destination">
+        <h2 class="heading s">Upcoming Trips</h2>
+        <table class="table-data">
+          <tr class="table-heading-upcoming">
+            <td>Date</td>
+            <td>Destination</td>
+            <td>Origin</td>
+            <td></td>
+          </tr>
+        </table>
+        <br/>
+        <br/>
+        <h3>Popular Trip Destinations</h3>
+        <div class="popular-country">
+          <div class="popular-country-example">
+            <p class="country-name">Japan</p>
+            <img src={require('../img/japan.png')}/>
+          </div>
+          <div class="popular-country-example">
+            <p class="country-name">Italy</p>
+            <img src={require('../img/italy.png')}/>
+          </div>
+          <div class="popular-country-example">
+            <p class="country-name">UK</p>
+            <img src={require('../img/uk.png')}/>
+          </div>
+          <div class="popular-country-example">
+            <p class="country-name">France</p>
+            <img src={require('../img/france.png')}/>
+          </div>
+        </div>
+
+
+
+      </section>
+
        <section class="why-use">
         <h2 class="heading w">Past Transactions</h2>
         <div class="case-one">
